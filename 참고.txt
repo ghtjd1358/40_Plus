@@ -1,0 +1,21 @@
+// 로컬에 브랜치 생성 (브랜치 명은 feat_이름)으로 통일하면 될거같아요.
+
+git branch feat_jihun
+
+// 해당 브랜치로 이동
+git checkout feat_jihun
+
+// 저는 이거 하고 해당 파일인 참고.txt만들었습니다,
+// 해당 브랜치에서 작업, 수정하고 저장
+
+// add commit push
+git add .
+// (git add 참고.txt) // 이것도 됩니다. 따로 올리실 때 참고
+
+git commit -m "참고"
+
+// 로컬에서 만든 것과 같은 이름으로 깃허브에 브랜치 생성해서 푸시하기
+git push origin feat_jihun
+
+// 이후 깃허브 들어와서 pull request만들고 mergy하기
+// 웬만하면 충돌 안날건데 혹시 날수도 있으니까 자주 git pull 해주세요
