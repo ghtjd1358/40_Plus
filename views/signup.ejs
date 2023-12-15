@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <p id="result"></p>
+    </div>
+    <form name="signup">
+        <input type="text" id="userid" name="userid" placeholder="id"> <button type="button" id="valid-check">중복검사</button><br>
+        <input type="password" name="password" placeholder="pw"><br>
+        <input type="password" name="confirm-password" placeholder="비밀번호 확인"><br>
+        <input type="text" placeholder="이름" name="name"><br>
+        <button type="button" id="signup">회원가입</button>
+    </form>
+</body>
+<script>
+    let isUnique;
+    const validCheckButtonElement = document.querySelector('#valid-check');
+    const signUpButtonElement = document.querySelector('#signup');
+    const resultElement = document.querySelector('#result');
+    const userid = document.querySelector('#userid').value;
+    async function getIsValid() {
+        const res = await axios({
+            method: 'post',
+            url: '/isValid',
+            data: {
+                userid: userid
+            }
+        });
+        console.log(res.data);
+        isUnique = res.data.isUnique;
+        
+        // to do: res.data.msg를 아이디 input과 중복 검사 자리에 색깔이랑 해서 넣기
+    }
+
+    async function signup() {
+        const form = document.forms['signup'];
+        console.log(form.name);
+        const res = await axios({
+            method: 'post',
+            url: '/signup',
+            data: {
+                userid: form.userid.value,
+                password: form.password.value,
+                confirmPassword: form['confirm-password'].value,
+                name: form.name.value,
+                isUnique: isUnique
+            }
+        });
+        resultElement.textContent = res.data.msg
+        if (!res.data.isError) {
+            location.href = '/'
+        }
+    }
+
+    validCheckButtonElement.addEventListener('click', getIsValid);
+    signUpButtonElement.addEventListener('click', signup);
+
+</script>
+</html>
