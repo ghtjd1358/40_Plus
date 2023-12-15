@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <p id="result"></p>
+    </div>
+    <form name="login">
+        <input type="text" id="userid" name="userid" placeholder="id">
+        <input type="password" name="password" placeholder="pw"><br>
+        <button type="button" id="login">로그인</button>
+    </form>
+</body>
+<script>
+
+    const loginButtonElement = document.querySelector('#login');
+    const resultElement = document.querySelector('#result');
+    const userid = document.querySelector('#userid').value;
+
+    async function login() {
+        const form = document.forms['login'];
+        const res = await axios({
+            method: 'post',
+            url: '/login',
+            data: {
+                userid: form.userid.value,
+                password: form.password.value
+            }
+        });
+        if (res.data.isError) {
+            return resultElement.textContent = res.data.msg
+        }
+        location.href = '/';
+
+    }
+
+    loginButtonElement.addEventListener('click', login);
+
+</script>
+</html>
