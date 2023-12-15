@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            height: fit-content;
+        }
+        /* 키보드 전체  */
+        .big_C {
+            /* border: 1px solid black; */
+            flex-wrap: wrap;
+            max-width: fit-content;
+            text-align: center;
+            margin: 0 auto;
+            margin-top: 50vh;
+        }
+        /* 한줄 마다 */
+        .sml_C {
+            /* border: 1px solid black; */
+            display: flex;
+        }
+        .key {
+            width: 50px;
+            height: 50px;
+            border: 1px solid #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 2px;
+            box-shadow: 2px 2px 2px 1px grey;
+        }
+        .tab-key {
+            width: 74px; /* Tab 키의 가로 길이 조절 */
+        }
+
+        .caps-lock-key {
+            width: 90px; /* Caps Lock 키의 가로 길이 조절 */
+        }
+        
+        .delete-key {
+            width: 74px;
+        }
+
+        .enter-key {
+            width: 90px;
+        }
+        .shift-key {
+            width: 118px;
+        }
+        .space-key {
+            width: 370px;
+        }
+        .ctrl-key {
+            width: 70px;
+        }
+        .result {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <div class="result"></div>
+    <!-- 키보드 -->
+    <div class="big_C">
+        <div class="sml_C">
+            <div class="key">₩</div>
+            <div class="key" onkeydown="showKey(window.event.keyCode == 49)">1</div>
+            <div class="key">2</div>
+            <div class="key">3</div>
+            <div class="key">4</div>
+            <div class="key">5</div>
+            <div class="key">6</div>
+            <div class="key">7</div>
+            <div class="key">8</div>
+            <div class="key">9</div>
+            <div class="key">0</div>
+            <div class="key">-</div>
+            <div class="key">=</div>
+            <div class="key delete-key">Delete</div>
+        </div>
+        <!-- 2번 째 줄 -->
+        <div class="sml_C">
+            <div class="key tab-key">Tab</div>
+            <div class="key">ㅂ</div>
+            <div class="key">ㅈ</div>
+            <div class="key">ㄷ</div>
+            <div class="key">ㄱ</div>
+            <div class="key">ㅅ</div>
+            <div class="key">ㅛ</div>
+            <div class="key">ㅕ</div>
+            <div class="key">ㅑ</div>
+            <div class="key">ㅐ</div>
+            <div class="key">ㅔ</div>
+            <div class="key">[</div>
+            <div class="key">]</div>
+            <div class="key">\</div>
+        </div>
+        <!-- 3번째 줄 -->
+        <div class="sml_C">
+            <div class="key caps-lock-key">Caps Lock</div>
+            <div class="key">ㅁ</div>
+            <div class="key">ㄴ</div>
+            <div class="key">ㅇ</div>
+            <div class="key">ㄹ</div>
+            <div class="key">ㅎ</div>
+            <div class="key">ㅗ</div>
+            <div class="key">ㅓ</div>
+            <div class="key">ㅏ</div>
+            <div class="key">ㅣ</div>
+            <div class="key">;</div>
+            <div class="key">'</div>
+            <div class="key enter-key">Enter</div>
+        </div>
+        <!-- 4번째 줄 -->
+        <div class="sml_C">
+            <div class="key shift-key">Shift</div>
+            <div class="key">ㅋ</div>
+            <div class="key">ㅌ</div>
+            <div class="key">ㅊ</div>
+            <div class="key">ㅍ</div>
+            <div class="key">ㅠ</div>
+            <div class="key">ㅜ</div>
+            <div class="key">ㅡ</div>
+            <div class="key">,</div>
+            <div class="key">.</div>
+            <div class="key">/</div>
+            <div class="key shift-key">Shift</div>
+        </div>
+        <!-- 5번째 줄 -->
+        <div class="sml_C">
+            <div class="key ctrl-key">Ctrl</div>
+            <div class="key"> </div>
+            <div class="key">Alt</div>
+            <div class="key space-key">Space</div>
+            <div class="key">한/영</div>
+            <div class="key"> </div>
+            <div class="key"> </div>
+            <div class="key ctrl-key">Ctrl</div>
+        </div>
+    </div>
+
+    <!-- ----------------구분선--------------- -->
+    <script>
+        function showKey(keyValue) {
+            document.querySelector('.result').textContent = keyValue;
+            
+        }
+    </script>
+</body>
+</html>
