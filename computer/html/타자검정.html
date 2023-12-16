@@ -10,7 +10,7 @@
       text-align: center;
     }
 
-    #typing-container {
+    #moniter {
       max-width: 600px;
       margin: 50px auto;
       border: 1px solid black;
@@ -26,22 +26,29 @@
       padding: 5px;
     }
 
+    #user-input.error {
+      color: red;
+    }
+
     #result {
       margin-top: 20px;
       font-weight: bold;
     }
+
+    
   </style>
 </head>
 <body>
-  <div id="typing-container">
+  <div id="moniter">
     <div id="text-to-type">한글 타자 검정을 시작합니다. 아무내용이나 써보세요</div>
     <input type="text" id="user-input" placeholder="여기에 입력하세요" oninput="checkTyping()">
-    <div id="result"></div>
+    
   </div>
+  <div id="result"></div>
 
   
   <script>
-    const originalText = "한글 타자 검정을 시작합니다.";
+    const originalText = "한글 타자 검정을 시작합니다. 아무내용이나 써보세요";
     const textToType = document.getElementById('text-to-type');
     const userInput = document.getElementById('user-input');
     const result = document.getElementById('result');
@@ -49,13 +56,17 @@
     function checkTyping() {
       const userTypedText = userInput.value;
       const correctText = originalText.substring(0, userTypedText.length);
+      const accurary = (correctText.length / originalText.length) * 100;
 
       if (userTypedText === originalText) {
         result.innerText = '타자 검정 완료! 정확도 100%';
       } else if (userTypedText === correctText) {
-        result.innerText = `정확도: ${(correctText.length / originalText.length) * 100}%`;
+        result.innerText = `정확도: ${accurary.toFixed(2)}%`;
+        userInput.classList.remove('error');
       } else {
-        result.innerText = '타자 오류입니다. 다시 확인하세요.';
+        result.innerText = ''; // Clear previous result
+        userInput.classList.add('error');
+        // result.innerText = '타자 오류입니다. 다시 확인하세요.';
       }
     }
   </script>
