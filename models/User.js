@@ -24,11 +24,11 @@ const User = (Sequelize, DataTypes) => {
       },
       RefreshToken: {
         type: DataTypes.STRING(100),
-        allowNull: false,
+        defaultValue: ''
       },
       AccessToken: {
         type: DataTypes.STRING(100),
-        allowNull: false,
+        defaultValue: ''
       },
     },
     {

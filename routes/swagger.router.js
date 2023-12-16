@@ -18,8 +18,6 @@ const router = express.Router();
  *             example:
  *               message: "Hello, Swagger!"
  */
-router.get("/test", (req, res) => {
-  res.json({ message: "Hello, Swagger!" });
-});
+
 
 module.exports = router;
