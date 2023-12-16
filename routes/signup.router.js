@@ -4,9 +4,7 @@ const controller = require('../controllers/auth.controller');
 
 const router = express();
 
-router.get('/', function(req,res) {
-    res.render('index');
-})
+router.get('/', controller.getIndex);
 
 router.get('/signup', controller.getSignup);
 
@@ -17,4 +15,6 @@ router.get('/login', controller.getLogin);
 router.post('/login', controller.login);
 
 router.post('/isvalid', controller.existsAlready);
+
+router.post('/logout', controller.logout);
 module.exports = router;

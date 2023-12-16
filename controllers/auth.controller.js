@@ -1,19 +1,20 @@
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const models = require('../models/index');
+
+const checkJwt = require('../utility/checkJwt');
 const User = models.User;
 
+function getIndex (req, res) {
+    res.render('index');
+}
+
 function getSignup (req, res) {
-
-    // post에 오류가 있으면 signUp을 redirect함. 그때마다 프론트에서 세션에 있는 아래 4개의 항목을 이용할 예정.
-
     res.render('signup');
 }
 
 async function existsAlready (req, res) {
     const existingUser = await User.findOne({ where: { userid: req.body.userid }})
-    console.log('우저아이디',req.body.userid);
-    console.log('이그지스팅아이디',existingUser)
+
     if (existingUser) {
        res.json({ msg : '이미 존재하는 아이디입니다.', isUnique : false});
     } else {
@@ -82,12 +83,17 @@ async function login(req, res) {
         return res.json({ msg : '아이디 혹은 비밀번호가 다릅니다.', isError : true});
     }
 
-    req.session.idToken = jwt.sign({userid: userid}, 'SECRET');
+    req.session.idToken = checkJwt.makeJwt(userid);
     res.json({ msg : '성공', isError : false});
 
     // to do. refresh 토큰 발급해야하는데 어떻게 할지 생각하기.
-
     
+}
+
+function logout(req, res) {
+    req.session.idToken = null;
+
+    res.send('완료');
 }
 
 
@@ -96,5 +102,7 @@ module.exports = {
     signup : signup,
     existsAlready : existsAlready,
     getLogin : getLogin,
-    login : login
+    login : login,
+    getIndex : getIndex,
+    logout : logout
 }
