@@ -1,5 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const models = require('../models/index');
+const User = models.User;
 
 function getSignup (req, res) {
 
@@ -9,26 +11,27 @@ function getSignup (req, res) {
 }
 
 async function existsAlready (req, res) {
-    // const existingUser = await User.findOne({ where: { userid: req.body.userid }})
-    // if (existingUser) {
-    //    res.json({ msg : '이미 존재하는 아이디입니다.', isUnique : false});
-    //} else {
-    //  res.json ({ msg : '아이디 생성 가능합니다.', isUnique : true});
-    //}
-    res.json ({ msg : '아이디 생성 가능합니다.', isUnique : true});
+    const existingUser = await User.findOne({ where: { userid: req.body.userid }})
+    console.log('우저아이디',req.body.userid);
+    console.log('이그지스팅아이디',existingUser)
+    if (existingUser) {
+       res.json({ msg : '이미 존재하는 아이디입니다.', isUnique : false});
+    } else {
+     res.json ({ msg : '아이디 생성 가능합니다.', isUnique : true});
+    }
 }
 
 async function signup (req, res) {
     const {userid, password, confirmPassword, name, isUnique} = req.body;
 
-    // const existingUser = await User.findOne({ where: { userid: req.body.userid }})
-    // if (!isUnique || isUnique === false || existingUser ) {
-    //   return res.json({msg : '중복검사를 실시하지 않았거나 이미 존재하는 아이디입니다.', isError: true});
+    const existingUser = await User.findOne({ where: { userid: req.body.userid }})
+    if (!isUnique || isUnique === false || existingUser ) {
+      return res.json({msg : '중복검사를 실시하지 않았거나 이미 존재하는 아이디입니다.', isError: true});
 
-    // }
+    }
 
-    if (!userid || userid.trim().length <= 5) {
-        return res.json({msg : '아이디를 6자 이상으로 입력해주세요.', isError: true});
+    if (!userid || userid.trim().length <= 3) {
+        return res.json({msg : '아이디를 4자 이상으로 입력해주세요.', isError: true});
     }
 
     if (!password || password.trim().length <= 5) {
@@ -45,11 +48,11 @@ async function signup (req, res) {
 
     const hashPW = bcrypt.hashSync(password, 12);
 
-    // const result = await User.create({
-        //     userid: userid,
-        //     name: name,
-        //     password: hashPW
-        // })
+    const result = await User.create({
+            userid: userid,
+            name: name,
+            password: hashPW
+        })
 
         return res.json({msg : '완료.', isError: false});
     // 프론트에서 res.data.isError가 true면 => redirect('/');

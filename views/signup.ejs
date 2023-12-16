@@ -11,7 +11,9 @@
         <p id="result"></p>
     </div>
     <form name="signup">
-        <input type="text" id="userid" name="userid" placeholder="id"> <button type="button" id="valid-check">중복검사</button><br>
+        <input type="text" id="userid" name="userid" placeholder="id"> <button type="button" id="valid-check">중복검사</button>
+        <span id="valid-check-result"></span>
+        <br>
         <input type="password" name="password" placeholder="pw"><br>
         <input type="password" name="confirm-password" placeholder="비밀번호 확인"><br>
         <input type="text" placeholder="이름" name="name"><br>
@@ -23,8 +25,9 @@
     const validCheckButtonElement = document.querySelector('#valid-check');
     const signUpButtonElement = document.querySelector('#signup');
     const resultElement = document.querySelector('#result');
-    const userid = document.querySelector('#userid').value;
+    const validCheckResultElement = document.querySelector('#valid-check-result');
     async function getIsValid() {
+        const userid = document.querySelector('#userid').value;
         const res = await axios({
             method: 'post',
             url: '/isValid',
@@ -32,9 +35,8 @@
                 userid: userid
             }
         });
-        console.log(res.data);
         isUnique = res.data.isUnique;
-        
+        validCheckResultElement.textContent = res.data.msg;
         // to do: res.data.msg를 아이디 input과 중복 검사 자리에 색깔이랑 해서 넣기
     }
 
