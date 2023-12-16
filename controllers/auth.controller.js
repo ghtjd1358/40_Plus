@@ -20,6 +20,7 @@ async function existsAlready (req, res) {
     } else {
      res.json ({ msg : '아이디 생성 가능합니다.', isUnique : true});
     }
+
 }
 
 async function signup (req, res) {
@@ -49,10 +50,13 @@ async function signup (req, res) {
 
     const hashPW = bcrypt.hashSync(password, 12);
 
+    const refreshToken = checkJwt.makeSignupJwt(userid);
+
     const result = await User.create({
             userid: userid,
             name: name,
-            password: hashPW
+            password: hashPW,
+            RefreshToken: refreshToken
         })
 
         return res.json({msg : '완료.', isError: false});
@@ -65,6 +69,7 @@ function getLogin(req, res) {
 
 async function login(req, res) {
     const {userid, password} = req.body;
+    let checkRefreshToken;
     
     if (!userid || userid.trim().length === 0) {
         return res.json({msg : '아이디를 입력해주세요.', isError: true});
@@ -83,7 +88,25 @@ async function login(req, res) {
         return res.json({ msg : '아이디 혹은 비밀번호가 다릅니다.', isError : true});
     }
 
+    try {
+        checkRefreshToken  = checkJwt.checkJwt(existingUser.RefreshToken);
+    } catch(err) {
+        res.json({ msg: '휴면 로그인 되었습니다.', isError : true, tokenExpire : true});
+    }
+
+    if (!checkRefreshToken) {
+        return;
+    }
+
     req.session.idToken = checkJwt.makeJwt(userid);
+    // 데이터베이스의 토큰 업데이트
+    const newRefreshToken = checkJwt.makeSignupJwt(userid);
+    await User.update({
+        RefreshToken: newRefreshToken
+    }, {
+        where: {userid: userid}
+    })
+
     res.json({ msg : '성공', isError : false});
 
     // to do. refresh 토큰 발급해야하는데 어떻게 할지 생각하기.
