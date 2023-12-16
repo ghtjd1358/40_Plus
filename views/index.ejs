@@ -3,12 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>Document</title>
 </head>
 <body>
     인뎃스
-    <% if(locals.idToken) {%>
+    <% if(locals.userid) {%>
         <p>ㅎㅇㅎㅇ</p>
+        <button id="logout" onclick="logout()">로그아웃</button>
         <% } %>
+
+        <script>
+            async function logout() {
+                const res = await axios({
+                    method : 'post',
+                    url : '/logout'
+                });
+        
+                location.href = '/';
+            }
+        </script>
 </body>
 </html>
