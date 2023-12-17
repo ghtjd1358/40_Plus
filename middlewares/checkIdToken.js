@@ -46,15 +46,9 @@ async function checkAuthStatus(req, res, next) {
             } catch(err) {
             // refresh token이 만료되었거나 없을 경우
             if (err.message === 'jwt must be provided' || err.message === 'jwt expired') {
-                try {
                     res.clearCookie('refreshToken', req.signedCookies.refreshToken, getCookieConfig());
                     clearUserInfo(req, res);
                     return next();
-                    // 쿠키가 없을 경우 refresh token이 없을 경우
-                } catch(err) {
-                    clearUserInfo(req, res);
-                    return next();
-                }
             }
             // 그밖의 경우 (refresh 토큰이 조작된 토큰이거나 해서 오류가 뜰 경우)
             next(err);
