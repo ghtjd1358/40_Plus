@@ -178,7 +178,10 @@
     <!-- 한글 자판 -->
     <div class="big_C" id="hgkeyboard">
         <div class="sml_C" id="hg_1">
-            <div class="key" id="Backquote">`</div>
+            <div class="key" id="Backquote">
+                <div class="top">~</div>
+                <div class="bottom">`</div>
+            </div>
             <div class="key" id="Digit1">
                 <div class="top">!</div>
                 <div class="bottom">1</div>
@@ -413,7 +416,7 @@
             <div class="key ctrl-key" id="ControlRight">Ctrl</div>
         </div>
     </div>
-    <!-- ----------------구분선--------------- -->
+    
     <script>
         // ----------------------- 구 분 선 ----------------------- 
         // (초기) 키 눌렀을 때 이벤트
@@ -426,7 +429,7 @@
             handleKeyEvents(e, false);
         });
         
-        // 키 이벤트를 처리하는 함수
+        // 키 이벤트를 처리하는 함수 (키 누를때마다 색 바뀌기)
         function handleKeyEvents(e, isKeyDown) {
             // console.log(`Key event: key=${e.key}, code=${e.code}, isKeyDown=${isKeyDown}`);
             
@@ -454,7 +457,7 @@
             }
         });
         // ----------------------- 구 분 선 -----------------------
-        // 키보드 전환 함수
+        // 키보드 레이아웃 전환 함수
         function toggleKeyboard() {
             const hgKeyboard = document.getElementById('hgkeyboard');
             const egKeyboard = document.getElementById('egkeyboard');
@@ -466,7 +469,6 @@
                 egKeyboard.style.display = 'block';
                 toggleButton.innerText = '한글';
                 
-
             } else {
                 hgKeyboard.style.display = 'block';
                 egKeyboard.style.display = 'none';
@@ -527,6 +529,6 @@
                 
             }
         });
-      </script>
+        </script>
 </body>
 </html>
