@@ -16,6 +16,9 @@ function getSignup (req, res) {
 }
 
 async function existsAlready (req, res) {
+    if (req.body.userid.trim().length <= 3) {
+        return res.json({ msg : '아이디를 4자 이상으로 입력해주세요.', isUnique : false});
+    }
     const existingUser = await User.findOne({ where: { userid: req.body.userid }})
 
     if (existingUser) {
@@ -96,7 +99,7 @@ async function login(req, res) {
         RefreshToken: newRefreshToken
     }, {
         where: {userid: userid}
-    })
+    });
 
     res.json({ msg : '성공', isError : false});
     
@@ -108,6 +111,30 @@ function logout(req, res) {
     res.send('완료');
 }
 
+async function getMyPage(req, res) {
+    const userInfo = await User.findOne(
+        { where: {userid: req.session.userid} ,
+        attributes: ['userid', 'name']})
+    res.render('MyPage', {userInfo : userInfo});
+    
+}
+
+async function changeUserName(req, res) {
+    const newUserName = req.body.name;
+
+    try {
+        await User.update({
+            name: newUserName
+        }, {
+            where: {userid: req.session.userid}
+        });
+        res.json({msg: '이름 변경이 완료되었습니다.', isError: false});
+    } catch (err) {
+        res.json({msg: '오류가 발생하였습니다. 새로고침 후 다시 시도해주세요', isError: true});
+    }
+
+}
+
 
 module.exports = {
     getSignup : getSignup,
@@ -116,5 +143,7 @@ module.exports = {
     getLogin : getLogin,
     login : login,
     getIndex : getIndex,
-    logout : logout
+    logout : logout,
+    getMyPage : getMyPage,
+    changeUserName : changeUserName
 }
