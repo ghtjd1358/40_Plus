@@ -23,7 +23,7 @@ const User = (Sequelize, DataTypes) => {
         allowNull: false,
       },
       RefreshToken: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING(1000),
         defaultValue: ''
       },
       AccessToken: {

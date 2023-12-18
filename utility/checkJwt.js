@@ -1,7 +1,11 @@
 const jwt = require('jsonwebtoken');
 
-function makeJwt(userid) {
-    return jwt.sign({userid: userid}, 'SECRET');
+function makeAccessJwt(userid) {
+    return jwt.sign({userid: userid}, 'SECRET', {expiresIn: 30 * 60});
+}
+
+function makeRefreshJwt(userid, name) {
+    return jwt.sign({userid: userid, name: name}, 'SECRET', {expiresIn: '14d'} );
 }
 
 function checkJwt(idToken) {
@@ -10,6 +14,7 @@ function checkJwt(idToken) {
 }
 
 module.exports = {
-    makeJwt : makeJwt,
-    checkJwt : checkJwt
+    makeAccessJwt : makeAccessJwt,
+    checkJwt : checkJwt,
+    makeRefreshJwt : makeRefreshJwt
 }
