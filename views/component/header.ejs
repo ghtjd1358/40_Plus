@@ -27,4 +27,14 @@
       <%}%>
     </li>
   </ul>
+      <script>
+      async function logout() {
+        const res = await axios({
+          method: "post",
+          url: "/logout",
+        });
+
+        location.href = "/";
+      }
+    </script>
 </header>

@@ -5,6 +5,7 @@ const PORT = 8000;
 
 const swaggerRouter = require("./routes/swagger.router");
 const signupRouter = require('./routes/signup.router');
+const errorRouter = require('./routes/error.routes');
 const db = require("./models/index");
 
 const app = express();
@@ -13,7 +14,8 @@ const getSessionConfig = require('./config/session.config');
 app.use(cookieParser('추후 수정 예정 암호'));
 
 const checkIdTokenMiddleware = require('./middlewares/checkIdToken');
-
+const notFoundMiddleWare = require('./middlewares/not-found');
+const errorHanderMiddleware = require('./middlewares/error-handler');
 
 app.set('view engine', 'ejs');
 app.set("views", "./views");
@@ -35,8 +37,11 @@ app.use(expressSession(sessionConfig));
 app.use(checkIdTokenMiddleware);
 
 app.use(signupRouter);
+app.use(errorRouter);
 
 
+app.use(notFoundMiddleWare);
+app.use(errorHanderMiddleware);
 
 db.sequelize
   .sync({ force: false })

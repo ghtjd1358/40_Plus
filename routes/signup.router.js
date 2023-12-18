@@ -21,9 +21,10 @@ router.post('/logout', controller.logout);
 
 router.get('/mypage', checkAccessMiddleware, controller.getMyPage);
 
-router.patch('/mypage/changename', checkAccessMiddleware, controller.changeUserName)
+router.patch('/mypage/changename', checkAccessMiddleware, controller.changeUserName);
 
-router.get('/401', function(req, res) {
-    res.render('401')
-})
+router.patch('/mypage/changepassword', checkAccessMiddleware, controller.changeUserPassword);
+
+router.delete('/mypage', checkAccessMiddleware, controller.deleteUser);
+
 module.exports = router;
