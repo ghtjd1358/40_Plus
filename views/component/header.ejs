@@ -1,0 +1,30 @@
+<header class="header">
+  <div class="logo">
+    <a href="/">
+      <img src="./testlogo.png" alt="" class="logo" />
+    </a>
+  </div>
+
+  <div class="mainHeader"></div>
+
+  <ul class="nav">
+    <li><a href="">이용 안내</a></li>
+    <li>
+      <% if(locals.userid) {%>
+      <!-- <button id="logout" onclick="logout()">로그아웃</button> -->
+      <a href="" onclick="logout()" id="logout">로그아웃</a>
+
+      <%} else { %>
+      <a href="/login">로그인</a>
+      <%}%>
+    </li>
+    <li>
+      <% if(locals.userid) {%>
+      <a href="/"> 마이페이지 </a>
+      <%} else { %>
+
+      <a href="/signup"> 회원가입</a>
+      <%}%>
+    </li>
+  </ul>
+</header>

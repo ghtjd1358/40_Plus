@@ -1,0 +1,133 @@
+html {
+  /* 검정 계열  */
+  --color-black-1: rgb(204, 204, 204);
+  --color-black-2: rgb(153, 153, 153);
+  --color-black-3: rgb(102, 102, 102);
+  --color-black-4: rgb(51, 51, 51);
+  --color-black-5: rgb(0, 0, 0);
+
+  /* 빨강 계열 */
+  --color-red-1: rgb(255, 194, 194);
+  --color-red-2: rgb(250, 153, 153);
+  --color-red-3: rgb(239, 112, 112);
+  --color-red-4: rgb(228, 71, 71);
+  --color-red-5: rgb(207, 10, 10);
+
+  /* 주황 계열 */
+  --color-orange-1: rgb(255, 214, 191);
+  --color-orange-2: rgb(255, 184, 143);
+  --color-orange-3: rgb(243, 154, 95);
+  --color-orange-4: rgb(232, 125, 48);
+  --color-orange-5: rgb(220, 95, 0);
+
+  /* 회색 */
+  --color-grey-0: #eeeeee;
+
+  /* 둥글기 */
+  --border-radius-small: 5px;
+  --border-radius-medium: 10px;
+
+  /* 그림자 */
+  --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+  /* 여백 */
+  /* font-size에 비례 */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: scroll;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color: black;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+/* 로고 */
+.logo {
+  width: 100px;
+  height: 100px;
+}
+
+/* header 영역 CSS */
+.header {
+  width: 100%;
+  height: 150px;
+  background-color: white;
+  position: fixed;
+  display: flex;
+  z-index: 100;
+  border-bottom: 2px solid var(--color-black-1);
+  justify-content: space-around;
+  align-items: center;
+}
+
+.nav {
+  display: flex;
+  padding: 0;
+}
+
+.nav > li {
+  font-size: 18px;
+  font-weight: 700;
+  margin-right: 20px;
+}
+
+li {
+  list-style: none;
+}
+
+/* footer 영역 CSS */
+footer {
+  background-color: var(--color-grey-0);
+  width: 100%;
+  height: 100px;
+  position: relative;
+  top: 300px;
+}
+
+.footer-nav {
+  border: 1px solid black;
+  border-radius: 20px;
+  height: 100px;
+  width: 80%;
+  /* display: flex;
+        flex-direction: row;
+        justify-content: space-around; */
+}
+
+.footer-nav > ul {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  line-height: 100%;
+  height: 100%;
+}
+
+.container {
+  position: relative;
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+  height: 80%;
+  top: 180px;
+  /* background-color: var(--color-black-1); */
+}
