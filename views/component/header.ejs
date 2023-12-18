@@ -10,7 +10,7 @@
   <ul class="nav">
     <li><a href="">이용 안내</a></li>
     <li>
-      <% if(locals.userid) {%>
+      <% if(locals.accessToken) {%>
       <!-- <button id="logout" onclick="logout()">로그아웃</button> -->
       <a href="" onclick="logout()" id="logout">로그아웃</a>
 
@@ -19,7 +19,7 @@
       <%}%>
     </li>
     <li>
-      <% if(locals.userid) {%>
+      <% if(locals.accessToken) {%>
       <a href="/"> 마이페이지 </a>
       <%} else { %>
 
