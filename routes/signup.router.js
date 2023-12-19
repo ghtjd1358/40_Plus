@@ -23,13 +23,6 @@ router.get("/community", controller.community);
 
 router.post('/logout', controller.logout);
 
-router.get('/mypage', checkAccessMiddleware, controller.getMyPage);
-
-router.patch('/mypage/changename', checkAccessMiddleware, controller.changeUserName);
-
-router.patch('/mypage/changepassword', checkAccessMiddleware, controller.changeUserPassword);
-
-router.delete('/mypage', checkAccessMiddleware, controller.deleteUser);
 
 module.exports = router;
 

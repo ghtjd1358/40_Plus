@@ -1,23 +1,24 @@
+require('dotenv').config();
 const express = require("express");
 const expressSession = require("express-session");
 const cookieParser = require("cookie-parser");
 const axios = require("axios");
-const PORT = 8000;
+const PORT = process.env.SERVERPORT;
 
 const swaggerRouter = require("./routes/swagger.router");
-
 const signupRouter = require('./routes/signup.router');
 const errorRouter = require('./routes/error.routes');
+const mypageRouter = require('./routes/mypage.routes');
 
 const db = require("./models/index");
-
 const app = express();
 
 const getSessionConfig = require("./config/session.config");
-app.use(cookieParser("추후 수정 예정 암호"));
+app.use(cookieParser(process.env.SECRETKEY));
 
 
 const checkIdTokenMiddleware = require('./middlewares/checkIdToken');
+const checkAccessTokenMiddleware = require('./middlewares/checkAccessToken');
 const notFoundMiddleWare = require('./middlewares/not-found');
 const errorHanderMiddleware = require('./middlewares/error-handler');
 
@@ -40,11 +41,11 @@ app.use(expressSession(sessionConfig));
 
 app.use(checkIdTokenMiddleware);
 
-app.use(signupRouter);
 app.use(errorRouter);
+app.use(signupRouter);
 
 // API 관련
-const serviceKey = "522a1115-e77c-4ab7-b97f-f2628669126c"; // .env
+const serviceKey = process.env.CULTUREAPISERVICEKEY; // .env
 
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
@@ -52,32 +53,32 @@ app.use(bodyParser.json());
 app.get("/cultureAPI", async (req, res) => {
   const serviceUrl =
     "http://api.kcisa.kr/openapi/service/rest/convergence/conver6?";
-
-  let URI = encodeURI("serviceKey") + "=" + serviceKey;
-  URI += "&" + encodeURI("numOfRows") + "=" + encodeURI("2");
-  URI += "&" + encodeURI("pageNo") + "=" + encodeURI("1");
-  // URI += "&" + encodeURI("charge") + "=" + encodeURI("무료");
-
-  const charge = req.query.cost;
-  if (charge && charge === "무료") {
+    
+    let URI = encodeURI("serviceKey") + "=" + serviceKey;
+    URI += "&" + encodeURI("numOfRows") + "=" + encodeURI("2");
+    URI += "&" + encodeURI("pageNo") + "=" + encodeURI("1");
+    // URI += "&" + encodeURI("charge") + "=" + encodeURI("무료");
+    
+    const charge = req.query.cost;
+    if (charge && charge === "무료") {
     URI += "&" + encodeURI("charge") + "=" + encodeURI("무료");
   }
-
+  
 
   const url = serviceUrl + URI;
-
+  
   console.log(URI);
-
+  
   try {
     const result = await axios.get(url);
     const data = result.data;
-
+    
     // 사용자가 "무료"를 선택한 경우에만 데이터 필터링 적용
     if (charge && charge === "무료") {
       const filteredData = data.items.item.filter((item) => {
         return item.charge && item.charge.includes("무료");
       });
-
+      
       // 클라이언트에 필터링된 데이터 전송
       res.json(filteredData);
     } else {
@@ -89,13 +90,15 @@ app.get("/cultureAPI", async (req, res) => {
   }
 });
 
+app.use(checkAccessTokenMiddleware);
+app.use('/mypage', mypageRouter);
 
 app.use(notFoundMiddleWare);
 app.use(errorHanderMiddleware);
 
 db.sequelize
-  .sync({ force: false })
-  .then(() => {
+.sync({ force: false })
+.then(() => {
     // force: false => 테이블이 없으면 생성
     // force: true => 테이블 무조건 생성 (만약 DB가 있다면 다 삭제하고 다시 생성 -> prod에서 사용 X)
     app.listen(PORT, () => {
