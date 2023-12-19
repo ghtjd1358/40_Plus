@@ -21,19 +21,20 @@
             height: 300px;
             box-shadow: 2px 2px 2px 2px grey;
         }
-
+        /* 문제 */
         #text-to-type {
             position: relative;
             font-size: 2em;
             padding: 20px;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             background-color: #f8f8f8;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
+            font-weight: bolder;
             color: #3498db;
         }
-
+        /* 유저 입력 칸 */
         #user-input {
             font-size: 1em;
             padding: 10px;
@@ -54,17 +55,49 @@
             color: red;
             border-color: red;
         }
+        /* 해설 */
         #mean-by {
-            font-size: 2em;
-            padding-top: 20px;
+            font-size: 1.5em;
+            padding: 20px;
+            font-weight: bold;
             text-align: center;
+            background-color: #2ecc71; /* 배경색 변경 */
+            color: #ffffff; /* 글자색 변경 */
+            margin-top: 30px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 2px 2px grey;
+        }
+        /* 해설 내용 */
+        #mean-by-text {
+            font-size: 1.6em;
+            display: inline-block;
+            color: #000000; /* 글자색 변경 */
+            font-weight: bold;
+            text-transform: uppercase; /* 대문자로 변환 */
+            letter-spacing: 1px; /* 글자 간격 조절 */
+        }
+        /* 결과 창 */
+        #result {
+            position: relative;
+            left: 820px;
+            top:  -310px;
+            width: 150px;
+            height: fit-content;
+            font-weight: bold;
+            font-size: larger;
+            border: 1px solid black;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 10px;
+            box-shadow: 2px 2px 2px 2px grey;
         }
 
-        #mean-by-text {
-            display: inline-block;
-            color: #3498db;
-            font-weight: bold;
-            margin-top: 10px;
+        #result .accuracy {
+            font-size: 1.5em;
         }
 
         /* 키보드 전체  */
@@ -123,44 +156,47 @@
         .ctrl-key {
             width: 70px;
         }
-
+        /* 키보드 key,down 이벤트 */
         .changed {
             background-color: rgb(255, 73, 73);
         }
-        
+        /* 정답 일 때 */
         .correct {
-            background-color: rgb(88, 247, 109);
+            animation: pulse 1s infinite; /* 깜빡거림 효과 */
         }
-        
+        @keyframes pulse {
+            0%, 100% {
+                background-color: #3498db;
+                color: white;
+            }
+            50% {
+                background-color: rgb(255, 255, 255); /* 깜빡거림 중간 색상 설정 */
+                color: black;
+            }
+        }
+        /* 토클 버튼 */
         #toggleKeyboard {
             position: relative;
             color: black;
             left: 455px;
-            top: 90px;
+            top: 50px;
             width: 60px;
             height: 60px;
             background-color: rgb(162, 246, 137);
             border-radius: 50%;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
             border: none;
             cursor: pointer;
             outline: none;
             transition: background-color 0.3s ease;
+            text-align: center;
+            align-items: center;
+            box-shadow: 2px 2px 2px 2px grey;
         }
 
         #toggleKeyboard:hover {
-            background-color: rgb(50, 205, 0); /* hover 시 배경색 변경 */
-        }
-        #result {
-            position: relative;
-            left: 250px;
-            top: -50px;
-            width: 300px;
-            height: fit-content;
-            font-weight: bold;
-            
-            /* border: 1px solid black; */
+            background-color: #2ecc71; /* hover 시 배경색 변경 */
         }
     </style>
 </head>
@@ -169,7 +205,7 @@
     <div id="moniter">
         <div id="text-to-type"></div>
         <input type="text" id="user-input" placeholder="여기에 입력하세요" oninput="checkTyping()">
-        <div id="mean-by">해설 : <span id="mean-by-text"></span></div>
+        <div id="mean-by"><span id="mean-by-text"></span></div>
         <!-- "영문자" 버튼 -->
         <button id="toggleKeyboard" onclick="toggleKeyboard()">영문자</button>
         <div id="result"></div>
@@ -638,7 +674,7 @@
             textToType.innerText = word[wordIndex]
             userInput.value = '';
             meanByText.innerText = mean[meanIndex]
-            result.innerText = '';
+            result.innerText = '정확도 : 0.00%';
             userInput.classList.remove('error');
         }
         // 페이지 로드 시 초기화 호출
@@ -674,7 +710,7 @@
 
             // 정확도 출력
             if (userTypedText === correctText) {
-                result.innerText = '정확도: 100% \n\n"Enter"를 눌러 다음 문제를 진행하세요!';
+                result.innerText = '정확도 : 100%';
                 // console.log(enters);
                 for (const enter of enters) {
                     enter.classList.add('correct');
@@ -690,10 +726,10 @@
                         console.log('meanIndex > ', meanIndex);
                     }
             } else if (correctText.startsWith(userTypedText)) {
-                result.innerText = `정확도: ${accuracy.toFixed(2)}%`;
+                result.innerText = `정확도 : ${accuracy.toFixed(2)}%`;
                 userInput.classList.remove('error');
             } else {
-                result.innerText = `정확도: ${accuracy.toFixed(2)}%`;
+                result.innerText = `정확도 : ${accuracy.toFixed(2)}%`;
                 for (const enter of enters) {
                     enter.classList.remove('correct');
                 }
