@@ -4,7 +4,10 @@ const cookieParser = require("cookie-parser");
 const PORT = 8000;
 
 const swaggerRouter = require("./routes/swagger.router");
-const signupRouter = require("./routes/signup.router");
+
+const signupRouter = require('./routes/signup.router');
+const errorRouter = require('./routes/error.routes');
+
 const db = require("./models/index");
 
 const app = express();
@@ -12,9 +15,13 @@ const app = express();
 const getSessionConfig = require("./config/session.config");
 app.use(cookieParser("추후 수정 예정 암호"));
 
-const checkIdTokenMiddleware = require("./middlewares/checkIdToken");
 
-app.set("view engine", "ejs");
+const checkIdTokenMiddleware = require('./middlewares/checkIdToken');
+const notFoundMiddleWare = require('./middlewares/not-found');
+const errorHanderMiddleware = require('./middlewares/error-handler');
+
+app.set('view engine', 'ejs');
+
 app.set("views", "./views");
 
 app.use("/static", express.static(__dirname + "/static"));
@@ -33,6 +40,7 @@ app.use(expressSession(sessionConfig));
 app.use(checkIdTokenMiddleware);
 
 app.use(signupRouter);
+app.use(errorRouter);
 
 // API 관련
 const serviceKey = "522a1115-e77c-4ab7-b97f-f2628669126c"; // .env
@@ -54,6 +62,7 @@ app.get("/cultureAPI", async (req, res) => {
   if (charge && charge === "무료") {
     URI += "&" + encodeURI("charge") + "=" + encodeURI("무료");
   }
+
 
   const url = serviceUrl + URI;
 
@@ -79,6 +88,10 @@ app.get("/cultureAPI", async (req, res) => {
     console.log(err);
   }
 });
+
+
+app.use(notFoundMiddleWare);
+app.use(errorHanderMiddleware);
 
 db.sequelize
   .sync({ force: false })

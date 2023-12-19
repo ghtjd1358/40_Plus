@@ -8,13 +8,29 @@ const clearUserInfo = require("../utility/clearUserInfo");
 
 function getIndex(req, res) {
   res.render("index");
-}
+};
+
+const culture = (req, res) => {
+  res.render("culture");
+};
+
+const community = (req, res) => {
+  res.render("community");
+};
+
+
 
 function getSignup(req, res) {
   res.render("signup");
 }
 
 async function existsAlready(req, res) {
+  if (req.body.userid.trim().length <= 3) {
+    return res.json({
+      msg: "아이디를 4자 이상으로 입력해주세요.",
+      isUnique: false,
+    });
+  }
   const existingUser = await User.findOne({
     where: { userid: req.body.userid },
   });
@@ -129,13 +145,112 @@ function logout(req, res) {
   res.send("완료");
 }
 
-const culture = (req, res) => {
-  res.render("culture");
-};
+async function getMyPage(req, res) {
+  const userInfo = await User.findOne({
+    where: { userid: req.session.userid },
+    attributes: ["userid", "name"],
+  });
+  res.render("MyPage", { userInfo: userInfo });
+}
 
-const community = (req, res) => {
-  res.render("community");
-};
+async function changeUserName(req, res) {
+  const newUserName = req.body.name;
+
+  try {
+    await User.update(
+      {
+        name: newUserName,
+      },
+      {
+        where: { userid: req.session.userid },
+      }
+    );
+    res.json({ msg: "이름 변경이 완료되었습니다.", isError: false });
+  } catch (err) {
+    res.json({
+      msg: "오류가 발생하였습니다. 새로고침 후 다시 시도해주세요",
+      isError: true,
+    });
+  }
+}
+
+async function changeUserPassword(req, res) {
+  const { currentPassword, newPassword, confirmPassword } = req.body;
+
+  const userPassword = await User.findOne({
+    where: { userid: req.session.userid },
+    attributes: ["password"],
+  });
+
+  const result = bcrypt.compareSync(currentPassword, userPassword.password);
+  if (!result) {
+    return res.json({ msg: "현재 비밀번호가 다릅니다.", isError: true });
+  }
+
+  if (newPassword.trim().length < 6 || !newPassword) {
+    return res.json({
+      msg: "비밀번호를 6자 이상으로 입력해주세요.",
+      isError: true,
+    });
+  }
+
+  if (!(newPassword === confirmPassword)) {
+    return res.json({
+      msg: "새 비밀번호와 확인 비밀번호가 다릅니다.",
+      isError: true,
+    });
+  }
+
+  if (bcrypt.compareSync(newPassword, userPassword.password)) {
+    return res.json({
+      msg: "이전 비밀번호와 동일한 비밀번호입니다.",
+      isError: true,
+    });
+  }
+
+  const hashedNewPassword = bcrypt.hashSync(newPassword, 12);
+
+  try {
+    await User.update(
+      {
+        password: hashedNewPassword,
+      },
+      {
+        where: { userid: req.session.userid },
+      }
+    );
+    return res.json({ msg: "비밀번호 변경이 완료되었습니다.", isError: false });
+  } catch (err) {
+    return res.json({
+      msg: "오류가 발생하였습니다. 새로고침 후 다시 시도해주세요",
+      isError: true,
+    });
+  }
+}
+
+async function deleteUser(req, res) {
+  try {
+    await User.destroy({
+      where: { userid: req.session.userid },
+    });
+
+    res.clearCookie(
+      "refreshToken",
+      req.signedCookies.refreshToken,
+      getCookieConfig()
+    );
+    clearUserInfo(req, res);
+    res.json({
+      msg: "삭제완료",
+      isError: false,
+    });
+  } catch(err) {
+    res.json({
+      msg: "오류가 발생하였습니다. 새로고침 후 다시 시도해주세요",
+      isError: true,
+    });
+  }
+}
 
 module.exports = {
   getSignup: getSignup,
@@ -147,4 +262,9 @@ module.exports = {
   logout: logout,
   culture: culture,
   community: community,
+  getMyPage: getMyPage,
+  changeUserName: changeUserName,
+  changeUserPassword: changeUserPassword,
+  deleteUser: deleteUser,
+
 };

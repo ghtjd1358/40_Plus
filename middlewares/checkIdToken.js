@@ -12,6 +12,7 @@ async function checkAuthStatus(req, res, next) {
 
     // 세션에 있는 access토큰 locals로 불러오기
     res.locals.accessToken = req.session.accessToken;
+    res.locals.userid = req.session.userid;
     try {
         // access token이 유효한지 검사
         checkAccessToken = checkJwt.checkJwt(req.session.accessToken);
@@ -36,7 +37,8 @@ async function checkAuthStatus(req, res, next) {
                     const newAccessToken = checkJwt.makeAccessJwt(existingUser.userid);
                     req.session.accessToken = newAccessToken;
                     res.locals.accessToken = newAccessToken;
-                    res.locals.userid = existingUser.userid;
+                    req.session.userid = existingUser.userid;
+                    res.locals.userid = req.session.userid;
                 }
                 return next();
             } 
