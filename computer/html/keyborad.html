@@ -561,6 +561,8 @@
     </div>
     
     <script>
+        // 단일 키 코드 값 가져오기.
+        let inputCode = '';
         // ----------------------- 구 분 선 ----------------------- 
         // (초기) 키 눌렀을 때 이벤트
         window.addEventListener("keydown", (e) => {
@@ -578,7 +580,10 @@
             
             // 일반 키 + 특수 키 (통일)=> e.code 코드 값으로 받기.
             // const code = document.getElementById(e.code);
+
+            inputCode = e.code;
             const codes = document.querySelectorAll(`.${e.code}`);
+            
             for (const code of codes) {
                 if (code) {
                     if (isKeyDown) {
@@ -623,9 +628,9 @@
         }
         // ----------------------- 구 분 선 -----------------------
         // 추가 부분: 과일 배열 및 현재 인덱스 변수
-        const word = ["cook", "알잘딱깔센", "킹받네", "꾸안꾸"];
+        const word = ["예시","알잘딱깔센", "킹받네", "꾸안꾸"];
         let wordIndex = 0;
-        const mean = ["'알아서 잘 딱 깔끔하고 센스있게'의 줄임말", "'열받네'에 킹을 더해 의미를 강조한 단어'", "'꾸민듯 안꾸민듯'의 줄임말"]
+        const mean = ["예시","'알아서 잘 딱 깔끔하고 센스있게'의 줄임말", "'열받네'에 킹을 더해 의미를 강조한 단어'", "'꾸민듯 안꾸민듯'의 줄임말"]
         let meanIndex = 0;
 
         // 초기화 함수: 텍스트 설정 및 현재 인덱스 초기화
@@ -646,6 +651,7 @@
         const result = document.getElementById('result');
         const enters = document.querySelectorAll('.Enter');
         const meanByText = document.getElementById('mean-by-text');
+        
 
         function checkTyping() {
             const userTypedText = userInput.value;  // 유저가 입력하는 값.
@@ -655,7 +661,7 @@
             console.log(correctChars);
             console.log(userTypedChars);
             const minLength = Math.min(userTypedChars.length, correctChars.length); // 최소 길이 찾기
-            console.log(minLength);
+            // console.log(minLength);
 
             // 각 글자를 비교하고 정확도 계산
             let correctCount = 0;
@@ -666,16 +672,23 @@
             }
             const accuracy = (correctCount / correctChars.length) * 100; // 정확도 계산
 
+            // 정확도 출력
             if (userTypedText === correctText) {
                 result.innerText = '정확도: 100% \n\n"Enter"를 눌러 다음 문제를 진행하세요!';
-                console.log(enters);
+                // console.log(enters);
                 for (const enter of enters) {
-                    
                     enter.classList.add('correct');
                 }
                 userInput.classList.remove('error');
-                wordIndex = (wordIndex + 1) % word.length; // 정확하게 입력하면 다음 값으로 이동
-                meanIndex = (meanIndex + 1) % mean.length; // 
+                    // console.log(event.key);  // undefined.
+                    // console.log(inputCode);  // 마지막으로 입력 된 값 확인 로그
+                    if(inputCode === 'Enter') {
+                        console.log('인덱스 증가');
+                        wordIndex = (wordIndex + 1) % word.length; // 정확하게 입력하면 다음 값으로 이동
+                        meanIndex = (meanIndex + 1) % mean.length;  
+                        console.log('wordIndex > ', wordIndex);
+                        console.log('meanIndex > ', meanIndex);
+                    }
             } else if (correctText.startsWith(userTypedText)) {
                 result.innerText = `정확도: ${accuracy.toFixed(2)}%`;
                 userInput.classList.remove('error');
@@ -690,11 +703,11 @@
         // Enter 키 이벤트 처리
         userInput.addEventListener('keyup', function(event) {
             if (event.key === 'Enter') {
+                // console.log(event.key); // enter
                 initializeText(); // 엔터 키 누르면 초기화
                 for (const enter of enters) {
                     enter.classList.remove('correct');
                 }
-                
             }
         });
         </script>
