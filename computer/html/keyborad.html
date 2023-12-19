@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            height: fit-content;
+            text-align: center;
+        }
+        /* 모니터 화면 */
+        #moniter {
+            /* max-width: 600px; */
+            margin-top: 30px;
+            margin-left: auto;
+            margin-right: auto;
+            /* border: 1px solid black; */
+            width: 800px;
+            height: 300px;
+            box-shadow: 2px 2px 2px 2px grey;
+        }
+
+        #text-to-type {
+            position: relative;
+            font-size: 2em;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #f8f8f8;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            color: #3498db;
+        }
+
+        #user-input {
+            font-size: 1em;
+            padding: 10px;
+            width: 300px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.3s ease;
+            color: darkblue;
+        }
+
+        #user-input:focus {
+            border-color: dodgerblue; /* 입력창에 포커스 시 테두리 색상을 파란색으로 변경 */
+            background-color: rgb(255, 251, 214);
+        }
+
+        #user-input.error {
+            color: red;
+            border-color: red;
+        }
+        #mean-by {
+            font-size: 2em;
+            padding-top: 20px;
+            text-align: center;
+        }
+
+        #mean-by-text {
+            display: inline-block;
+            color: #3498db;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* 키보드 전체  */
+        .big_C {
+            /* border: 1px solid black; */
+            flex-wrap: wrap;
+            max-width: fit-content;
+            text-align: center;
+            margin: 0 auto;
+        }
+        /* 한줄 마다 */
+        .sml_C {
+            /* border: 1px solid black; */
+            display: flex;
+        }
+        .key {
+            width: 50px;
+            height: 50px;
+            border: 1px solid #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 2px;
+            box-shadow: 2px 2px 2px 1px grey;
+        }
+        .key .top {
+            display: none;
+        }
+
+        .shift-pressed .key .top {
+            display: block;
+        }
+        .shift-pressed .key .bottom {
+            display: none;
+        }
+        .tab-key {
+            width: 74px; /* Tab 키의 가로 길이 조절 */
+        }
+        .caps-lock-key {
+            width: 90px; /* Caps Lock 키의 가로 길이 조절 */
+        }
+        .delete-key {
+            width: 74px;
+        }
+        .enter-key {
+            width: 90px;
+        }
+        .shift-key {
+            width: 118px;
+        }
+        .space-key {
+            width: 370px;
+        }
+        .ctrl-key {
+            width: 70px;
+        }
+
+        .changed {
+            background-color: rgb(255, 73, 73);
+        }
+        
+        .correct {
+            background-color: rgb(88, 247, 109);
+        }
+        
+        #toggleKeyboard {
+            position: relative;
+            color: black;
+            left: 455px;
+            top: 90px;
+            width: 60px;
+            height: 60px;
+            background-color: rgb(162, 246, 137);
+            border-radius: 50%;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            transition: background-color 0.3s ease;
+        }
+
+        #toggleKeyboard:hover {
+            background-color: rgb(50, 205, 0); /* hover 시 배경색 변경 */
+        }
+        #result {
+            position: relative;
+            left: 250px;
+            top: -50px;
+            width: 300px;
+            height: fit-content;
+            font-weight: bold;
+            
+            /* border: 1px solid black; */
+        }
+    </style>
+</head>
+<body>
+    <!-- 화면 출력 -->
+    <div id="moniter">
+        <div id="text-to-type"></div>
+        <input type="text" id="user-input" placeholder="여기에 입력하세요" oninput="checkTyping()">
+        <div id="mean-by">해설 : <span id="mean-by-text"></span></div>
+        <!-- "영문자" 버튼 -->
+        <button id="toggleKeyboard" onclick="toggleKeyboard()">영문자</button>
+        <div id="result"></div>
+    </div>
+    
+    <!-- 키보드 -->
+    <!-- 한글 자판 -->
+    <div class="big_C" id="hgkeyboard">
+        <div class="sml_C" id="hg_1">
+            <div class="key Backquote">
+                <div class="top">~</div>
+                <div class="bottom">`</div>
+            </div>
+            <div class="key Digit1">
+                <div class="top">!</div>
+                <div class="bottom">1</div>
+            </div>
+            <div class="key Digit2">
+                <div class="top">@</div>
+                <div class="bottom">2</div>
+            </div>
+            <div class="key Digit3">
+                <div class="top">#</div>
+                <div class="bottom">3</div>
+            </div>
+            <div class="key Digit4">
+                <div class="top">$</div>
+                <div class="bottom">4</div>
+            </div>
+            <div class="key Digit5">
+                <div class="top">%</div>
+                <div class="bottom">5</div>
+            </div>
+            <div class="key Digit6">
+                <div class="top">^</div>
+                <div class="bottom">6</div>
+            </div>
+            <div class="key Digit7">
+                <div class="top">&</div>
+                <div class="bottom">7</div>
+            </div>
+            <div class="key Digit8">
+                <div class="top">*</div>
+                <div class="bottom">8</div>
+            </div>
+            <div class="key Digit9">
+                <div class="top">(</div>
+                <div class="bottom">9</div>
+            </div>
+            <div class="key Digit0">
+                <div class="top">)</div>
+                <div class="bottom">0</div>
+            </div>
+            <div class="key Minus">
+                <div class="top">_</div>
+                <div class="bottom">-</div>
+            </div>
+            <div class="key Equal">
+                <div class="top">+</div>
+                <div class="bottom">=</div>
+            </div>
+            <div class="key delete-key Backspace">Delete</div>
+        </div>
+        <!-- 2번 째 줄 -->
+        <div class="sml_C" id="hg_2">
+            <div class="key tab-key Tab">Tab</div>
+            <div class="key KeyQ">
+                <div class="top">ㅃ</div>
+                <div class="bottom">ㅂ</div>
+            </div>
+            <div class="key KeyW">
+                <div class="top">ㅉ</div>
+                <div class="bottom">ㅈ</div>
+            </div>
+            <div class="key KeyE">
+                <div class="top">ㄸ</div>
+                <div class="bottom">ㄷ</div>
+            </div>
+            <div class="key KeyR">
+                <div class="top">ㄲ</div>
+                <div class="bottom">ㄱ</div>
+            </div>
+            <div class="key KeyT">
+                <div class="top">ㅆ</div>
+                <div class="bottom">ㅅ</div>
+            </div>
+            <div class="key KeyY">ㅛ</div>
+            <div class="key KeyU">ㅕ</div>
+            <div class="key KeyI">ㅑ</div>
+            <div class="key KeyO">
+                <div class="top">ㅒ</div>
+                <div class="bottom">ㅐ</div>
+            </div>
+            <div class="key KeyP">
+                <div class="top">ㅖ</div>
+                <div class="bottom">ㅔ</div>
+            </div>
+            <div class="key BracketLeft">
+                <div class="top">{</div>
+                <div class="bottom">[</div>
+            </div>
+            <div class="key BracketRight">
+                <div class="top">}</div>
+                <div class="bottom">]</div>
+            </div>
+            <div class="key Backslash">
+                <div class="top">|</div>
+                <div class="bottom">\</div>
+            </div>
+        </div>
+        <!-- 3번째 줄 -->
+        <div class="sml_C hg_3">
+            <div class="key caps-lock-key CapsLock">Caps Lock</div>
+            <div class="key KeyA">ㅁ</div>
+            <div class="key KeyS">ㄴ</div>
+            <div class="key KeyD">ㅇ</div>
+            <div class="key KeyF">ㄹ</div>
+            <div class="key KeyG">ㅎ</div>
+            <div class="key KeyH">ㅗ</div>
+            <div class="key KeyJ">ㅓ</div>
+            <div class="key KeyK">ㅏ</div>
+            <div class="key KeyL">ㅣ</div>
+            <div class="key Semicolon">
+                <div class="top">:</div>
+                <div class="bottom">;</div>
+            </div>
+            <div class="key Quote">
+                <div class="top">"</div>
+                <div class="bottom">'</div>
+            </div>
+            <div class="key enter-key Enter">Enter</div>
+        </div>
+        <!-- 4번째 줄 -->
+        <div class="sml_C" id="hg_4">
+            <div class="key shift-key ShiftLeft">Shift</div>
+            <div class="key KeyZ">ㅋ</div>
+            <div class="key KeyX">ㅌ</div>
+            <div class="key KeyC">ㅊ</div>
+            <div class="key KeyV">ㅍ</div>
+            <div class="key KeyB">ㅠ</div>
+            <div class="key KeyN">ㅜ</div>
+            <div class="key KeyM">ㅡ</div>
+            <div class="key Comma">
+                <div class="top"><</div>
+                <div class="bottom">,</div>
+            </div>
+            <div class="key Period">
+                <div class="top">></div>
+                <div class="bottom">.</div>
+            </div>
+            <div class="key Slash">
+                <div class="top">?</div>
+                <div class="bottom">/</div>
+            </div>
+            <div class="key shift-key ShiftRight">Shift</div>
+        </div>        
+        <!-- 5번째 줄 -->
+        <div class="sml_C hg_5">
+            <div class="key ctrl-key ControlLeft">Ctrl</div>
+            <div class="key"> </div>
+            <div class="key AltLeft">Alt</div>
+            <div class="key space-key Space">Space</div>
+            <div class="key HangulMode">한/영</div>
+            <div class="key HanjaMode">한자</div>
+            <div class="key"> </div>
+            <div class="key ctrl-key ControlRight">Ctrl</div>
+        </div>
+    </div>
+    <!-- 영어 자판 -->
+    <div class="big_C" id="egkeyboard" style="display: none;">
+        <div class="sml_C" id="eg_1">
+            <div class="key Backquote">`</div>
+            <div class="key Digit1">1</div>
+            <div class="key Digit2">2</div>
+            <div class="key Digit3">3</div>
+            <div class="key Digit4">4</div>
+            <div class="key Digit5">5</div>
+            <div class="key Digit6">6</div>
+            <div class="key Digit7">7</div>
+            <div class="key Digit8">8</div>
+            <div class="key Digit9">9</div>
+            <div class="key Digit0">0</div>
+            <div class="key Minus">-</div>
+            <div class="key Equal">=</div>
+            <div class="key delete-key Backspace">Delete</div>
+        </div>
+        <!-- 2번 째 줄 -->
+        <div class="sml_C" id="eg_2">
+            <div class="key tab-key Tab">Tab</div>
+            <div class="key KeyQ">q</div>
+            <div class="key KeyW">w</div>
+            <div class="key KeyE">e</div>
+            <div class="key KeyR">r</div>
+            <div class="key KeyT">t</div>
+            <div class="key KeyY">y</div>
+            <div class="key KeyU">u</div>
+            <div class="key KeyI">i</div>
+            <div class="key KeyO">o</div>
+            <div class="key KeyP">p</div>
+            <div class="key BracketLeft">[</div>
+            <div class="key BracketRight">]</div>
+            <div class="key Backslash">\</div>
+        </div>
+        <!-- 3번째 줄 -->
+        <div class="sml_C" id="eg_3">
+            <div class="key caps-lock-key CapsLock">Caps Lock</div>
+            <div class="key KeyA">a</div>
+            <div class="key KeyS">s</div>
+            <div class="key KeyD">d</div>
+            <div class="key KeyF">f</div>
+            <div class="key KeyG">g</div>
+            <div class="key KeyH">h</div>
+            <div class="key KeyJ">j</div>
+            <div class="key KeyK">k</div>
+            <div class="key KeyL">l</div>
+            <div class="key Semicolon">;</div>
+            <div class="key Quote">'</div>
+            <div class="key enter-key Enter">Enter</div>
+        </div>
+        <!-- 4번째 줄 -->
+        <div class="sml_C" id="eg_4">
+            <div class="key shift-key ShiftLeft">Shift</div>
+            <div class="key KeyZ">z</div>
+            <div class="key KeyX">x</div>
+            <div class="key KeyC">c</div>
+            <div class="key KeyV">v</div>
+            <div class="key KeyB">b</div>
+            <div class="key KeyN">n</div>
+            <div class="key KeyM">m</div>
+            <div class="key Comma">,</div>
+            <div class="key Period">.</div>
+            <div class="key Slash">/</div>
+            <div class="key shift-key ShiftRight">Shift</div>
+        </div>
+        
+        <!-- 5번째 줄 -->
+        <div class="sml_C" id="eg_5">
+            <div class="key ctrl-key ControlLeft">Ctrl</div>
+            <div class="key"> </div>
+            <div class="key AltLeft">Alt</div>
+            <div class="key space-key Space">Space</div>
+            <div class="key HangulMode">한/영</div>
+            <div class="key HanjaMode">한자</div>
+            <div class="key"> </div>
+            <div class="key ctrl-key ControlRight">Ctrl</div>
+        </div>
+    </div>
+    
+    <script>
+        // ----------------------- 구 분 선 ----------------------- 
+        // (초기) 키 눌렀을 때 이벤트
+        window.addEventListener("keydown", (e) => {
+            handleKeyEvents(e, true);
+        });
+
+        // (초기) 키 뗐을 때 이벤트
+        window.addEventListener("keyup", (e) => {
+            handleKeyEvents(e, false);
+        });
+        
+        // 키 이벤트를 처리하는 함수 (키 누를때마다 색 바뀌기)
+        function handleKeyEvents(e, isKeyDown) {
+            // console.log(`Key event: key=${e.key}, code=${e.code}, isKeyDown=${isKeyDown}`);
+            
+            // 일반 키 + 특수 키 (통일)=> e.code 코드 값으로 받기.
+            // const code = document.getElementById(e.code);
+            const codes = document.querySelectorAll(`.${e.code}`);
+            for (const code of codes) {
+                if (code) {
+                    if (isKeyDown) {
+                        code.classList.add("changed");
+                    } else {
+                        code.classList.remove("changed");
+                    }
+                }
+            }
+        }
+        // ----------------------- 구 분 선 -----------------------
+        // shift 키가 눌렸을 때 쌍모음 이벤트
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Shift') {
+                document.body.classList.add('shift-pressed');
+            }
+        });
+
+        document.addEventListener('keyup', function (event) {
+            if (event.key === 'Shift') {
+                document.body.classList.remove('shift-pressed');
+            }
+        });
+        // ----------------------- 구 분 선 -----------------------
+        // 키보드 레이아웃 전환 함수
+        function toggleKeyboard() {
+            const hgKeyboard = document.getElementById('hgkeyboard');
+            const egKeyboard = document.getElementById('egkeyboard');
+            const toggleButton = document.getElementById('toggleKeyboard');
+            
+            // "한글 자판"이 보이면 "영어 자판"으로, 그 반대도 마찬가지
+            if (hgKeyboard.style.display !== 'none') {
+                hgKeyboard.style.display = 'none';
+                egKeyboard.style.display = 'block';
+                toggleButton.innerText = '한글';
+                
+            } else {
+                hgKeyboard.style.display = 'block';
+                egKeyboard.style.display = 'none';
+                toggleButton.innerText = '영문자';
+            }
+        }
+        // ----------------------- 구 분 선 -----------------------
+        // 추가 부분: 과일 배열 및 현재 인덱스 변수
+        const word = ["cook", "알잘딱깔센", "킹받네", "꾸안꾸"];
+        let wordIndex = 0;
+        const mean = ["'알아서 잘 딱 깔끔하고 센스있게'의 줄임말", "'열받네'에 킹을 더해 의미를 강조한 단어'", "'꾸민듯 안꾸민듯'의 줄임말"]
+        let meanIndex = 0;
+
+        // 초기화 함수: 텍스트 설정 및 현재 인덱스 초기화
+        function initializeText() {;
+            textToType.innerText = word[wordIndex]
+            userInput.value = '';
+            meanByText.innerText = mean[meanIndex]
+            result.innerText = '';
+            userInput.classList.remove('error');
+        }
+        // 페이지 로드 시 초기화 호출
+        window.onload = initializeText;
+        
+        //  타자 검정
+        // const originalText = "한글 타자 검정을 시작합니다. 아무내용이나 써보세요"; //정답
+        const textToType = document.getElementById('text-to-type');
+        const userInput = document.getElementById('user-input');
+        const result = document.getElementById('result');
+        const enters = document.querySelectorAll('Enter');
+        const meanByText = document.getElementById('mean-by-text');
+
+        function checkTyping() {
+            const userTypedText = userInput.value;  // 유저가 입력하는 값.
+            const correctText = word[wordIndex];   // 정답 ex)사과
+            const accuracy = Math.min((userTypedText.length / correctText.length) * 100, 100); // 최대 100%로 제한
+
+            if (userTypedText === correctText) {
+                result.innerText = '정확도: 100% \n\n"Enter"를 눌러 다음 문제를 진행하세요!';
+                for (const enter of enters) {
+                    enter.classList.add('correct');
+                }
+                userInput.classList.remove('error');
+                wordIndex = (wordIndex + 1) % word.length; // 정확하게 입력하면 다음 과일로 이동
+                meanIndex = (meanIndex + 1) % mean.length; // 
+            } else if (correctText.startsWith(userTypedText)) {
+                result.innerText = `정확도: ${accuracy.toFixed(2)}%`;
+                userInput.classList.remove('error');
+            } else {
+                result.innerText = `정확도: ${accuracy.toFixed(2)}%`;
+                for (const enter of enters) {
+                    enter.classList.remove('correct');
+                }
+                userInput.classList.add('error');
+            }
+        }
+        // Enter 키 이벤트 처리
+        userInput.addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                initializeText(); // 엔터 키 누르면 초기화
+                for (const enter of enters) {
+                    enter.classList.remove('correct');
+                }
+                
+            }
+        });
+        </script>
+</body>
+</html>

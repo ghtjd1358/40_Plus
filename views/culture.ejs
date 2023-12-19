@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="/static/css/component.css" />
+    <title>culture</title>
+
+    <style>
+      a {
+        cursor: pointer;
+      }
+
+      .header {
+        width: 100%;
+        height: 150px;
+        background-color: white;
+        position: fixed;
+        display: flex;
+        z-index: 100;
+        border-bottom: 2px solid var(--color-black-1);
+        justify-content: space-around;
+        align-items: center;
+      }
+
+      .main-content {
+        display: flex;
+      }
+      .container {
+        position: relative;
+        display: flex;
+
+        flex-direction: column;
+        align-items: center;
+
+        width: 100%;
+        height: 80%;
+        top: 180px;
+        /* background-color: var(--color-black-1); */
+      }
+
+      .culture {
+        background-color: white;
+        border: 1px solid var(--color-black-1);
+        border-radius: 20px;
+        box-shadow: 1px 1px var(--color-black-1);
+        width: 400px;
+        height: 600px;
+
+        margin: 30px;
+      }
+
+      .terms {
+        /* background-color: pink; */
+        width: 400px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include("./component/header")%>
+
+    <main class="container">
+      <div class="terms">
+        <form action="/cultureAPI" name="termsForm" id="termsFrom">
+          <input type="date" name="date" id="date" />
+          <!-- <select name="location" id="location">
+            <option value="서울">서울</option>
+            <option value="부산">부산</option>
+          </select> -->
+
+          <select name="cost" id="cost">
+            <option value="무료">무료</option>
+            <option value="1">유로</option>
+          </select>
+        </form>
+      </div>
+
+      <button onclick="submit()">검색하기</button>
+      <button onclick="result()">불러오기</button>
+
+      <section class="main-content">
+        <div class="culture">
+          <div></div>
+        </div>
+        <div class="culture"></div>
+      </section>
+    </main>
+
+    <script>
+      // async function submit() {
+      //   const forms = document.forms["termsFrom"];
+      //   const period = forms.date.value;
+      //   // const location = forms.location.value;
+      //   const charge = forms.cost.value;
+
+      //   try {
+      //     const respons = await fetch(
+      //       `/cultureAPI?period=${period}&charge=${charge}`
+      //     );
+      //     const data = await response.json();
+      //     displayData(data);
+      //   } catch (error) {
+      //     console.error(error);
+      //   }
+
+      // const forms = document.forms["termsForm"];
+      // const period = forms.date.value;
+      // const location = forms.location.value;
+      // const cost = forms.cost.value;
+
+      // try {
+      //   const response = await fetch(
+      //     `/cultureAPI?period=${period}&location=${location}&cost=${cost}`
+      //   );
+      //   const data = await response.json();
+      //   displayData(data);
+      // } catch (error) {
+      //   console.error(error);
+      // }
+
+      // const response = await fetch("/cultureAPI", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({ preiod, lociton, cost }),
+      // });
+
+      // const data = await response.json();
+      // displayData(data);
+
+      // console.log({
+      //   period,
+      //   charge,
+      // });
+
+      async function result() {
+        const cost = document.getElementById("cost");
+        const costValue = cost.value;
+        try {
+          const response = await fetch(`/cultureAPI?charge=${costValue}`);
+          const data = await response.json();
+          displayData(data);
+
+          console.log(data);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      function displayData(data) {
+        const cultureDivs = document.querySelectorAll(".main-content .culture");
+
+        cultureDivs.forEach((div) => {
+          div.innerHTML = "";
+        });
+
+        const items = data.response?.body?.items?.item;
+
+        if (items && items.length > 0) {
+          items.forEach((item, index) => {
+            const itemDiv = document.createElement("div");
+
+            const titleDiv = document.createElement("div");
+            titleDiv.textContent = `Title: ${item.title}`;
+            itemDiv.appendChild(titleDiv);
+
+            // period
+            const periodDiv = document.createElement("div");
+            periodDiv.textContent = `Period: ${item.period}`;
+            itemDiv.appendChild(periodDiv);
+
+            // time
+            const timeDiv = document.createElement("div");
+            timeDiv.textContent = `Time: ${item.time}`;
+            itemDiv.appendChild(timeDiv);
+
+            // url
+            const urlDiv = document.createElement("div");
+            urlDiv.innerHTML = `<a href="${item.url}" target="_blank">링크 바로가기 </a>`;
+            itemDiv.appendChild(urlDiv);
+
+            // grade
+            const gradeDiv = document.createElement("div");
+            gradeDiv.textContent = `Grade: ${item.grade}`;
+            itemDiv.appendChild(gradeDiv);
+
+            // creator
+            const creatorDiv = document.createElement("div");
+            creatorDiv.textContent = `Creator: ${item.creator}`;
+            itemDiv.appendChild(creatorDiv);
+
+            // charge
+            const chargeDiv = document.createElement("div");
+            chargeDiv.textContent = `Charge: ${item.charge}`;
+            itemDiv.appendChild(chargeDiv);
+
+            // // img;
+            const imgDiv = document.createElement("div");
+            imgDiv.innerHTML = `<img src="${item.referenceIdentifier}" alt="">`;
+            itemDiv.appendChild(imgDiv);
+
+            cultureDivs[index].appendChild(itemDiv);
+          });
+        } else {
+          // 검색 결과가 없는 경우 메시지 표시
+          cultureDivs.forEach((div) => {
+            div.textContent = "검색 결과가 없습니다.";
+          });
+        }
+      }
+    </script>
+  </body>
+</html>

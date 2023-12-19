@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>main page</title>
+
+    <link rel="stylesheet" href="/static/css/component.css" />
+  </head>
+  <body>
+    <!-- header -->
+    <%- include("./component/header")%>
+    <main class="container">
+      <label for="userid">아이디 : </label>
+      <input type="text" id="userid" value="<%= userInfo.userid %>" readonly />
+      <br />
+
+      <label for="name">이름 : </label>
+      <input type="text" id="name" value="<%= userInfo.name %>" />
+      <button id="change-name-button">이름바꾸기</button>
+      <div id="result-of-change-name"></div>
+
+      <button>비밀번호 변경하기 (이거 누르면 밑에꺼 모달)</button>
+      <div>
+        <form name="change-password">
+          <label for="current-password">현재 비밀번호</label>
+          <input
+            type="password"
+            id="current-password"
+            name="current-password"
+          />
+          <label for="new-password">새 비밀번호</label>
+          <input type="password" id="new-password" name="new-password" />
+          <label for="confirm-password">비밀번호 확인</label>
+          <input
+            type="password"
+            id="confirm-password"
+            name="confirm-password"
+          />
+          <button id="change-password-button" type="button">
+            비밀번호 변경
+          </button>
+        </form>
+        <div id="result-of-change-password"></div>
+      </div>
+      <button id="delete-user-button">
+        회원 탈퇴 (버튼 누를 시 밑에 div 모달)
+      </button>
+      <div>
+        탈퇴하시겠습니까?
+        <button id="delete-user-button-yes">예</button>
+        <button id="delete-user-button-no">아니오 (누를시 div 안보이게)</button>
+      </div>
+      <div id="result-of-delete-user"></div>
+    </main>
+    <%- include('./component/footer')%>
+    <script>
+      const changeNameBtnElement = document.querySelector(
+        "#change-name-button"
+      );
+      const changePasswordBtnElement = document.querySelector(
+        "#change-password-button"
+      );
+      const deleteUserBtnElement = document.querySelector(
+        "#delete-user-button-yes"
+      );
+
+      async function changeName() {
+        const nameElement = document.querySelector("#name");
+        const result = document.querySelector("#result-of-change-name");
+        const res = await axios({
+          url: "/mypage/changename",
+          method: "patch",
+          data: {
+            name: nameElement.value,
+          },
+        });
+        console.log(res.data);
+        result.textContent = res.data.msg;
+      }
+
+      async function changePassword() {
+        const passwordForm = document.forms["change-password"];
+        const resultOfchangePassword = document.querySelector(
+          "#result-of-change-password"
+        );
+
+        const res = await axios({
+          url: "/mypage/changepassword",
+          method: "patch",
+          data: {
+            currentPassword: passwordForm["current-password"].value,
+            newPassword: passwordForm["new-password"].value,
+            confirmPassword: passwordForm["confirm-password"].value,
+          },
+        });
+        console.log(res.data);
+        resultOfchangePassword.textContent = res.data.msg;
+      }
+      async function deleteUser() {
+        const resultOfDeleteUser = document.querySelector('#result-of-delete-user')
+        const res = await axios({
+          url: "/mypage",
+          method: 'delete'
+        });
+
+        if (!res.data.isError) {
+          location.href = '/'
+        } else {
+          resultOfDeleteUser.textContent = res.data.msg;
+        }
+      }
+
+      changeNameBtnElement.addEventListener("click", changeName);
+      changePasswordBtnElement.addEventListener("click", changePassword);
+      deleteUserBtnElement.addEventListener('click', deleteUser);
+    </script>
+  </body>
+</html>

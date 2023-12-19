@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/component.css" />
+
+    <style>
+      .signupContent {
+        width: 700px;
+        height: 400px;
+        background-color: var(--color-grey);
+
+        display: flex;
+        flex-direction: column;
+        border-radius: var(--border-radius-medium);
+        box-shadow: var(--shadow);
+        /* margin-top: var(--space-1); */
+      }
+
+      #userid {
+        width: 400px;
+      }
+
+      input {
+        width: 500px;
+        height: 50px;
+        border: 1px solid var(--color-black-1);
+        border-radius: var(--border-radius-small);
+        font-size: 18px;
+        margin-bottom: var(--space-1);
+      }
+
+      .btnLarge {
+        width: 500px;
+        height: 50px;
+        background-color: var(--color-orange-4);
+        color: var(--color-grey-0);
+        font-size: 18px;
+        border: 1px solid var(--color-orange-3);
+        width: 500px;
+        border-radius: var(--border-radius-small);
+      }
+
+      .signupBox {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* background-color: pink; */
+        margin-top: var(--space-3);
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        /* justify-content: center; */
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include("./component/header")%>
+
+    <main class="container">
+      <div class="signupContent">
+        <div class="signupBox">
+          <form name="signup">
+            <input type="text" id="userid" name="userid" placeholder="id" />
+            <button type="button" id="valid-check">중복검사</button>
+            <span id="valid-check-result"></span>
+            <br />
+            <input type="password" name="password" placeholder="pw" /><br />
+            <input
+              type="password"
+              name="confirm-password"
+              placeholder="비밀번호 확인"
+            /><br />
+
+            <input type="text" placeholder="이름" name="name" /><br />
+
+            <div>
+              <p id="result"></p>
+            </div>
+            <button type="button" id="signup" class="btnLarge">회원가입</button>
+          </form>
+        </div>
+      </div>
+    </main>
+  </body>
+  <script>
+    let isUnique;
+    const validCheckButtonElement = document.querySelector("#valid-check");
+    const signUpButtonElement = document.querySelector("#signup");
+    const resultElement = document.querySelector("#result");
+    const validCheckResultElement = document.querySelector(
+      "#valid-check-result"
+    );
+    async function getIsValid() {
+      const userid = document.querySelector("#userid").value;
+      const res = await axios({
+        method: "post",
+        url: "/isValid",
+        data: {
+          userid: userid,
+        },
+      });
+      isUnique = res.data.isUnique;
+      validCheckResultElement.textContent = res.data.msg;
+      // to do: res.data.msg를 아이디 input과 중복 검사 자리에 색깔이랑 해서 넣기
+    }
+
+    async function signup() {
+      const form = document.forms["signup"];
+      console.log(form.name);
+      const res = await axios({
+        method: "post",
+        url: "/signup",
+        data: {
+          userid: form.userid.value,
+          password: form.password.value,
+          confirmPassword: form["confirm-password"].value,
+          name: form.name.value,
+          isUnique: isUnique,
+        },
+      });
+      resultElement.textContent = res.data.msg;
+      if (!res.data.isError) {
+        location.href = "/";
+      }
+    }
+
+    validCheckButtonElement.addEventListener("click", getIsValid);
+    signUpButtonElement.addEventListener("click", signup);
+  </script>
+</html>

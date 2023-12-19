@@ -1,6 +1,6 @@
-const User = (Sequelize, DataTypes) => {
+const Words = (Sequelize, DataTypes) => {
   const model = Sequelize.define(
-    "User",
+    "Words",
     {
       number: {
         type: DataTypes.INTEGER,
@@ -8,26 +8,12 @@ const User = (Sequelize, DataTypes) => {
         autoIncrement: true,
         allowNull: false,
       },
-      userid: {
-        type: DataTypes.STRING(10),
-        unique: true,
+      word: {
+        type: DataTypes.STRING(30),
         allowNull: false,
       },
-      name: {
-        // name VARCHAR(10) not null
-        type: DataTypes.STRING(10),
-        allowNull: false,
-      },
-      password: {
-        type: DataTypes.STRING(100),
-        allowNull: false,
-      },
-      RefreshToken: {
-        type: DataTypes.STRING(100),
-        allowNull: false,
-      },
-      AccessToken: {
-        type: DataTypes.STRING(100),
+      meaning: {
+        type: DataTypes.STRING(50),
         allowNull: false,
       },
     },
@@ -43,4 +29,4 @@ const User = (Sequelize, DataTypes) => {
   return model;
 };
 
-module.exports = User;
+module.exports = Words;

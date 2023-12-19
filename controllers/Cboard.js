@@ -1,4 +1,4 @@
-const db = require("../model/index");
+const db = require("../models/index");
 const UserTable = db.User;
 const CommunityTable = db.Community;
 const CommentTable = db.Comment;
