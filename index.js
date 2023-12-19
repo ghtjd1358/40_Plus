@@ -17,13 +17,11 @@ const { swaggerUi, specs } = require("./swagger/swagger");
 
 // http://localhost:8000/api-docs 로 접근 가능
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
-
-app.get("/", (req, res) => {
-  res.send("Hello World");
-});
+const router = require("./routes");
+app.use("/", router);
 
 db.sequelize
-  .sync({ force: true })
+  .sync({ force: false })
   .then(() => {
     // force: false => 테이블이 없으면 생성
     // force: true => 테이블 무조건 생성 (만약 DB가 있다면 다 삭제하고 다시 생성 -> prod에서 사용 X)
