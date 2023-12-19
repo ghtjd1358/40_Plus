@@ -1,6 +1,7 @@
 const express = require("express");
 const expressSession = require("express-session");
 const cookieParser = require("cookie-parser");
+const axios = require("axios");
 const PORT = 8000;
 
 const swaggerRouter = require("./routes/swagger.router");
@@ -48,7 +49,6 @@ const serviceKey = "522a1115-e77c-4ab7-b97f-f2628669126c"; // .env
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 
-const axios = require("axios");
 app.get("/cultureAPI", async (req, res) => {
   const serviceUrl =
     "http://api.kcisa.kr/openapi/service/rest/convergence/conver6?";

@@ -1,7 +1,7 @@
 
 const checkAccessMiddleware = require('../middlewares/checkAccessToken');
 const controller = require('../controllers/auth.controller');
-
+const express = require('express');
 const router = express();
 
 router.get("/", controller.getIndex);
