@@ -8,7 +8,17 @@ const clearUserInfo = require("../utility/clearUserInfo");
 
 function getIndex(req, res) {
   res.render("index");
-}
+};
+
+const culture = (req, res) => {
+  res.render("culture");
+};
+
+const community = (req, res) => {
+  res.render("community");
+};
+
+
 
 function getSignup(req, res) {
   res.render("signup");
@@ -250,8 +260,11 @@ module.exports = {
   login: login,
   getIndex: getIndex,
   logout: logout,
+  culture: culture,
+  community: community,
   getMyPage: getMyPage,
   changeUserName: changeUserName,
   changeUserPassword: changeUserPassword,
   deleteUser: deleteUser,
+
 };

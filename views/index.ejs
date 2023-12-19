@@ -32,13 +32,28 @@
       .content-box {
         background-color: white;
         /* border: 1px solid var(--color-black-1); */
-        border-radius: 20px;
+        border-radius: var(--border-radius-medium);
         /* box-shadow: 1px 1px var(--color-black-1); */
 
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        position: relative;
       }
 
-      .content1 {
+      .menu {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: var(--border-radius-medium);
+      }
+
+      .menu:hover {
+        background-color: var(--color-orange-4);
+      }
+
+      .computer {
         margin: 0 2% 0 0;
         width: 50%;
         height: 300px;
@@ -134,26 +149,26 @@
     <%- include("./component/header")%>
     <main class="container">
       <section class="mainContent">
-        <div class="content-box content1">
-          <a href="">
+        <div class="content-box computer">
+          <a href="/computer" class="menu">
             <img src="" alt="" />
-            <div>컴퓨터</div></a
-          >
+            컴퓨터
+          </a>
         </div>
         <div class="content-box content2">
-          <a href=""> <img src="" alt="" />모바일</a>
+          <a href="" class="menu"> <img src="" alt="" />모바일</a>
         </div>
       </section>
 
       <section class="subContent">
         <div class="content-box content3">
-          <a href=""> <img src="" alt="" />생활 편의 </a>
+          <a href="" class="menu"> <img src="" alt="" />생활 편의 </a>
         </div>
         <div class="content-box content4">
-          <a href=""> <img src="" alt="" />문화 여가</a>
+          <a href="/culture" class="menu"> <img src="" alt="" />문화 여가</a>
         </div>
         <div class="content-box content5">
-          <a href=""> <img src="" alt="" />커뮤니티</a>
+          <a href="/community" class="menu"> <img src="" alt="" />커뮤니티</a>
         </div>
       </section>
 
@@ -200,12 +215,13 @@
 
       <div class="line"></div>
 
-      <div class="footer-nav">
-        <ul>
+      <div class="footer-nav-box">
+        <ul class="foorter-nav">
           <li><a href="">컴퓨터</a></li>
           <li><a href="">모바일</a></li>
           <li><a href="">생활</a></li>
           <li><a href="">문화 여가</a></li>
+          <li><a href="">커뮤니티</a></li>
         </ul>
       </div>
     </main>

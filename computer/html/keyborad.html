@@ -1,183 +1,191 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MZ어 타자검정</title>
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            height: fit-content;
-            text-align: center;
-        }
-        /* 모니터 화면 */
-        #moniter {
-            /* max-width: 600px; */
-            margin-top: 30px;
-            margin-left: auto;
-            margin-right: auto;
-            /* border: 1px solid black; */
-            width: 800px;
-            height: 300px;
-            box-shadow: 2px 2px 2px 2px grey;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        height: fit-content;
+        text-align: center;
+      }
+      /* 모니터 화면 */
+      #moniter {
+        /* max-width: 600px; */
+        margin-top: 30px;
+        margin-left: auto;
+        margin-right: auto;
+        /* border: 1px solid black; */
+        width: 800px;
+        height: 300px;
+        box-shadow: 2px 2px 2px 2px grey;
+      }
 
-        #text-to-type {
-            position: relative;
-            font-size: 2em;
-            padding: 20px;
-            margin-bottom: 20px;
-            background-color: #f8f8f8;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            color: #3498db;
-        }
+      #text-to-type {
+        position: relative;
+        font-size: 2em;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: #f8f8f8;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        color: #3498db;
+      }
 
-        #user-input {
-            font-size: 1em;
-            padding: 10px;
-            width: 300px;
-            border: 2px solid #ccc;
-            border-radius: 5px;
-            outline: none;
-            transition: border-color 0.3s ease;
-            color: darkblue;
-        }
+      #user-input {
+        font-size: 1em;
+        padding: 10px;
+        width: 300px;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        outline: none;
+        transition: border-color 0.3s ease;
+        color: darkblue;
+      }
 
-        #user-input:focus {
-            border-color: dodgerblue; /* 입력창에 포커스 시 테두리 색상을 파란색으로 변경 */
-            background-color: rgb(255, 251, 214);
-        }
+      #user-input:focus {
+        border-color: dodgerblue; /* 입력창에 포커스 시 테두리 색상을 파란색으로 변경 */
+        background-color: rgb(255, 251, 214);
+      }
 
-        #user-input.error {
-            color: red;
-            border-color: red;
-        }
-        #mean-by {
-            font-size: 2em;
-            padding-top: 20px;
-            text-align: center;
-        }
+      #user-input.error {
+        color: red;
+        border-color: red;
+      }
+      #mean-by {
+        font-size: 2em;
+        padding-top: 20px;
+        text-align: center;
+      }
 
-        #mean-by-text {
-            display: inline-block;
-            color: #3498db;
-            font-weight: bold;
-            margin-top: 10px;
-        }
+      #mean-by-text {
+        display: inline-block;
+        color: #3498db;
+        font-weight: bold;
+        margin-top: 10px;
+      }
 
-        /* 키보드 전체  */
-        .big_C {
-            /* border: 1px solid black; */
-            flex-wrap: wrap;
-            max-width: fit-content;
-            text-align: center;
-            margin: 0 auto;
-        }
-        /* 한줄 마다 */
-        .sml_C {
-            /* border: 1px solid black; */
-            display: flex;
-        }
-        .key {
-            width: 50px;
-            height: 50px;
-            border: 1px solid #ccc;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            font-weight: bold;
-            margin: 2px;
-            box-shadow: 2px 2px 2px 1px grey;
-        }
-        .key .top {
-            display: none;
-        }
+      /* 키보드 전체  */
+      .big_C {
+        /* border: 1px solid black; */
+        flex-wrap: wrap;
+        max-width: fit-content;
+        text-align: center;
+        margin: 0 auto;
+      }
+      /* 한줄 마다 */
+      .sml_C {
+        /* border: 1px solid black; */
+        display: flex;
+      }
+      .key {
+        width: 50px;
+        height: 50px;
+        border: 1px solid #ccc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        font-weight: bold;
+        margin: 2px;
+        box-shadow: 2px 2px 2px 1px grey;
+      }
+      .key .top {
+        display: none;
+      }
 
-        .shift-pressed .key .top {
-            display: block;
-        }
-        .shift-pressed .key .bottom {
-            display: none;
-        }
-        .tab-key {
-            width: 74px; /* Tab 키의 가로 길이 조절 */
-        }
-        .caps-lock-key {
-            width: 90px; /* Caps Lock 키의 가로 길이 조절 */
-        }
-        .delete-key {
-            width: 74px;
-        }
-        .enter-key {
-            width: 90px;
-        }
-        .shift-key {
-            width: 118px;
-        }
-        .space-key {
-            width: 370px;
-        }
-        .ctrl-key {
-            width: 70px;
-        }
+      .shift-pressed .key .top {
+        display: block;
+      }
+      .shift-pressed .key .bottom {
+        display: none;
+      }
+      .tab-key {
+        width: 74px; /* Tab 키의 가로 길이 조절 */
+      }
+      .caps-lock-key {
+        width: 90px; /* Caps Lock 키의 가로 길이 조절 */
+      }
+      .delete-key {
+        width: 74px;
+      }
+      .enter-key {
+        width: 90px;
+      }
+      .shift-key {
+        width: 118px;
+      }
+      .space-key {
+        width: 370px;
+      }
+      .ctrl-key {
+        width: 70px;
+      }
 
-        .changed {
-            background-color: rgb(255, 73, 73);
-        }
-        
-        .correct {
-            background-color: rgb(88, 247, 109);
-        }
-        
-        #toggleKeyboard {
-            position: relative;
-            color: black;
-            left: 455px;
-            top: 90px;
-            width: 60px;
-            height: 60px;
-            background-color: rgb(162, 246, 137);
-            border-radius: 50%;
-            font-size: 18px;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            outline: none;
-            transition: background-color 0.3s ease;
-        }
+      .changed {
+        background-color: rgb(255, 73, 73);
+      }
 
-        #toggleKeyboard:hover {
-            background-color: rgb(50, 205, 0); /* hover 시 배경색 변경 */
-        }
-        #result {
-            position: relative;
-            left: 250px;
-            top: -50px;
-            width: 300px;
-            height: fit-content;
-            font-weight: bold;
-            
-            /* border: 1px solid black; */
-        }
+      .correct {
+        background-color: rgb(88, 247, 109);
+      }
+
+      #toggleKeyboard {
+        position: relative;
+        color: black;
+        left: 455px;
+        top: 90px;
+        width: 60px;
+        height: 60px;
+        background-color: rgb(162, 246, 137);
+        border-radius: 50%;
+        font-size: 18px;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+        outline: none;
+        transition: background-color 0.3s ease;
+      }
+
+      #toggleKeyboard:hover {
+        background-color: rgb(50, 205, 0); /* hover 시 배경색 변경 */
+      }
+      #result {
+        position: relative;
+        left: 250px;
+        top: -50px;
+        width: 300px;
+        height: fit-content;
+        font-weight: bold;
+
+        /* border: 1px solid black; */
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- 화면 출력 -->
     <div id="moniter">
-        <div id="text-to-type"></div>
-        <input type="text" id="user-input" placeholder="여기에 입력하세요" oninput="checkTyping()">
-        <div id="mean-by">해설 : <span id="mean-by-text"></span></div>
-        <!-- "영문자" 버튼 -->
-        <button id="toggleKeyboard" onclick="toggleKeyboard()">영문자</button>
-        <div id="result"></div>
+      <div id="text-to-type"></div>
+      <input
+        type="text"
+        id="user-input"
+        placeholder="여기에 입력하세요"
+        oninput="checkTyping()"
+      />
+      <div id="mean-by">해설 : <span id="mean-by-text"></span></div>
+      <!-- "영문자" 버튼 -->
+      <button id="toggleKeyboard" onclick="toggleKeyboard()">영문자</button>
+      <div id="result"></div>
     </div>
-    
+
     <!-- 키보드 -->
     <!-- 한글 자판 -->
     <div class="big_C" id="hgkeyboard">
+
         <div class="sml_C" id="hg_1">
             <div class="key Backquote">
                 <div class="top">~</div>
@@ -557,15 +565,23 @@
             <div class="key HanjaMode">한자</div>
             <div class="key"> </div>
             <div class="key ctrl-key ControlRight">Ctrl</div>
+
         </div>
-    </div>
-    
+      </div>
+      
+
     <script>
-        // ----------------------- 구 분 선 ----------------------- 
-        // (초기) 키 눌렀을 때 이벤트
-        window.addEventListener("keydown", (e) => {
-            handleKeyEvents(e, true);
-        });
+      // ----------------------- 구 분 선 -----------------------
+      // (초기) 키 눌렀을 때 이벤트
+      window.addEventListener("keydown", (e) => {
+        handleKeyEvents(e, true);
+      });
+
+      // (초기) 키 뗐을 때 이벤트
+      window.addEventListener("keyup", (e) => {
+        handleKeyEvents(e, false);
+      });
+
 
         // (초기) 키 뗐을 때 이벤트
         window.addEventListener("keyup", (e) => {
@@ -589,38 +605,20 @@
                 }
             }
         }
-        // ----------------------- 구 분 선 -----------------------
-        // shift 키가 눌렸을 때 쌍모음 이벤트
-        document.addEventListener('keydown', function (event) {
-            if (event.key === 'Shift') {
-                document.body.classList.add('shift-pressed');
-            }
-        });
+      });
 
-        document.addEventListener('keyup', function (event) {
-            if (event.key === 'Shift') {
-                document.body.classList.remove('shift-pressed');
-            }
-        });
-        // ----------------------- 구 분 선 -----------------------
-        // 키보드 레이아웃 전환 함수
-        function toggleKeyboard() {
-            const hgKeyboard = document.getElementById('hgkeyboard');
-            const egKeyboard = document.getElementById('egkeyboard');
-            const toggleButton = document.getElementById('toggleKeyboard');
-            
-            // "한글 자판"이 보이면 "영어 자판"으로, 그 반대도 마찬가지
-            if (hgKeyboard.style.display !== 'none') {
-                hgKeyboard.style.display = 'none';
-                egKeyboard.style.display = 'block';
-                toggleButton.innerText = '한글';
-                
-            } else {
-                hgKeyboard.style.display = 'block';
-                egKeyboard.style.display = 'none';
-                toggleButton.innerText = '영문자';
-            }
+      document.addEventListener("keyup", function (event) {
+        if (event.key === "Shift") {
+          document.body.classList.remove("shift-pressed");
         }
+      });
+      // ----------------------- 구 분 선 -----------------------
+      // 키보드 레이아웃 전환 함수
+      function toggleKeyboard() {
+        const hgKeyboard = document.getElementById("hgkeyboard");
+        const egKeyboard = document.getElementById("egkeyboard");
+        const toggleButton = document.getElementById("toggleKeyboard");
+
         // ----------------------- 구 분 선 -----------------------
         // 추가 부분: 과일 배열 및 현재 인덱스 변수
         const word = ["cook", "알잘딱깔센", "킹받네", "꾸안꾸"];
@@ -628,13 +626,16 @@
         const mean = ["'알아서 잘 딱 깔끔하고 센스있게'의 줄임말", "'열받네'에 킹을 더해 의미를 강조한 단어'", "'꾸민듯 안꾸민듯'의 줄임말"]
         let meanIndex = 0;
 
-        // 초기화 함수: 텍스트 설정 및 현재 인덱스 초기화
-        function initializeText() {;
-            textToType.innerText = word[wordIndex]
-            userInput.value = '';
-            meanByText.innerText = mean[meanIndex]
-            result.innerText = '';
-            userInput.classList.remove('error');
+
+        // "한글 자판"이 보이면 "영어 자판"으로, 그 반대도 마찬가지
+        if (hgKeyboard.style.display !== "none") {
+          hgKeyboard.style.display = "none";
+          egKeyboard.style.display = "block";
+          toggleButton.innerText = "한글";
+        } else {
+          hgKeyboard.style.display = "block";
+          egKeyboard.style.display = "none";
+          toggleButton.innerText = "영문자";
         }
         // 페이지 로드 시 초기화 호출
         window.onload = initializeText;
@@ -699,4 +700,5 @@
         });
         </script>
 </body>
+
 </html>
