@@ -26,6 +26,7 @@ html {
   /* 둥글기 */
   --border-radius-small: 5px;
   --border-radius-medium: 10px;
+  --border-radius-large: 15px;
 
   /* 그림자 */
   --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -60,8 +61,8 @@ a {
 
 /* 로고 */
 .logo {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 60px;
 }
 
 /* header 영역 CSS */
@@ -101,7 +102,7 @@ footer {
   top: 300px;
 }
 
-.footer-nav {
+.footer-nav-box {
   border: 1px solid black;
   border-radius: 20px;
   height: 100px;
@@ -111,12 +112,14 @@ footer {
         justify-content: space-around; */
 }
 
-.footer-nav > ul {
+.footer-nav-box > ul {
   display: flex;
   justify-content: space-around;
   align-items: center;
   line-height: 100%;
   height: 100%;
+  margin: 0px;
+  padding: 0;
 }
 
 .container {
