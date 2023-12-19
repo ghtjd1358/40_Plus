@@ -9,6 +9,7 @@ const swaggerRouter = require("./routes/swagger.router");
 const signupRouter = require('./routes/signup.router');
 const errorRouter = require('./routes/error.routes');
 const mypageRouter = require('./routes/mypage.routes');
+const yongRouter = require('./routes/index');
 
 const db = require("./models/index");
 const app = express();
@@ -43,6 +44,7 @@ app.use(checkIdTokenMiddleware);
 
 app.use(errorRouter);
 app.use(signupRouter);
+app.use(yongRouter);
 
 // API 관련
 const serviceKey = process.env.CULTUREAPISERVICEKEY; // .env
