@@ -12,7 +12,7 @@ async function getMyPage(req, res) {
     where: { userid: req.session.userid },
     attributes: ["userid", "name"],
   });
-  res.render("MyPage", { userInfo: userInfo });
+  res.render("user/MyPage", { userInfo: userInfo });
 }
 
 async function changeUserName(req, res) {

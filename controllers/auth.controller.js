@@ -22,7 +22,7 @@ const community = (req, res) => {
 
 
 function getSignup(req, res) {
-  res.render("signup");
+  res.render("user/signup");
 }
 
 async function existsAlready(req, res) {
@@ -97,7 +97,7 @@ async function signup(req, res) {
 }
 
 function getLogin(req, res) {
-  res.render("login");
+  res.render("user/login");
 }
 
 async function login(req, res) {

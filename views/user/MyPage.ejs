@@ -10,7 +10,7 @@
   </head>
   <body>
     <!-- header -->
-    <%- include("./component/header")%>
+    <%- include("../component/header")%>
     <main class="container">
       <label for="userid">아이디 : </label>
       <input type="text" id="userid" value="<%= userInfo.userid %>" readonly />
@@ -54,7 +54,7 @@
       </div>
       <div id="result-of-delete-user"></div>
     </main>
-    <%- include('./component/footer')%>
+    <%- include('../component/footer')%>
     <script>
       const changeNameBtnElement = document.querySelector(
         "#change-name-button"
