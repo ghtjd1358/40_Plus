@@ -9,23 +9,25 @@ exports.board = (req, res) => {
 
 // 게시물 등록
 exports.postDB = (req, res) => {
-  const { userid, content } = req.body;
+  const { content } = req.body;
   console.log("axios get data > ", req.body);
 
   // 가입된 유져인지 검증 후 게시물 create -> db로 content 전송
-  UserTable.findOne({ where: { userid: userid } }).then((result) => {
-    if (result) {
-      console.log("find result > ", result);
-      CommunityTable.create({
-        number: UserTable.number,
-        userid: result.userid,
-        title: "A", //임의 설정 -> 프론트에서 들어온 값으로 처리
-        content: content,
-      });
-    } else {
-      console.log("id를 찾지 못함");
+  UserTable.findOne({ where: { userid: req.session.userid } }).then(
+    (result) => {
+      if (result) {
+        console.log("find result > ", result);
+        CommunityTable.create({
+          number: UserTable.number,
+          userid: req.session.userid,
+          title: "A", //임의 설정 -> 프론트에서 들어온 값으로 처리
+          content: content,
+        });
+      } else {
+        console.log("id를 찾지 못함");
+      }
     }
-  });
+  );
 };
 
 // 게시물 전체 출력
@@ -51,7 +53,7 @@ exports.writeComment = (req, res) => {
   console.log(number, writeUserid, writeContent);
   CommentTable.create({
     foreign_number: number,
-    userid: writeUserid,
+    userid: req.session.userid,
     content: writeContent,
   }).then((result) => {
     // console.log("댓글 추가 > ", result);
