@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="kiosk.css">
+    <title>Kiosk</title>
+</head>
+<body>
+    <!-- nav  -->
+    <header>
+        <div id="navigation-bar">
+            <button onclick="prevPage()">이전</button>
+            <h1>
+                <a href="../index.html"><img src="" alt="logo">40+</a>
+            </h1>
+            <button onclick="firstPage()">처음</button>
+        </div>
+    </header>
+
+    <!-- 키오스크 컨테이너 -->
+    <section>
+        <div id="kiosk-container">
+            <!-------------------------- page 1 ---------------------->
+            <div class="page" id="page1">
+                <div class="selectable" onclick="checkAnswer(1)">
+                    <div id="img-container">
+                    <img src="https://v1.kiosapp.kr/img/intro-1.d05eadf7.svg" alt="order">
+                    <img src="https://v1.kiosapp.kr/img/intro-1-1.e63b4900.svg" alt="touch">
+                    </div>
+                </div>
+            </div>
+            <!-- section 1page 끝 -->  
+   
+            <!--------------------------- page 2 ---------------------->
+            <div class="page" id="page2">
+                <div class="payment">원하시는 결제방법을 선택해주세요</div>
+                <div class="payment-container" style="display: flex;">
+                <div class="selectable" id="card" onclick="checkAnswer(1)">
+                    <img src="https://v1.kiosapp.kr/img/order-card.af6f2c14.svg" alt="card">
+                </div>
+                <div class="selectable" id="cardText" onclick="checkAnswer(1)"> 
+                    <h3>카드</h3>
+                    <p>신용/체크카드<br>
+                        모바일금액권<br>
+                        간편결제<br>
+                        (L.pay, 삼성페이, LG페이, 알리페이, 카카오페이, PAYCO)
+                    </p>
+                </div>
+                </div>
+                <div style="display: flex;">
+                     <div class="selectable" id="coupon" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/order-coupon.62fafcbb.svg" alt="coupon">
+                    <h3>디지털쿠폰 / 교환권</h3>
+                </div>
+                <div class="selectable" id="money" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/order-cash.be9f74f0.svg" alt="money">
+                    <h3>현금</h3>
+                </div>
+                </div>
+            </div> 
+            <!-- section 2page 끝 -->  
+    
+            <!--------------------------- page 3 ---------------------->
+            <div class="page" id="page3">
+              <div class="menu-header">
+               <button>
+                <img src="https://v1.kiosapp.kr/img/arrow-l.1e59ab09.svg" alt="left">
+               </button>
+                    <div>착한메뉴</div>
+                    <div>추천메뉴</div>
+                    <div>햄버거</div>
+                    <div>디저트치킨</div>
+                    <div>음료/커피</div>
+               <button>
+                <img src="https://v1.kiosapp.kr/img/arrow-r.4cc0b1c8.svg" alt="right">
+               </button>
+              </div>
+
+              <!-- 메뉴 선택 -->
+              <div class="menu-select active">
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/101.09780be2.jpg" alt="">
+                        <h2>착한한우세트</h2>
+                        <h3>7,900</h3>
+                    </div>
+                  
+                    <!-- 1 -->
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/102.a2c49df7.jpg" alt="">
+                    <h2>착한AZ버거세트</h2>
+                    <h3>7,500</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/103.9426967b.jpg" alt="">
+                    <h2>착한doublex2버거세트</h2>
+                    <h3>6,800</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/104.ff604441.jpg" alt="">
+                    <h2>착한핫크리스피세트</h2>
+                    <h3>6,000</h3>
+                    </div>
+
+                     <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/106.f7efa689.jpg" alt="">
+                    <h2>착한리아미라클버거</h2>
+                    <h3>5,500</h3>
+                    </div>
+              </div>
+              <!-- 2 -->
+              <div class="menu-select">
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/201.9bdaf0f6.jpg" alt="">
+                        <h2>폴더버거핫치킨</h2>
+                        <h3>5,700</h3>
+                    </div>
+                  
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/308.4809b6f6.jpg" alt="">
+                    <h2>와규에디션2</h2>
+                    <h3>5,700</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/203.785672a8.jpg" alt="">
+                    <h2>모짜렐라인더버거</h2>
+                    <h3>6,700</h3>
+                    </div>
+              </div>
+
+              <!-- 3 -->
+              <div class="menu-select">
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/301.43a8cd51.jpg" alt="">
+                        <h2>폴더버거비프</h2>
+                        <h3>5,700</h3>
+                    </div>
+                  
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/201.9bdaf0f6.jpg" alt="">
+                    <h2>폴더버거핫치킨</h2>
+                    <h3>5,700</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(5)">
+                    <img src="https://v1.kiosapp.kr/img/303.3cf4cb26.jpg" alt="">
+                    <h2>한우불고기</h2>
+                    <h3>7,000</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/202.4d3ffc2b.jpg" alt="">
+                    <h2>AZ버거</h2>
+                    <h3>6,600</h3>
+                    </div>
+
+                     <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/203.785672a8.jpg" alt="">
+                    <h2>모짜렐라인더버거베이컨</h2>
+                    <h3>6,000</h3>
+                    </div>
+
+                     <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/307.513a332b.jpg" alt="">
+                    <h2>빅볼</h2>
+                    <h3>5,800</h3>
+                    </div>
+
+                     <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/308.4809b6f6.jpg" alt="">
+                    <h2>리아미라클버거</h2>
+                    <h3>5,600</h3>
+                    </div>
+            </div>
+
+             <!-- 4 -->
+                    <div class="menu-select">
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/1015.cb95b7e1.jpg" alt="">
+                        <h2>치즈인더에그</h2>
+                        <h3>3,000</h3>
+                    </div>
+                  
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/1001.6cf745db.jpg" alt="">
+                    <h2>포테이토</h2>
+                    <h3>1,500</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/1001.6cf745db.jpg" alt="">
+                    <h2>포테이토(L)</h2>
+                    <h3>1,900</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/1002.d6327997.jpg" alt="">
+                    <h2>양념감자</h2>
+                    <h3>2,000</h3>
+                    </div>
+
+                     <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/1003.e6f82a2a.jpg" alt="">
+                    <h2>치즈스틱</h2>
+                    <h3>2,000</h3>
+                    </div>
+
+                     <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/1008.d97316a6.jpg" alt="">
+                    <h2>롱치즈스틱</h2>
+                    <h3>1,800</h3>
+                    </div>
+              </div>
+
+              <!-- 5 -->
+                    <div class="menu-select">
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/2012.0fd49c52.jpg" alt="">
+                        <h2>오렌지쥬스(PET)</h2>
+                        <h3>2,500</h3>
+                    </div>
+                  
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/2013.8c2f5993.jpg" alt="">
+                    <h2>레몬에이드</h2>
+                    <h3>2,500</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/2003.082ff860.jpg" alt="">
+                    <h2>콜라(L)</h2>
+                    <h3>1,900</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/2002.4b96fccc.jpg" alt="">
+                    <h2>사이다</h2>
+                    <h3>1,900</h3>
+                    </div>
+
+                     <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/2001.082ff860.jpg" alt="">
+                    <h2>콜라</h2>
+                    <h3>1,700</h3>
+                    </div>
+              </div>
+ 
+              <!-- 메뉴-하단 -->
+            <div class="menu-footer">
+                <div class="menu-footer-inner">
+                    <div class="menu-footer-left">
+                         <div class="menu-footer-box">
+                             <img src="https://v1.kiosapp.kr/img/icon-1.df954fb7.svg" alt="">
+                             <p>장애인</p>
+                         </div>
+                    <div class="menu-footer-box">
+                        <img src="https://v1.kiosapp.kr/img/icon-2.b4f3d9c4.svg" alt="">
+                        <p>돋보기</p>
+                    </div>
+                    <div class="menu-footer-box">
+                        <img src="https://v1.kiosapp.kr/img/icon-3.c0771af4.svg" alt="">
+                        <p>직원호출</p>
+                    </div>
+                    <div class="menu-footer-box">
+                        <img src="https://v1.kiosapp.kr/img/icon-4.092756a8.svg" alt="">
+                        <p>이전</p>
+                    </div>
+                    </div>
+
+                    <div class="menu-footer-right">
+                        <div class="selectable" id="menu-footer-button" onclick="checkAnswer(2)">
+                            <button>취소하기</button>
+                        </div>
+                        <div id="menu-footer-button" onclick="checkAnswer(2)">
+                            <button>결제하기</button>
+                        </div>
+                   </div>
+                </div>
+            </div>
+        </div>  
+        <!-- section 3page 끝 -->   
+    
+        <!--------------------------- page 4 ---------------------->
+       <div class="page" id="page4">
+          <div id="menu-modal">
+        <div id="menu-modal-content">
+            <div id="menu-modal-text"><h2>세트로 드시겠어요?</h2></div>
+            <div id="menu-modal-box">
+                <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/modal-burger-single.02ab4cd5.svg" alt="">
+                    <h3>7,000</h3>
+                </div>
+                <div class="selectable" onclick="checkAnswer(1)">
+                    <img src="https://v1.kiosapp.kr/img/modal-burger-set.12e4a85b.svg" alt="">
+                    <h3>9,000</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div id="menu-modal-select" >
+              <div class="menu-header-modal" style="position: relative;">
+               <button>
+                <img src="https://v1.kiosapp.kr/img/arrow-l.1e59ab09.svg" alt="left">
+               </button>
+                    <div>착한메뉴</div>
+                    <div>추천메뉴</div>
+                    <div>햄버거</div>
+                    <div>디저트치킨</div>
+                    <div>음료/커피</div>
+               <button>
+                <img src="https://v1.kiosapp.kr/img/arrow-r.4cc0b1c8.svg" alt="right">
+               </button>
+              </div>
+
+              <div class="menu-select-modal" style="display: flex;">
+                    <!-- only 1page -->
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/101.09780be2.jpg" alt="">
+                        <h2>착한한우세트</h2>
+                        <h3>7,900</h3>
+                    </div>
+    
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/102.a2c49df7.jpg" alt="">
+                    <h2>착한AZ버거세트</h2>
+                    <h3>7,500</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/103.9426967b.jpg" alt="">
+                    <h2>착한doublex2버거세트</h2>
+                    <h3>6,800</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/104.ff604441.jpg" alt="">
+                    <h2>착한핫크리스피세트</h2>
+                    <h3>6,000</h3>
+                    </div>
+
+                     <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/106.f7efa689.jpg" alt="">
+                    <h2>착한리아미라클버거</h2>
+                    <h3>5,500</h3>
+                    </div>
+              </div>
+
+              <div class="menu-footer-modal">
+                <div class="menu-footer-inner-modal">
+                    <div class="menu-footer-left-modal">
+                         <div class="menu-footer-box">
+                             <img src="https://v1.kiosapp.kr/img/icon-1.df954fb7.svg" alt="">
+                             <p>장애인</p>
+                         </div>
+                    <div class="menu-footer-box-modal">
+                        <img src="https://v1.kiosapp.kr/img/icon-2.b4f3d9c4.svg" alt="">
+                        <p>돋보기</p>
+                    </div>
+                    <div class="menu-footer-box-modal">
+                        <img src="https://v1.kiosapp.kr/img/icon-3.c0771af4.svg" alt="">
+                        <p>직원호출</p>
+                    </div>
+                    <div class="menu-footer-box-modal">
+                        <img src="https://v1.kiosapp.kr/img/icon-4.092756a8.svg" alt="">
+                        <p>이전</p>
+                    </div>
+                    </div>
+
+                    <div class="menu-footer-right-modal">
+                        <div class="selectable" id="menu-btn-modal" onclick="checkAnswer(2)">
+                            <button>취소하기</button>
+                        </div>
+                        <div class="selectable" id="menu-btn-modal" onclick="checkAnswer(2)">
+                            <button>결제하기</button>
+                        </div>
+                   </div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+        <!-- 4page 끝 -->
+
+        <!----------------------------------- page 5 ------------------------------->
+       <div class="page" id="page5">
+        <div id="menu-list">
+        <div id="menu-list-content">
+            <div id="menu-list-text">
+                <h2>세트 디저트 1개를 선택해주세요</h2>
+            </div>
+
+            <div class="menu-list-header">
+               <button>
+                <img src="https://v1.kiosapp.kr/img/arrow-l.1e59ab09.svg" alt="left">
+               </button>
+                    <div class="selectable" onclick="checkAnswer(2)">
+                        세트디저트
+                    </div>
+                    
+                   <div class="selectable" onclick="checkAnswer(2)">
+                        세트드링크
+                   </div>
+               <button>
+                <img src="https://v1.kiosapp.kr/img/arrow-r.4cc0b1c8.svg" alt="right">
+               </button>
+              </div>
+
+               <div class="menu-select-list" style="display: flex;">
+                    <!-- only 1page -->
+                    <div class="selectable" onclick="checkAnswer(1)">
+                        <img src="https://v1.kiosapp.kr/img/1001.6cf745db.jpg" alt="">
+                        <h2>포테이토</h2>
+                        <h3>0</h3>
+                    </div>
+
+    
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/1002.d6327997.jpg" alt="">
+                    <h2>양념감자</h2>
+                    <h3>500</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/1003.e6f82a2a.jpg" alt="">
+                    <h2>치즈스틱</h2>
+                    <h3>500</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/1004.fc5326c8.jpg" alt="">
+                    <h2>오징어링</h2>
+                    <h3>700</h3>
+                    </div>
+
+                     <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/1005.8d795c26.jpg" alt="">
+                    <h2>쉨쉨치킨</h2>
+                    <h3>1000</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/1001.6cf745db.jpg" alt="">
+                    <h2>포테이토(L)</h2>
+                    <h3>400</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/1007.d51198db.jpg" alt="">
+                    <h2>콘샐러드</h2>
+                    <h3>200</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/1008.d97316a6.jpg" alt="">
+                    <h2>롱치즈스틱</h2>
+                    <h3>300</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/1009.ddee81f3.jpg" alt="">
+                    <h2>아이스크림</h2>
+                    <h3>0</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/1010.8f5a36bf.jpg" alt="">
+                    <h2>토네이도-초코</h2>
+                    <h3>700</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/1011.5b8cf999.jpg" alt="">
+                    <h2>토네이도-딸기</h2>
+                    <h3>0</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/1012.b328cfbb.jpg" alt="">
+                    <h2>토네이도-녹차</h2>
+                    <h3>700</h3>
+                    </div>
+              </div>
+        </div> <!--menu-list-content-->
+    </div>  
+
+        <div id="menu-modal-select" >
+              <div class="menu-header-modal" style="position: relative;">
+               <button>
+                <img src="https://v1.kiosapp.kr/img/arrow-l.1e59ab09.svg" alt="left">
+               </button>
+                    <div>착한메뉴</div>
+                    <div>추천메뉴</div>
+                    <div>햄버거</div>
+                    <div>디저트치킨</div>
+                    <div>음료/커피</div>
+               <button>
+                <img src="https://v1.kiosapp.kr/img/arrow-r.4cc0b1c8.svg" alt="right">
+               </button>
+              </div>
+
+              <div class="menu-select-modal" style="display: flex;">
+                    <!-- only 1page -->
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/101.09780be2.jpg" alt="">
+                        <h2>착한한우세트</h2>
+                        <h3>7,900</h3>
+                    </div>
+    
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/102.a2c49df7.jpg" alt="">
+                    <h2>착한AZ버거세트</h2>
+                    <h3>7,500</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/103.9426967b.jpg" alt="">
+                    <h2>착한doublex2버거세트</h2>
+                    <h3>6,800</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/104.ff604441.jpg" alt="">
+                    <h2>착한핫크리스피세트</h2>
+                    <h3>6,000</h3>
+                    </div>
+
+                     <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/106.f7efa689.jpg" alt="">
+                    <h2>착한리아미라클버거</h2>
+                    <h3>5,500</h3>
+                    </div>
+              </div>
+
+              <div class="menu-footer-modal">
+                <div class="menu-footer-inner-modal">
+                    <div class="menu-footer-left-modal">
+                         <div class="menu-footer-box">
+                             <img src="https://v1.kiosapp.kr/img/icon-1.df954fb7.svg" alt="">
+                             <p>장애인</p>
+                         </div>
+                    <div class="menu-footer-box-modal">
+                        <img src="https://v1.kiosapp.kr/img/icon-2.b4f3d9c4.svg" alt="">
+                        <p>돋보기</p>
+                    </div>
+                    <div class="menu-footer-box-modal">
+                        <img src="https://v1.kiosapp.kr/img/icon-3.c0771af4.svg" alt="">
+                        <p>직원호출</p>
+                    </div>
+                    <div class="menu-footer-box-modal">
+                        <img src="https://v1.kiosapp.kr/img/icon-4.092756a8.svg" alt="">
+                        <p>이전</p>
+                    </div>
+                    </div>
+
+                    <div class="menu-footer-right-modal">
+                        <div class="selectable" id="menu-btn-modal" onclick="checkAnswer(2)">
+                            <button>취소하기</button>
+                        </div>
+                        <div class="selectable" id="menu-btn-modal" onclick="checkAnswer(2)">
+                            <button>결제하기</button>
+                        </div>
+                   </div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+        <!-- 5page 끝 -->
+
+        <!--------------------------------  page 6 ---------------------------------->
+        <div class="page" id="page6">
+        <div id="menu-list">
+        <div id="menu-list-content">
+            <div id="menu-list-text">
+                <h2>세트 디저트 1개를 선택해주세요</h2>
+            </div>
+
+            <div class="menu-list-header">
+               <button>
+                <img src="https://v1.kiosapp.kr/img/arrow-l.1e59ab09.svg" alt="left">
+               </button>
+                    <div class="selectable" onclick="checkAnswer(2)">
+                        세트디저트
+                    </div>
+                    
+                   <div class="selectable" onclick="checkAnswer(1)">
+                        세트드링크
+                   </div>
+               <button>
+                <img src="https://v1.kiosapp.kr/img/arrow-r.4cc0b1c8.svg" alt="right">
+               </button>
+              </div>
+
+               <div class="menu-select-list" style="display: flex;">
+                    <div class="selectable" onclick="checkAnswer(2)">
+                         <div id="circleFirst">1</div>
+                        <img src="https://v1.kiosapp.kr/img/1001.6cf745db.jpg" alt="">  
+                        <h2>포테이토</h2>
+                        <h3>0</h3>
+                    </div>
+
+    
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/1002.d6327997.jpg" alt="">
+                    <h2>양념감자</h2>
+                    <h3>500</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/1003.e6f82a2a.jpg" alt="">
+                    <h2>치즈스틱</h2>
+                    <h3>500</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/1004.fc5326c8.jpg" alt="">
+                    <h2>오징어링</h2>
+                    <h3>700</h3>
+                    </div>
+
+                     <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/1005.8d795c26.jpg" alt="">
+                    <h2>쉨쉨치킨</h2>
+                    <h3>1000</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/1001.6cf745db.jpg" alt="">
+                    <h2>포테이토(L)</h2>
+                    <h3>400</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/1007.d51198db.jpg" alt="">
+                    <h2>콘샐러드</h2>
+                    <h3>200</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/1008.d97316a6.jpg" alt="">
+                    <h2>롱치즈스틱</h2>
+                    <h3>300</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/1009.ddee81f3.jpg" alt="">
+                    <h2>아이스크림</h2>
+                    <h3>0</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/1010.8f5a36bf.jpg" alt="">
+                    <h2>토네이도-초코</h2>
+                    <h3>700</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/1011.5b8cf999.jpg" alt="">
+                    <h2>토네이도-딸기</h2>
+                    <h3>0</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/1012.b328cfbb.jpg" alt="">
+                    <h2>토네이도-녹차</h2>
+                    <h3>700</h3>
+                    </div>
+              </div>
+        </div> <!--menu-list-content-->
+    </div>  
+
+        <div id="menu-modal-select" >
+              <div class="menu-header-modal" style="position: relative;">
+               <button>
+                <img src="https://v1.kiosapp.kr/img/arrow-l.1e59ab09.svg" alt="left">
+               </button>
+                    <div>착한메뉴</div>
+                    <div>추천메뉴</div>
+                    <div>햄버거</div>
+                    <div>디저트치킨</div>
+                    <div>음료/커피</div>
+               <button>
+                <img src="https://v1.kiosapp.kr/img/arrow-r.4cc0b1c8.svg" alt="right">
+               </button>
+              </div>
+
+              <div class="menu-select-modal" style="display: flex;">
+                    <!-- only 1page -->
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/101.09780be2.jpg" alt="">
+                        <h2>착한한우세트</h2>
+                        <h3>7,900</h3>
+                    </div>
+    
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/102.a2c49df7.jpg" alt="">
+                    <h2>착한AZ버거세트</h2>
+                    <h3>7,500</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/103.9426967b.jpg" alt="">
+                    <h2>착한doublex2버거세트</h2>
+                    <h3>6,800</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/104.ff604441.jpg" alt="">
+                    <h2>착한핫크리스피세트</h2>
+                    <h3>6,000</h3>
+                    </div>
+
+                     <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/106.f7efa689.jpg" alt="">
+                    <h2>착한리아미라클버거</h2>
+                    <h3>5,500</h3>
+                    </div>
+              </div>
+
+              <div class="menu-footer-modal">
+                <div class="menu-footer-inner-modal">
+                    <div class="menu-footer-left-modal">
+                         <div class="menu-footer-box">
+                             <img src="https://v1.kiosapp.kr/img/icon-1.df954fb7.svg" alt="">
+                             <p>장애인</p>
+                         </div>
+                    <div class="menu-footer-box-modal">
+                        <img src="https://v1.kiosapp.kr/img/icon-2.b4f3d9c4.svg" alt="">
+                        <p>돋보기</p>
+                    </div>
+                    <div class="menu-footer-box-modal">
+                        <img src="https://v1.kiosapp.kr/img/icon-3.c0771af4.svg" alt="">
+                        <p>직원호출</p>
+                    </div>
+                    <div class="menu-footer-box-modal">
+                        <img src="https://v1.kiosapp.kr/img/icon-4.092756a8.svg" alt="">
+                        <p>이전</p>
+                    </div>
+                    </div>
+
+                    <div class="menu-footer-right-modal">
+                        <div class="selectable" id="menu-btn-modal" onclick="checkAnswer(2)">
+                            <button>취소하기</button>
+                        </div>
+                        <div class="selectable" id="menu-btn-modal" onclick="checkAnswer(2)">
+                            <button>결제하기</button>
+                        </div>
+                   </div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+        <!-- 6page 끝 -->
+
+         <!------------------------------page 7 ---------------------------------->
+        <div class="page" id="page7">
+        <div id="menu-list">
+        <div id="menu-list-content">
+            <div id="menu-list-text">
+                <h2>세트 드링크 1개를 선택해주세요</h2>
+            </div>
+
+            <div class="menu-list-header">
+               <button>
+                <img src="https://v1.kiosapp.kr/img/arrow-l.1e59ab09.svg" alt="left">
+               </button>
+                    <div class="selectable" onclick="checkAnswer(2)">
+                        세트디저트
+                    </div>
+                    
+                   <div class="selectable" onclick="checkAnswer(2)">
+                        세트드링크
+                   </div>
+               <button>
+                <img src="https://v1.kiosapp.kr/img/arrow-r.4cc0b1c8.svg" alt="right">
+               </button>
+              </div>
+
+               <div class="menu-select-list" style="display: flex;">
+                    <!-- only 1page -->
+                    <div class="selectable" onclick="checkAnswer(1)">
+                        <img src="https://v1.kiosapp.kr/img/2001.082ff860.jpg" alt="">
+                        <h2>콜라</h2>
+                        <h3>0</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/2002.4b96fccc.jpg" alt="">
+                    <h2>사이다</h2>
+                    <h3>0</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/2003.082ff860.jpg" alt="">
+                    <h2>콜라(라지)</h2>
+                    <h3>200</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/2004.4b96fccc.jpg" alt="">
+                    <h2>사이다(라지)</h2>
+                    <h3>200</h3>
+                    </div>
+
+                     <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/2005.c734db08.jpg" alt="">
+                    <h2>아메리카노</h2>
+                    <h3>300</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/2006.adfe025a.jpg" alt="">
+                    <h2>아이스아메리카노</h2>
+                    <h3>300</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/2007.d2bf8072.jpg" alt="">
+                    <h2>아이스아메리카노(라지)</h2>
+                    <h3>800</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/2005.c734db08.jpg" alt="">
+                    <h2>카페라떼</h2>
+                    <h3>700</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/2009.662fe7f5.jpg" alt="">
+                    <h2>아이스카페라떼</h2>
+                    <h3>700</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/2010.b30f6add.jpg" alt="">
+                    <h2>우유</h2>
+                    <h3>0</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/2012.0fd49c52.jpg" alt="">
+                    <h2>오렌지주스(PET)</h2>
+                    <h3>800</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/2013.8c2f5993.jpg" alt="">
+                    <h2>레몬에이드</h2>
+                    <h3>800</h3>
+                    </div>
+              </div>
+             <div class="menu-select-footer">
+                        <div class="menu-select-text">
+                            <p>선택수량: 1</p>
+                            <p>잔여수량 : 0</p>
+                        </div>
+                        <div class="menu-select-button">
+                            <div class="selectable" onclick="checkAnswer(2)">
+                                 취소하기
+                            </div>
+                            <div class="selectable" onclick="checkAnswer(2)">
+                                 선택완료
+                            </div>
+                        </div>
+                    </div>
+        </div> <!--menu-list-content-->
+    </div>  
+
+        <div id="menu-modal-select" >
+              <div class="menu-header-modal" style="position: relative;">
+               <button>
+                <img src="https://v1.kiosapp.kr/img/arrow-l.1e59ab09.svg" alt="left">
+               </button>
+                    <div>착한메뉴</div>
+                    <div>추천메뉴</div>
+                    <div>햄버거</div>
+                    <div>디저트치킨</div>
+                    <div>음료/커피</div>
+               <button>
+                <img src="https://v1.kiosapp.kr/img/arrow-r.4cc0b1c8.svg" alt="right">
+               </button>
+              </div>
+
+              <div class="menu-select-modal" style="display: flex;">
+                    <!-- only 1page -->
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/101.09780be2.jpg" alt="">
+                        <h2>착한한우세트</h2>
+                        <h3>7,900</h3>
+                    </div>
+    
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/102.a2c49df7.jpg" alt="">
+                    <h2>착한AZ버거세트</h2>
+                    <h3>7,500</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/103.9426967b.jpg" alt="">
+                    <h2>착한doublex2버거세트</h2>
+                    <h3>6,800</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/104.ff604441.jpg" alt="">
+                    <h2>착한핫크리스피세트</h2>
+                    <h3>6,000</h3>
+                    </div>
+
+                     <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/106.f7efa689.jpg" alt="">
+                    <h2>착한리아미라클버거</h2>
+                    <h3>5,500</h3>
+                    </div>
+              </div>
+
+              <div class="menu-footer-modal">
+                <div class="menu-footer-inner-modal">
+                    <div class="menu-footer-left-modal">
+                         <div class="menu-footer-box">
+                             <img src="https://v1.kiosapp.kr/img/icon-1.df954fb7.svg" alt="">
+                             <p>장애인</p>
+                         </div>
+                    <div class="menu-footer-box-modal">
+                        <img src="https://v1.kiosapp.kr/img/icon-2.b4f3d9c4.svg" alt="">
+                        <p>돋보기</p>
+                    </div>
+                    <div class="menu-footer-box-modal">
+                        <img src="https://v1.kiosapp.kr/img/icon-3.c0771af4.svg" alt="">
+                        <p>직원호출</p>
+                    </div>
+                    <div class="menu-footer-box-modal">
+                        <img src="https://v1.kiosapp.kr/img/icon-4.092756a8.svg" alt="">
+                        <p>이전</p>
+                    </div>
+                    </div>
+
+                    <div class="menu-footer-right-modal">
+                        <div class="selectable" id="menu-btn-modal" onclick="checkAnswer(2)">
+                            취소하기
+                        </div>
+                        <div class="selectable" id="menu-btn-modal" onclick="checkAnswer(2)">
+                            결제하기
+                        </div>
+                   </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+          <!-- 7 page 끝 -->
+
+          <!---------------------------- page 8 -------------------------------->
+            <div class="page" id="page8">
+        <div id="menu-list">
+        <div id="menu-list-content">
+            <div id="menu-list-text">
+                <h2>세트 드링크 1개를 선택해주세요</h2>
+            </div>
+
+            <div class="menu-list-header">
+               <button>
+                <img src="https://v1.kiosapp.kr/img/arrow-l.1e59ab09.svg" alt="left">
+               </button>
+                    <div class="selectable" onclick="checkAnswer(2)">
+                        세트디저트
+                    </div>
+                    
+                   <div class="selectable" onclick="checkAnswer(2)">
+                        세트드링크
+                   </div>
+               <button>
+                <img src="https://v1.kiosapp.kr/img/arrow-r.4cc0b1c8.svg" alt="right">
+               </button>
+              </div>
+
+               <div class="menu-select-list" style="display: flex;">
+                    <!-- only 1page -->
+                    <div class="selectable" onclick="checkAnswer(2)">
+                        <div id="circleFirst">1</div>
+                        <img src="https://v1.kiosapp.kr/img/2001.082ff860.jpg" alt="">
+                        <h2>콜라</h2>
+                        <h3>0</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/2002.4b96fccc.jpg" alt="">
+                    <h2>사이다</h2>
+                    <h3>0</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/2003.082ff860.jpg" alt="">
+                    <h2>콜라(라지)</h2>
+                    <h3>200</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/2004.4b96fccc.jpg" alt="">
+                    <h2>사이다(라지)</h2>
+                    <h3>200</h3>
+                    </div>
+
+                     <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/2005.c734db08.jpg" alt="">
+                    <h2>아메리카노</h2>
+                    <h3>300</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/2006.adfe025a.jpg" alt="">
+                    <h2>아이스아메리카노</h2>
+                    <h3>300</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/2007.d2bf8072.jpg" alt="">
+                    <h2>아이스아메리카노(라지)</h2>
+                    <h3>800</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/2005.c734db08.jpg" alt="">
+                    <h2>카페라떼</h2>
+                    <h3>700</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/2009.662fe7f5.jpg" alt="">
+                    <h2>아이스카페라떼</h2>
+                    <h3>700</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/2010.b30f6add.jpg" alt="">
+                    <h2>우유</h2>
+                    <h3>0</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/2012.0fd49c52.jpg" alt="">
+                    <h2>오렌지주스(PET)</h2>
+                    <h3>800</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/2013.8c2f5993.jpg" alt="">
+                    <h2>레몬에이드</h2>
+                    <h3>800</h3>
+                    </div>
+                   
+              </div>
+               <div class="menu-select-footer">
+                        <div class="menu-select-text">
+                            <p>선택수량: 1</p>
+                            <p>잔여수량 : 0</p>
+                        </div>
+                        <div class="menu-select-button">
+                            <div class="selectable" onclick="checkAnswer(2)">
+                                 취소하기
+                            </div>
+                            <div class="selectable" onclick="checkAnswer(1)">
+                                 선택완료
+                            </div>
+                        </div>
+                    </div>
+        </div> <!--menu-list-content-->
+    </div>  
+
+        <div id="menu-modal-select" >
+              <div class="menu-header-modal" style="position: relative;">
+               <button>
+                <img src="https://v1.kiosapp.kr/img/arrow-l.1e59ab09.svg" alt="left">
+               </button>
+                    <div>착한메뉴</div>
+                    <div>추천메뉴</div>
+                    <div>햄버거</div>
+                    <div>디저트치킨</div>
+                    <div>음료/커피</div>
+               <button>
+                <img src="https://v1.kiosapp.kr/img/arrow-r.4cc0b1c8.svg" alt="right">
+               </button>
+              </div>
+
+              <div class="menu-select-modal" style="display: flex;">
+                    <!-- only 1page -->
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/101.09780be2.jpg" alt="">
+                        <h2>착한한우세트</h2>
+                        <h3>7,900</h3>
+                    </div>
+    
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/102.a2c49df7.jpg" alt="">
+                    <h2>착한AZ버거세트</h2>
+                    <h3>7,500</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/103.9426967b.jpg" alt="">
+                    <h2>착한doublex2버거세트</h2>
+                    <h3>6,800</h3>
+                    </div>
+
+                    <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/104.ff604441.jpg" alt="">
+                    <h2>착한핫크리스피세트</h2>
+                    <h3>6,000</h3>
+                    </div>
+
+                     <div class="selectable" onclick="checkAnswer(2)">
+                    <img src="https://v1.kiosapp.kr/img/106.f7efa689.jpg" alt="">
+                    <h2>착한리아미라클버거</h2>
+                    <h3>5,500</h3>
+                    </div>
+              </div>
+
+              <div class="menu-footer-modal">
+                <div class="menu-footer-inner-modal">
+                    <div class="menu-footer-left-modal">
+                         <div class="menu-footer-box">
+                             <img src="https://v1.kiosapp.kr/img/icon-1.df954fb7.svg" alt="">
+                             <p>장애인</p>
+                         </div>
+                    <div class="menu-footer-box-modal">
+                        <img src="https://v1.kiosapp.kr/img/icon-2.b4f3d9c4.svg" alt="">
+                        <p>돋보기</p>
+                    </div>
+                    <div class="menu-footer-box-modal">
+                        <img src="https://v1.kiosapp.kr/img/icon-3.c0771af4.svg" alt="">
+                        <p>직원호출</p>
+                    </div>
+                    <div class="menu-footer-box-modal">
+                        <img src="https://v1.kiosapp.kr/img/icon-4.092756a8.svg" alt="">
+                        <p>이전</p>
+                    </div>
+                    </div>
+
+                    <div class="menu-footer-right-modal">
+                        <div class="selectable" id="menu-btn-modal" onclick="checkAnswer(2)">
+                            <button>취소하기</button>
+                        </div>
+                        <div class="selectable" id="menu-btn-modal" onclick="checkAnswer(2)">
+                            <button>결제하기</button>
+                        </div>
+                   </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+          <!-- 8 page 끝 -->
+
+          <!---------------------------- 9page ---------------------------------->
+       
+
+          <!-- 9 page 끝 -->
+    </div>
+           
+    </section>
+    <!---------------------------------- 진행 하단 --------------------------------->
+    <footer>
+        <div id="progressbar-text">
+            <h3>한우불고기버거 세트 1개를(포테이토, 콜라) 주문하려고 해요. 장바구니에 담고 신용카드로 결제까지 하여 포장 주문을 완료 해보세요</h3>
+            <img src="https://v1.kiosapp.kr/img/char-3.112ee7d7.svg" alt="">
+        </div>
+        <div id="progressbar-container">
+            <div id="progressbar"></div>
+        </div>
+    </footer>
+
+    <!------------------------------- modal ----------------------------------------->
+    <div id="modal">
+        <div id="modal-content">
+            <img src="https://v1.kiosapp.kr/img/char-3.112ee7d7.svg" alt="">
+            <p>앗! 잘못 누르셨어요!</p>
+            <button onclick="hideModal()">닫기</button>
+            <button onclick="firstPage()">처음</button>
+        </div>
+    </div>
+
+    <!-- ---------------------------circle-------------------------------------- -->
+    </div>
+
+    <script src="./kiosk.js">
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>단어</title>
+    <style>
+        /* setting */
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-align: center;
+            font-size: 0.625rem;
+        }
+
+        li{
+            list-style: none;
+        }
+
+        .page {
+            display: none;
+            margin: 0 auto;
+        }
+
+        .page h2{
+            margin: 50px auto 40px;
+            font-size: 2rem;
+        }
+
+        
+        .page p{
+            width: 80%;
+            font-size: 1.6rem;
+             margin: 30px auto 20px;
+             line-height: 3.5rem;
+        }
+
+  
+
+        /* nav */
+        #navigation-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #000;
+            color: #fff;
+            padding: 10px;
+        }
+
+        #navigation-bar h1{
+            margin: auto 20px;
+        }
+
+        #navigation-bar button {
+            width: 15%;
+            font-size: 1.6rem;
+            font-weight: bold;
+            padding: 10px 50px;
+            margin: auto 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #CF0A0A;
+            color: #fff;
+        }
+
+        /* section */
+        #kiosk-container {
+            width: 100%;
+            height: 805px;
+            display: flex;
+        }
+
+        .selectable {
+            cursor: pointer;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        /* page1 */
+ 
+
+
+        
+
+
+
+    .word-box{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 80vw;
+    height: 60vh;
+    border-radius: 5px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    transition: all 0.6s ease-in-out;
+    border: 2px solid #eee;
+
+    }
+
+    .word-box > button{
+  width: 120px;height: 80px;
+  margin: 2rem;
+  padding: 10px;
+  border: none;
+  background-color: #eee;
+  border-radius: 5px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+    </style>
+</head>
+
+<body>
+    <!-- nav  -->
+    <header>
+        <div id="navigation-bar">
+            <h1>
+                <a href="../index.html"><img src="" alt="logo">40+</a>
+            </h1>
+            <button onclick="prevPage()">돌아가기</button>
+            <!-- <button onclick="firstPage()">처음</button> -->
+        </div>
+    </header>
+
+    <!-- 키오스크 컨테이너 -->
+    <section>
+       <div id="kiosk-container">
+            <div class="page" id="page1">
+                  <h2>단어 숙지</h2>
+                    <p>궁금한 단어를 눌러주세요!</p>
+                <div class="word-box">
+                    <button id="button1">키오스크</button>
+                    <button id="button2">터치</button>
+                    <button id="button3">ATM</button>
+                    <button id="button4">미션</button>
+                    <button id="button5">스페셜</button>
+                    <button id="button6">프리미엄</button>
+                    <button id="button7">와퍼</button>
+                    <button id="button8">주니어</button>
+                    <button id="button9">디저트</button>
+                    <button id="button10">라지세트</button>
+                    <button id="button11">포테이토</button>
+                    <button id="button12">드링크</button>
+                </div>
+                </div>
+            
+
+             <div class="page" id="page2">
+                <div class="selectable">
+                    <h2>키오스크</h2>
+                    <div class="word-box">
+                        <p>공공장소에 설치된 안내기기 또는 무인주문기. 건물안내, 시설, 행사, 박람회, 식당 등에서 정보를 제공해주거나 주문을 받는 용도로 사용되고 있습니다.</p>
+                    </div>
+                </div>
+            </div>
+
+             <div class="page" id="page3">
+                 <div class="selectable">
+                    <h2>터치</h2>
+                    <div class="word-box">
+                        <p>손 또는 손가락으로 '만지다', '건드리다'라는 뜻의 영어표현입니다.</p>
+                    </div>
+                </div>
+            </div>
+
+             <div class="page" id="page4">
+                 <div class="selectable">
+                    <h2>ATM</h2>
+                    <div class="word-box">
+                        <p>현금자동입출금기.은행의 입금 및 출금 등을 할 수 있는 기계입니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page" id="page5">
+                 <div class="selectable">
+                    <h2>미션</h2>
+                    <div class="word-box">
+                        <p>목적달성 임무.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page" id="page6">
+                 <div class="selectable">
+                    <h2>스페셜</h2>
+                    <div class="word-box">
+                        <p>보통의 것과는 특별히 다른 것을 의미하는 '특수한', '특별한' 뜻의 영어표현입니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page" id="page7">
+                 <div class="selectable">
+                    <h2>프리미엄</h2>
+                    <div class="word-box">
+                        <p>'아주 높은', '고급의' 라는 뜻의 영어표현입니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page" id="page8">
+                 <div class="selectable">
+                    <h2>와퍼</h2>
+                    <div class="word-box">
+                        <p>1957년 출시된 버거킹의 대표 메뉴. 일반 햄버거의 평균 두께인 3.81츠 5.08cm의 크기를 내세우고 있습니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page" id="page9">
+                 <div class="selectable">
+                    <h2>주니어</h2>
+                    <div class="word-box">
+                        <p>'청소년', '나이어린'이란 뜻의 영어표현입니다.</p>
+                    </div>
+                </div>
+            </div>
+
+             <div class="page" id="page10">
+                 <div class="selectable">
+                    <h2>디저트</h2>
+                    <div class="word-box">
+                        <p>'후식'이란 뜻의 영어표현입니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page" id="page11">
+                 <div class="selectable">
+                    <h2>라지세트</h2>
+                    <div class="word-box">
+                        <p>크기가 크거나 또는 양이 많은 햄버거, 감자튀김, 콜라의 구성입니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page" id="page12">
+                 <div class="selectable">
+                    <h2>포테이토</h2>
+                    <div class="word-box">
+                        <p>'감자'라는 뜻의 영어표현입니다.</p>
+                    </div>
+                </div>
+            </div>
+
+             <div class="page" id="page13">
+                 <div class="selectable">
+                    <h2>드링크</h2>
+                    <div class="word-box">
+                        <p>'음료'라는 뜻의 영어표현입니다.</p>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    </section>
+    
+    <script>
+  
+    //button
+    function wordButton() {
+        const buttons = document.querySelectorAll('.word-box > button');
+        buttons.forEach((button, i) => {
+            button.addEventListener('click', () => showPage(i + 1));
+        });
+    }
+
+    function initialize() {
+        showPage(0); 
+    }
+
+    // page
+    function showPage(pageIndex) {
+        const pages = document.querySelectorAll('.page');
+
+        pages.forEach(page => page.style.display = 'none');
+        pages[pageIndex].style.display = 'block';
+    }
+
+    //     showPage(0);
+    // }
+
+    // prev
+    function prevPage() {
+        showPage(0);;
+    }
+
+    
+    wordButton();
+
+    // 초기화
+    initialize();
+</script>
+
+
+
+
+
+</body>
+
+</html>
