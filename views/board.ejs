@@ -44,7 +44,7 @@
       <!-- 초기에 하나의 postBox가 있을 때, 복제할 대상이 되어야 함 -->
       <div class="postBox" id="originalPostBox">
         <form name="postForm">
-          <input type="text" id="userid" placeholder="userid" />
+          <!-- <input type="text" id="userid" placeholder="userid" /> -->
           <input type="text" id="content" placeholder="content" />
           <button type="button" id="contentBtn" onclick="getForm()">
             제출
@@ -74,7 +74,7 @@
           method: "post",
           url: "/board",
           data: {
-            userid: form.userid.value,
+            // userid: form.userid.value,
             content: form.content.value,
           },
         }).then((res) => {
