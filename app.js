@@ -92,8 +92,7 @@ app.get("/cultureAPI", async (req, res) => {
   }
 });
 
-app.use(checkAccessTokenMiddleware);
-app.use('/mypage', mypageRouter);
+app.use('/mypage', checkAccessTokenMiddleware, mypageRouter);
 
 app.use(notFoundMiddleWare);
 app.use(errorHanderMiddleware);
