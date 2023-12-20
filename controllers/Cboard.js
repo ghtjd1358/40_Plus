@@ -7,27 +7,18 @@ exports.board = (req, res) => {
   res.render("./board/board");
 };
 
-// 게시물 등록
+// 게시물 등록 -> title, content 값 등록
 exports.postDB = (req, res) => {
-  const { content } = req.body;
+  const { title, content } = req.body;
   console.log("axios get data > ", req.body);
 
-  // 가입된 유져인지 검증 후 게시물 create -> db로 content 전송
-  UserTable.findOne({ where: { userid: req.session.userid } }).then(
-    (result) => {
-      if (result) {
-        console.log("find result > ", result);
-        CommunityTable.create({
-          number: UserTable.number,
-          userid: req.session.userid,
-          title: "A", //임의 설정 -> 프론트에서 들어온 값으로 처리
-          content: content,
-        });
-      } else {
-        console.log("id를 찾지 못함");
-      }
-    }
-  );
+  CommunityTable.create({
+    userid: req.session.userid,
+    title: title,
+    content: content,
+  }).then((result) => {
+    console.log("postDB 완료 > ", result);
+  });
 };
 
 // 게시물 전체 출력
@@ -47,21 +38,22 @@ exports.boardList = (req, res) => {
 
 //댓글 추가
 exports.writeComment = (req, res) => {
-  const { number, writeContent } = req.body;
+  const { foreign_number, content } = req.body;
 
   console.log("writeComment 값 받기 > ", req.body);
-  console.log(number, writeContent);
+  console.log(foreign_number, content);
   CommentTable.create({
-    foreign_number: number,
     userid: req.session.userid,
-    content: writeContent,
+    content: content,
+    foreign_number: foreign_number,
   }).then((result) => {
-    // console.log("댓글 추가 > ", result);
+    console.log("댓글 추가 > ", result);
   });
 };
 
-// 댓글 읽어오기
+// 댓글 읽어오기 -> foreign number(게시물 번호) 이용
 exports.readComment = (req, res) => {
+  console.log("req.body > ", req.body);
   const number = req.body.number;
 
   console.log("readComment number > ", number);
@@ -79,5 +71,14 @@ exports.readComment = (req, res) => {
 
     console.log("Comment Array >  ", commentArray);
     res.send({ commentArray: commentArray });
+  });
+};
+
+// 임시 댓글 출력용
+exports.readAllComment = (req, res) => {
+  CommentTable.findAll({
+    raw: true,
+  }).then((result) => {
+    console.log("All comment > ", result);
   });
 };

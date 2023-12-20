@@ -38,7 +38,7 @@
         <!-- 아래는 댓글 작성 -->
         <form class="comment">
           <!-- <input type="text" name="writeUserid" placeholder="아이디" /> -->
-          <input type="text" name="writeContent" placeholder="댓글내용" />
+          <input type="text" name="content" placeholder="댓글내용" />
           <button type="button" onclick="writeComment('<%= index %>')">
             제출
           </button>
@@ -58,14 +58,13 @@
         const forms = document.querySelectorAll(".comment");
         const form = Array.from(forms)[index]; //몇번째 글을 눌러서 댓글 작성하는지 알아야해서 array로 저장
 
-        // 클릭된 게시물 number + 작성자 이름 + 댓글내용 필요
         axios({
           method: "post",
           url: "/writeComment",
           data: {
-            number: parseInt(index) + 1,
+            foreign_number: parseInt(index) + 1,
             // writeUserid: form.querySelector("[name='writeUserid']").value,
-            writeContent: form.querySelector("[name='writeContent']").value,
+            content: form.querySelector("[name='content']").value,
           },
         }).then((result) => {
           console.log("click Box > ", result);

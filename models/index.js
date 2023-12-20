@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const config = require(__dirname + "/../config/config.js")(); 
+const config = require(__dirname + "/../config/config.js")();
 //사용할 db 연동 -> config.json의 키 값
 
 console.log(config);
@@ -46,7 +46,7 @@ User.hasMany(Words, {
   foreignKey: "userid",
   sourceKey: "userid",
   onDelete: "CASCADE",
-  onUpdate: "CASCADE"
+  onUpdate: "CASCADE",
 });
 
 Words.belongsTo(User, {
