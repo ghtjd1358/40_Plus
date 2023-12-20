@@ -10,7 +10,6 @@ const Comment = (Sequelize, DataTypes) => {
       },
       userid: {
         type: DataTypes.STRING(10),
-        unique: true,
         allowNull: false,
       },
       content: {
