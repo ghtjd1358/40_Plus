@@ -1,7 +1,7 @@
 <header class="header">
   <div class="logo">
     <a href="/">
-      <img src="/static/css/test1.png" alt="" class="logo" />
+      <img src="/static/css/test3.png" alt="" class="logo" />
     </a>
   </div>
 
@@ -27,14 +27,14 @@
       <%}%>
     </li>
   </ul>
-      <script>
-      async function logout() {
-        const res = await axios({
-          method: "post",
-          url: "/logout",
-        });
+  <script>
+    async function logout() {
+      const res = await axios({
+        method: "post",
+        url: "/logout",
+      });
 
-        location.href = "/";
-      }
-    </script>
+      location.href = "/";
+    }
+  </script>
 </header>

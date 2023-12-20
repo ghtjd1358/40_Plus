@@ -47,7 +47,7 @@
         border-radius: 20px;
         box-shadow: 1px 1px var(--color-black-1);
         width: 400px;
-        height: 600px;
+        height: 300px;
 
         margin: 30px;
       }
@@ -63,36 +63,112 @@
     </style>
   </head>
   <body>
-    <%- include("./component/header")%>
+    <%- include("./component/header2")%>
 
     <main class="container">
       <div class="terms">
         <form action="/cultureAPI" name="termsForm" id="termsFrom">
-          <input type="date" name="date" id="date" />
-          <!-- <select name="location" id="location">
-            <option value="서울">서울</option>
-            <option value="부산">부산</option>
-          </select> -->
-
-          <select name="cost" id="cost">
-            <option value="무료">무료</option>
-            <option value="1">유로</option>
-          </select>
+          <input type="text" name="" id="" />
+          <button onclick="">검색할 데이터 수 입력</button>
         </form>
+
+        <button onclick="submit()">불러오기</button>
+        <button onclick="result()">불러오기</button>
       </div>
 
-      <button onclick="submit()">검색하기</button>
-      <button onclick="result()">불러오기</button>
-
       <section class="main-content">
-        <div class="culture">
-          <div></div>
-        </div>
         <div class="culture"></div>
       </section>
     </main>
 
     <script>
+      // async function submit() {
+      //   try {
+      //     const response = await fetch("/cultureAPI");
+      //     const data = await response.json();
+      //     // const itemdata
+
+      //     // data 객체 내의 기대하는 속성이 존재하는지 확인
+      //     if (data && data.items) {
+      //       result(data.items.item);
+      //     } else {
+      //       console.error("예상하지 못한 데이터 구조:", data);
+      //     }
+      //   } catch (error) {
+      //     console.error(error);
+      //   }
+      // }
+
+      // function result(items) {
+      //   const cultureDiv = document.querySelector(".main-content");
+
+      //   if (Array.isArray(items) && items.length > 0) {
+      //     for (let i = 0; i < items.length; i++) {
+      //       const item = items[i];
+      //       const cultureItemDiv = document.createElement("div");
+      //       cultureItemDiv.classList.add("culture");
+
+      //       if (item.title) {
+      //         cultureItemDiv.innerHTML = `<p>Title: ${item.title}</p>`;
+      //       } else {
+      //         cultureItemDiv.textContent = "데이터 오류";
+      //       }
+
+      //       cultureDiv.appendChild(cultureItemDiv);
+      //     }
+      //   } else {
+      //     console.error("잘못된 데이터 형식:", items);
+      //     cultureDiv.innerHTML = "데이터를 불러오지 못했습니다.";
+      //   }
+      // }
+
+      // 한국문화정보원_전국 문화 여가 활동 시설(클래스)
+      // async function submit() {
+      //   try {
+      //     const response = await fetch("/cultureAPI");
+      //     const data = await response.json();
+
+      //     if (
+      //       data &&
+      //       data.response &&
+      //       data.response.items &&
+      //       data.response.items.item
+      //     ) {
+      //       result(data.response.items.item);
+      //     } else {
+      //       console.error("잘못된 데이터 구조:", data);
+      //       throw new Error("잘못된 데이터 구조");
+      //     }
+      //   } catch (error) {
+      //     console.error(error);
+      //   }
+      // }
+
+      // function result(items) {
+      //   const cultureDiv = document.querySelector(".main-content");
+
+      //   if (Array.isArray(items) && items.length > 0) {
+      //     for (let i = 0; i < items.length; i++) {
+      //       const item = items[i];
+      //       const cultureItemDiv = document.createElement("div");
+      //       cultureItemDiv.classList.add("culture");
+
+      //       if (item.title) {
+      //         cultureItemDiv.innerHTML = `<p>Title: ${item.title}</p>`;
+      //       } else {
+      //         cultureItemDiv.textContent = "데이터 오류";
+      //       }
+
+      //       cultureDiv.appendChild(cultureItemDiv);
+      //     }
+      //   } else {
+      //     console.error("잘못된 데이터 형식:", items);
+      //     cultureDiv.innerHTML = "데이터를 불러오지 못했습니다.";
+      //   }
+      // }
+
+      // window.onload = submit;
+
       // async function submit() {
       //   const forms = document.forms["termsFrom"];
       //   const period = forms.date.value;
@@ -108,20 +184,6 @@
       //   } catch (error) {
       //     console.error(error);
       //   }
-
-      // const forms = document.forms["termsForm"];
-      // const period = forms.date.value;
-      // const location = forms.location.value;
-      // const cost = forms.cost.value;
-
-      // try {
-      //   const response = await fetch(
-      //     `/cultureAPI?period=${period}&location=${location}&cost=${cost}`
-      //   );
-      //   const data = await response.json();
-      //   displayData(data);
-      // } catch (error) {
-      //   console.error(error);
       // }
 
       // const response = await fetch("/cultureAPI", {
@@ -140,81 +202,81 @@
       //   charge,
       // });
 
-      async function result() {
-        const cost = document.getElementById("cost");
-        const costValue = cost.value;
-        try {
-          const response = await fetch(`/cultureAPI?charge=${costValue}`);
-          const data = await response.json();
-          displayData(data);
+      // async function result() {
+      //   const cost = document.getElementById("cost");
+      //   const costValue = cost.value;
+      //   try {
+      //     const response = await fetch(`/cultureAPI?charge=${costValue}`);
+      //     const data = await response.json();
+      //     displayData(data);
 
-          console.log(data);
-        } catch (error) {
-          console.error(error);
-        }
-      }
+      //     console.log(data);
+      //   } catch (error) {
+      //     console.error(error);
+      //   }
+      // }
 
-      function displayData(data) {
-        const cultureDivs = document.querySelectorAll(".main-content .culture");
+      // function displayData(data) {
+      //   const cultureDivs = document.querySelectorAll(".main-content .culture");
 
-        cultureDivs.forEach((div) => {
-          div.innerHTML = "";
-        });
+      //   cultureDivs.forEach((div) => {
+      //     div.innerHTML = "";
+      //   });
 
-        const items = data.response?.body?.items?.item;
+      //   const items = data.response?.body?.items?.item;
 
-        if (items && items.length > 0) {
-          items.forEach((item, index) => {
-            const itemDiv = document.createElement("div");
+      //   if (items && items.length > 0) {
+      //     items.forEach((item, index) => {
+      //       const itemDiv = document.createElement("div");
 
-            const titleDiv = document.createElement("div");
-            titleDiv.textContent = `Title: ${item.title}`;
-            itemDiv.appendChild(titleDiv);
+      //       const titleDiv = document.createElement("div");
+      //       titleDiv.textContent = `Title: ${item.title}`;
+      //       itemDiv.appendChild(titleDiv);
 
-            // period
-            const periodDiv = document.createElement("div");
-            periodDiv.textContent = `Period: ${item.period}`;
-            itemDiv.appendChild(periodDiv);
+      //       // period
+      //       const periodDiv = document.createElement("div");
+      //       periodDiv.textContent = `Period: ${item.period}`;
+      //       itemDiv.appendChild(periodDiv);
 
-            // time
-            const timeDiv = document.createElement("div");
-            timeDiv.textContent = `Time: ${item.time}`;
-            itemDiv.appendChild(timeDiv);
+      //       // time
+      //       const timeDiv = document.createElement("div");
+      //       timeDiv.textContent = `Time: ${item.time}`;
+      //       itemDiv.appendChild(timeDiv);
 
-            // url
-            const urlDiv = document.createElement("div");
-            urlDiv.innerHTML = `<a href="${item.url}" target="_blank">링크 바로가기 </a>`;
-            itemDiv.appendChild(urlDiv);
+      //       // url
+      //       const urlDiv = document.createElement("div");
+      //       urlDiv.innerHTML = `<a href="${item.url}" target="_blank">링크 바로가기 </a>`;
+      //       itemDiv.appendChild(urlDiv);
 
-            // grade
-            const gradeDiv = document.createElement("div");
-            gradeDiv.textContent = `Grade: ${item.grade}`;
-            itemDiv.appendChild(gradeDiv);
+      //       // grade
+      //       const gradeDiv = document.createElement("div");
+      //       gradeDiv.textContent = `Grade: ${item.grade}`;
+      //       itemDiv.appendChild(gradeDiv);
 
-            // creator
-            const creatorDiv = document.createElement("div");
-            creatorDiv.textContent = `Creator: ${item.creator}`;
-            itemDiv.appendChild(creatorDiv);
+      //       // creator
+      //       const creatorDiv = document.createElement("div");
+      //       creatorDiv.textContent = `Creator: ${item.creator}`;
+      //       itemDiv.appendChild(creatorDiv);
 
-            // charge
-            const chargeDiv = document.createElement("div");
-            chargeDiv.textContent = `Charge: ${item.charge}`;
-            itemDiv.appendChild(chargeDiv);
+      //       // charge
+      //       const chargeDiv = document.createElement("div");
+      //       chargeDiv.textContent = `Charge: ${item.charge}`;
+      //       itemDiv.appendChild(chargeDiv);
 
-            // // img;
-            const imgDiv = document.createElement("div");
-            imgDiv.innerHTML = `<img src="${item.referenceIdentifier}" alt="">`;
-            itemDiv.appendChild(imgDiv);
+      //       // // img;
+      //       const imgDiv = document.createElement("div");
+      //       imgDiv.innerHTML = `<img src="${item.referenceIdentifier}" alt="">`;
+      //       itemDiv.appendChild(imgDiv);
 
-            cultureDivs[index].appendChild(itemDiv);
-          });
-        } else {
-          // 검색 결과가 없는 경우 메시지 표시
-          cultureDivs.forEach((div) => {
-            div.textContent = "검색 결과가 없습니다.";
-          });
-        }
-      }
+      //       cultureDivs[index].appendChild(itemDiv);
+      //     });
+      //   } else {
+      //     // 검색 결과가 없는 경우 메시지 표시
+      //     cultureDivs.forEach((div) => {
+      //       div.textContent = "검색 결과가 없습니다.";
+      //     });
+      //   }
+      // }
     </script>
   </body>
 </html>

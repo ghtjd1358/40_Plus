@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="/static/css/component.css" />
+
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <title>library</title>
+
+    <style>
+      a {
+        cursor: pointer;
+      }
+
+      .header {
+        width: 100%;
+        height: 150px;
+        background-color: white;
+        position: fixed;
+        display: flex;
+        z-index: 100;
+        border-bottom: 2px solid var(--color-black-1);
+        justify-content: space-around;
+        align-items: center;
+      }
+
+      .main-content {
+        display: flex;
+      }
+      .container {
+        position: relative;
+        display: flex;
+
+        flex-direction: column;
+        align-items: center;
+
+        width: 100%;
+        height: 80%;
+        top: 180px;
+        /* background-color: var(--color-black-1); */
+      }
+
+      .culture {
+        background-color: white;
+        border: 1px solid var(--color-black-1);
+        border-radius: 20px;
+        box-shadow: 1px 1px var(--color-black-1);
+        width: 400px;
+        height: 300px;
+
+        margin: 30px;
+      }
+
+      .terms {
+        /* background-color: pink; */
+        width: 400px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .nav {
+        background-color: white;
+      }
+      
+      .nav > ul {
+       color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <body>
+    <%- include("./component/header2")%>
+
+    <main class="container">
+      <div class="terms">
+        <form action="/libraryAPI" name="termsForm" id="termsFrom">
+
+            <p>도서관 정보는 최대 20개씩 표시됩니다. </p>
+          <select name="region" id="region">
+            <option value="11"> 서울</option>
+            <option value="21"> 부산</option>
+            <option value="39"> 제주</option>
+          </select>
+
+           <select name="dtl_region" id="region">
+            <option value="11140"> 마포구</option>
+            <option value="11190"> 영등포구</option>
+            <option value="11210"> 관악구</option>
+          </select>
+
+      </form>
+    <button onclick="submit()">지역 설정하기</button>
+      <button onclick="result()">불러오기</button>
+      </div>
+
+
+      <section class="main-content">
+        <div class="culture"></div>
+      </section>
+    </main>
+
+    <script>
+
+
+        function submit() {
+            
+        }
+
+        async function result() {
+            try {
+                const response = await fetch('/libraryAPI')
+                const data = await response.text()
+
+                console.log('data',data)
+                // -> xml 데이터
+                // console.log('xml',xml)
+
+                // xml 데이터 파싱 
+                const parser =  new DOMParser()
+                const xmlData = parser.parseFromString(data, 'text/xml')
+
+                
+                const result = document.querySelector('.culture')
+                result.innerHTML = ""
+
+                const resData = xmlData.documentElement.childNodes
+                
+                const libs = resData.getElementsByTagName('libs')
+                const lib = libs.getElementsByTagName('lib')
+                const libInfo = lib.getElementsByTagName('libInfo')
+                const libName = libInfo.getElementsByTagName('libName').textContent
+
+                const libResult = document.createElement('div');
+                libResult.innerHTML = `도서관 이름: ${libName}`;
+                result.appendChild(libResult);
+
+
+                //  const libName = libInfo.querySelector('libName')[0].childNodes[0].nodeValue
+                // for (let i = 0; i < libInfos.length; i++) {
+                //     const libInfo = libInfos[i]
+                //     const libName = libInfo.querySelector('libName').textContent
+
+                //     const libResult = document.createElement('div');
+                //     libResult.innerHTML = `도서관 이름: ${libName}`;
+                //     result.appendChild(libResult);
+        
+                // }
+               
+
+            } catch (error) {
+                console.error(error)
+            }
+        }
+
+
+    </script>
+  </body>
+</html>

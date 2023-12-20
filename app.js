@@ -5,8 +5,8 @@ const PORT = 8000;
 
 const swaggerRouter = require("./routes/swagger.router");
 
-const signupRouter = require('./routes/signup.router');
-const errorRouter = require('./routes/error.routes');
+const signupRouter = require("./routes/signup.router");
+const errorRouter = require("./routes/error.routes");
 
 const db = require("./models/index");
 
@@ -15,12 +15,11 @@ const app = express();
 const getSessionConfig = require("./config/session.config");
 app.use(cookieParser("추후 수정 예정 암호"));
 
+const checkIdTokenMiddleware = require("./middlewares/checkIdToken");
+const notFoundMiddleWare = require("./middlewares/not-found");
+const errorHanderMiddleware = require("./middlewares/error-handler");
 
-const checkIdTokenMiddleware = require('./middlewares/checkIdToken');
-const notFoundMiddleWare = require('./middlewares/not-found');
-const errorHanderMiddleware = require('./middlewares/error-handler');
-
-app.set('view engine', 'ejs');
+app.set("view engine", "ejs");
 
 app.set("views", "./views");
 
@@ -54,15 +53,8 @@ app.get("/cultureAPI", async (req, res) => {
     "http://api.kcisa.kr/openapi/service/rest/convergence/conver6?";
 
   let URI = encodeURI("serviceKey") + "=" + serviceKey;
-  URI += "&" + encodeURI("numOfRows") + "=" + encodeURI("2");
+  URI += "&" + encodeURI("numOfRows") + "=" + encodeURI("10");
   URI += "&" + encodeURI("pageNo") + "=" + encodeURI("1");
-  // URI += "&" + encodeURI("charge") + "=" + encodeURI("무료");
-
-  const charge = req.query.cost;
-  if (charge && charge === "무료") {
-    URI += "&" + encodeURI("charge") + "=" + encodeURI("무료");
-  }
-
 
   const url = serviceUrl + URI;
 
@@ -71,24 +63,58 @@ app.get("/cultureAPI", async (req, res) => {
   try {
     const result = await axios.get(url);
     const data = result.data;
-
-    // 사용자가 "무료"를 선택한 경우에만 데이터 필터링 적용
-    if (charge && charge === "무료") {
-      const filteredData = data.items.item.filter((item) => {
-        return item.charge && item.charge.includes("무료");
-      });
-
-      // 클라이언트에 필터링된 데이터 전송
-      res.json(filteredData);
-    } else {
-      // 클라이언트에 전체 데이터 전송
-      res.json(data);
-    }
+    res.json(data);
   } catch (err) {
     console.log(err);
   }
 });
 
+// 한국문화정보원_전국 문화 여가 활동 시설(클래스)
+// const apiKey = "adaccb06-738c-4122-aad0-dcf69d09d802";
+
+// app.get("/cultureAPI", async (req, res) => {
+//   const serviceUrl = "http://api.kcisa.kr/openapi/API_CIA_081/request?";
+
+//   let URI = encodeURI("serviceKey") + "=" + apiKey;
+//   URI += "&" + encodeURI("numOfRows") + "=" + encodeURI("1");
+//   URI += "&" + encodeURI("pageNo") + "=" + encodeURI("1");
+
+//   const url = serviceUrl + URI;
+
+//   console.log(URI);
+
+//   try {
+//     const result = await axios.get(url);
+//     const data = result.data;
+//     res.json(data);
+//   } catch (err) {
+//     console.log(err);
+//   }
+// });
+
+//도서관 정보
+const libraryKey =
+  "cc2b7e47274edbc8c38943c9c0dd105e0a026bc5ab7de6e0cb4ec27027a241e9";
+
+app.get("/libraryAPI", async (req, res) => {
+  const url = "http://data4library.kr/api/extends/libSrch?";
+
+  let URI = encodeURI("authKey") + "=" + libraryKey;
+  URI += "&" + encodeURI("pageNo") + "=" + encodeURI("1");
+  URI += "&" + encodeURI("pageSize") + "=" + encodeURI("1");
+
+  const libraryUrl = url + URI;
+
+  console.log(libraryUrl);
+
+  try {
+    const result = await axios.get(libraryUrl);
+    const data = result.data;
+    res.json(data);
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 app.use(notFoundMiddleWare);
 app.use(errorHanderMiddleware);

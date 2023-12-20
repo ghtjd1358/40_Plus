@@ -7,8 +7,8 @@ const getCookieConfig = require("../config/cookie.config");
 const clearUserInfo = require("../utility/clearUserInfo");
 
 function getIndex(req, res) {
-  res.render("index");
-};
+  res.render("index2");
+}
 
 const culture = (req, res) => {
   res.render("culture");
@@ -18,7 +18,9 @@ const community = (req, res) => {
   res.render("community");
 };
 
-
+const library = (req, res) => {
+  res.render("library");
+};
 
 function getSignup(req, res) {
   res.render("signup");
@@ -244,7 +246,7 @@ async function deleteUser(req, res) {
       msg: "삭제완료",
       isError: false,
     });
-  } catch(err) {
+  } catch (err) {
     res.json({
       msg: "오류가 발생하였습니다. 새로고침 후 다시 시도해주세요",
       isError: true,
@@ -266,5 +268,5 @@ module.exports = {
   changeUserName: changeUserName,
   changeUserPassword: changeUserPassword,
   deleteUser: deleteUser,
-
+  library: library,
 };
