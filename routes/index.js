@@ -28,4 +28,7 @@ router.post("/board", controller.postDB);
 router.get("/boardList", controller.boardList);
 router.post("/writeComment", controller.writeComment);
 router.post("/readComment", controller.readComment);
+
+// 임시
+router.get("/allComment", controller.readAllComment);
 module.exports = router;
