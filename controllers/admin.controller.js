@@ -5,7 +5,6 @@ const ConfirmWords = models.ConfirmWords;
 
 async function getConfirmWord (req, res) {
     const words = await Words.findAll();
-
     res.render('admin/confirmword', {words: words});
 }
 
