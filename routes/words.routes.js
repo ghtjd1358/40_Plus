@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express();
 
-router.get('/add-word', function(req, res) {
-    res.render('addWord');
-});
+const controller = require('../controllers/word.controller');
+
+router.get('/', controller.getAddWord);
+
+router.post('/addword', controller.addWord);
 
 
 

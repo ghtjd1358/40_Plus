@@ -17,6 +17,7 @@ const User = require("./User")(sequelize, Sequelize);
 const Community = require("./Community")(sequelize, Sequelize);
 const Comment = require("./Comment")(sequelize, Sequelize);
 const Words = require("./Words")(sequelize, Sequelize);
+const ConfirmWords = require("./ConfirmWords")(sequelize, Sequelize);
 
 // FK 설정 1:n
 User.hasMany(Community, {
@@ -52,6 +53,17 @@ Words.belongsTo(User, {
   foreignKey: "userid",
   targetKey: "userid"
 })
+User.hasMany(ConfirmWords, {
+  foreignKey: "userid",
+  sourceKey: "userid",
+  onDelete: "CASCADE",
+  onUpdate: "CASCADE"
+});
+
+ConfirmWords.belongsTo(User, {
+  foreignKey: "userid",
+  targetKey: "userid"
+})
 
 
 db.sequelize = sequelize;
@@ -61,5 +73,6 @@ db.User = User;
 db.Community = Community;
 db.Comment = Comment;
 db.Words = Words;
+db.ConfirmWords = ConfirmWords;
 
 module.exports = db;
