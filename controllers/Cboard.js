@@ -4,7 +4,7 @@ const CommunityTable = db.Community;
 const CommentTable = db.Comment;
 
 exports.board = (req, res) => {
-  res.render("board");
+  res.render("./board/board");
 };
 
 // 게시물 등록
@@ -35,22 +35,22 @@ exports.boardList = (req, res) => {
   CommunityTable.findAll({ raw: true })
     .then((result) => {
       if (result) {
-        console.log("find all > ", result); // 결과 출력
-        res.render("boardList", { success: true, data: result });
+        console.log("find all > ", result);
+        res.render("./board/boardList", { success: true, data: result });
       }
     })
     .catch((error) => {
       console.error("Error:", error);
-      res.render("boardList", { success: false, error: error.message });
+      res.render("./board/boardList", { success: false, error: error.message });
     });
 };
 
 //댓글 추가
 exports.writeComment = (req, res) => {
-  const { number, writeUserid, writeContent } = req.body;
+  const { number, writeContent } = req.body;
 
   console.log("writeComment 값 받기 > ", req.body);
-  console.log(number, writeUserid, writeContent);
+  console.log(number, writeContent);
   CommentTable.create({
     foreign_number: number,
     userid: req.session.userid,

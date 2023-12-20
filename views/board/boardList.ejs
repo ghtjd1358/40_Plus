@@ -37,9 +37,11 @@
         <hr />
         <!-- 아래는 댓글 작성 -->
         <form class="comment">
-          <input type="text" name="writeUserid" placeholder="아이디" />
+          <!-- <input type="text" name="writeUserid" placeholder="아이디" /> -->
           <input type="text" name="writeContent" placeholder="댓글내용" />
-          <button type="button" onclick="clickBox('<%= index %>')">제출</button>
+          <button type="button" onclick="writeComment('<%= index %>')">
+            제출
+          </button>
         </form>
 
         <div class="commentContainer">
@@ -52,7 +54,7 @@
     </div>
 
     <script>
-      function clickBox(index) {
+      function writeComment(index) {
         const forms = document.querySelectorAll(".comment");
         const form = Array.from(forms)[index]; //몇번째 글을 눌러서 댓글 작성하는지 알아야해서 array로 저장
 
@@ -62,7 +64,7 @@
           url: "/writeComment",
           data: {
             number: parseInt(index) + 1,
-            writeUserid: form.querySelector("[name='writeUserid']").value,
+            // writeUserid: form.querySelector("[name='writeUserid']").value,
             writeContent: form.querySelector("[name='writeContent']").value,
           },
         }).then((result) => {
