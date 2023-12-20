@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <title>단어 추가</title>
+    <title>단어 승인</title>
     <style>
         #add_body {
             font-family: 'Arial', sans-serif;
@@ -97,7 +97,7 @@
         </div>
         <p id="result"></p>
     </form>
-        <% if (words) {%>
+        <% if (words.length > 0) {%>
         <% for (const word of words) {%>
             <form method="post" action="/admin/confirmword" name="forms" data-number="<%= word.number %>">
                 <input type="text" name="number" value="<%= word.number %>"> </input>
@@ -111,7 +111,9 @@
            
             </form>
         <% } %>
-        <% } %>
+        <% } else {%>
+            <h1>등록된 단어가 없습니다.</h1>
+            <% } %>
 
   <script>
     const deleteButtonElements = document.querySelectorAll('.delete');
