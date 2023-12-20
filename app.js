@@ -6,10 +6,14 @@ const axios = require("axios");
 const PORT = process.env.SERVERPORT;
 
 const swaggerRouter = require("./routes/swagger.router");
-const signupRouter = require("./routes/signup.router");
-const errorRouter = require("./routes/error.routes");
-const mypageRouter = require("./routes/mypage.routes");
-const yongRouter = require("./routes/index");
+
+const signupRouter = require('./routes/signup.router');
+const errorRouter = require('./routes/error.routes');
+const mypageRouter = require('./routes/mypage.routes');
+const yongRouter = require('./routes/index');
+const wordRouter = require('./routes/words.routes');
+const adminRouter = require('./routes/admin.routes');
+
 
 const db = require("./models/index");
 const app = express();
@@ -44,6 +48,8 @@ app.use(checkIdTokenMiddleware);
 app.use(errorRouter);
 app.use(signupRouter);
 app.use(yongRouter);
+app.use('/word', wordRouter);
+app.use('/admin', adminRouter);
 
 // API 관련
 const serviceKey = process.env.CULTUREAPISERVICEKEY; // .env
