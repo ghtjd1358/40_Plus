@@ -70,7 +70,7 @@ async function changeUserPassword(req, res) {
     });
   }
 
-  const hashedNewPassword = bcrypt.hashSync(newPassword, process.env.HASHROUND);
+  const hashedNewPassword = bcrypt.hashSync(newPassword, parseInt(process.env.HASHROUND));
 
   try {
     await User.update(

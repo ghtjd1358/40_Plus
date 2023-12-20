@@ -84,7 +84,7 @@ async function signup(req, res) {
     });
   }
 
-  const hashPW = bcrypt.hashSync(password, process.env.HASHROUND);
+  const hashPW = bcrypt.hashSync(password, parseInt(process.env.HASHROUND));
 
   const result = await User.create({
     userid: userid,
