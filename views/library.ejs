@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="/static/css/component.css" />
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -66,38 +66,34 @@
       .nav {
         background-color: white;
       }
-      
+
       .nav > ul {
-       color: black;
+        color: black;
       }
     </style>
   </head>
   <body>
-    <body>
     <%- include("./component/header2")%>
 
     <main class="container">
       <div class="terms">
         <form action="/libraryAPI" name="termsForm" id="termsFrom">
-
-            <p>도서관 정보는 최대 20개씩 표시됩니다. </p>
+          <p>도서관 정보는 최대 20개씩 표시됩니다.</p>
           <select name="region" id="region">
-            <option value="11"> 서울</option>
-            <option value="21"> 부산</option>
-            <option value="39"> 제주</option>
+            <option value="11">서울</option>
+            <option value="21">부산</option>
+            <option value="39">제주</option>
           </select>
 
-           <select name="dtl_region" id="region">
-            <option value="11140"> 마포구</option>
-            <option value="11190"> 영등포구</option>
-            <option value="11210"> 관악구</option>
+          <select name="dtl_region" id="dtl_region">
+            <option value="11140">마포구</option>
+            <option value="11190">영등포구</option>
+            <option value="11210">관악구</option>
           </select>
-
-      </form>
-    <button onclick="submit()">지역 설정하기</button>
-      <button onclick="result()">불러오기</button>
+          <button onclick="submit()" type="button">지역 설정하기</button>
+          <button onclick="result()" type="button">불러오기</button>
+        </form>
       </div>
-
 
       <section class="main-content">
         <div class="culture"></div>
@@ -105,59 +101,50 @@
     </main>
 
     <script>
+      function submit() {}
 
+      async function result() {
+        try {
+          const response = await fetch("/libraryAPI");
+          const data = await response.text();
 
-        function submit() {
-            
+          console.log("data", data);
+          // -> xml 데이터
+          // console.log('xml',xml)
+
+          // xml 데이터 파싱
+          const parser = new DOMParser();
+          const xmlData = parser.parseFromString(data, "text/xml");
+
+          const result = document.querySelector(".culture");
+          result.innerHTML = "";
+
+          const resData = xmlData.documentElement.childNodes;
+
+          const libs = resData.getElementsByTagName("libs");
+          const lib = libs.getElementsByTagName("lib");
+          const libInfo = lib.getElementsByTagName("libInfo");
+
+          const libName = libInfo.getElementsByTagName("libName").textContent;
+
+          const libResult = document.createElement("div");
+          libResult.innerHTML = `도서관 이름: ${libName}`;
+          result.appendChild(libResult);
+
+          //  const libName = libInfo.querySelector('libName')[0].childNodes[0].nodeValue
+          // for (let i = 0; i < libInfos.length; i++) {
+          //     const libInfo = libInfos[i]
+          //     const libName = libInfo.querySelector('libName').textContent
+
+          //     const libResult = document.createElement('div');
+          //     libResult.innerHTML = `도서관 이름: ${libName}`;
+          //     result.appendChild(libResult);
+
+          // }
+        } catch (error) {
+          console.error(error);
         }
-
-        async function result() {
-            try {
-                const response = await fetch('/libraryAPI')
-                const data = await response.text()
-
-                console.log('data',data)
-                // -> xml 데이터
-                // console.log('xml',xml)
-
-                // xml 데이터 파싱 
-                const parser =  new DOMParser()
-                const xmlData = parser.parseFromString(data, 'text/xml')
-
-                
-                const result = document.querySelector('.culture')
-                result.innerHTML = ""
-
-                const resData = xmlData.documentElement.childNodes
-                
-                const libs = resData.getElementsByTagName('libs')
-                const lib = libs.getElementsByTagName('lib')
-                const libInfo = lib.getElementsByTagName('libInfo')
-                const libName = libInfo.getElementsByTagName('libName').textContent
-
-                const libResult = document.createElement('div');
-                libResult.innerHTML = `도서관 이름: ${libName}`;
-                result.appendChild(libResult);
-
-
-                //  const libName = libInfo.querySelector('libName')[0].childNodes[0].nodeValue
-                // for (let i = 0; i < libInfos.length; i++) {
-                //     const libInfo = libInfos[i]
-                //     const libName = libInfo.querySelector('libName').textContent
-
-                //     const libResult = document.createElement('div');
-                //     libResult.innerHTML = `도서관 이름: ${libName}`;
-                //     result.appendChild(libResult);
-        
-                // }
-               
-
-            } catch (error) {
-                console.error(error)
-            }
-        }
-
-
+      }
     </script>
   </body>
 </html>
