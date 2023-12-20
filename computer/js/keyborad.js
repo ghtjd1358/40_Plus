@@ -123,23 +123,23 @@ function checkTyping() {
             enter.classList.add('correct');
         }
         userInput.classList.remove('error');
-            // console.log(event.key);  // undefined.
-            // console.log(inputCode);  // 마지막으로 입력 된 값 확인 로그
-            if(inputCode === 'Enter') {
-                console.log('인덱스 증가');
-                wordIndex = (wordIndex + 1) % word.length; // 정확하게 입력하면 다음 값으로 이동
-                meanIndex = (meanIndex + 1) % mean.length;  
-                console.log('wordIndex > ', wordIndex);
-                console.log('meanIndex > ', meanIndex);
-                // 타자 속도 측정 및 출력
-                const endTime = Date.now();
-                const elapsedTime = (endTime - startTime) / (1000*60); // 분 단위로 변환
-                const typingSpeed = (correctText.length / 5) / elapsedTime; // 5글자당 단어당 평균 길이로 나누어 타자 속도 계산
-                result2.innerText = `타자 속도 : ${(typingSpeed).toFixed(2) * 100} 타`;
+        // console.log(event.key);  // undefined.
+        // console.log(inputCode);  // 마지막으로 입력 된 값 확인 로그
+        if(inputCode === 'Enter') {
+            console.log('인덱스 증가');
+            wordIndex = (wordIndex + 1) % word.length; // 정확하게 입력하면 다음 값으로 이동
+            meanIndex = (meanIndex + 1) % mean.length;  
+            console.log('wordIndex > ', wordIndex);
+            console.log('meanIndex > ', meanIndex);
+            // 타자 속도 측정 및 출력
+            const endTime = Date.now();
+            const elapsedTime = (endTime - startTime) / (1000*60); // 분 단위로 변환
+            const typingSpeed = (correctText.length / 5) / elapsedTime; // 5글자당 단어당 평균 길이로 나누어 타자 속도 계산
+            result2.innerText = `타자 속도 : ${(typingSpeed).toFixed(2) * 100} 타`;
 
-                console.log(`타자 속도: ${(typingSpeed).toFixed(2) * 100} 타/분`);
-                console.log('끝 > ', endTime);
-            }
+            console.log(`타자 속도: ${(typingSpeed).toFixed(2) * 100} 타/분`);
+            console.log('끝 > ', endTime);
+        }
     } else if (correctText.startsWith(userTypedText)) {
         result.innerText = `정확도 : ${accuracy.toFixed(2)}%`;
         userInput.classList.remove('error');
