@@ -68,9 +68,10 @@ function toggleKeyboard() {
 }
 // ----------------------- 구 분 선 -----------------------
 // 추가 부분: 과일 배열 및 현재 인덱스 변수
-const word = ["예시","알잘딱깔센", "킹받네", "꾸안꾸"];
+const word = ["단어","예시1","알잘딱깔센", "킹받네", "꾸안꾸"];
 let wordIndex = 0;
 const mean = ['해설1',"예시","'알아서 잘 딱 깔끔하고 센스있게'의 줄임말", "'열받네'에 킹을 더해 의미를 강조한 단어'", "'꾸민듯 안꾸민듯'의 줄임말"]
+const mean = ["예시","예시","'알아서 잘 딱 깔끔하고 센스있게'의 줄임말", "'열받네'에 킹을 더해 의미를 강조한 단어'", "'꾸민듯 안꾸민듯'의 줄임말"]
 let meanIndex = 0;
 
 // 초기화 함수: 텍스트 설정 및 현재 인덱스 초기화
@@ -81,7 +82,6 @@ function initializeText() {;
     result.innerText = '정확도 : 0.00%';
     userInput.classList.remove('error');
     startTime = Date.now();
-    console.log('시작 > ',startTime);
 }
 // 페이지 로드 시 초기화 호출
 window.onload = initializeText;
@@ -101,8 +101,7 @@ function checkTyping() {
     const correctText = word[wordIndex];   // 정답 ex) (문제)알잘딱깔센
     const userTypedChars = userTypedText.split(''); // 사용자 입력을 글자 단위로 분할
     const correctChars = correctText.split(''); // 정답을 글자 단위로 분할
-    console.log(correctChars);
-    console.log(userTypedChars);
+   
     const minLength = Math.min(userTypedChars.length, correctChars.length); // 최소 길이 찾기
     // console.log(minLength);
 
@@ -126,19 +125,13 @@ function checkTyping() {
         // console.log(event.key);  // undefined.
         // console.log(inputCode);  // 마지막으로 입력 된 값 확인 로그
         if(inputCode === 'Enter') {
-            console.log('인덱스 증가');
             wordIndex = (wordIndex + 1) % word.length; // 정확하게 입력하면 다음 값으로 이동
             meanIndex = (meanIndex + 1) % mean.length;  
-            console.log('wordIndex > ', wordIndex);
-            console.log('meanIndex > ', meanIndex);
             // 타자 속도 측정 및 출력
             const endTime = Date.now();
             const elapsedTime = (endTime - startTime) / (1000*60); // 분 단위로 변환
             const typingSpeed = (correctText.length / 5) / elapsedTime; // 5글자당 단어당 평균 길이로 나누어 타자 속도 계산
             result2.innerText = `타자 속도 : ${(typingSpeed).toFixed(2) * 100} 타`;
-
-            console.log(`타자 속도: ${(typingSpeed).toFixed(2) * 100} 타/분`);
-            console.log('끝 > ', endTime);
         }
     } else if (correctText.startsWith(userTypedText)) {
         result.innerText = `정확도 : ${accuracy.toFixed(2)}%`;
@@ -154,7 +147,6 @@ function checkTyping() {
 // Enter 키 이벤트 처리
 userInput.addEventListener('keyup', function(event) {
     if (event.key === 'Enter') {
-        // console.log(event.key); // enter
         initializeText(); // 엔터 키 누르면 초기화
         for (const enter of enters) {
             enter.classList.remove('correct');

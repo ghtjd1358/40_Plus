@@ -565,37 +565,154 @@ img{
 .menu-select-button div:last-child{
     background-color: #B1F9C6;
 }
- 
 
+/* 9page */
+.menu-footer2 {
+    position: fixed;
+    bottom: 148px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 300px;
+    background-color: #eee;
+    /* border: 1px solid #000; */
+}
 
+.menu-footer2-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
 
+.menu-first{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #bebebe;
+    width: 100%;
+    height: 60px;
+    padding: 0 20px;
+}
 
+.menu-first h3{
+    margin-left: 3%;
+    font-size: 1.4rem;
+}
 
+.menu-first p{
+    margin-right: 40%;
+    font-size: 1rem;
+}
 
+.menu-first p > span{
+    font-size: 1.2rem;
+    font-weight: bold;
+}
 
+.menu-first h2{
+    font-size: 1.6rem;
+    color: #CF0A0A;
+}
 
+.menu-last{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    padding: 10px 30px;
+    background-color: #fff;
+    width: 100%;
+    height: 100px;
+}
 
+.menu-last p{
+    margin-left: 3%;
+    font-size: 1.4rem;
+}
 
+.menu-last p:nth-child(2){
+    margin-left: 5%;
+}
 
+.menu-last-button{
+    display: flex;
+    flex-direction: column;
+}
 
+.menu-last-button button{
+    width: 2rem;
+    height: 2rem;
+    margin: 1px;
+}
 
+.menu-last-button:last-child button{
+    width: 2.5rem;
+    height: 3rem;
+}
 
+.menu-last-button2{
+    margin-top: 1%;
+    width: 20%;
+}
 
+.menu-last-button2 button{
+    width: 5rem;
+    height: 2rem;
+    margin-left: 1%;
+}
 
+.menu-footer2-bot{
+    display: flex;
+    align-items: center;
+}
 
+.menu-footer2-left {
+    display: flex;
+    width: 65%;
+    justify-content: space-around;
+    padding: 20px 40px;
+    /* border: 1px solid red; */
+}
 
+.menu-footer2-box img {
+    cursor: pointer;
+    width: 25%;
+}
 
+.menu-footer2-box p {
+    font-size: 0.8rem;
+    line-height: 1px;
+    font-weight: bold;
 
+}
 
+.menu-footer2-right {
+    display: flex;
+    width: 70%;
+    height: 0px;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px 30px;
+    /* border: 1px solid red; */
+}
 
+#menu-footer2-button button {
+    width: 25rem;
+    height: 80px;
+    font-size: 1.6rem;
+    font-weight: bold;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: #eee;
+    color: #000;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    z-index: 2;
+}
 
-
-
-
-
-
-
-
+#menu-footer2-button:last-child button {
+    margin-left: 30px;
+    background-color: #fff;
+}
 
 /* -----------------------footer progress---------------------------------- */
 footer {
