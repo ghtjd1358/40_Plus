@@ -21,18 +21,19 @@
             justify-content: center;
             margin: 20px 0;
             border: 1px solid black;
+            box-shadow: 0 7px 8px rgba(0, 0, 0, 0.1);
         }
 
         .add-text {
             padding: 10px;
-            width: 150px;
+            width: 200px;
             border: 1px solid #ddd;
             border-radius: 5px;
             margin-right: 10px;
         }
 
         #mean {
-            width: 300px;
+            width: 400px;
         }
 
         .add-btn {
@@ -63,6 +64,23 @@
             color: white;
         }
 
+        /* DB 표 */
+        th.th-number {
+            width: 50px; /* 간격을 조절할 값으로 지정하세요 */
+        }
+
+        th.th-word {
+            width: 150px; /* 간격을 조절할 값으로 지정하세요 */
+        }
+
+        th.th-meaning {
+            width: 300px; /* 간격을 조절할 값으로 지정하세요 */
+        }
+
+        th.th-username {
+            width: 100px; /* 간격을 조절할 값으로 지정하세요 */
+        }
+
         th:not(:first-child)::before,
         td:not(:first-child)::before {
             content: '';
@@ -90,7 +108,7 @@
             background-color: #f5f5f5;
         }
         /* 페이징 스타일 */
-        .pagination {
+        .paging {
             display: flex;
             justify-content: center;
             margin-top: 20px;
@@ -99,10 +117,25 @@
         .page-item {
             margin: 0 5px;
             cursor: pointer;
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
         }
 
         .page-item:hover {
-            color: blue;
+            background-color: #ddd;
+        }
+
+        /* 기존 스타일 유지하며 현재 보고 있는 페이지에 대한 스타일 추가 */
+        .current-page {
+        background-color: #4CAF50;
+        color: white;
+        }
+        .next-page, .prev-page {
+            background-color: rgb(253, 240, 226);
+        }
+        .next-page:hover, .prev-page:hover {
+            background-color: bisque;
         }
         
     </style>
@@ -118,10 +151,10 @@
         </form>
         <table>
             <tr>
-                <th>번호</th>
-                <th>단어 명</th>
-                <th>단어 뜻</th>
-                <th>유저명</th>
+                <th class="th-number">번호</th>
+                <th class="th-word">단어 명</th>
+                <th class="th-meaning">단어 뜻</th>
+                <th class="th-username">유저명</th>
             </tr>
             <tr>
                 <td>1</td>
@@ -135,95 +168,156 @@
                 <td>'알아서 잘 딱 깔끔하고 센스있게'의 줄임말</td>
                 <td>김재현</td>
             </tr>
+            <tr>
+                <td>3</td>
+                <td>알잘딱깔센</td>
+                <td>'알아서 잘 딱 깔끔하고 센스있게'의 줄임말</td>
+                <td>김재현</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>알잘딱깔센</td>
+                <td>'알아서 잘 딱 깔끔하고 센스있게'의 줄임말</td>
+                <td>김재현</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>알잘딱깔센</td>
+                <td>'알아서 잘 딱 깔끔하고 센스있게'의 줄임말</td>
+                <td>김재현</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>알잘딱깔센</td>
+                <td>'알아서 잘 딱 깔끔하고 센스있게'의 줄임말</td>
+                <td>김재현</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>알잘딱깔센</td>
+                <td>'알아서 잘 딱 깔끔하고 센스있게'의 줄임말</td>
+                <td>김재현</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>알잘딱깔센</td>
+                <td>'알아서 잘 딱 깔끔하고 센스있게'의 줄임말</td>
+                <td>김재현</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>알잘딱깔센</td>
+                <td>'알아서 잘 딱 깔끔하고 센스있게'의 줄임말</td>
+                <td>김재현</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>알잘딱깔센</td>
+                <td>'알아서 잘 딱 깔끔하고 센스있게'의 줄임말</td>
+                <td>김재현</td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>알잘딱깔센</td>
+                <td>'알아서 잘 딱 깔끔하고 센스있게'의 줄임말</td>
+                <td>김재현</td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>알잘딱깔센</td>
+                <td>'알아서 잘 딱 깔끔하고 센스있게'의 줄임말</td>
+                <td>김재현</td>
+            </tr>
+            <tr>
+                <td>13</td>
+                <td>알잘딱깔센</td>
+                <td>'알아서 잘 딱 깔끔하고 센스있게'의 줄임말</td>
+                <td>김재현</td>
+            </tr>
         </table>
-        <div class="pagination" id="pagination">
-            <!-- 페이지 번호가 동적으로 추가될 공간 -->
-        </div>
         <div class="paging" id="paging">
-            <!-- 추가 될 공간 -->
+            <!-- 페이징 추가 될 공간 -->
         </div>
     </div>
     <script>
-        // 한 페이지 당 표시할 글의 개수
+        // 한 페이지당 표시할 항목 수
         const postPerPage = 10;
-        // table 한 줄
-        // const post 
-        
-        // function showPage(pageNumber) {
-        //     const tableRows = document.querySelectorAll('table tr');        // [tr], [tr], [tr]
-        //     const pagingDiv = document.getElementById('paging');
-        //     const totalPages = ((tableRows.length - 1) / postPerPage) + 1;
-        //     // totalPages = ((totalPosts-1) / postsPerPage) + 1 
-        // }
 
+        // 한 번에 표시할 페이지 번호 수
+        const numDisplayPage = 5;
 
+        // 테이블과 페이지 번호를 관리할 함수
+        function showPage(currentPage) {
+            const tableRows = document.querySelectorAll('table tr');    // [tr], [tr], [tr]
+            const pagingDiv = document.getElementById('paging');
+            const totalPages = Math.ceil((tableRows.length - 1) / postPerPage); // 총 페이지 수 계산
+            console.log(totalPages);    // 이게 왜 반올림이 되는가...?
+            const startPage = Math.max(1, currentPage - Math.floor(numDisplayPage / 2)); // 표시할 페이지 범위의 시작
+            const endPage = Math.min(totalPages, startPage + numDisplayPage - 1); // 표시할 페이지 범위의 끝
 
-        // // 페이지당 표시할 항목 수
-        // const itemsPerPage = 2;
+            // 페이지 번호가 유효한지 확인
+            if (currentPage < 1 || currentPage > totalPages) {
+                return;
+            }
 
-        // // 테이블과 페이지 번호를 관리할 함수
-        // function showPage(pageNumber) {
-        //     const tableRows = document.querySelectorAll('table tr');
-        //     const paginationDiv = document.getElementById('pagination');
-        //     const totalPages = ((tableRows.length - 1) / itemsPerPage) +1;
-        //     // const totalPages = Math.ceil((tableRows.length - 1) / itemsPerPage); // th 제외
-        //     console.log(tableRows);
-        //     // 페이지 번호가 유효한지 확인
-        //     if (pageNumber < 1 || pageNumber > totalPages) {
-        //         return;
-        //     }
+            // 모든 행 숨김
+            tableRows.forEach(row => row.style.display = 'none');
 
-        //     // 모든 행 숨김
-        //     tableRows.forEach(row => row.style.display = 'none');
+            // 헤더 행을 보이게 설정
+            tableRows[0].style.display = '';
 
-        //     // 헤더 행을 보이게 설정
-        //     tableRows[0].style.display = '';
+            // 현재 페이지에 해당하는 행들을 보이게 설정
+            const startIndex = (currentPage - 1) * postPerPage + 1;     // th 제외
+            const endIndex = startIndex + postPerPage;                 
+            for (let i = startIndex; i < endIndex && i < tableRows.length; i++) {
+                tableRows[i].style.display = '';
+            }
 
-        //     // 현재 페이지에 해당하는 행들을 보이게 설정
-        //     const startIndex = (pageNumber - 1) * itemsPerPage + 1; // th 제외
-        //     const endIndex = startIndex + itemsPerPage;
-        //     for (let i = startIndex; i < endIndex && i < tableRows.length; i++) {
-        //         tableRows[i].style.display = '';
-        //     }
+            // 페이지 번호 갱신
+            updatepaging(totalPages, currentPage, startPage, endPage);
+        }
 
-        //     // 페이지 번호 갱신
-        //     updatePagination(totalPages, pageNumber);
-        // }
+        // 페이지 번호 갱신 함수
+        function updatepaging(totalPages, currentPage, startPage, endPage) {
+            const pagingDiv = document.getElementById('paging');
+            pagingDiv.innerHTML = '';
 
-        // // 페이지 번호 갱신 함수
-        // function updatePagination(totalPages, currentPage) {
-        //     const paginationDiv = document.getElementById('pagination');
-        //     paginationDiv.innerHTML = '';
+            // 이전 페이지 버튼
+            const prevButton = createPageButton('<', currentPage - 1);
+            prevButton.classList.add('prev-page');
+            pagingDiv.appendChild(prevButton);
 
-        //     // 이전 페이지 버튼
-        //     const prevButton = createPageButton('이전', currentPage - 1);
-        //     paginationDiv.appendChild(prevButton);
+            // 페이지 번호 버튼
+            for (let i = startPage; i <= endPage; i++) {
+                if (i <= totalPages) {
+                const pageButton = createPageButton(i, i);
+                if (i === currentPage) {
+                    pageButton.classList.add('current-page');
+                }
+                pagingDiv.appendChild(pageButton);
+            }
+            }
 
-        //     // 페이지 번호 버튼
-        //     for (let i = 1; i <= totalPages; i++) {
-        //         const pageButton = createPageButton(i, i);
-        //         paginationDiv.appendChild(pageButton);
-        //     }
+            // 다음 페이지 버튼
+            const nextButton = createPageButton('>', currentPage + 1);
+            nextButton.classList.add('next-page');
+            pagingDiv.appendChild(nextButton);
+        }
 
-        //     // 다음 페이지 버튼
-        //     const nextButton = createPageButton('다음', currentPage + 1);
-        //     paginationDiv.appendChild(nextButton);
-        // }
+        // 페이지 번호 버튼 생성 함수
+        function createPageButton(text, currentPage) {
+            const pageButton = document.createElement('span');
+            pageButton.classList.add('page-item');
+            pageButton.textContent = text;
 
-        // // 페이지 번호 버튼 생성 함수
-        // function createPageButton(text, pageNumber) {
-        //     const pageButton = document.createElement('span');
-        //     pageButton.classList.add('page-item');
-        //     pageButton.textContent = text;
+            // 클릭 이벤트 설정
+            pageButton.addEventListener('click', () => showPage(currentPage));
 
-        //     // 클릭 이벤트 설정
-        //     pageButton.addEventListener('click', () => showPage(pageNumber));
+            return pageButton;
+        }
 
-        //     return pageButton;
-        // }
-
-        // // 초기 페이지 로드 시 첫 번째 페이지 표시
-        // showPage(1);
+        // 초기 페이지 로드 시 첫 번째 페이지 표시
+        showPage(1);
     </script>
 </body>
 </html>
