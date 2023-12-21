@@ -7,13 +7,12 @@ const PORT = process.env.SERVERPORT;
 
 const swaggerRouter = require("./routes/swagger.router");
 
-const signupRouter = require('./routes/signup.router');
-const errorRouter = require('./routes/error.routes');
-const mypageRouter = require('./routes/mypage.routes');
-const yongRouter = require('./routes/index');
-const wordRouter = require('./routes/words.routes');
-const adminRouter = require('./routes/admin.routes');
-
+const signupRouter = require("./routes/signup.router");
+const errorRouter = require("./routes/error.routes");
+const mypageRouter = require("./routes/mypage.routes");
+const yongRouter = require("./routes/index");
+const wordRouter = require("./routes/words.routes");
+const adminRouter = require("./routes/admin.routes");
 
 const db = require("./models/index");
 const app = express();
@@ -48,28 +47,26 @@ app.use(checkIdTokenMiddleware);
 app.use(errorRouter);
 app.use(signupRouter);
 app.use(yongRouter);
-app.use('/word', wordRouter);
-app.use('/admin', adminRouter);
+app.use("/word", wordRouter);
+app.use("/admin", adminRouter);
 
 // API 관련
 const serviceKey = process.env.CULTUREAPISERVICEKEY; // .env
 
-const bodyParser = require("body-parser");
-app.use(bodyParser.json());
+const key = "cc2b7e47274edbc8c38943c9c0dd105e0a026bc5ab7de6e0cb4ec27027a241e9";
 
 app.get("/cultureAPI", async (req, res) => {
-  const serviceUrl =
-    "http://api.kcisa.kr/openapi/service/rest/convergence/conver6?";
+  const { selectRegion, selectDtl } = req.query;
+  console.log("region>", selectRegion);
+  console.log("dtl>", selectDtl);
 
-  let URI = encodeURI("serviceKey") + "=" + serviceKey;
-  URI += "&" + encodeURI("numOfRows") + "=" + encodeURI("2");
+  const serviceUrl = "http://data4library.kr/api/extends/libSrch?";
+
+  let URI = encodeURI("authKey") + "=" + key;
   URI += "&" + encodeURI("pageNo") + "=" + encodeURI("1");
-  // URI += "&" + encodeURI("charge") + "=" + encodeURI("무료");
-
-  const charge = req.query.cost;
-  if (charge && charge === "무료") {
-    URI += "&" + encodeURI("charge") + "=" + encodeURI("무료");
-  }
+  URI += "&" + encodeURI("pageSize") + "=" + encodeURI("10");
+  URI += "&" + encodeURI("region") + "=" + encodeURI(selectRegion);
+  URI += "&" + encodeURI("dtl_region") + "=" + encodeURI(selectDtl);
 
   const url = serviceUrl + URI;
 
@@ -78,19 +75,7 @@ app.get("/cultureAPI", async (req, res) => {
   try {
     const result = await axios.get(url);
     const data = result.data;
-
-    // 사용자가 "무료"를 선택한 경우에만 데이터 필터링 적용
-    if (charge && charge === "무료") {
-      const filteredData = data.items.item.filter((item) => {
-        return item.charge && item.charge.includes("무료");
-      });
-
-      // 클라이언트에 필터링된 데이터 전송
-      res.json(filteredData);
-    } else {
-      // 클라이언트에 전체 데이터 전송
-      res.json(data);
-    }
+    res.json(data);
   } catch (err) {
     console.log(err);
   }

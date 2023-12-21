@@ -5,60 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="/static/css/style.css" />
     <link rel="stylesheet" href="/static/css/component.css" />
     <title>culture</title>
 
     <style>
-      a {
-        cursor: pointer;
-      }
-
-      .header {
-        width: 100%;
-        height: 150px;
-        background-color: white;
-        position: fixed;
-        display: flex;
-        z-index: 100;
-        border-bottom: 2px solid var(--color-black-1);
-        justify-content: space-around;
-        align-items: center;
-      }
-
       .main-content {
         display: flex;
-      }
-      .container {
-        position: relative;
-        display: flex;
-
-        flex-direction: column;
+        width: 80%;
+        /* background-color: pink; */
+        flex-wrap: wrap;
         align-items: center;
-
-        width: 100%;
-        height: 80%;
-        top: 180px;
-        /* background-color: var(--color-black-1); */
+        /* justify-content: space-evenly; */
       }
 
       .culture {
         background-color: white;
         border: 1px solid var(--color-black-1);
-        border-radius: 20px;
+        border-radius: var(--border-radius-medium);
         box-shadow: 1px 1px var(--color-black-1);
-        width: 400px;
-        height: 300px;
-
-        margin: 30px;
+        width: 30%;
+        height: 350px;
+        margin-left: 2rem;
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: column;
+        padding: 0.25rem;
+        /* align-items: center; */
       }
 
+      p {
+        margin-top: 0.25rem;
+      }
       .terms {
-        /* background-color: pink; */
-        width: 400px;
-        height: 50px;
+        width: 500px;
+        height: 80px;
         display: flex;
         align-items: center;
         justify-content: center;
+        background-color: var(--color-grey);
+        border-radius: var(--border-radius-medium);
+        box-shadow: var(--shadow);
+        margin-top: var(--space-2);
+      }
+
+      #regionForm > select {
+        width: 130px;
+        height: 30px;
+        font-size: 18px;
+        border-radius: var(--border-radius-small);
+
+        border: none;
+      }
+      button {
+        border-radius: var(--border-radius-small);
+        background-color: var(--color-orange-4);
+        color: white;
+        width: 60px;
+        height: 30px;
+        border: none;
+      }
+
+      span {
+        font-weight: 700;
       }
     </style>
   </head>
@@ -66,217 +75,160 @@
     <%- include("./component/header2")%>
 
     <main class="container">
+      <div class="space"></div>
+      <h1>전국 도서관 정보 안내</h1>
       <div class="terms">
-        <form action="/cultureAPI" name="termsForm" id="termsFrom">
-          <input type="text" name="" id="" />
-          <button onclick="">검색할 데이터 수 입력</button>
-        </form>
+        <form
+          action="/cultureAPI"
+          name="regionForm"
+          id="regionForm"
+          onsubmit="submitForm(event)"
+        >
+          <select name="region" id="region">
+            <option value="11">서울특별시</option>
+            <option value="21">부산광역시</option>
+            <option value="31">경기도</option>
+          </select>
+          <select name="dtl_region" id="dtl_region"></select>
 
-        <button onclick="submit()">불러오기</button>
-        <button onclick="result()">불러오기</button>
+          <button type="submit" onclick="submitForm(event)">불러오기</button>
+        </form>
       </div>
 
-      <section class="main-content">
-        <div class="culture"></div>
-      </section>
+      <section class="main-content"></section>
     </main>
 
     <script>
-      // async function submit() {
-      //   try {
-      //     const response = await fetch("/cultureAPI");
-      //     const data = await response.json();
-      //     // const itemdata
+      const regionForm = document.forms["regionForm"];
+      const region = regionForm.querySelector("#region");
+      const dtl_region = regionForm.querySelector("#dtl_region");
 
-      //     // data 객체 내의 기대하는 속성이 존재하는지 확인
-      //     if (data && data.items) {
-      //       result(data.items.item);
-      //     } else {
-      //       console.error("예상하지 못한 데이터 구조:", data);
-      //     }
-      //   } catch (error) {
-      //     console.error(error);
-      //   }
-      // }
+      function option() {
+        dtl_region.innerHTML = "";
+        if (region.value === "11") {
+          const newOption1 = document.createElement("option");
+          newOption1.value = "11010";
+          newOption1.textContent = "종로구";
+          dtl_region.add(newOption1);
 
-      // function result(items) {
-      //   const cultureDiv = document.querySelector(".main-content");
+          const newOption2 = document.createElement("option");
+          newOption2.value = "11190";
+          newOption2.textContent = "영등포구";
+          dtl_region.add(newOption2);
 
-      //   if (Array.isArray(items) && items.length > 0) {
-      //     for (let i = 0; i < items.length; i++) {
-      //       const item = items[i];
-      //       const cultureItemDiv = document.createElement("div");
-      //       cultureItemDiv.classList.add("culture");
+          const newOption3 = document.createElement("option");
+          newOption3.value = "11140";
+          newOption3.textContent = "마포구";
+          dtl_region.add(newOption3);
+        } else if (region.value === "21") {
+          const newOption1 = document.createElement("option");
+          newOption1.value = "21090";
+          newOption1.textContent = "해운대구";
+          dtl_region.add(newOption1);
 
-      //       if (item.title) {
-      //         cultureItemDiv.innerHTML = `<p>Title: ${item.title}</p>`;
-      //       } else {
-      //         cultureItemDiv.textContent = "데이터 오류";
-      //       }
+          const newOption2 = document.createElement("option");
+          newOption2.value = "21110";
+          newOption2.textContent = "금정구";
+          dtl_region.add(newOption2);
 
-      //       cultureDiv.appendChild(cultureItemDiv);
-      //     }
-      //   } else {
-      //     console.error("잘못된 데이터 형식:", items);
-      //     cultureDiv.innerHTML = "데이터를 불러오지 못했습니다.";
-      //   }
-      // }
+          const newOption3 = document.createElement("option");
+          newOption3.value = "21050";
+          newOption3.textContent = "동래구";
+          dtl_region.add(newOption3);
+        }
+      }
 
-      // 한국문화정보원_전국 문화 여가 활동 시설(클래스)
-      // async function submit() {
-      //   try {
-      //     const response = await fetch("/cultureAPI");
-      //     const data = await response.json();
+      region.addEventListener("change", option);
+      option();
 
-      //     if (
-      //       data &&
-      //       data.response &&
-      //       data.response.items &&
-      //       data.response.items.item
-      //     ) {
-      //       result(data.response.items.item);
-      //     } else {
-      //       console.error("잘못된 데이터 구조:", data);
-      //       throw new Error("잘못된 데이터 구조");
-      //     }
-      //   } catch (error) {
-      //     console.error(error);
-      //   }
-      // }
+      function submitForm(event) {
+        event.preventDefault();
 
-      // function result(items) {
-      //   const cultureDiv = document.querySelector(".main-content");
+        const selectRegion = region.value;
+        const selectDtl = dtl_region.value;
 
-      //   if (Array.isArray(items) && items.length > 0) {
-      //     for (let i = 0; i < items.length; i++) {
-      //       const item = items[i];
-      //       const cultureItemDiv = document.createElement("div");
-      //       cultureItemDiv.classList.add("culture");
+        fetch(
+          `/cultureAPI?selectRegion=${selectRegion}&selectDtl=${selectDtl}`,
+          {
+            method: "get",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            // 서버로부터 받은 데이터를 처리
+            console.log("data >", data);
+            apiData(data);
+          })
+          .catch((error) => {
+            console.error("Error fetching data:", error);
+          });
+        return false;
+      }
 
-      //       if (item.title) {
-      //         cultureItemDiv.innerHTML = `<p>Title: ${item.title}</p>`;
-      //       } else {
-      //         cultureItemDiv.textContent = "데이터 오류";
-      //       }
+      function apiData(data) {
+        // console.log("data2>", data);
 
-      //       cultureDiv.appendChild(cultureItemDiv);
-      //     }
-      //   } else {
-      //     console.error("잘못된 데이터 형식:", items);
-      //     cultureDiv.innerHTML = "데이터를 불러오지 못했습니다.";
-      //   }
-      // }
+        // xml 데이터 변환
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(data, "text/xml");
 
-      // window.onload = submit;
+        const libName = xmlDoc.getElementsByTagName("libName");
+        const libAddress = xmlDoc.getElementsByTagName("address");
+        const libPage = xmlDoc.getElementsByTagName("homepage");
+        const libClose = xmlDoc.getElementsByTagName("closed");
+        const libTime = xmlDoc.getElementsByTagName("operatingTime");
 
-      // async function submit() {
-      //   const forms = document.forms["termsFrom"];
-      //   const period = forms.date.value;
-      //   // const location = forms.location.value;
-      //   const charge = forms.cost.value;
+        // 각 데이터 길이 확인
+        console.log("libName length:", libName.length);
+        console.log("libAddress length:", libAddress.length);
+        console.log("libPage length:", libPage.length);
+        console.log("libClose length:", libClose.length);
+        console.log("libTime length:", libTime.length);
+        try {
+          const parser = new DOMParser();
+          const xmlDoc = parser.parseFromString(data, "text/xml");
 
-      //   try {
-      //     const respons = await fetch(
-      //       `/cultureAPI?period=${period}&charge=${charge}`
-      //     );
-      //     const data = await response.json();
-      //     displayData(data);
-      //   } catch (error) {
-      //     console.error(error);
-      //   }
-      // }
+          const libName = xmlDoc.getElementsByTagName("libName");
+          const libAddress = xmlDoc.getElementsByTagName("address");
+          const libPage = xmlDoc.getElementsByTagName("homepage");
+          const libClose = xmlDoc.getElementsByTagName("closed");
+          const libTime = xmlDoc.getElementsByTagName("operatingTime");
 
-      // const response = await fetch("/cultureAPI", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({ preiod, lociton, cost }),
-      // });
+          const dataElem = document.querySelector(".main-content");
+          dataElem.innerHTML = "";
 
-      // const data = await response.json();
-      // displayData(data);
+          for (let i = 0; i < libName.length; i++) {
+            const name = libName[i].textContent || "N/A";
+            const address = libAddress[i].textContent || "N/A";
+            const page = libPage[i].textContent || "N/A";
+            const close = libClose[i].textContent || "N/A";
+            const time = libTime[i].textContent || "N/A";
 
-      // console.log({
-      //   period,
-      //   charge,
-      // });
+            const libraryDiv = document.createElement("div");
+            const libraryInfo = document.createElement("p");
+            libraryDiv.innerHTML =
+              `<p>-도서관명-</p>` +
+              `<p> ${name} </p>` +
+              `<p>-주소-</p>` +
+              `<p>${address}</p>` +
+              `<p>-홈페이지-</p>` +
+              `<p><a href=${page}> 홈페이지 바로가기 </a></p>` +
+              `<p>-휴무일-</p>` +
+              `<p>${close}</p>` +
+              `<p>-영업시간-</p>` +
+              `<p>${time}</p>`;
 
-      // async function result() {
-      //   const cost = document.getElementById("cost");
-      //   const costValue = cost.value;
-      //   try {
-      //     const response = await fetch(`/cultureAPI?charge=${costValue}`);
-      //     const data = await response.json();
-      //     displayData(data);
-
-      //     console.log(data);
-      //   } catch (error) {
-      //     console.error(error);
-      //   }
-      // }
-
-      // function displayData(data) {
-      //   const cultureDivs = document.querySelectorAll(".main-content .culture");
-
-      //   cultureDivs.forEach((div) => {
-      //     div.innerHTML = "";
-      //   });
-
-      //   const items = data.response?.body?.items?.item;
-
-      //   if (items && items.length > 0) {
-      //     items.forEach((item, index) => {
-      //       const itemDiv = document.createElement("div");
-
-      //       const titleDiv = document.createElement("div");
-      //       titleDiv.textContent = `Title: ${item.title}`;
-      //       itemDiv.appendChild(titleDiv);
-
-      //       // period
-      //       const periodDiv = document.createElement("div");
-      //       periodDiv.textContent = `Period: ${item.period}`;
-      //       itemDiv.appendChild(periodDiv);
-
-      //       // time
-      //       const timeDiv = document.createElement("div");
-      //       timeDiv.textContent = `Time: ${item.time}`;
-      //       itemDiv.appendChild(timeDiv);
-
-      //       // url
-      //       const urlDiv = document.createElement("div");
-      //       urlDiv.innerHTML = `<a href="${item.url}" target="_blank">링크 바로가기 </a>`;
-      //       itemDiv.appendChild(urlDiv);
-
-      //       // grade
-      //       const gradeDiv = document.createElement("div");
-      //       gradeDiv.textContent = `Grade: ${item.grade}`;
-      //       itemDiv.appendChild(gradeDiv);
-
-      //       // creator
-      //       const creatorDiv = document.createElement("div");
-      //       creatorDiv.textContent = `Creator: ${item.creator}`;
-      //       itemDiv.appendChild(creatorDiv);
-
-      //       // charge
-      //       const chargeDiv = document.createElement("div");
-      //       chargeDiv.textContent = `Charge: ${item.charge}`;
-      //       itemDiv.appendChild(chargeDiv);
-
-      //       // // img;
-      //       const imgDiv = document.createElement("div");
-      //       imgDiv.innerHTML = `<img src="${item.referenceIdentifier}" alt="">`;
-      //       itemDiv.appendChild(imgDiv);
-
-      //       cultureDivs[index].appendChild(itemDiv);
-      //     });
-      //   } else {
-      //     // 검색 결과가 없는 경우 메시지 표시
-      //     cultureDivs.forEach((div) => {
-      //       div.textContent = "검색 결과가 없습니다.";
-      //     });
-      //   }
-      // }
+            libraryDiv.appendChild(libraryInfo);
+            libraryDiv.classList.add("culture");
+            dataElem.appendChild(libraryDiv);
+          }
+        } catch (error) {
+          console.error("Error parsing or displaying data:", error);
+        }
+      }
     </script>
   </body>
 </html>
