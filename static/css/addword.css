@@ -19,14 +19,14 @@
 
 .add-text {
     padding: 10px;
-    width: 200px;
+    width: 250px;
     border: 1px solid #ddd;
     border-radius: 5px;
     margin-right: 10px;
 }
 
 #mean {
-    width: 400px;
+    width: 500px;
 }
 
 .add-btn {
@@ -54,7 +54,7 @@ th, td {
 
 th {
     /* background-color: #4CAF50; */
-    background-color: var(--color-orange-5);
+    background-color: var(--color-orange-3);
     /* color: white; */
     color: #333;
 }
