@@ -99,7 +99,11 @@ async function signup(req, res) {
 }
 
 function getLogin(req, res) {
-  res.render("user/login");
+  if(!req.session.accessToken) {
+    res.render("user/login");
+  } else {
+    res.redirect('/401');
+  }
 }
 
 async function login(req, res) {
