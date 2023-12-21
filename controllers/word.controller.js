@@ -30,8 +30,20 @@ async function addWord (req, res, next) {
       
     }
 
+async function getKeyboard(req, res, next) {
+    const words = await ConfirmWords.findAll();
+    // for (const word of words) {
+    //     console.log(word.dataValues);
+    // }
+    let dataVal = words.map(item => item.dataValues);
+    console.log(dataVal);
+
+
+    res.render('keyboard/keyboard', {words: words});
+}
 
 module.exports = {
     getAddWord : getAddWord,
-    addWord : addWord
+    addWord : addWord,
+    getKeyboard: getKeyboard
 }
