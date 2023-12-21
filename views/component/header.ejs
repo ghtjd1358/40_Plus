@@ -29,6 +29,7 @@
   </ul>
   <script>
     async function logout() {
+      event.preventDefault();
       const res = await axios({
         method: "post",
         url: "/logout",
