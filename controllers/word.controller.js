@@ -32,14 +32,11 @@ async function addWord (req, res, next) {
 
 async function getKeyboard(req, res, next) {
     const words = await ConfirmWords.findAll();
-    // for (const word of words) {
-    //     console.log(word.dataValues);
-    // }
+
     let dataVal = words.map(item => item.dataValues);
-    console.log(dataVal);
+    dataVal.sort(() => Math.random() - 0.5);
 
-
-    res.render('keyboard/keyboard', {words: words});
+    res.render('keyboard/keyboard', {words: dataVal});
 }
 
 module.exports = {
