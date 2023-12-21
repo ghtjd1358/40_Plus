@@ -12,6 +12,7 @@ async function checkAuthStatus(req, res, next) {
 
     // 세션에 있는 access토큰 locals로 불러오기
     res.locals.accessToken = req.session.accessToken;
+    res.locals.userid = req.session.userid;
     try {
         // access token이 유효한지 검사
         checkAccessToken = checkJwt.checkJwt(req.session.accessToken);
@@ -21,6 +22,10 @@ async function checkAuthStatus(req, res, next) {
 
         // access token이 서버에서 발행한 것이 아니거나 유효기간이 만료된 경우
     } catch(err) {
+        req.session.userid = '';
+        res.locals.userid = req.session.userid;
+        req.session.accessToken = '';
+        res.locals.userid = req.session.accessToken;
         try {
             // 처음 로그인 해서 session에 access token이 없거나 (로그인하면 refresh token만 줌.) access token이 expire 된 경우
             if (err.message === 'jwt must be provided' || err.message === 'jwt expired') {
@@ -36,7 +41,8 @@ async function checkAuthStatus(req, res, next) {
                     const newAccessToken = checkJwt.makeAccessJwt(existingUser.userid);
                     req.session.accessToken = newAccessToken;
                     res.locals.accessToken = newAccessToken;
-                    res.locals.userid = existingUser.userid;
+                    req.session.userid = existingUser.userid;
+                    res.locals.userid = req.session.userid;
                 }
                 return next();
             } 

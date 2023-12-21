@@ -1,7 +1,7 @@
 <header class="header">
   <div class="logo">
     <a href="/">
-      <img src="./testlogo.png" alt="" class="logo" />
+      <img src="/static/css/test3.png" alt="" class="logo" />
     </a>
   </div>
 
@@ -20,11 +20,21 @@
     </li>
     <li>
       <% if(locals.accessToken) {%>
-      <a href="/"> 마이페이지 </a>
+      <a href="/mypage"> 마이페이지 </a>
       <%} else { %>
 
       <a href="/signup"> 회원가입</a>
       <%}%>
     </li>
   </ul>
+  <script>
+    async function logout() {
+      const res = await axios({
+        method: "post",
+        url: "/logout",
+      });
+
+      location.href = "/";
+    }
+  </script>
 </header>

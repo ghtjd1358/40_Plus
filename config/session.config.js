@@ -1,12 +1,13 @@
 const session = require('express-session');
 const MySQLStore = require('express-mysql-session');
 const MySQLStoreSession = MySQLStore(session);
+require('dotenv').config();
 
 const options = {
-  host: '3.34.122.61',
-  port: 3306,
-  user: 'user',
-  password: 'hypeboy',
+  host: process.env.SERVERIPNO,
+  port: process.env.MYSQLPORT,
+  user: process.env.MYSQLUSERNAME,
+  password: process.env.MYSQLUSERPASSWORD,
   database: '40'
 }
 
@@ -14,7 +15,7 @@ const sessionStore = new MySQLStoreSession(options);
 
 function getSessionConfig() {
   return {
-    secret: "추후 env 예정",
+    secret: process.env.SECRETKEY,
     resave: false,
     saveUninitialized: false,
     store : sessionStore,

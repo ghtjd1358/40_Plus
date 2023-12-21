@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+      integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="stylesheet" href="/static/css/component.css" />
+
+    <style>
+      .mainContent {
+        width: 80%;
+        display: flex;
+      }
+
+      .mainContent > a {
+        width: 100%;
+        height: 100%;
+      }
+
+      .subContent {
+        margin-top: 2%;
+        /* background-color: red; */
+        width: 80%;
+        display: flex;
+      }
+
+      .content-box {
+        background-color: white;
+        /* border: 1px solid var(--color-black-1); */
+        border-radius: var(--border-radius-medium);
+        /* box-shadow: 1px 1px var(--color-black-1); */
+
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        position: relative;
+      }
+
+      .menu {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-radius: var(--border-radius-medium);
+      }
+
+      .menu:hover {
+        background-color: var(--color-orange-4);
+      }
+
+      .computer {
+        margin: 0 2% 0 0;
+        width: 50%;
+        height: 300px;
+      }
+
+      .content2 {
+        width: 50%;
+        height: 300px;
+      }
+
+      .content3 {
+        width: 52.5%;
+        margin: 0 2% 0 0;
+        height: 300px;
+      }
+
+      .content4 {
+        width: 25%;
+        margin: 0 2% 0 0;
+        height: 300px;
+      }
+
+      .content5 {
+        width: 25%;
+        height: 300px;
+      }
+
+      .mainHeader {
+        font-size: 32px;
+        margin-left: 3px;
+        font-weight: 700;
+      }
+
+      /* 자주 묻는 질문 */
+      .question {
+        width: 80%;
+        position: relative;
+      }
+      .collapsible {
+        /* background-color: pink; */
+        color: #444;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 18px;
+        border-radius: 5px;
+        margin-top: 1rem;
+      }
+      .active,
+      .collapsible:hover {
+        background-color: #ccc;
+        border-radius: 5px 5px 0 0;
+      }
+      .content {
+        padding: 0 18px;
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+      }
+
+      .collapsible:after {
+        content: "\2303";
+        transform: rotate(180deg);
+        border-radius: 0px;
+        font-size: 25px;
+        line-height: 25px;
+        float: right;
+        margin-left: 5px;
+      }
+      .active:after {
+        content: "\2303";
+        transform: rotate(360deg);
+        font-size: 25px;
+        line-height: 25px;
+        margin-top: 5px;
+      }
+
+      .line {
+        width: 80%;
+        height: 1px;
+        background-color: var(--color-black-1);
+        margin: 5% 0;
+        z-index: 1;
+      }
+
+      footer {
+        position: relative;
+      }
+    </style>
+    <title>main page</title>
+  </head>
+  <body>
+    <!-- header -->
+    <header>
+      <nav class="nav">
+        <div class="headerContainer">
+          <!-- 로고 -->
+          <a href="/index.html"
+            ><img src="/static/css/logo.png" alt="" class="logo"
+          /></a>
+
+          <!-- 헤더 nav -->
+          <ul class="navInner">
+            <li class="navi-li">
+              <a href="#">컴퓨터</a>
+
+              <ul class="nav-ul">
+                <li><a href="">타자연습</a></li>
+                <li><a href="">키보드</a></li>
+                <li><a href="">단축키</a></li>
+              </ul>
+            </li>
+
+            <li class="navi-li">
+              <a href="#">모바일</a>
+              <ul class="nav-ul">
+                <li><a href="">카카오톡 사용</a></li>
+                <li><a href="">인터넷 결제</a></li>
+                <li><a href="">소프트웨어</a></li>
+              </ul>
+            </li>
+
+            <li class="navi-li">
+              <a href="#">생할/편의</a>
+              <ul class="nav-ul">
+                <li><a href="">키오스크</a></li>
+                <li><a href="">티켓팅</a></li>
+              </ul>
+            </li>
+
+            <li class="navi-li">
+              <a href="#">문화/여가</a>
+              <ul class="nav-ul">
+                <li><a href="">무료 구청 교육</a></li>
+                <li><a href=""> 동네 문화 생활</a></li>
+                <li><a href="">도서관 영업 시간</a></li>
+              </ul>
+            </li>
+          </ul>
+
+          <!-- 로그인 -->
+          <ul class="user">
+            <li><a href="">이용 안내</a></li>
+            <li>
+              <% if(locals.accessToken) {%>
+              <!-- <button id="logout" onclick="logout()">로그아웃</button> -->
+              <a href="" onclick="logout()" id="logout">로그아웃</a>
+
+              <%} else { %>
+              <a href="/login">로그인</a>
+              <%}%>
+            </li>
+            <li>
+              <% if(locals.accessToken) {%>
+              <a href="/mypage"> 마이페이지 </a>
+              <%} else { %>
+
+              <a href="/signup"> 회원가입</a>
+              <%}%>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- visual -->
+      <div class="visual">
+        <div class="visualText">
+          <h1>일상 속 디지털기기 사용법</h1>
+          <br />
+          <p>어렵게 느껴졌던 일상 속 디지털 기기, 이제 쉽게 체험해 보세요!</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- 키오스크 -->
+    <!-- 키오스크 사용법 -->
+
+    <!-- contianer로 교체 -->
+    <section class="container up">
+      <main class="container">
+        <section class="mainContent">
+          <div class="content-box computer">
+            <a href="/computer" class="menu">
+              <img src="" alt="" />
+              컴퓨터
+            </a>
+          </div>
+          <div class="content-box content2">
+            <a href="" class="menu"> <img src="" alt="" />모바일</a>
+          </div>
+        </section>
+
+        <section class="subContent">
+          <div class="content-box content3">
+            <a href="" class="menu"> <img src="" alt="" />생활 편의 </a>
+          </div>
+          <div class="content-box content4">
+            <a href="/culture" class="menu"> <img src="" alt="" />문화 여가</a>
+          </div>
+          <div class="content-box content5">
+            <a href="/community" class="menu"> <img src="" alt="" />커뮤니티</a>
+          </div>
+        </section>
+
+        <div class="line"></div>
+
+        <div class="question">
+          <h2>자주 묻는 질문</h2>
+          <button type="button" class="collapsible btn">
+            컴퓨터 메뉴에선 어떤걸 할 수 있나요?
+          </button>
+          <div class="content">
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore
+              natus, non, aperiam possimus architecto iste, recusandae
+              consectetur harum at totam numquam illum rem sapiente! Molestias
+              numquam suscipit obcaecati adipisci inventore.
+            </p>
+          </div>
+
+          <button type="button" class="collapsible btn">
+            모바일 메뉴에선 어떤걸 할 수 있나요?
+          </button>
+          <div class="content">
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore
+              natus, non, aperiam possimus architecto iste, recusandae
+              consectetur harum at totam numquam illum rem sapiente! Molestias
+              numquam suscipit obcaecati adipisci inventore.
+            </p>
+          </div>
+
+          <button type="button" class="collapsible btn">
+            진행 가능한 문화 생활을 어디서 보나요?
+          </button>
+          <div class="content">
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Labore
+              natus, non, aperiam possimus architecto iste, recusandae
+              consectetur harum at totam numquam illum rem sapiente! Molestias
+              numquam suscipit obcaecati adipisci inventore.
+            </p>
+          </div>
+        </div>
+
+        <div class="line"></div>
+
+        <div class="footer-nav-box">
+          <ul class="foorter-nav">
+            <li><a href="">컴퓨터</a></li>
+            <li><a href="">모바일</a></li>
+            <li><a href="">생활</a></li>
+            <li><a href="">문화 여가</a></li>
+            <li><a href="">커뮤니티</a></li>
+          </ul>
+        </div>
+      </main>
+    </section>
+    <%- include('./component/footer')%>
+    <script>
+      const coll = document.getElementsByClassName("collapsible");
+      let i;
+
+      for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function () {
+          this.classList.toggle("active");
+          var content = this.nextElementSibling;
+          if (content.style.maxHeight) {
+            content.style.maxHeight = null;
+          } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+          }
+        });
+      }
+    </script>
+
+    <script>
+      async function logout() {
+        const res = await axios({
+          method: "post",
+          url: "/logout",
+        });
+
+        location.href = "/";
+      }
+    </script>
+    <script src="/static/css/script.js"></script>
+  </body>
+</html>

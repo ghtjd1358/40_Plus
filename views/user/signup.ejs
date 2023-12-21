@@ -43,30 +43,49 @@
         width: 500px;
         border-radius: var(--border-radius-small);
       }
+
+      .signupBox {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* background-color: pink; */
+        margin-top: var(--space-3);
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        /* justify-content: center; */
+        align-items: center;
+      }
     </style>
   </head>
   <body>
-    <%- include("./component/header")%>
+    <%- include("../component/header")%>
 
     <main class="container">
       <div class="signupContent">
-        <div>
-          <p id="result"></p>
+        <div class="signupBox">
+          <form name="signup">
+            <input type="text" id="userid" name="userid" placeholder="id" />
+            <button type="button" id="valid-check">중복검사</button>
+            <span id="valid-check-result"></span>
+            <br />
+            <input type="password" name="password" placeholder="pw" /><br />
+            <input
+              type="password"
+              name="confirm-password"
+              placeholder="비밀번호 확인"
+            /><br />
+
+            <input type="text" placeholder="이름" name="name" /><br />
+
+            <div>
+              <p id="result"></p>
+            </div>
+            <button type="button" id="signup" class="btnLarge">회원가입</button>
+          </form>
         </div>
-        <form name="signup">
-          <input type="text" id="userid" name="userid" placeholder="id" />
-          <button type="button" id="valid-check">중복검사</button>
-          <span id="valid-check-result"></span>
-          <br />
-          <input type="password" name="password" placeholder="pw" /><br />
-          <input
-            type="password"
-            name="confirm-password"
-            placeholder="비밀번호 확인"
-          /><br />
-          <input type="text" placeholder="이름" name="name" /><br />
-          <button type="button" id="signup" class="btnLarge">회원가입</button>
-        </form>
       </div>
     </main>
   </body>
