@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -287,126 +287,16 @@
     </div>
     
     <script>
-        // ----------------------- 구 분 선 ----------------------- 
-        // (초기) 키 눌렀을 때 이벤트
-        window.addEventListener("keydown", (e) => {
-            handleKeyEvents(e, true);
-        });
+        let word = [];
+        let mean = [];
+        '<% for (const wor of words) {%>'
+            word.push('<%=wor.word%>');
+            mean.push('<%=wor.meaning%>');
+        '<%}%>'
 
-        // (초기) 키 뗐을 때 이벤트
-        window.addEventListener("keyup", (e) => {
-            handleKeyEvents(e, false);
-        });
+
+
         
-        // 키 이벤트를 처리하는 함수 (키 누를때마다 색 바뀌기)
-        function handleKeyEvents(e, isKeyDown) {
-            // console.log(`Key event: key=${e.key}, code=${e.code}, isKeyDown=${isKeyDown}`);
-            
-            // 일반 키 + 특수 키 (통일)=> e.code 코드 값으로 받기.
-            // const code = document.getElementById(e.code);
-            const codes = document.querySelectorAll(`.${e.code}`);
-            for (const code of codes) {
-                if (code) {
-                    if (isKeyDown) {
-                        code.classList.add("changed");
-                    } else {
-                        code.classList.remove("changed");
-                    }
-                }
-            }
-        }
-        // ----------------------- 구 분 선 -----------------------
-        // shift 키가 눌렸을 때 쌍모음 이벤트
-        document.addEventListener('keydown', function (event) {
-            if (event.key === 'Shift') {
-                document.body.classList.add('shift-pressed');
-            }
-        });
-
-        document.addEventListener('keyup', function (event) {
-            if (event.key === 'Shift') {
-                document.body.classList.remove('shift-pressed');
-            }
-        });
-        // ----------------------- 구 분 선 -----------------------
-        // 키보드 레이아웃 전환 함수
-        function toggleKeyboard() {
-            const hgKeyboard = document.getElementById('hgkeyboard');
-            const egKeyboard = document.getElementById('egkeyboard');
-            const toggleButton = document.getElementById('toggleKeyboard');
-            
-            // "한글 자판"이 보이면 "영어 자판"으로, 그 반대도 마찬가지
-            if (hgKeyboard.style.display !== 'none') {
-                hgKeyboard.style.display = 'none';
-                egKeyboard.style.display = 'block';
-                toggleButton.innerText = '한글';
-                
-            } else {
-                hgKeyboard.style.display = 'block';
-                egKeyboard.style.display = 'none';
-                toggleButton.innerText = '영문자';
-            }
-        }
-        // ----------------------- 구 분 선 -----------------------
-        // 추가 부분: 과일 배열 및 현재 인덱스 변수
-        const word = ["cook", "알잘딱깔센", "킹받네", "꾸안꾸"];
-        let wordIndex = 0;
-        const mean = ["'알아서 잘 딱 깔끔하고 센스있게'의 줄임말", "'열받네'에 킹을 더해 의미를 강조한 단어'", "'꾸민듯 안꾸민듯'의 줄임말"]
-        let meanIndex = 0;
-
-        // 초기화 함수: 텍스트 설정 및 현재 인덱스 초기화
-        function initializeText() {;
-            textToType.innerText = word[wordIndex]
-            userInput.value = '';
-            meanByText.innerText = mean[meanIndex]
-            result.innerText = '';
-            userInput.classList.remove('error');
-        }
-        // 페이지 로드 시 초기화 호출
-        window.onload = initializeText;
-        
-        //  타자 검정
-        // const originalText = "한글 타자 검정을 시작합니다. 아무내용이나 써보세요"; //정답
-        const textToType = document.getElementById('text-to-type');
-        const userInput = document.getElementById('user-input');
-        const result = document.getElementById('result');
-        const enters = document.querySelectorAll('Enter');
-        const meanByText = document.getElementById('mean-by-text');
-
-        function checkTyping() {
-            const userTypedText = userInput.value;  // 유저가 입력하는 값.
-            const correctText = word[wordIndex];   // 정답 ex)사과
-            const accuracy = Math.min((userTypedText.length / correctText.length) * 100, 100); // 최대 100%로 제한
-
-            if (userTypedText === correctText) {
-                result.innerText = '정확도: 100% \n\n"Enter"를 눌러 다음 문제를 진행하세요!';
-                for (const enter of enters) {
-                    enter.classList.add('correct');
-                }
-                userInput.classList.remove('error');
-                wordIndex = (wordIndex + 1) % word.length; // 정확하게 입력하면 다음 과일로 이동
-                meanIndex = (meanIndex + 1) % mean.length; // 
-            } else if (correctText.startsWith(userTypedText)) {
-                result.innerText = `정확도: ${accuracy.toFixed(2)}%`;
-                userInput.classList.remove('error');
-            } else {
-                result.innerText = `정확도: ${accuracy.toFixed(2)}%`;
-                for (const enter of enters) {
-                    enter.classList.remove('correct');
-                }
-                userInput.classList.add('error');
-            }
-        }
-        // Enter 키 이벤트 처리
-        userInput.addEventListener('keyup', function(event) {
-            if (event.key === 'Enter') {
-                initializeText(); // 엔터 키 누르면 초기화
-                for (const enter of enters) {
-                    enter.classList.remove('correct');
-                }
-                
-            }
-        });
         </script>
         <script src="/static/javaScript/keyboard.js"></script> 
 </body>
