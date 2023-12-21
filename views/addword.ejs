@@ -4,134 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="/static/css/component.css">
+    <link rel="stylesheet" href="/static/css/addword.css">
     <title>단어 추가</title>
-    <style>
-        #add_body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            /* display: block; */
-            display: flex;
-            justify-content: center;
-            /* align-items: center; */
-        }
-        
-        /* 입력 칸 div */
-        .add_C {
-            display: flex;
-            display: block;
-            justify-content: center;
-            text-align: center;
-            margin: 20px;
-            border: 1px solid black;
-            
-        }
-
-        .add-text {
-            padding: 10px;
-            width: 150px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin-right: 10px;
-        }
-
-        /* DB 표 */
-        table {
-            width: 80vw;
-            border-collapse: collapse;  /* 표 테두리 단선으로 */
-            background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        th, td {
-            padding: 15px;
-            border-bottom: 1px solid #ddd;
-            position: relative;
-        }
-
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        th:not(:first-child)::before,
-        td:not(:first-child)::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 1px;
-            background-color: #ddd;
-        }
-
-        /* data 사이 간격 */
-        th:not(:last-child)::after,
-        td:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            right: 0;
-            top: 0;
-            height: 100%;
-            width: 1px;
-            background-color: #ddd;
-        }
-
-        tr:hover {
-            background-color: #f5f5f5;
-        }
-
-        
-    </style>
 </head>
 <body id="add_body">
-    <form name="addword">
-        <div class="add_C">
-            <input type="text" class="add-text" name="name" id="name" placeholder="단어 이름">
-            <input type="text" class="add-text" name="mean" id="mean" placeholder="해설"> <br>
-            <button id="addWord" type="button">등록</button>
-        </div>
-        <p id="result"></p>
-    </form>
-    <table>
-        <% if (words) {%>
-        <% for (const word of words) {%>
-        <tr>
-            <th> <%= word.number %></th>
-            <th><%= word.word%></th>
-            <th><%= word.meaning %></th>
-            <th><%= word.name %></th>
-            <th><%= word.createdAt %></th>
-        </tr>
-        <% } %>
-        <% } else{%>
+    <div>
+        <form name="addword">
+            <div class="add-C">
+                <input type="text" class="add-text" name="name" id="name" placeholder="단어 이름"> <br>
+                <input type="text" class="add-text" name="mean" id="mean" placeholder="해설"> <br>
+                <button id="addWord" class="add-btn" type="button">등록</button>
+            </div>
+            <p id="result"></p>
+        </form>
+        <table>
             <tr>
-                <th>아직 등록된 단어가 없습니다.</th>
+                <th class="th-number">번호</th>
+                <th class="th-word">단어 명</th>
+                <th class="th-meaning">단어 뜻</th>
+                <th class="th-username">유저명</th>
+                <th class="th-time">등록일</th>
+            </tr>
+            <% if (words) {%>
+            <% for (const word of words) {%>
+                
+            <tr>
+                <td ><%= word.number %></td>
+                <td ><%= word.word%></td>
+                <td ><%= word.meaning %></td>
+                <td ><%= word.name %></td>
+                <td><%= word.createdAt %></td>
             </tr>
             <% } %>
-    </table>
-  <script>
-    const addWordButtonElement = document.querySelector('#addWord');
-    const resultElement = document.querySelector('#result');
-    const form = document.forms['addword'];
-    async function addWord() {
-        const res = await axios({
-            url: '/word/addword',
-            method: 'post',
-            data: {
-                name: form.name.value,
-                mean: form.mean.value
-            }
-        })
-        resultElement.textContent = res.data.msg;
-        form.reset();
-        
-    }
-    addWordButtonElement.addEventListener('click', addWord);
-  </script>
+            <% } else{%>
+            <tr>
+                <td>아직 등록된 단어가 없습니다.</td>
+            </tr>
+            <% } %>
+        </table>
+        <div class="paging" id="paging">
+            <!-- 페이징 추가 될 공간 -->
+        </div>
+    </div>
+    <script src="/static//javaScript/addword.js"></script>
 </body>
 </html>
