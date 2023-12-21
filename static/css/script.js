@@ -1,7 +1,6 @@
 // nav bar
 const nav = document.querySelector(".nav");
 const navUls = document.querySelectorAll(".nav-ul");
-console.log(navUls);
 
 window.addEventListener("scroll", fixNav);
 
@@ -9,10 +8,6 @@ function fixNav() {
   const scrolled = window.scrollY > nav.offsetHeight + 150;
   // nav.classList.add('active') : nav.classList.remove('active')
   nav.classList.toggle("active", scrolled);
-
-  navUls.forEach((navUl) => {
-    navUl.classList.toggle("active", scrolled);
-  });
 }
 
 //--------------------------------------------------

@@ -1,40 +1,70 @@
-<header class="header">
-  <div class="logo">
-    <a href="/">
-      <img src="/static/css/test3.png" alt="" class="logo" />
-    </a>
-  </div>
+<header>
+  <header>
+    <nav class="nav header2">
+      <div class="headerContainer">
+        <!-- 로고 -->
+        <a href="/"><img src="/static/css/logo.png" alt="" class="logo" /></a>
 
-  <div class="mainHeader"></div>
+        <!-- 헤더 nav -->
+        <ul class="navMenu">
+          <li class="navi-li headerli">
+            <a href="#">컴퓨터</a>
+          </li>
 
-  <ul class="nav">
-    <li><a href="">이용 안내</a></li>
-    <li>
-      <% if(locals.accessToken) {%>
-      <!-- <button id="logout" onclick="logout()">로그아웃</button> -->
-      <a href="" onclick="logout()" id="logout">로그아웃</a>
+          <li class="navi-li headerli">
+            <a href="#">모바일</a>
+          </li>
 
-      <%} else { %>
-      <a href="/login">로그인</a>
-      <%}%>
-    </li>
-    <li>
-      <% if(locals.accessToken) {%>
-      <a href="/mypage"> 마이페이지 </a>
-      <%} else { %>
+          <li class="navi-li headerli">
+            <a href="#">생할/편의</a>
+            <ul class="nav-ul">
+              <li><a href="">키오스크</a></li>
+              <li><a href="">티켓팅</a></li>
+            </ul>
+          </li>
 
-      <a href="/signup"> 회원가입</a>
-      <%}%>
-    </li>
-  </ul>
-  <script>
-    async function logout() {
-      const res = await axios({
-        method: "post",
-        url: "/logout",
-      });
+          <li class="navi-li headerli">
+            <a href="#">문화/여가</a>
+            <ul class="nav-ul">
+              <li><a href="">무료 구청 교육</a></li>
+              <li><a href=""> 동네 문화 생활</a></li>
+              <li><a href="">도서관 영업 시간</a></li>
+            </ul>
+          </li>
+        </ul>
 
-      location.href = "/";
-    }
-  </script>
+        <!-- 로그인 -->
+        <ul class="navUser">
+          <li class="navi-li headerli"><a href="">이용 안내</a></li>
+          <li class="navi-li headerli">
+            <% if(locals.accessToken) {%>
+            <!-- <button id="logout" onclick="logout()">로그아웃</button> -->
+            <a href="" onclick="logout()" id="logout">로그아웃</a>
+
+            <%} else { %>
+            <a href="/login">로그인</a>
+            <%}%>
+          </li>
+          <li class="navi-li headerli">
+            <% if(locals.accessToken) {%>
+            <a href="/Mypage"> 마이페이지 </a>
+            <%} else { %>
+
+            <a href="/signup"> 회원가입</a>
+            <%}%>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <script>
+      async function logout() {
+        const res = await axios({
+          method: "post",
+          url: "/logout",
+        });
+
+        location.href = "/";
+      }
+    </script>
+  </header>
 </header>
