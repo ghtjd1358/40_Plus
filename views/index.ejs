@@ -11,6 +11,7 @@
     />
     <link rel="stylesheet" href="/static/css/style.css" />
     <link rel="stylesheet" href="/static/css/component.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <style>
       .mainContent {
@@ -202,7 +203,7 @@
             <li class="navi-li indexli">
               <% if(locals.accessToken) {%>
               <!-- <button id="logout" onclick="logout()">로그아웃</button> -->
-              <a href="" onclick="logout()" id="logout">로그아웃</a>
+              <a onclick="logout(window.event)" id="logout">로그아웃</a>
 
               <%} else { %>
               <a href="/login">로그인</a>
@@ -333,7 +334,8 @@
     </script>
 
     <script>
-      async function logout() {
+      async function logout(event) {
+        event.preventDefault();
         const res = await axios({
           method: "post",
           url: "/logout",
