@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>단어 추가</title>
+    <style>
+        #add_body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        /* 입력 칸 div */
+        .add-C {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 20px 0;
+            border: 1px solid black;
+            box-shadow: 0 7px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .add-text {
+            padding: 10px;
+            width: 200px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        #mean {
+            width: 400px;
+        }
+
+        .add-btn {
+            margin: 0 auto;
+        }
+
+        /* DB 표 */
+        table {
+            width: 80vw;
+            min-width: 500px;
+            border-collapse: collapse;  /* 표 테두리 단선으로 */
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        th, td {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            position: relative;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        /* DB 표 */
+        th.th-number {
+            width: 50px; /* 간격을 조절할 값으로 지정하세요 */
+        }
+
+        th.th-word {
+            width: 150px; /* 간격을 조절할 값으로 지정하세요 */
+        }
+
+        th.th-meaning {
+            width: 300px; /* 간격을 조절할 값으로 지정하세요 */
+        }
+
+        th.th-username {
+            width: 100px; /* 간격을 조절할 값으로 지정하세요 */
+        }
+
+        th:not(:first-child)::before,
+        td:not(:first-child)::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 1px;
+            background-color: #ddd;
+        }
+
+        /* data 사이 간격 */
+        th:not(:last-child)::after,
+        td:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 1px;
+            background-color: #ddd;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        /* 페이징 스타일 */
+        .paging {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .page-item {
+            margin: 0 5px;
+            cursor: pointer;
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .page-item:hover {
+            background-color: #ddd;
+        }
+
+        /* 기존 스타일 유지하며 현재 보고 있는 페이지에 대한 스타일 추가 */
+        .current-page {
+        background-color: #4CAF50;
+        color: white;
+        }
+        .next-page, .prev-page {
+            background-color: rgb(253, 240, 226);
+        }
+        .next-page:hover, .prev-page:hover {
+            background-color: bisque;
+        }
+        
+    </style>
+</head>
+<body id="add_body">
+    <div>
+        <form>
+            <div class="add-C">
+                <input type="text" class="add-text" name="" id="name" placeholder="단어 이름"> <br>
+                <input type="text" class="add-text" name="" id="mean" placeholder="해설"> <br>
+                <button type="button" class="add-btn" onclick="addword()">등록</button>
+            </div>
+        </form>
+        <table>
+            <tr>
+                <th class="th-number">번호</th>
+                <th class="th-word">단어 명</th>
+                <th class="th-meaning">단어 뜻</th>
+                <th class="th-username">유저명</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>ㅇㅇ</td>
+                <td>이응</td>
+                <td>홍길동</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>알잘딱깔센</td>
+                <td>'알아서 잘 딱 깔끔하고 센스있게'의 줄임말</td>
+                <td>김재현</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>알잘딱깔센</td>
+                <td>'알아서 잘 딱 깔끔하고 센스있게'의 줄임말</td>
+                <td>김재현</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>알잘딱깔센</td>
+                <td>'알아서 잘 딱 깔끔하고 센스있게'의 줄임말</td>
+                <td>김재현</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>알잘딱깔센</td>
+                <td>'알아서 잘 딱 깔끔하고 센스있게'의 줄임말</td>
+                <td>김재현</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>알잘딱깔센</td>
+                <td>'알아서 잘 딱 깔끔하고 센스있게'의 줄임말</td>
+                <td>김재현</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>알잘딱깔센</td>
+                <td>'알아서 잘 딱 깔끔하고 센스있게'의 줄임말</td>
+                <td>김재현</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>알잘딱깔센</td>
+                <td>'알아서 잘 딱 깔끔하고 센스있게'의 줄임말</td>
+                <td>김재현</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>알잘딱깔센</td>
+                <td>'알아서 잘 딱 깔끔하고 센스있게'의 줄임말</td>
+                <td>김재현</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>알잘딱깔센</td>
+                <td>'알아서 잘 딱 깔끔하고 센스있게'의 줄임말</td>
+                <td>김재현</td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>알잘딱깔센</td>
+                <td>'알아서 잘 딱 깔끔하고 센스있게'의 줄임말</td>
+                <td>김재현</td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>알잘딱깔센</td>
+                <td>'알아서 잘 딱 깔끔하고 센스있게'의 줄임말</td>
+                <td>김재현</td>
+            </tr>
+            <tr>
+                <td>13</td>
+                <td>알잘딱깔센</td>
+                <td>'알아서 잘 딱 깔끔하고 센스있게'의 줄임말</td>
+                <td>김재현</td>
+            </tr>
+        </table>
+        <div class="paging" id="paging">
+            <!-- 페이징 추가 될 공간 -->
+        </div>
+    </div>
+    <script>
+        // 한 페이지당 표시할 항목 수
+        const postPerPage = 10;
+
+        // 한 번에 표시할 페이지 번호 수
+        const numDisplayPage = 5;
+
+        // 테이블과 페이지 번호를 관리할 함수
+        function showPage(currentPage) {
+            const tableRows = document.querySelectorAll('table tr');    // [tr], [tr], [tr]
+            const pagingDiv = document.getElementById('paging');
+            const totalPages = Math.ceil((tableRows.length - 1) / postPerPage); // 총 페이지 수 계산
+            console.log(totalPages);    // 이게 왜 반올림이 되는가...?
+            const startPage = Math.max(1, currentPage - Math.floor(numDisplayPage / 2)); // 표시할 페이지 범위의 시작
+            const endPage = Math.min(totalPages, startPage + numDisplayPage - 1); // 표시할 페이지 범위의 끝
+
+            // 페이지 번호가 유효한지 확인
+            if (currentPage < 1 || currentPage > totalPages) {
+                return;
+            }
+
+            // 모든 행 숨김
+            tableRows.forEach(row => row.style.display = 'none');
+
+            // 헤더 행을 보이게 설정
+            tableRows[0].style.display = '';
+
+            // 현재 페이지에 해당하는 행들을 보이게 설정
+            const startIndex = (currentPage - 1) * postPerPage + 1;     // th 제외
+            const endIndex = startIndex + postPerPage;                 
+            for (let i = startIndex; i < endIndex && i < tableRows.length; i++) {
+                tableRows[i].style.display = '';
+            }
+
+            // 페이지 번호 갱신
+            updatepaging(totalPages, currentPage, startPage, endPage);
+        }
+
+        // 페이지 번호 갱신 함수
+        function updatepaging(totalPages, currentPage, startPage, endPage) {
+            const pagingDiv = document.getElementById('paging');
+            pagingDiv.innerHTML = '';
+
+            // 이전 페이지 버튼
+            const prevButton = createPageButton('<', currentPage - 1);
+            prevButton.classList.add('prev-page');
+            pagingDiv.appendChild(prevButton);
+
+            // 페이지 번호 버튼
+            for (let i = startPage; i <= endPage; i++) {
+                if (i <= totalPages) {
+                const pageButton = createPageButton(i, i);
+                if (i === currentPage) {
+                    pageButton.classList.add('current-page');
+                }
+                pagingDiv.appendChild(pageButton);
+            }
+            }
+
+            // 다음 페이지 버튼
+            const nextButton = createPageButton('>', currentPage + 1);
+            nextButton.classList.add('next-page');
+            pagingDiv.appendChild(nextButton);
+        }
+
+        // 페이지 번호 버튼 생성 함수
+        function createPageButton(text, currentPage) {
+            const pageButton = document.createElement('span');
+            pageButton.classList.add('page-item');
+            pageButton.textContent = text;
+
+            // 클릭 이벤트 설정
+            pageButton.addEventListener('click', () => showPage(currentPage));
+
+            return pageButton;
+        }
+
+        // 초기 페이지 로드 시 첫 번째 페이지 표시
+        showPage(1);
+    </script>
+</body>
+</html>
