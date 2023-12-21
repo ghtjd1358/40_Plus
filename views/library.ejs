@@ -77,7 +77,7 @@
 
     <main class="container">
       <div class="terms">
-        <form action="/libraryAPI" name="termsForm" id="termsFrom">
+        <form action="/" name="termsForm" id="termsFrom">
           <p>도서관 정보는 최대 20개씩 표시됩니다.</p>
           <select name="region" id="region">
             <option value="11">서울</option>
@@ -105,7 +105,7 @@
 
       async function result() {
         try {
-          const response = await fetch("/libraryAPI");
+          const response = await fetch("/");
           const data = await response.text();
 
           console.log("data", data);

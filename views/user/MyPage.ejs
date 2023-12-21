@@ -6,56 +6,171 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>main page</title>
 
+    <link rel="stylesheet" href="/static/css/style.css" />
     <link rel="stylesheet" href="/static/css/component.css" />
+    <style>
+      .userContent {
+        width: 700px;
+        height: 400px;
+        background-color: var(--color-grey);
+
+        position: relative;
+        display: flex;
+        flex-direction: column;
+
+        /* justify-content: center;
+        align-items: center; */
+        border-radius: var(--border-radius-medium);
+        box-shadow: var(--shadow);
+      }
+
+      .btnS {
+        background-color: var(--color-orange-4);
+        color: var(--color-grey-0);
+        font-size: 14px;
+        border: 1px solid var(--color-orange-3);
+        width: 100px;
+        height: 30px;
+        border-radius: var(--border-radius-small);
+        margin-left: var(--space-0);
+      }
+
+      .modal {
+        position: absolute;
+        background-color: white;
+        display: none;
+        width: 100%;
+        height: 100%;
+        top: 0;
+      }
+
+      .modalDel {
+        position: absolute;
+        background-color: white;
+        display: none;
+        width: 100%;
+        height: 100%;
+      }
+
+      .userContent > .infos {
+        width: 700px;
+        height: 50px;
+
+        /* background-color: pink; */
+        line-height: 50px;
+        display: flex;
+        align-items: center;
+      }
+
+      .infos > input {
+        width: 200px;
+        height: 30px;
+        border: 1px solid var(--color-black-1);
+        border-radius: var(--border-radius-small);
+        font-size: 16px;
+        margin-bottom: var(--space-0);
+      }
+
+      .infos > label {
+        display: inline-block;
+        width: 80px;
+        font-weight: 700;
+      }
+    </style>
   </head>
   <body>
     <!-- header -->
-    <%- include("../component/header")%>
+    <%- include("../component/header2")%>
     <main class="container">
-      <label for="userid">아이디 : </label>
-      <input type="text" id="userid" value="<%= userInfo.userid %>" readonly />
-      <br />
-
-      <label for="name">이름 : </label>
-      <input type="text" id="name" value="<%= userInfo.name %>" />
-      <button id="change-name-button">이름바꾸기</button>
-      <div id="result-of-change-name"></div>
-
-      <button>비밀번호 변경하기 (이거 누르면 밑에꺼 모달)</button>
-      <div>
-        <form name="change-password">
-          <label for="current-password">현재 비밀번호</label>
+      <div class="space"></div>
+      <div class="userContent">
+        <!--  -->
+        <div class="infos userId">
+          <label for="userid">아이디 </label>
           <input
-            type="password"
-            id="current-password"
-            name="current-password"
+            type="text"
+            id="userid"
+            value="<%= userInfo.userid %>"
+            readonly
           />
-          <label for="new-password">새 비밀번호</label>
-          <input type="password" id="new-password" name="new-password" />
-          <label for="confirm-password">비밀번호 확인</label>
-          <input
-            type="password"
-            id="confirm-password"
-            name="confirm-password"
-          />
-          <button id="change-password-button" type="button">
-            비밀번호 변경
+          <div>아이디는 변경 불가능합니다.</div>
+        </div>
+
+        <div class="infos userName">
+          <label for="name">이름</label>
+          <input type="text" id="name" value="<%= userInfo.name %>" />
+          <button id="change-name-button" class="btnS">이름 변경</button>
+          <div id="result-of-change-name"></div>
+        </div>
+
+        <div class="infos">
+          <!-- 비빌번호 변경 -->
+          <button class="btnS openPwModal">비밀번호 변경</button>
+
+          <div class="modal modalPw">
+            <form name="change-password">
+              <label for="current-password">현재 비밀번호</label>
+              <input
+                type="password"
+                id="current-password"
+                name="current-password"
+              />
+              <label for="new-password">새 비밀번호</label>
+              <input type="password" id="new-password" name="new-password" />
+              <label for="confirm-password">비밀번호 확인</label>
+              <input
+                type="password"
+                id="confirm-password"
+                name="confirm-password"
+              />
+              <button id="change-password-button" type="button" class="btnS">
+                비밀번호 변경
+              </button>
+
+              <button>닫기</button>
+            </form>
+            <div id="result-of-change-password"></div>
+          </div>
+
+          <!-- 회원 탈퇴 -->
+          <button id="delete-user-button" class="btnS openDelModal">
+            회원 탈퇴
           </button>
-        </form>
-        <div id="result-of-change-password"></div>
+
+          <div class="modal modalDel">
+            <div>
+              회원을 탈퇴하시겠습니까?
+              <p>(예 버튼 클릭시 즉시 탈퇴됩니다.)</p>
+              <button id="delete-user-button-yes">예</button>
+              <button id="delete-user-button-no" onclick="close()">
+                아니오
+              </button>
+            </div>
+            <div id="result-of-delete-user"></div>
+          </div>
+        </div>
       </div>
-      <button id="delete-user-button">
-        회원 탈퇴 (버튼 누를 시 밑에 div 모달)
-      </button>
-      <div>
-        탈퇴하시겠습니까?
-        <button id="delete-user-button-yes">예</button>
-        <button id="delete-user-button-no">아니오 (누를시 div 안보이게)</button>
-      </div>
-      <div id="result-of-delete-user"></div>
     </main>
-    <%- include('../component/footer')%>
+
     <script>
+      const modal1 = document.querySelector(".modalPw");
+      const modal2 = document.querySelector(".modalDel");
+
+      const openModal1 = document.querySelector(".openPwModal");
+      const openModal2 = document.querySelector(".openDelModal");
+
+      openModal1.addEventListener("click", () => {
+        modal1.style.display = "flex";
+      });
+
+      openModal2.addEventListener("click", () => {
+        modal2.style.display = "flex";
+      });
+
+      function close() {
+        modal2.style.display = "none";
+      }
+
       const changeNameBtnElement = document.querySelector(
         "#change-name-button"
       );
@@ -99,14 +214,16 @@
         resultOfchangePassword.textContent = res.data.msg;
       }
       async function deleteUser() {
-        const resultOfDeleteUser = document.querySelector('#result-of-delete-user')
+        const resultOfDeleteUser = document.querySelector(
+          "#result-of-delete-user"
+        );
         const res = await axios({
           url: "/mypage",
-          method: 'delete'
+          method: "delete",
         });
 
         if (!res.data.isError) {
-          location.href = '/'
+          location.href = "/";
         } else {
           resultOfDeleteUser.textContent = res.data.msg;
         }
@@ -114,7 +231,7 @@
 
       changeNameBtnElement.addEventListener("click", changeName);
       changePasswordBtnElement.addEventListener("click", changePassword);
-      deleteUserBtnElement.addEventListener('click', deleteUser);
+      deleteUserBtnElement.addEventListener("click", deleteUser);
     </script>
   </body>
 </html>

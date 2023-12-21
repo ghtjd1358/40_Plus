@@ -5,21 +5,23 @@ const checkJwt = require("../utility/checkJwt");
 const User = models.User;
 const getCookieConfig = require("../config/cookie.config");
 const clearUserInfo = require("../utility/clearUserInfo");
-require('dotenv').config();
+require("dotenv").config();
 
 function getIndex(req, res) {
   res.render("index");
-};
+}
 
 const culture = (req, res) => {
   res.render("culture");
 };
 
+// const cultureRegion = (req, res) => {
+//   console.log(req.body);
+// };
+
 const community = (req, res) => {
   res.render("community");
 };
-
-
 
 function getSignup(req, res) {
   res.render("user/signup");
@@ -101,7 +103,7 @@ function getLogin(req, res) {
 }
 
 async function login(req, res) {
-    clearUserInfo(req, res);
+  clearUserInfo(req, res);
   const { userid, password } = req.body;
 
   if (!userid || userid.trim().length === 0) {
@@ -146,7 +148,6 @@ function logout(req, res) {
   clearUserInfo(req, res);
   res.send("완료");
 }
-
 
 module.exports = {
   getSignup: getSignup,

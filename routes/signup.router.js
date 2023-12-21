@@ -1,7 +1,6 @@
-
-const checkAccessMiddleware = require('../middlewares/checkAccessToken');
-const controller = require('../controllers/auth.controller');
-const express = require('express');
+const checkAccessMiddleware = require("../middlewares/checkAccessToken");
+const controller = require("../controllers/auth.controller");
+const express = require("express");
 const router = express();
 
 router.get("/", controller.getIndex);
@@ -16,13 +15,11 @@ router.post("/login", controller.login);
 
 router.post("/isvalid", controller.existsAlready);
 
-
 router.get("/culture", controller.culture);
+// router.post("/culture", controller.cultureRegion);
 
 router.get("/community", controller.community);
 
-router.post('/logout', controller.logout);
-
+router.post("/logout", controller.logout);
 
 module.exports = router;
-
