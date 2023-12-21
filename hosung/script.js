@@ -10,29 +10,6 @@ function fixNav() {
     nav.classList.toggle('active', scrolled);
 }
 
-//nav display
-const navLis = document.querySelectorAll('.navi-li');
-
-navLis.forEach((navLi, i) => {
-  navLi.addEventListener('click', () => {
-    navUls.forEach((navUl) => {
-      navUl.style.display = 'none';
-    });
-    navUls[i].style.display = 'block';
-  });
-
-  // navLi.addEventListener('mouseout', () => {
-  //   navUls.forEach((navUl) => {
-  //     navUl.style.display = 'none';
-  //   });
-  // });
-});
-
-
-
-
-
-
 //--------------------------------------------------
 
 // animation scroll(section)
@@ -52,8 +29,6 @@ window.addEventListener('scroll', () => {
       section.classList.add('up')
     }
   })
- 
-
 })
 
 
@@ -85,6 +60,7 @@ function prevSlide() {
   setActiveSlide();
 }
 
+// slide
 function setActiveSlide() {
   slides.forEach((slide, i) => {
     activeSlide === i ? slide.classList.add('active') : slide.classList.remove('active');
@@ -112,18 +88,18 @@ leftBtn.addEventListener('click', prevSlide);
 
 
 
-  // navUls.forEach(navUl => {
-  //   navUl.classList.toggle('active', scrolled)
+//   navUls.forEach(navUl => {
+//     navUl.classList.toggle('active', scrolled)
 // });
   
 
-// document.addEventListener('mouseover', hoverTag);
-// document.addEventListener('mouseout', hoverTag);
+document.addEventListener('mouseover', hoverTag);
+document.addEventListener('mouseout', hoverTag);
 
-// function hoverTag(e) {
-//     let currentElement = e.target;
+function hoverTag(e) {
+    let currentElement = e.target;
 
-//     if (currentElement.tagName === 'DIV') {
-//         currentElement.classList.toggle('shadow-drop-2-center', e.type === 'mouseover');
-//     }
-// }
+    if (currentElement.tagName === 'BUTTON') {
+        currentElement.classList.toggle('shadow-drop-2-center', e.type === 'mouseover');
+    }
+}
