@@ -1,4 +1,4 @@
-const totalPages = 11;
+const totalPages = 12;
 const pages =  document.querySelectorAll('.page')
 let currentPage = 1;
 

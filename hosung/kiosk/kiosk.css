@@ -84,7 +84,7 @@ img{
 
 /* ------------------------------page 1--------------------  */
 
-/* .screen{
+.screen{
             height: 635px;
         }
 
@@ -106,7 +106,7 @@ img{
         .screen-container img:last-child {
             width: 800px;
             height: 450px;
-        } */
+        }
 
 /* ------------------------------page 2--------------------  */
 #page2 h3{
@@ -634,10 +634,19 @@ img{
 }
 
 .menu-last-button button{
-    width: 2rem;
+    width: 1.5rem;
     height: 2rem;
     margin: 1px;
+    border: 1px solid #99b1d1;
+        border-radius: 5px;
+        background: none;
+        padding: 5px;
 }
+
+.menu-last-button img{
+    width: 100%;
+}
+
 
 .menu-last-button:last-child button{
     width: 2.5rem;
@@ -695,9 +704,8 @@ img{
     height: 80px;
     font-size: 1.6rem;
     font-weight: bold;
-    border: 1px solid black;
+    border: 1px solid #000;
     border-radius: 5px;
-    background-color: #eee;
     color: #000;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     z-index: 2;
@@ -708,11 +716,18 @@ img{
     background-color: #fff;
 }
 
+.menu-last-button2 button{
+    border: 1px solid #99b1d1;
+    border-radius: 5px;
+    background: none;
+    padding: 5px;
+}
+
 /* page10 */
 .payments{
     width: 100%;
     padding: 8px;
-    max-height: 360px;
+    max-height: 340px;
     overflow-y: auto;
 }
 
@@ -760,41 +775,73 @@ img{
     font-size: 1.6rem;
 }
 
-.payments-left-box2 h3 {
+.payments-left-box3 {
+    margin: auto;
+    width: 90%;
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid #E2E8F0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.5%;
+    padding: 0px 10px
+}
+
+.payments-left-box3 h3 {
     font-size: 1.3rem;
 }
 
 
-
-
-
-
 .payments-right{
-    border: 2px solid #000;
-    border-radius: 10px;
     width: 49%;
     display: flex;
     flex-direction: column;
+    border: 1px solid #000;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px;
 }
 
 .payments-right-table{
-    border: 1px solid #000;
     padding: 5px;
 }
+
+.payments-title{
+    background-color: #CF0A0A;
+    height: 45px;
+}
+
+.payments-title h2{
+    color: #fff;
+    line-height: 40px;
+}
+
 
 .payments-right-box{
     display: flex;
     justify-content: space-between;
+    
 }
 
 .payments-right-box > div{
     width: 50%;
+    margin-top: 1%;
+    padding: 10px;
+    border: 1px solid #000;
+    border-top:none ;
+    border-bottom:none ;
+    
 }
 
 .payments-right-box img{
-    width: 50%;
+    width: 55%;
+   
     /* height: 100%; */
 }
+
+
+
 
 /* last-page account */
 .account{
