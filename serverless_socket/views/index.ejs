@@ -7,8 +7,9 @@
   </head>
   <body>
     <input type="text" id="messageInput" placeholder="Type your message" />
-    <button onclick="sendMessage()">Send</button>
-    <script>
+    <a href="/leave">떠나기</a>
+    <!-- <button onclick="sendMessage()">Send</button> -->
+    <!-- <script>
       const ws = new WebSocket(
         "wss://3jzziq6i17.execute-api.ap-southeast-2.amazonaws.com/dev/"
       );
@@ -30,6 +31,6 @@
         const receivedMessage = JSON.parse(event.data).message;
         console.log("Received message:", receivedMessage);
       };
-    </script>
+    </script> -->
   </body>
 </html>
