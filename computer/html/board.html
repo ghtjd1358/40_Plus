@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/component.css">
+    <link rel="stylesheet" href="/computer/css/borad.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-BKTRJSBv9tQDe+qZqRr9LJQktGMxwwkIs6mH3l5x0epjQQ2glzB6tDM1gJnbxoJFqP4iTVgfk4DSbsnmRvhVw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <title>커뮤니티 게시판</title>
+</head>
+<body id="add_body">
+    <div>
+        <form>
+            <div class="add-C">
+                <button>글쓰기</button>
+            </div>
+        </form>
+        <table>
+            <tr>
+                <th class="th-number">번호</th>
+                <th class="th-title">제목</th>
+                <th class="th-writer">글쓴이</th>
+                <th class="th-check">조회</th>
+                <th class="th-time">작성일</th>
+                
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>배고프다</td>
+                <td>홍길동</td>
+                <td>0</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>점심 뭐 먹지</td>
+                <td>ㄴㄴㄴ</td>
+                <td>0</td>
+                <td></td>
+            </tr>
+        </table>
+        <form>
+            <div class="add-C">
+                <button>글쓰기</button>
+            </div>
+        </form>
+        <div class="paging" id="paging">
+            <!-- 페이징 추가 될 공간 -->
+        </div>
+
+        <!-- 검색 영역 추가 -->
+        <div id="search-area">
+            <select name="search-type" id="search-type">
+                <option value="title-content">제목+내용</option>
+                <option value="title">제목</option>
+                <option value="content">내용</option>
+                <option value="writer">글쓴이</option>
+            </select>
+            <input type="text" id="search-input" placeholder="검색어를 입력하세요">
+            <button id="search-button">검색</button>
+        </div>
+    </div>
+    <script src="/computer/js/board.js"></script>
+</body>
+</html>
