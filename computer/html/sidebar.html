@@ -78,22 +78,7 @@
                 transform: translateY(0px);
             }
         }
-        
-        .fade-out {
-            animation: fadeout 1s;
-        }
-
-        @keyframes fadeout {
-            0% {
-                opacity: 1;
-                transform: translateY(0px);
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-        }
-
+        /* 항목들 전체 */
         .full-line {
             margin: 0;
             padding: 0;
@@ -102,12 +87,18 @@
             flex-direction: column;
             align-items: center;
         }
+        /* 하위 항목들 */
         ol {
             display: none;
             box-sizing: border-box;
             padding: 0;
             height: 80px;
             width: 100%;
+        }
+
+        /* 문화/여가 하위 항목만 조절 */
+        #sidebar #culture .sub-line a {
+            bottom: 80px;
         }
 
         /* 내용 */
@@ -263,10 +254,11 @@
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
         Aperiam dignissimos rerum non maxime quam, consectetur porro aliquam asperiores adipisci laborum suscipit, 
         repudiandae libero sunt. Voluptate qui praesentium maxime omnis recusandae.</p>
+        <a href="#">링크</a>
     </div>
 
     <script>
-    // fade-in / out
+    // fade-in / out 을 위함.
     // 상위 메뉴의 부모 li 선택.
     const homeMenu = document.getElementById('home');
     const computerMenu = document.getElementById('computer');
@@ -279,17 +271,17 @@
     const lifeLink = lifeMenu.querySelector('a');
     const cultureLink = cultureMenu.querySelector('a');
 
+    // --------------------- 구 분 선 ----------------------
     // 사이드바 토글 함수
     function toggleSidebar() {
         const sidebar = document.getElementById('sidebar');
         const main = document.getElementById('main');
         const togglebtn = document.getElementById('toggle-btn');
         const backbtn = document.getElementById('back-btn');
-
-        
+        const activeSubmenu = document.querySelector('.main-line-active');
 
         if (sidebar.style.marginLeft === '0px') {
-            // 사이드 바 가리기
+            // 사이드 바 닫을 때
             backbtn.style.display = 'none';
             sidebar.style.marginLeft = '-300px';
             main.style.marginLeft = '0';
@@ -311,14 +303,22 @@
             togglebtn.classList.add("toggle-btn-after");
             togglebtn.innerText = '✕';      // '☰' 에서 '✕'로 변경
             sidebar.classList.add("toggle-sidebar"); // 클래스 추가
-            // 각 링크들 애니메이션 추가하기
+
+            // 각 li(링크)들 애니메이션 추가하기
             homeLink.classList.add('fade-in');
             computerLink.classList.add('fade-in');
             lifeLink.classList.add('fade-in');
             cultureLink.classList.add('fade-in');
+
+            // 활성화된 서브메뉴 일 때 사이드 바 닫고 다시 열었을 때 backbtn 다시 보여주기
+            if (activeSubmenu) {
+                backbtn.style.display = 'block';
+            }
         }
     }
 
+    // --------------------- 구 분 선 ----------------------
+    // 서브 메뉴 보여주기.
     function toggleSubmenu(Id) {
         const clickId = document.getElementById(Id);
         const backbtn = document.getElementById('back-btn');
@@ -334,7 +334,8 @@
         clickId.querySelector('a').style.display = 'none';
 
         // back 버튼 생성
-        backbtn.style.display = clickId.classList.contains('main-line-active') ? 'block' : 'none';
+        // backbtn.style.display = clickId.classList.contains('main-line-active') ? 'block' : 'none';
+        backbtn.style.display = 'block';
 
         // 토글될 때 다른 상위 메뉴들의 클래스 제거
         for (let i = 0; i < lis.length; i++) {
