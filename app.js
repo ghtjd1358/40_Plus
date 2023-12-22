@@ -24,6 +24,8 @@ const checkIdTokenMiddleware = require("./middlewares/checkIdToken");
 const checkAccessTokenMiddleware = require("./middlewares/checkAccessToken");
 const notFoundMiddleWare = require("./middlewares/not-found");
 const errorHanderMiddleware = require("./middlewares/error-handler");
+const checkAdminMiddleware = require('./middlewares/checkAdmin');
+const blockAdminMiddleware = require('./middlewares/blockNotAdmin');
 
 app.set("view engine", "ejs");
 
@@ -43,12 +45,13 @@ const sessionConfig = getSessionConfig();
 app.use(expressSession(sessionConfig));
 
 app.use(checkIdTokenMiddleware);
+app.use(checkAdminMiddleware);
 
 app.use(errorRouter);
 app.use(signupRouter);
 app.use(yongRouter);
 app.use("/word", wordRouter);
-app.use("/admin", adminRouter);
+app.use("/admin", blockAdminMiddleware, adminRouter);
 
 // API 관련
 const serviceKey = process.env.CULTUREAPISERVICEKEY; // .env

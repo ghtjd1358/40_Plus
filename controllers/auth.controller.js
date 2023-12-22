@@ -31,16 +31,21 @@ function getSignup(req, res) {
   res.render("user/signup");
 }
 
-async function existsAlready(req, res) {
+async function existsAlready(req, res, next) {
   if (req.body.userid.trim().length <= 3) {
     return res.json({
       msg: "아이디를 4자 이상으로 입력해주세요.",
       isUnique: false,
     });
   }
-  const existingUser = await User.findOne({
-    where: { userid: req.body.userid },
-  });
+  let existingUser
+  try{
+    existingUser = await User.findOne({
+      where: { userid: req.body.userid },
+    });
+  }catch(err) {
+    return next(err);
+  }
 
   if (existingUser) {
     res.json({ msg: "이미 존재하는 아이디입니다.", isUnique: false });
@@ -51,10 +56,16 @@ async function existsAlready(req, res) {
 
 async function signup(req, res) {
   const { userid, password, confirmPassword, name, isUnique } = req.body;
+  let existingUser;
+  
+  try {
+    existingUser = await User.findOne({
+      where: { userid: req.body.userid },
+    });   
+  }catch(err) {
+    return next(err);
+  }
 
-  const existingUser = await User.findOne({
-    where: { userid: req.body.userid },
-  });
   if (!isUnique || isUnique === false || existingUser) {
     return res.json({
       msg: "중복검사를 실시하지 않았거나 이미 존재하는 아이디입니다.",
@@ -91,12 +102,15 @@ async function signup(req, res) {
   }
 
   const hashPW = bcrypt.hashSync(password, parseInt(process.env.HASHROUND));
-
-  const result = await User.create({
-    userid: userid,
-    name: name,
-    password: hashPW,
-  });
+  try {
+    const result = await User.create({
+      userid: userid,
+      name: name,
+      password: hashPW,
+    });
+  } catch(err) {
+    return next(err);
+  }
 
   return res.json({ msg: "완료.", isError: false });
   // 프론트에서 res.data.isError가 true면 => redirect('/');
@@ -110,7 +124,7 @@ function getLogin(req, res) {
   }
 }
 
-async function login(req, res) {
+async function login(req, res, next) {
   clearUserInfo(req, res);
   const { userid, password } = req.body;
 
@@ -134,15 +148,18 @@ async function login(req, res) {
   // 데이터베이스의 토큰 업데이트
   newRefreshToken = checkJwt.makeRefreshJwt(userid, existingUser.name);
   res.cookie("refreshToken", newRefreshToken, getCookieConfig());
-
-  await User.update(
-    {
-      RefreshToken: newRefreshToken,
-    },
-    {
-      where: { userid: userid },
-    }
-  );
+  try {
+    await User.update(
+      {
+        RefreshToken: newRefreshToken,
+      },
+      {
+        where: { userid: userid },
+      }
+    );
+  }catch(err) {
+    return next(err)
+  }
 
   res.json({ msg: "성공", isError: false });
 }
