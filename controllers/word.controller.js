@@ -2,8 +2,13 @@ const models = require('../models/index');
 const Words = models.Words;
 const ConfirmWords = models.ConfirmWords;
 
-async function getAddWord (req, res) {
-    const words = await ConfirmWords.findAll();
+async function getAddWord (req, res, next) {
+    let words;
+    try {
+        words = await ConfirmWords.findAll();
+    }catch(err) {
+        return next(err);
+    }
     res.render('addword', {words: words});
 }
 
@@ -31,7 +36,12 @@ async function addWord (req, res, next) {
     }
 
 async function getKeyboard(req, res, next) {
-    const words = await ConfirmWords.findAll();
+    let words;
+    try {
+        words = await ConfirmWords.findAll();
+    }catch(err) {
+        return next(err);
+    }
 
     let dataVal = words.map(item => item.dataValues);
     dataVal.sort(() => Math.random() - 0.5);

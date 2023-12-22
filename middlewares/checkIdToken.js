@@ -34,7 +34,12 @@ async function checkAuthStatus(req, res, next) {
 
                 // 쿠키에 refresh 토큰이 있을 경우 그 값을 기반으로 DB에서 유저정보 가져와 일치하는 유저가 있는지 확인 (탈퇴 유저의 토큰일수도 있음)
                 const {userid, name} = checkRefreshToken;
-                const existingUser = await User.findOne({ where: {userid: userid, name: name}});
+                let existingUser;
+                try{
+                    existingUser = await User.findOne({ where: {userid: userid, name: name}});
+                } catch(err) {
+                    return next(err);
+                }
                 
                 // 유저가 db에 있다면 access token 발급하고 프론트에서 쓸 userid 정의
                 if (existingUser) {
@@ -58,7 +63,6 @@ async function checkAuthStatus(req, res, next) {
             }
             // 그밖의 경우 (refresh 토큰이 조작된 토큰이거나 해서 오류가 뜰 경우)
             next(err);
-
         }
     }
     }
