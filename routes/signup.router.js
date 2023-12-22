@@ -16,7 +16,8 @@ router.post("/login", controller.login);
 router.post("/isvalid", controller.existsAlready);
 
 router.get("/culture", controller.culture);
-// router.post("/culture", controller.cultureRegion);
+router.get("/culture/library", controller.library);
+router.get("/culture/class", controller.dayClass);
 
 router.get("/community", controller.community);
 
