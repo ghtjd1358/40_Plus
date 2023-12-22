@@ -40,23 +40,6 @@ section {
   display: block;
 }
 
-.nav-ul.active {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 32.5%;
-  width: 10%;
-  text-align: center;
-  background-color: #fff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  z-index: 1;
-}
-
-.nav-ul.active li {
-  padding: 10px 0 10px 0;
-  border-top: 1px solid #000;
-}
-
 .visual {
   background: url("https://images.pexels.com/photos/450035/pexels-photo-450035.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")
     no-repeat bottom center;
@@ -82,5 +65,3 @@ section {
   background-color: rgba(0, 0, 0, 0.5);
   z-index: -1;
 }
-
-/*  */

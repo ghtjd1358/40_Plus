@@ -15,9 +15,13 @@ const culture = (req, res) => {
   res.render("culture");
 };
 
-// const cultureRegion = (req, res) => {
-//   console.log(req.body);
-// };
+const library = (req, res) => {
+  res.render("culture_library");
+};
+
+const dayClass = (req, res) => {
+  res.render("culture_class");
+};
 
 const community = (req, res) => {
   res.render("community");
@@ -162,5 +166,7 @@ module.exports = {
   getIndex: getIndex,
   logout: logout,
   culture: culture,
+  library: library,
+  dayClass: dayClass,
   community: community,
 };
