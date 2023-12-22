@@ -1,34 +1,53 @@
-<header class="header">
-  <div class="logo">
-    <a href="/">
-      <img src="/static/css/test3.png" alt="" class="logo" />
-    </a>
-  </div>
+<header>
+  <nav class="nav header2">
+    <div class="headerContainer">
+      <!-- 로고 -->
+      <a href="/"><img src="/static/css/logo2.png" alt="" class="logo" /></a>
 
-  <div class="mainHeader"></div>
+      <!-- 헤더 nav -->
+      <ul class="navMenu">
+        <li class="navi-li headerli">
+          <a href="#">컴퓨터</a>
+        </li>
 
-  <ul class="nav">
-    <li><a href="">이용 안내</a></li>
-    <li>
-      <% if(locals.accessToken) {%>
-      <!-- <button id="logout" onclick="logout()">로그아웃</button> -->
-      <a href="" onclick="logout()" id="logout">로그아웃</a>
+        <li class="navi-li headerli">
+          <a href="#">생활편의</a>
+        </li>
 
-      <%} else { %>
-      <a href="/login">로그인</a>
-      <%}%>
-    </li>
-    <li>
-      <% if(locals.accessToken) {%>
-      <a href="/mypage"> 마이페이지 </a>
-      <%} else { %>
+        <li class="navi-li headerli">
+          <a href="/culture">문화여가</a>
+        </li>
 
-      <a href="/signup"> 회원가입</a>
-      <%}%>
-    </li>
-  </ul>
+        <li class="navi-li headerli">
+          <a href="#">게시판</a>
+        </li>
+      </ul>
+
+      <!-- 로그인 -->
+      <ul class="navUser">
+        <li class="navi-li headerli"><a href="">이용 안내</a></li>
+        <li class="navi-li headerli">
+          <% if(locals.accessToken) {%>
+          <!-- <button id="logout" onclick="logout()">로그아웃</button> -->
+          <a onclick="logout(window.event)" id="logout"> 로그아웃</a>
+
+          <%} else { %>
+          <a href="/login">로그인</a>
+          <%}%>
+        </li>
+        <li class="navi-li headerli">
+          <% if(locals.accessToken) {%>
+          <a href="/Mypage"> 마이페이지 </a>
+          <%} else { %>
+
+          <a href="/signup"> 회원가입</a>
+          <%}%>
+        </li>
+      </ul>
+    </div>
+  </nav>
   <script>
-    async function logout() {
+    async function logout(event) {
       event.preventDefault();
       const res = await axios({
         method: "post",

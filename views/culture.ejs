@@ -5,230 +5,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="stylesheet" href="/static/css/header.css" />
     <link rel="stylesheet" href="/static/css/component.css" />
     <title>culture</title>
 
     <style>
-      .main-content {
+      .mainContent {
         display: flex;
         width: 80%;
         /* background-color: pink; */
-        flex-wrap: wrap;
         align-items: center;
-        /* justify-content: space-evenly; */
+        justify-content: center;
       }
 
-      .culture {
+      .content-box {
+        width: 300px;
+        height: 400px;
+
+        margin: 0 var(--space-1);
         background-color: white;
         border: 1px solid var(--color-black-1);
         border-radius: var(--border-radius-medium);
-        box-shadow: 1px 1px var(--color-black-1);
-        width: 30%;
-        height: 350px;
-        margin-left: 2rem;
-        margin-top: 1rem;
-        display: flex;
-        flex-direction: column;
-        padding: 0.25rem;
-        /* align-items: center; */
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
       }
 
-      p {
-        margin-top: 0.25rem;
-      }
-      .terms {
-        width: 500px;
-        height: 80px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: var(--color-grey);
-        border-radius: var(--border-radius-medium);
-        box-shadow: var(--shadow);
-        margin-top: var(--space-2);
+      .content-box img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        object-position: center top;
+        /* object-position: 50% 50%; */
+        /* opacity: 0.5; */
+        filter: grayscale(60%);
       }
 
-      #regionForm > select {
-        width: 130px;
-        height: 30px;
-        font-size: 18px;
-        border-radius: var(--border-radius-small);
-
-        border: none;
-      }
-      button {
-        border-radius: var(--border-radius-small);
-        background-color: var(--color-orange-4);
-        color: white;
-        width: 60px;
-        height: 30px;
-        border: none;
+      .content img {
+        transition: all 0.4s linear;
       }
 
-      span {
-        font-weight: 700;
+      .content:hover img {
+        transform: scale(1.4);
+        filter: grayscale(100%);
+      }
+
+      .content a {
+        transition: all 0.5s linear;
+      }
+
+      .content:hover a {
+        color: var(--color-white-0);
+        font-size: 30px;
+      }
+
+      /* .class {
+        background-image: url("/static//css/university-105709_1280.jpg");
+      } */
+
+      .textButton {
+        position: absolute;
+        width: 100%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: var(--color-black-0);
+        font-size: 0;
+        font-weight: bold;
+        text-align: center;
       }
     </style>
   </head>
   <body>
-    <%- include("./component/header2")%>
+    <%- include("./component/header")%>
 
     <main class="container">
       <div class="space"></div>
-      <h1>전국 도서관 정보 안내</h1>
-      <div class="terms">
-        <form
-          action="/cultureAPI"
-          name="regionForm"
-          id="regionForm"
-          onsubmit="submitForm(event)"
-        >
-          <select name="region" id="region">
-            <option value="11">서울특별시</option>
-            <option value="21">부산광역시</option>
-            <option value="31">경기도</option>
-          </select>
-          <select name="dtl_region" id="dtl_region"></select>
-
-          <button type="submit" onclick="submitForm(event)">불러오기</button>
-        </form>
-      </div>
-
-      <section class="main-content"></section>
+      <section class="mainContent">
+        <div class="content-box content class">
+          <img src="/static//css/university-105709_1280.jpg" alt="" />
+          <a href="/culture/class" class="textButton"> 지역별 일일 클래스 </a>
+        </div>
+        <div class="content-box content">
+          <img src="/static//css/books-1281581_1280.jpg" alt="" />
+          <a href="/culture/library" class="textButton"> 지역별 도서관 정보</a>
+        </div>
+        <div class="content-box content">
+          <a href="/" class="menu"> <img src="" alt="" />???</a>
+        </div>
+      </section>
     </main>
-
-    <script>
-      const regionForm = document.forms["regionForm"];
-      const region = regionForm.querySelector("#region");
-      const dtl_region = regionForm.querySelector("#dtl_region");
-
-      function option() {
-        dtl_region.innerHTML = "";
-        if (region.value === "11") {
-          const newOption1 = document.createElement("option");
-          newOption1.value = "11010";
-          newOption1.textContent = "종로구";
-          dtl_region.add(newOption1);
-
-          const newOption2 = document.createElement("option");
-          newOption2.value = "11190";
-          newOption2.textContent = "영등포구";
-          dtl_region.add(newOption2);
-
-          const newOption3 = document.createElement("option");
-          newOption3.value = "11140";
-          newOption3.textContent = "마포구";
-          dtl_region.add(newOption3);
-        } else if (region.value === "21") {
-          const newOption1 = document.createElement("option");
-          newOption1.value = "21090";
-          newOption1.textContent = "해운대구";
-          dtl_region.add(newOption1);
-
-          const newOption2 = document.createElement("option");
-          newOption2.value = "21110";
-          newOption2.textContent = "금정구";
-          dtl_region.add(newOption2);
-
-          const newOption3 = document.createElement("option");
-          newOption3.value = "21050";
-          newOption3.textContent = "동래구";
-          dtl_region.add(newOption3);
-        }
-      }
-
-      region.addEventListener("change", option);
-      option();
-
-      function submitForm(event) {
-        event.preventDefault();
-
-        const selectRegion = region.value;
-        const selectDtl = dtl_region.value;
-
-        fetch(
-          `/cultureAPI?selectRegion=${selectRegion}&selectDtl=${selectDtl}`,
-          {
-            method: "get",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        )
-          .then((response) => response.json())
-          .then((data) => {
-            // 서버로부터 받은 데이터를 처리
-            console.log("data >", data);
-            apiData(data);
-          })
-          .catch((error) => {
-            console.error("Error fetching data:", error);
-          });
-        return false;
-      }
-
-      function apiData(data) {
-        // console.log("data2>", data);
-
-        // xml 데이터 변환
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(data, "text/xml");
-
-        const libName = xmlDoc.getElementsByTagName("libName");
-        const libAddress = xmlDoc.getElementsByTagName("address");
-        const libPage = xmlDoc.getElementsByTagName("homepage");
-        const libClose = xmlDoc.getElementsByTagName("closed");
-        const libTime = xmlDoc.getElementsByTagName("operatingTime");
-
-        // 각 데이터 길이 확인
-        console.log("libName length:", libName.length);
-        console.log("libAddress length:", libAddress.length);
-        console.log("libPage length:", libPage.length);
-        console.log("libClose length:", libClose.length);
-        console.log("libTime length:", libTime.length);
-        try {
-          const parser = new DOMParser();
-          const xmlDoc = parser.parseFromString(data, "text/xml");
-
-          const libName = xmlDoc.getElementsByTagName("libName");
-          const libAddress = xmlDoc.getElementsByTagName("address");
-          const libPage = xmlDoc.getElementsByTagName("homepage");
-          const libClose = xmlDoc.getElementsByTagName("closed");
-          const libTime = xmlDoc.getElementsByTagName("operatingTime");
-
-          const dataElem = document.querySelector(".main-content");
-          dataElem.innerHTML = "";
-
-          for (let i = 0; i < libName.length; i++) {
-            const name = libName[i].textContent || "N/A";
-            const address = libAddress[i].textContent || "N/A";
-            const page = libPage[i].textContent || "N/A";
-            const close = libClose[i].textContent || "N/A";
-            const time = libTime[i].textContent || "N/A";
-
-            const libraryDiv = document.createElement("div");
-            const libraryInfo = document.createElement("p");
-            libraryDiv.innerHTML =
-              `<p>-도서관명-</p>` +
-              `<p> ${name} </p>` +
-              `<p>-주소-</p>` +
-              `<p>${address}</p>` +
-              `<p>-홈페이지-</p>` +
-              `<p><a href=${page}> 홈페이지 바로가기 </a></p>` +
-              `<p>-휴무일-</p>` +
-              `<p>${close}</p>` +
-              `<p>-영업시간-</p>` +
-              `<p>${time}</p>`;
-
-            libraryDiv.appendChild(libraryInfo);
-            libraryDiv.classList.add("culture");
-            dataElem.appendChild(libraryDiv);
-          }
-        } catch (error) {
-          console.error("Error parsing or displaying data:", error);
-        }
-      }
-    </script>
   </body>
 </html>
