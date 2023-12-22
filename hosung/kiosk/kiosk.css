@@ -37,13 +37,7 @@ img{
     color: #fff;
     padding: 10px;
     position: relative;
-    z-index: 20;
-    /* position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-    z-index: 20;
-     */
+    z-index: 7;
 }
 
 #navigation-buttons {
@@ -90,11 +84,11 @@ img{
 
 /* ------------------------------page 1--------------------  */
 
-#page1 > .selectable{
+/* .screen{
             height: 635px;
         }
 
-        #img-container{
+        .screen-container{
             width: 80%;
             height: 95%;
             margin: 0 auto;
@@ -104,29 +98,29 @@ img{
             align-items: center;
         }
 
-        #page1 > .selectable img:first-child{
+        .screen-container img:first-child{
             width: 800px;
             height: 450px;
         }
 
-        #page1 > .selectable img:last-child{
+        .screen-container img:last-child {
             width: 800px;
-            height: 150px;
-        } 
+            height: 450px;
+        } */
 
 /* ------------------------------page 2--------------------  */
-#page2 h3 {
+#page2 h3{
     font-size: 1.8rem;
     font-weight: bold;
 }
 
-#page2 p {
+#page2 p{
     margin-top: -10px;
     font-size: 1rem;
     font-weight: bold;
 }
 
-.payment {
+.payment{
     width: 100%;
     height: 60px;
     background-color: #eee;
@@ -150,7 +144,7 @@ img{
     height: 100%;
 }
 
-#cardText {
+#payment-text {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -158,24 +152,24 @@ img{
     flex-direction: column;
 }
 
-#coupon {
+#payment-coupon {
     width: 60%;
     height: 230px;
     border: 2px solid #eee;
 }
 
-#coupon img {
+#payment-coupon img {
     width: 100%;
     height: 100%;
 }
 
-#money {
+#payment-money {
     width: 60%;
     height: 230px;
     border: 2px solid #eee;
 }
 
-#money img {
+#payment-money img {
     width: 100%;
     height: 100%;
 }
@@ -440,7 +434,7 @@ img{
     background: rgba(0, 0, 0, 0.8);
     justify-content: center;
     align-items: center;
-    z-index: 10;
+    z-index: 5;
 }
 
 #menu-list-content {
@@ -453,7 +447,7 @@ img{
     padding: 20px;
     text-align: center;
     position: relative;
-    overflow: scroll;
+    overflow-y: auto;
 }
 
 #menu-list-text {
@@ -714,6 +708,172 @@ img{
     background-color: #fff;
 }
 
+/* page10 */
+.payments{
+    width: 100%;
+    padding: 8px;
+    max-height: 360px;
+    overflow-y: auto;
+}
+
+.payments-table{
+    display: flex;
+    padding: 5px;
+}
+
+.payments-left{
+    border: 2px solid #E2E8F0;
+    border-radius: 10px;
+    width: 49%;
+    display: flex;
+    flex-direction: column;
+    margin-right: 1%;
+}
+
+.payments-left-box{
+    display: flex;
+    justify-content: space-between;
+    padding:0px 10px;
+    border: 1px solid #E2E8F0 ;
+}
+
+.payments-left-box p {
+    font-size: 1.3rem;
+    /* margin: 5px; */
+}
+
+.payments-left-box2 {
+    margin: auto;
+    width: 90%;
+    height: 50px;
+    border-radius: 10px;
+    background-color: #E2E8F0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 1.5%;
+    padding: 0px 10px
+}
+
+
+.payments-left-box2 h2{
+    font-size: 1.6rem;
+}
+
+.payments-left-box2 h3 {
+    font-size: 1.3rem;
+}
+
+
+
+
+
+
+.payments-right{
+    border: 2px solid #000;
+    border-radius: 10px;
+    width: 49%;
+    display: flex;
+    flex-direction: column;
+}
+
+.payments-right-table{
+    border: 1px solid #000;
+    padding: 5px;
+}
+
+.payments-right-box{
+    display: flex;
+    justify-content: space-between;
+}
+
+.payments-right-box > div{
+    width: 50%;
+}
+
+.payments-right-box img{
+    width: 50%;
+    /* height: 100%; */
+}
+
+/* last-page account */
+.account{
+    margin-top: 20px;
+    width: 100%;
+}
+
+.account h3 {
+    font-size: 2rem;
+}
+
+.account p{
+    font-size: 1rem;
+}
+
+.account h2{
+    font-size: 3rem;
+}
+
+.account img{
+    width: 23%;
+}
+
+.account-footer{
+    width: 100%;
+    height: 60px;
+    background-color: #333;
+}
+
+
+
+
+
+
+/*------------------------------ 점수판 ------------------------------------*/
+.scoreboard{
+    position: fixed;
+    top: 0;left: 0;
+    background: #fff;
+    width: 100%;
+    height: 960px;
+    z-index: 8;
+}
+
+.scoreboard-inner h1{
+    font-size: 3.5rem;
+}
+
+.scoreboard-inner h2{
+    font-size: 2.5rem;
+}
+
+.scoreboard-inner h3 {
+    font-size: 1.5rem;
+}
+
+.scoreboard-inner > button {
+    width: 20rem;
+    height: 80px;
+        font-size: 1.6rem;
+        font-weight: bold;
+        border-radius: 5px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.scoreboard-box{
+    margin: 0 auto;
+    border: 2px solid black;
+    width: 80%;
+    height: 400px;
+    line-height: 70px;
+    margin-bottom: 2rem;
+}
+
+.scoreboard-box > h3 >span{
+    color: #CF0A0A;
+}
+
+
 /* -----------------------footer progress---------------------------------- */
 footer {
     position: fixed;
@@ -722,7 +882,7 @@ footer {
     right: 0;
     width: 100%;
     background-color: #f0f0f0;
-    z-index: 20;
+    z-index: 5;
 }
 
 #progressbar-text {
@@ -746,7 +906,7 @@ footer {
     top: 80%;
     width: 130px;
     height: 180px;
-    z-index: 5;
+    z-index: 1;
 
 }
 
@@ -768,6 +928,7 @@ footer {
     font-weight: bold;
 }
 
+
 /* modal */
 #modal {
     display: none;
@@ -779,7 +940,7 @@ footer {
     background: rgba(0, 0, 0, 0.8);
     justify-content: center;
     align-items: center;
-    z-index: 15;
+    z-index: 7;
 }
 
 #modal img {
@@ -829,7 +990,7 @@ footer {
     background: rgba(0, 0, 0, 0.8);
     justify-content: center;
     align-items: center;
-    z-index: 10;
+    z-index: 7;
 }
 
 #menu-modal-content {
@@ -875,6 +1036,8 @@ footer {
 #menu-modal-box img {
     width: 80%;
 }
+
+
 
 /* set */
 .active {

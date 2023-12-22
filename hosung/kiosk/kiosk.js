@@ -1,34 +1,38 @@
-const totalPages = 10;
-const subScore = 5; 
-let score = 100; 
-
-
+const totalPages = 11;
 const pages =  document.querySelectorAll('.page')
-        let currentPage = 1;
-        let selectedDivs = [];
+let currentPage = 1;
 
+const subScore = 5; 
+let score = 105; 
+
+let selectedDivs = [];
+
+
+
+// 페이지
         showPage(currentPage);
 
-        function showPage(pageNumber) {
+        function showPage() {
             pages.forEach(page => {
                 page.style.display = 'none';
             });
 
-            const currentPage = document.getElementById(`page${pageNumber}`);
-            if (currentPage) {
-                currentPage.style.display = 'block';
+            const currentPages = document.getElementById(`page${currentPage}`);
+            if (currentPages) {
+                currentPages.style.display = 'block';
             }
             progressBar();
         }
 
-        // next Btn
+        // 다음 버튼
         function nextPage() {
             currentPage++;
             showPage(currentPage);
+            randomScore(); 
             resetSelection();
         }
 
-        // prev button
+        // 이전 버튼
         function prevPage() {
             if (currentPage > 1) {
                 currentPage--;
@@ -43,19 +47,20 @@ const pages =  document.querySelectorAll('.page')
             modal.style.display = 'none';
             currentPage = 1;
             showPage(currentPage);
-            score = 100;
+            score = 105;
+            subsScore();
             resetSelection();
 }
         
 
-        // 진행률
+// 진행률        
         function progressBar() {
             const progressBar = document.getElementById('progressbar');
             const progress = (currentPage - 1) / (totalPages - 1) * 100 + '%';
             progressBar.style.width = progress;
             const mathProgress = Math.floor(parseFloat(progress))
             progressBar.textContent = `진행 상황: ${mathProgress}%`;
-        }
+}
 
         function checkAnswer(divNumber) {
     if (divNumber % 2 !== 0 && selectedDivs.indexOf(divNumber) === -1) {
@@ -69,21 +74,13 @@ const pages =  document.querySelectorAll('.page')
     }
 }
 
+// 초기화
 function resetSelection() {
             selectedDivs = [];
         }
 
-function subsScore() {
-    if (score >= subScore) {
-        score -= subScore;
-    } else {
-        score = 0;
-    }
-    console.log('현재 점수:', score);
-}
 
-        
-
+// 모달
         function showModal() {
             const modal = document.getElementById('modal');
             modal.style.display = 'flex';
@@ -94,25 +91,9 @@ function subsScore() {
             modal.style.display = 'none';
         }
 
-        window.prevPage = prevPage;
-        window.firstPage = firstPage;
-        window.checkAnswer = checkAnswer;
-        window.showModal = showModal;
-        window.hideModal = hideModal;
-
-
         // page3 menu-selector
     const menuHeaders = document.querySelectorAll('.menu-header > div');
     const menuSelects = document.querySelectorAll('.menu-select');
-
-// menuHeaders.forEach((menuHeader, i) => {
-//     menuHeader.addEventListener('click', () => {
-//         menuSelects.forEach((menuSelect, j) => {
-//             menuSelect.classList.remove('active');
-//         });
-//         menuSelects[i].classList.add('active');
-//     });
-// });
 
 menuHeaders.forEach((menuHeader, i) => {
     menuHeader.addEventListener('click', () => {
@@ -120,24 +101,47 @@ menuHeaders.forEach((menuHeader, i) => {
     });
 });
 
-// let products = [
-//                     { id: 0, price: 7000, title: '햄버억' },
-//                     { id: 1, price: 5000, title: '감자' },
-//                     { id: 2, price: 6000, title: '콜라아' },//                 ];
-
-//         function productsDiv(product) {
-//             let div = document.createElement('div');
-//             div.className = 'selectable';
-//             div.innerHTML = `
-//                 <img src="https://via.placeholder.com/600" class="w-100">
-//                 <h2>${product.title}</h2>
-//                 <h3>가격 : ${product.price}</h3>`;
-//             return div;
-//         }
-
-//         products.forEach(product => menu-select-list.appendChild(productsDiv(product)));
 
 
+
+// create 카드
+function createProduct(product, menuSelectId) {
+    const productDiv = document.createElement("div");
+    productDiv.className = "selectable";
+    productDiv.onclick = function() { checkAnswer(2); };
+
+    const img = document.createElement("img");
+    img.src = product.image;
+
+    const name = document.createElement("h2");
+    name.textContent = product.name;
+
+    const price = document.createElement("h3");
+    price.textContent = product.price;
+
+    productDiv.appendChild(img);
+    productDiv.appendChild(name);
+    productDiv.appendChild(price);
+
+    const menuSelect = document.getElementById(menuSelectId);
+    menuSelect.appendChild(productDiv);
+}
+
+setMenu.forEach(product => createProduct(product, 'set-menu'));
+
+recommend.forEach(product => createProduct(product, 'recommend'));
+side.forEach(product => createProduct(product, 'side'));
+drink.forEach(product => createProduct(product, 'drink'));
+
+setSide.forEach(product => createProduct(product, 'setSide'));
+setSide.forEach(product => createProduct(product, 'setSide1'));
+
+setDrink.forEach(product => createProduct(product, 'setDrink'));
+setDrink.forEach(product => createProduct(product, 'setDrink1'));
+
+
+
+// 타이머
 // let startTime;
 // let endTime;
 
@@ -151,30 +155,40 @@ menuHeaders.forEach((menuHeader, i) => {
 //     console.log(`페이지 전환에 소요된 시간: ${elapsedTime}`);
 // }
 
-// function showPage(pageNumber) {
-//     startTimer();
-
-//     pages.forEach(page => {
-//         page.style.display = 'none';
-//     });
-
-//     const currentPage = document.getElementById(`page${pageNumber}`);
-//     if (currentPage) {
-//         currentPage.style.display = 'block';
-//     }
-//     progressBar();
-// }
-
-// function nextPage() {
-//     endTimer(); //
-//     currentPage++;
-//     showPage(currentPage);
-//     resetSelection();
-// }
 
 
 // let int = setTimeout(page10, 5000);
-
 // function page10() {
 //     const page10Element = document.querySelector('#page10');
 // }
+
+
+
+
+// 결제페이지(마지막)
+function randomScore() {
+    let randomNumber = Math.floor(Math.random() * 1000 + 1);
+    const orderScore = document.querySelector('.account > h2');
+    orderScore.textContent = randomNumber;
+    console.log(randomNumber);
+} 
+
+// 점수판
+function subsScore() {
+    score >= subScore ? score -= subScore : score = 0;
+    console.log('현재 점수:', score);
+    UpdateScoreBoard();  
+}
+
+const scoreboardBox = document.querySelector('.scoreboard-box');
+
+function UpdateScoreBoard() {  // 함수 이름 수정
+    const scoreText = score > 50 ? `매장에서도 주문 가능합니다.` : `<span>${score}</span>점으로는 아무 것도 할 수 없습니다.`;
+
+    scoreboardBox.innerHTML = `
+        <h3>총 점수 : <span>${score}</span>점</h3>
+        <h3>총 평가 : ${scoreText}</h3>
+    `;
+}
+
+subsScore()
