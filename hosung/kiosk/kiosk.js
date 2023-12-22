@@ -1,4 +1,4 @@
-const totalPages = 12;
+const totalPages = 13;
 const pages =  document.querySelectorAll('.page')
 let currentPage = 1;
 
@@ -37,6 +37,7 @@ let selectedDivs = [];
             if (currentPage > 1) {
                 currentPage--;
                 showPage(currentPage);
+                goToPage12()
                 resetSelection();
             }
         }
@@ -142,8 +143,8 @@ setDrink.forEach(product => createProduct(product, 'setDrink1'));
 
 
 // 타이머
-// let startTime;
-// let endTime;
+let startTime;
+let endTime;
 
 // function startTimer() {
 //     startTime = new Date();
@@ -157,10 +158,10 @@ setDrink.forEach(product => createProduct(product, 'setDrink1'));
 
 
 
-// let int = setTimeout(page10, 5000);
-// function page10() {
-//     const page10Element = document.querySelector('#page10');
-// }
+let int = setTimeout(page10, 5000);
+function page10() {
+    const page10Element = document.querySelector('#page10');
+}
 
 
 
@@ -192,3 +193,25 @@ function UpdateScoreBoard() {  // 함수 이름 수정
 }
 
 subsScore()
+
+// 11page
+const paymentsTable = document.querySelector('.payments-modal3-table > p');
+
+function timeTable() {
+    paymentsTable.textContent = '결제 진행 중입니다. 잠시만 기다려주세요';
+}
+
+function handleClick() {
+        checkAnswer(1);
+    setTimeout(timeTable, 3000);
+    goToPage12()
+}
+    
+function goToPage12() {
+    setTimeout(function() { 
+        currentPage = 12;
+        showPage();
+    }, 5000);  
+}
+
+//11 -> 12page 
