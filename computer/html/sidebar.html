@@ -3,9 +3,392 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>사이드 nav바</title>
-</head>
-<body>
+    <link rel="stylesheet" href="/static/css/component.css">
+    <title>Sidebar 예제</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            /* overflow-x: hidden; */
+        }
+        /* 사이드 바 */
+        #sidebar {
+            height: 100%;
+            width: 300px;
+            position: fixed;
+            background-color: #111;
+            padding-top: 20px;
+            transition: 1s;
+            margin-left: -300px; /* 초기에는 사이드바를 숨겨둠 */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: rgba(17, 17, 17, 0.8);
+        }
+        /* 배경 뿌옇게 보이기 */
+        #sidebar::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: -1; /* 가상 요소를 화면의 뒷 배경에 위치시키기 위해 음수 z-index 사용 */
+            display: none; /* 초기에는 가상 요소를 숨김 */
+        }
+
+        #sidebar.toggle-sidebar::before {
+            display: block; /* 토글되었을 때 가상 요소를 보이도록 설정 */
+        }
+
+
+        /* 사이드 바 카테고리 내용 */
+        #sidebar a , #sidebar li {
+            padding: 0px;
+            text-decoration: none;  /* 링크 밑줄 없애기 */
+            font-size: 18px;
+            color: white;
+            display: flex;
+            position: relative;
+            justify-content: center;
+            align-items: center;
+            transition: 0.5s;
+            text-align: center;
+            box-sizing: border-box;
+            height: 80px;
+            width: 100%;
+        }
+        #sidebar a:hover {
+            color: #f1f1f1;
+            background-color: var(--color-orange-4);
+        }
+
+        .fade-in {
+            animation: fadein 1s;
+        }
+
+        @keyframes fadein {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0px);
+            }
+        }
+        /* 항목들 전체 */
+        .full-line {
+            margin: 0;
+            padding: 0;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        /* 하위 항목들 */
+        ol {
+            display: none;
+            box-sizing: border-box;
+            padding: 0;
+            height: 80px;
+            width: 100%;
+        }
+
+        /* 문화/여가 하위 항목만 조절 */
+        #sidebar #culture .sub-line a {
+            bottom: 80px;
+        }
+
+        /* 내용 */
+        #main {
+            transition: margin-left 1s;
+            padding: 16px;
+        }
+
+        /* 토글 버튼 */
+        #toggle-btn {
+            font-size: 30px;
+            cursor: pointer;
+            position: fixed;
+            margin-left: 25px;
+            margin-top: 15px;
+            z-index: 1;
+            color: black;
+            display: block;
+            transition: 1s;
+        }
+
+        #toggle-btn.toggle-btn-before {
+            color: rgb(0, 0, 0);
+            animation: backmove 0.5s linear;
+        }
+        @keyframes backmove {
+            50% {
+                transform: rotate(-180deg);
+            }
+            100% {
+                transform: rotate(-360deg);
+            }
+        }
+        
+        #toggle-btn.toggle-btn-after {
+            color: white;
+            animation: move 0.5s linear;
+            margin-top: 20px;
+            margin-left: 250px;
+        }
+        @keyframes move {
+            50% {
+                transform: rotate(180deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        #toggle-btn:hover {
+            color: #9b9b9b;
+            transform: scale(1.2);
+        }
+        #toggle-btn.toggle-btn-after:hover {
+            color: rgb(101, 101, 101);
+            transform: scale(1.2);
+        }
+
+        /* back 버튼 */
+        #back-btn {
+            font-size: 30px;
+            height: 50px;
+            cursor: pointer;
+            position: fixed;
+            margin-left: 15px;
+            margin-top: 15px;
+            z-index: 1;
+            color: white;
+            background-color: #333; /* 배경 색상 추가 */
+            border: none;
+            padding: 10px 10px;
+            border-radius: 5px; /* 둥근 테두리 적용 */
+            display: none;
+            transition: 1s;
+            animation: backbtn 0.5s linear;
+        }
+        @keyframes backbtn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        #back-btn:hover {
+            background-color: #555; /* 호버 시 배경 색상 변경 */
+            transform: scale(1.2); /* 활성화 시 크기 확대 */
+        }
+        /* 반응형 웹 */
+        @media screen and (max-width: 600px) {
+            #sidebar {
+                margin-left: 0;
+            }
+
+            #main {
+                margin-left: 300px;
+            }
+
+            #toggle-btn {
+                display: block;
+            }
+        }
+        </style>
+    </head>
+    <body>
+
+    <div id="toggle-btn" onclick="toggleSidebar()">☰</div>
+    <div id="back-btn" onclick="goBack()">↩︎</div>
+
+    <!-- 사이드 바 -->
+    <div id="sidebar">  
+        <ul class="full-line">
+            <li class="main-line" id="home"><a href="#">Home</a></li>
+            <li class="main-line" id="computer">
+                <a href="#">컴퓨터</a>
+                <ol>
+                    <li class="sub-line">
+                        <a href="#">MZ어 타자검정</a>
+                    </li>
+                </ol>
+            </li>
+            <li class="main-line" id="life">
+                <a href="#">생활/편의</a>
+                <ol>
+                    <li class="sub-line">
+                        <a href="#">키오스크</a>
+                    </li>
+                </ol>
+            </li>
+            <li class="main-line" id="culture">
+                <a href="#">문화/여가</a>
+                <ol>
+                    <li class="sub-line">
+                        <a href="#">무료 구청 교육</a>
+                    </li>
+                    <li class="sub-line">
+                        <a href="#">동네 문화 생활</a>
+                    </li>
+                    <li class="sub-line">
+                        <a href="#">도서관 영업 시간</a>
+                    </li>
+                </ol>
+            </li>
+        </ul>
+    <!-- 추가적인 메뉴 항목을 원하는 만큼 추가할 수 있습니다. -->
+    </div>
+
+    <!-- 내용 -->
+    <div id="main">
+    <br><br><br><br>
+    <h2>Sidebar</h2>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+        Aperiam dignissimos rerum non maxime quam, consectetur porro aliquam asperiores adipisci laborum suscipit, 
+        repudiandae libero sunt. Voluptate qui praesentium maxime omnis recusandae.</p>
+        <a href="#">링크</a>
+    </div>
+
+    <script>
+    // fade-in / out 을 위함.
+    // 상위 메뉴의 부모 li 선택.
+    const homeMenu = document.getElementById('home');
+    const computerMenu = document.getElementById('computer');
+    const lifeMenu = document.getElementById('life');
+    const cultureMenu = document.getElementById('culture');
+
+    // 각 상위 메뉴에서 a 선택.
+    const homeLink = homeMenu.querySelector('a');
+    const computerLink = computerMenu.querySelector('a');
+    const lifeLink = lifeMenu.querySelector('a');
+    const cultureLink = cultureMenu.querySelector('a');
+
+    // --------------------- 구 분 선 ----------------------
+    // 사이드바 토글 함수
+    function toggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        const main = document.getElementById('main');
+        const togglebtn = document.getElementById('toggle-btn');
+        const backbtn = document.getElementById('back-btn');
+        const activeSubmenu = document.querySelector('.main-line-active');
+
+        if (sidebar.style.marginLeft === '0px') {
+            // 사이드 바 닫을 때
+            backbtn.style.display = 'none';
+            sidebar.style.marginLeft = '-300px';
+            main.style.marginLeft = '0';
+            togglebtn.classList.remove("toggle-btn-after");
+            togglebtn.classList.add("toggle-btn-before");
+            togglebtn.innerText = '☰';     // '✕' 에서 다시 '☰' 로 변경
+            sidebar.classList.remove("toggle-sidebar"); // 클래스 제거
+
+            // 각 링크들 애니메이션 삭제하기
+            homeLink.classList.remove('fade-in');
+            computerLink.classList.remove('fade-in');
+            lifeLink.classList.remove('fade-in');
+            cultureLink.classList.remove('fade-in');
+            
+        } else {
+            // 사이드 바 보여주기
+            sidebar.style.marginLeft = '0';
+            main.style.marginLeft = '300px';
+            togglebtn.classList.add("toggle-btn-after");
+            togglebtn.innerText = '✕';      // '☰' 에서 '✕'로 변경
+            sidebar.classList.add("toggle-sidebar"); // 클래스 추가
+
+            // 각 li(링크)들 애니메이션 추가하기
+            homeLink.classList.add('fade-in');
+            computerLink.classList.add('fade-in');
+            lifeLink.classList.add('fade-in');
+            cultureLink.classList.add('fade-in');
+
+            // 활성화된 서브메뉴 일 때 사이드 바 닫고 다시 열었을 때 backbtn 다시 보여주기
+            if (activeSubmenu) {
+                backbtn.style.display = 'block';
+            }
+        }
+    }
+
+    // --------------------- 구 분 선 ----------------------
+    // 서브 메뉴 보여주기.
+    function toggleSubmenu(Id) {
+        const clickId = document.getElementById(Id);
+        const backbtn = document.getElementById('back-btn');
+        const ol = clickId.querySelector('ol');
+        const lis = clickId.parentElement.children;     // 부모 요소들 모음집
+
+        console.log('클릭한 항목 >', clickId);
+        console.log('ol >', ol);
+        console.log('lis >', lis);
+
+        // 토글된 메뉴의 클래스 추가 또는 제거
+        clickId.classList.toggle("main-line-active");
+        clickId.querySelector('a').style.display = 'none';
+
+        // back 버튼 생성
+        // backbtn.style.display = clickId.classList.contains('main-line-active') ? 'block' : 'none';
+        backbtn.style.display = 'block';
+
+        // 토글될 때 다른 상위 메뉴들의 클래스 제거
+        for (let i = 0; i < lis.length; i++) {
+            const li = lis[i];
+            if (li !== clickId) {
+                li.classList.remove("main-line-active");
+                console.log('clickId != li >', li);
+                li.style.display = 'none';
+            }
+        }
+        // 클릭한 메뉴의 하위 메뉴 토글
+        ol.style.display = ol.style.display === 'block' ? 'none' : 'block';
+        ol.classList.add('fade-in');
+    }
+    // 사이드 바 뒤로 가기 버튼
+    function goBack() {
+        const backbtn = document.getElementById('back-btn');
+        const togglebtn = document.getElementById('toggle-btn');
+        // 현재 활성화된 하위 메뉴 찾기
+        const activeSubmenu = document.querySelector('.main-line-active');
+        
+        
+        if (activeSubmenu) {
+            // 현재 활성화된 하위 메뉴의 상태 초기화
+            activeSubmenu.classList.remove("main-line-active");
+            activeSubmenu.querySelector('a').style.display = 'flex';
+            activeSubmenu.querySelector('ol').style.display = 'none';
+        } 
+
+        // 메인 메뉴들 보이게 하기
+        const mainLines = document.querySelectorAll('.main-line');
+        mainLines.forEach(line => {
+            line.style.display = 'flex';
+        });
+        backbtn.style.display = 'none';
+    }
+
+    // 이벤트 리스너 추가
+    document.getElementById('home').addEventListener('click', function () {
+        toggleSubmenu('home');
+    });
+    document.getElementById('computer').addEventListener('click', function () {
+        toggleSubmenu('computer');
+    });
+    document.getElementById('life').addEventListener('click', function () {
+        toggleSubmenu('life');
+    });
+    document.getElementById('culture').addEventListener('click', function () {
+        toggleSubmenu('culture');
+    });
+
     
+</script>
+
 </body>
 </html>
