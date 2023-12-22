@@ -7,6 +7,8 @@ router.get('/', controller.getAddWord);
 
 router.post('/addword', controller.addWord);
 
+router.get('/getwords', controller.getWords);
+
 router.get('/keyboard', controller.getKeyboard);
 
 

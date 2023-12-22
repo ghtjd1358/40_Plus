@@ -27,14 +27,14 @@
                 <th class="th-time">등록일</th>
             </tr>
             <% if (words) {%>
-            <% for (const word of words) {%>
-                
+            <% for (let i = 0; i <= 19; i++) {%>
+                <% if (!words[i]) break; %>
             <tr>
-                <td ><%= word.number %></td>
-                <td ><%= word.word%></td>
-                <td ><%= word.meaning %></td>
-                <td ><%= word.name %></td>
-                <td><%= word.createdAt %></td>
+                <td ><%= words[i].number %></td>
+                <td ><%= words[i].word%></td>
+                <td ><%= words[i].meaning %></td>
+                <td ><%= words[i].name %></td>
+                <td><%= words[i].createdAt %></td>
             </tr>
             <% } %>
             <% } else{%>
@@ -47,6 +47,14 @@
             <!-- 페이징 추가 될 공간 -->
         </div>
     </div>
-    <script src="/static/javaScript/addword.js"></script>
+    <script>
+        // 밑에거를 토대로 개수 만들기
+        let words = '<%- JSON.stringify(words) %>';
+        words = JSON.parse(words);
+    for (const word of words) {
+        console.log(word)
+    }
+    </script>
+    <script src="/static/javaScript/addword.js" defer></script>
 </body>
 </html>

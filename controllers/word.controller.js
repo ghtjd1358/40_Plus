@@ -12,6 +12,17 @@ async function getAddWord (req, res, next) {
     res.render('addword', {words: words});
 }
 
+async function getWords (req, res, next) {
+    let words;
+    try {
+        words = await ConfirmWords.findAll();
+    }catch(err) {
+        return next(err);
+    }
+    console.log(words);
+    res.json({ words: words});
+}
+
 async function addWord (req, res, next) {
     const { name : word, mean : meaning} = req.body;
     const userid = req.session.userid;
@@ -52,5 +63,6 @@ async function getKeyboard(req, res, next) {
 module.exports = {
     getAddWord : getAddWord,
     addWord : addWord,
-    getKeyboard: getKeyboard
+    getKeyboard : getKeyboard,
+    getWords : getWords
 }
