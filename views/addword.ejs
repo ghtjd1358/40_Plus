@@ -27,14 +27,14 @@
                 <th class="th-time">등록일</th>
             </tr>
             <% if (words) {%>
-            <% for (let i = 0; i <= 19; i++) {%>
+            <% for (let i = 0; i <= 4; i++) {%>
                 <% if (!words[i]) break; %>
             <tr>
                 <td ><%= words[i].number %></td>
                 <td ><%= words[i].word%></td>
                 <td ><%= words[i].meaning %></td>
                 <td ><%= words[i].name %></td>
-                <td><%= words[i].createdAt %></td>
+                <td class="createdAt"><%= words[i].createdAt %></td>
             </tr>
             <% } %>
             <% } else{%>
@@ -51,9 +51,13 @@
         // 밑에거를 토대로 개수 만들기
         let words = '<%- JSON.stringify(words) %>';
         words = JSON.parse(words);
-    for (const word of words) {
-        console.log(word)
-    }
+        const createAtElements = document.querySelectorAll('.createdAt');
+        
+        for (let i = 0; i < 5; i++) {
+            const date = new Date(words[i].createdAt);
+            const realDay = `${date.getFullYear()}년 ${date.getMonth()+1}월 ${date.getDate()}일 ${date.getHours()}시 ${date.getMinutes()}분`;
+            createAtElements[i].textContent = realDay; 
+        }
     </script>
     <script src="/static/javaScript/addword.js" defer></script>
 </body>
