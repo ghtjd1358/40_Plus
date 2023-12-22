@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebSocket Chat</title>
+  </head>
+  <body>
+    <input type="text" id="messageInput" placeholder="Type your message" />
+    <button onclick="sendMessage()">Send</button>
+    <script>
+      const ws = new WebSocket(
+        "wss://3jzziq6i17.execute-api.ap-southeast-2.amazonaws.com/dev/"
+      );
+
+      function sendMessage() {
+        const messageInput = document.getElementById("messageInput");
+        const message = messageInput.value;
+
+        // 이벤트를 트리거하여 Lambda 함수로 메시지 전송
+        ws.send(
+          JSON.stringify({
+            action: "sendmessage",
+            message: message,
+          })
+        );
+      }
+
+      ws.onmessage = (event) => {
+        const receivedMessage = JSON.parse(event.data).message;
+        console.log("Received message:", receivedMessage);
+      };
+    </script>
+  </body>
+</html>
