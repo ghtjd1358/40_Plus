@@ -7,51 +7,58 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="/static/css/header.css" />
     <link rel="stylesheet" href="/static/css/component.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
     <title>culture</title>
 
     <style>
       .main-content {
         display: flex;
         width: 80%;
+        /* height: 100%; */
         /* background-color: pink; */
         flex-wrap: wrap;
         align-items: center;
         /* justify-content: space-evenly; */
       }
 
-      .mainContent {
-        width: 80%;
-        display: flex;
-      }
-
       .culture {
         background-color: white;
         border: 1px solid var(--color-black-1);
         border-radius: var(--border-radius-medium);
-        box-shadow: 1px 1px var(--color-black-1);
+        /* box-shadow: 1px 1px var(--color-black-1); */
         width: 30%;
-        height: 350px;
+        height: auto;
+
+        min-height: 300px;
+        max-height: 900px;
         margin-left: 2rem;
         margin-top: 1rem;
         display: flex;
         flex-direction: column;
         padding: 0.25rem;
+        align-items: center;
         /* align-items: center; */
+        padding: 0;
       }
 
-      p {
-        margin-top: 0.25rem;
+      .title {
+        margin: 0 0 var(--space-5);
       }
+
       .terms {
         width: 500px;
         height: 80px;
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: var(--color-grey);
+        /* background-color: var(--color-grey-0); */
         border-radius: var(--border-radius-medium);
-        box-shadow: var(--shadow);
-        margin-top: var(--space-2);
+        /* box-shadow: var(--shadow); */
+        margin: 0 0 var(--space-5);
       }
 
       #regionForm > select {
@@ -62,17 +69,93 @@
 
         border: none;
       }
-      button {
-        border-radius: var(--border-radius-small);
+
+      option {
+        background-color: white;
+      }
+
+      .btnS {
         background-color: var(--color-orange-4);
-        color: white;
-        width: 60px;
+        color: var(--color-grey-0);
+        border: 1px solid var(--color-orange-3);
+        border-radius: var(--border-radius-small);
         height: 30px;
-        border: none;
+        width: 80px;
+        margin-left: var(--space-2);
       }
 
       span {
         font-weight: 700;
+        margin-left: var(--space-1);
+      }
+
+      .name {
+        margin-top: 0;
+        line-height: 3;
+        border-radius: var(--border-radius-medium) var(--border-radius-medium) 0
+          0;
+      }
+
+      p {
+        margin-top: var(--space-1);
+        font-size: 18px;
+      }
+      .grey {
+        background-color: var(--color-grey-0);
+        width: 100%;
+        text-align: left;
+        font-weight: 700;
+      }
+
+      .white {
+        width: 90%;
+        text-align: center;
+        /* font-weight: 700; */
+        margin-bottom: var(--space-1);
+      }
+
+      .page {
+        color: var(--color-orange-3);
+      }
+
+      .material-symbols-outlined {
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 2;
+      }
+
+      .content {
+        padding: 0 18px;
+        height: auto;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-out;
+        width: 90%;
+        text-align: center;
+        /* font-weight: 700; */
+        margin-bottom: var(--space-1);
+        font-size: 18px;
+      }
+      .content::after {
+        height: 700px;
+      }
+      .collapsible {
+        border: none;
+        font-size: 18px;
+      }
+      .collapsible:after {
+        content: "\2303";
+        transform: rotate(180deg);
+        border-radius: 0px;
+        line-height: 25px;
+        float: right;
+        margin-right: var(--space-1);
+      }
+      .active:after {
+        content: "\2303";
+        transform: rotate(360deg);
+        line-height: 25px;
+        margin-top: 5px;
       }
     </style>
   </head>
@@ -81,22 +164,24 @@
 
     <main class="container">
       <div class="space"></div>
-      <h1>지역별 원데이 클래스 문화 활동</h1>
+      <h1 class="title">지역별 일일 클래스 안내</h1>
       <div class="terms">
         <form
-          action="/cultureAPI"
+          action="/classAPI"
           name="regionForm"
           id="regionForm"
           onsubmit="submitForm(event)"
         >
-          <select name="region" id="region">
+          <!-- <select name="region" id="region">
             <option value="11">서울특별시</option>
             <option value="21">부산광역시</option>
             <option value="31">경기도</option>
           </select>
-          <select name="dtl_region" id="dtl_region"></select>
+          <select name="dtl_region" id="dtl_region"></select> -->
 
-          <button type="submit" onclick="submitForm(event)">불러오기</button>
+          <button type="submit" onclick="submitForm(event)" class="btnS">
+            불러오기
+          </button>
         </form>
       </div>
 
@@ -108,40 +193,55 @@
       const region = regionForm.querySelector("#region");
       const dtl_region = regionForm.querySelector("#dtl_region");
 
-      function option() {
-        dtl_region.innerHTML = "";
-        if (region.value === "11") {
-          const newOption1 = document.createElement("option");
-          newOption1.value = "11010";
-          newOption1.textContent = "종로구";
-          dtl_region.add(newOption1);
+      // function option() {
+      //   dtl_region.innerHTML = "";
+      //   if (region.value === "11") {
+      //     const newOption1 = document.createElement("option");
+      //     newOption1.value = "11010";
+      //     newOption1.textContent = "종로구";
+      //     dtl_region.add(newOption1);
 
-          const newOption2 = document.createElement("option");
-          newOption2.value = "11190";
-          newOption2.textContent = "영등포구";
-          dtl_region.add(newOption2);
+      //     const newOption2 = document.createElement("option");
+      //     newOption2.value = "11190";
+      //     newOption2.textContent = "영등포구";
+      //     dtl_region.add(newOption2);
 
-          const newOption3 = document.createElement("option");
-          newOption3.value = "11140";
-          newOption3.textContent = "마포구";
-          dtl_region.add(newOption3);
-        } else if (region.value === "21") {
-          const newOption1 = document.createElement("option");
-          newOption1.value = "21090";
-          newOption1.textContent = "해운대구";
-          dtl_region.add(newOption1);
+      //     const newOption3 = document.createElement("option");
+      //     newOption3.value = "11140";
+      //     newOption3.textContent = "마포구";
+      //     dtl_region.add(newOption3);
+      //   } else if (region.value === "21") {
+      //     const newOption1 = document.createElement("option");
+      //     newOption1.value = "21090";
+      //     newOption1.textContent = "해운대구";
+      //     dtl_region.add(newOption1);
 
-          const newOption2 = document.createElement("option");
-          newOption2.value = "21110";
-          newOption2.textContent = "금정구";
-          dtl_region.add(newOption2);
+      //     const newOption2 = document.createElement("option");
+      //     newOption2.value = "21110";
+      //     newOption2.textContent = "금정구";
+      //     dtl_region.add(newOption2);
 
-          const newOption3 = document.createElement("option");
-          newOption3.value = "21050";
-          newOption3.textContent = "동래구";
-          dtl_region.add(newOption3);
-        }
-      }
+      //     const newOption3 = document.createElement("option");
+      //     newOption3.value = "21050";
+      //     newOption3.textContent = "동래구";
+      //     dtl_region.add(newOption3);
+      //   } else if (region.value === "31") {
+      //     const newOption1 = document.createElement("option");
+      //     newOption1.value = "31103";
+      //     newOption1.textContent = "일산 동구";
+      //     dtl_region.add(newOption1);
+
+      //     const newOption2 = document.createElement("option");
+      //     newOption2.value = "31104";
+      //     newOption2.textContent = "일산 서구";
+      //     dtl_region.add(newOption2);
+
+      //     const newOption3 = document.createElement("option");
+      //     newOption3.value = "31191";
+      //     newOption3.textContent = "용인시 처인구";
+      //     dtl_region.add(newOption3);
+      //   }
+      // }
 
       region.addEventListener("change", option);
       option();
@@ -149,18 +249,15 @@
       function submitForm(event) {
         event.preventDefault();
 
-        const selectRegion = region.value;
-        const selectDtl = dtl_region.value;
+        // const selectRegion = region.value;
+        // const selectDtl = dtl_region.value;
 
-        fetch(
-          `/cultureAPI?selectRegion=${selectRegion}&selectDtl=${selectDtl}`,
-          {
-            method: "get",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        )
+        fetch(`/classAPI?`, {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
           .then((response) => response.json())
           .then((data) => {
             // 서버로부터 받은 데이터를 처리
@@ -173,62 +270,135 @@
         return false;
       }
 
+      // function apiData(data) {
+      //   // console.log("data2>", data);
+
+      //   // xml 데이터 변환
+      //   const parser = new DOMParser();
+      //   const xmlDoc = parser.parseFromString(data, "text/xml");
+
+      //   const title = xmlDoc.getElementsByTagName("title");
+      //   const issuedDate = xmlDoc.getElementsByTagName("issuedDate");
+      //   const category3 = xmlDoc.getElementsByTagName("category3");
+      //   const address = xmlDoc.getElementsByTagName("address");
+      //   const charge = xmlDoc.getElementsByTagName("charge");
+
+      //   // 각 데이터 길이 확인
+      //   console.log("title length:", title.length);
+      //   console.log("issuedDate length:", issuedDate.length);
+      //   console.log("category3 length:", category3.length);
+      //   console.log("address length:", address.length);
+      //   console.log("charge length:", charge.length);
+      //   try {
+      //     const parser = new DOMParser();
+      //     const xmlDoc = parser.parseFromString(data, "text/xml");
+
+      //     const title = xmlDoc.getElementsByTagName("title");
+      //     const issuedDate = xmlDoc.getElementsByTagName("issuedDate");
+      //     const category3 = xmlDoc.getElementsByTagName("category3");
+      //     const address = xmlDoc.getElementsByTagName("address");
+      //     const charge = xmlDoc.getElementsByTagName("charge");
+
+      //     const dataElem = document.querySelector(".main-content");
+      //     dataElem.innerHTML = "";
+
+      //     for (let i = 0; i < libName.length; i++) {
+      //       const name = title[i].textContent || "N/A";
+      //       const address = issuedDate[i].textContent || "N/A";
+      //       const page = category3[i].textContent || "N/A";
+      //       const close = address[i].textContent || "N/A";
+      //       const time = charge[i].textContent || "N/A";
+
+      //       function addEvent() {
+      //         const coll = document.getElementsByClassName("collapsible");
+      //         for (let n = 0; n < coll.length; n++) {
+      //           coll[n].addEventListener("click", function () {
+      //             this.classList.toggle("active");
+      //             var content = this.nextElementSibling;
+
+      //             if (content.style.maxHeight) {
+      //               content.style.maxHeight = null;
+      //             } else {
+      //               content.style.maxHeight = "300px";
+      //             }
+      //           });
+      //         }
+      //       }
+
+      //       const libraryDiv = document.createElement("div");
+
+      //       libraryDiv.classList.add("culture");
+      //       dataElem.appendChild(libraryDiv);
+
+      //       addEvent();
+      //     }
+      //   } catch (error) {
+      //     console.error("Error parsing or displaying data:", error);
+      //   }
+      // }
+
+      // function submitForm(event) {
+      //   event.preventDefault();
+
+      //   // const selectRegion = region.value;
+      //   // const selectDtl = dtl_region.value;
+
+      //   fetch(`/classAPI?`, {
+      //     method: "get",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //   })
+      //     .then((response) => response.json())
+      //     .then((data) => {
+      //       // 서버로부터 받은 JSON 데이터를 처리
+      //       console.log("data >", data);
+      //       apiData(data);
+      //     })
+      //     .catch((error) => {
+      //       console.error("Error fetching data:", error);
+      //     });
+      //   return false;
+      // }
+
       function apiData(data) {
-        // console.log("data2>", data);
-
-        // xml 데이터 변환
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(data, "text/xml");
-
-        const libName = xmlDoc.getElementsByTagName("libName");
-        const libAddress = xmlDoc.getElementsByTagName("address");
-        const libPage = xmlDoc.getElementsByTagName("homepage");
-        const libClose = xmlDoc.getElementsByTagName("closed");
-        const libTime = xmlDoc.getElementsByTagName("operatingTime");
-
-        // 각 데이터 길이 확인
-        console.log("libName length:", libName.length);
-        console.log("libAddress length:", libAddress.length);
-        console.log("libPage length:", libPage.length);
-        console.log("libClose length:", libClose.length);
-        console.log("libTime length:", libTime.length);
         try {
-          const parser = new DOMParser();
-          const xmlDoc = parser.parseFromString(data, "text/xml");
-
-          const libName = xmlDoc.getElementsByTagName("libName");
-          const libAddress = xmlDoc.getElementsByTagName("address");
-          const libPage = xmlDoc.getElementsByTagName("homepage");
-          const libClose = xmlDoc.getElementsByTagName("closed");
-          const libTime = xmlDoc.getElementsByTagName("operatingTime");
+          const items = data.response.body.items.item;
 
           const dataElem = document.querySelector(".main-content");
           dataElem.innerHTML = "";
 
-          for (let i = 0; i < libName.length; i++) {
-            const name = libName[i].textContent || "N/A";
-            const address = libAddress[i].textContent || "N/A";
-            const page = libPage[i].textContent || "N/A";
-            const close = libClose[i].textContent || "N/A";
-            const time = libTime[i].textContent || "N/A";
+          for (let i = 0; i < items.length; i++) {
+            const item = items[i];
+
+            const name = item.title || "N/A";
+            const issuedDate = item.issuedDate || "N/A";
+            const category3 = item.category3 || "N/A";
+            const addr = item.address || "N/A";
+            const charge = item.charge || "N/A";
+
+            function addEvent() {
+              const coll = document.getElementsByClassName("collapsible");
+              for (let n = 0; n < coll.length; n++) {
+                coll[n].addEventListener("click", function () {
+                  this.classList.toggle("active");
+                  var content = this.nextElementSibling;
+
+                  if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                  } else {
+                    content.style.maxHeight = "300px";
+                  }
+                });
+              }
+            }
 
             const libraryDiv = document.createElement("div");
-            const libraryInfo = document.createElement("p");
-            libraryDiv.innerHTML =
-              `<p>-도서관명-</p>` +
-              `<p> ${name} </p>` +
-              `<p>-주소-</p>` +
-              `<p>${address}</p>` +
-              `<p>-홈페이지-</p>` +
-              `<p><a href=${page}> 홈페이지 바로가기 </a></p>` +
-              `<p>-휴무일-</p>` +
-              `<p>${close}</p>` +
-              `<p>-영업시간-</p>` +
-              `<p>${time}</p>`;
 
-            libraryDiv.appendChild(libraryInfo);
             libraryDiv.classList.add("culture");
             dataElem.appendChild(libraryDiv);
+
+            addEvent();
           }
         } catch (error) {
           console.error("Error parsing or displaying data:", error);

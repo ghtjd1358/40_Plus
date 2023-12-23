@@ -63,6 +63,10 @@ html {
   height: 100px;
 }
 
+button {
+  cursor: pointer;
+}
+
 li {
   list-style: none;
 }
@@ -74,7 +78,6 @@ body {
 a {
   text-decoration: none;
   cursor: pointer;
-  color: black;
 }
 
 .btn {
@@ -137,8 +140,8 @@ header {
 }
 
 .headerli a {
-  color: black;
   /* padding: 10px; */
+  color: var(--color-black-0);
   transition: color 0.3s ease-in-out;
 }
 
@@ -151,27 +154,6 @@ header {
   background-color: black;
   box-shadow: var(--shadow);
   z-index: 1;
-}
-
-/* 위치 조절 */
-.navi-li:nth-of-type(1) .nav-ul {
-  left: 26%;
-}
-
-.navi-li:nth-of-type(2) .nav-ul {
-  left: 10%;
-}
-
-.navi-li:nth-of-type(3) .nav-ul {
-  left: 49.5%;
-}
-
-.navi-li:nth-of-type(4) .nav-ul {
-  left: 57.5%;
-}
-
-.navi-li:hover .nav-ul {
-  display: block;
 }
 
 .nav-ul > li > a {
