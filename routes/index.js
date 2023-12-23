@@ -2,7 +2,7 @@
 
 const express = require("express");
 const router = express.Router();
-const controller = require("../controllers/Cboard");
+const controller = require("../controllers/community.controller");
 
 /**
  * @swagger
@@ -32,6 +32,9 @@ const controller = require("../controllers/Cboard");
 // 임시
 //router.get("/allComment", controller.readAllComment);
 
+router.get("/community", controller.community);
+
 // searchCommunity 부분
 router.post("/searchCommunity", controller.searchCommunity);
+router.get("/writeCommnunity", controller.writeCommunity);
 module.exports = router;
