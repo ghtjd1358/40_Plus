@@ -146,3 +146,16 @@ exports.searchCommunity = (req, res) => {
     });
   }
 };
+
+exports.communityPost = (req, res) => {
+  const { title, content } = req.body;
+  console.log("community post > ", title, content);
+
+  CommunityTable.create({
+    userid: req.session.userid,
+    title: title,
+    content: content,
+  }).then((result) => {
+    console.log("post create");
+  });
+};
