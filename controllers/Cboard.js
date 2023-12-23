@@ -2,44 +2,41 @@ const db = require("../models/index");
 const UserTable = db.User;
 const CommunityTable = db.Community;
 const CommentTable = db.Comment;
-
-exports.board = (req, res) => {
-  res.render("./board/board");
-};
+const { Op } = require("sequelize");
 
 // 게시물 등록 -> title, content 값 등록
-exports.postDB = (req, res, next) => {
-  const { title, content } = req.body;
-  console.log("axios get data > ", req.body);
+// exports.createCommunity = (req, res, next) => {
+//   const { title, content } = req.body;
+//   console.log("axios get data > ", req.body);
 
-  CommunityTable.create({
-    userid: req.session.userid,
-    title: title,
-    content: content,
-  })
-    .then((result) => {
-      console.log("postDB 완료 > ", result);
-    })
-    .catch((error) => {
-      return next(error);
-    });
-};
+//   CommunityTable.create({
+//     userid: req.session.userid,
+//     title: title,
+//     content: content,
+//   })
+//     .then((result) => {
+//       console.log("postDB 완료 > ", result);
+//     })
+//     .catch((error) => {
+//       return next(error);
+//     });
+// };
 
 // 게시물 전체 출력
-exports.boardList = (req, res, next) => {
-  CommunityTable.findAll({ raw: true })
-    .then((result) => {
-      if (result) {
-        console.log("find all > ", result);
-        res.render("./board/boardList", { success: true, data: result });
-      }
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-      res.render("./board/boardList", { success: false, error: error.message });
-      return next(error);
-    });
-};
+// exports.readCommunity = (req, res, next) => {
+//   CommunityTable.findAll({ raw: true })
+//     .then((result) => {
+//       if (result) {
+//         console.log("find all > ", result);
+//         //res.render("./board/boardList", { success: true, data: result });
+//       }
+//     })
+//     .catch((error) => {
+//       console.error("Error:", error);
+//       //res.render("./board/boardList", { success: false, error: error.message });
+//       return next(error);
+//     });
+// };
 
 //댓글 추가
 exports.writeComment = (req, res, next) => {
@@ -98,4 +95,43 @@ exports.readAllComment = (req, res, next) => {
     .catch((error) => {
       return next(error);
     });
+};
+
+// community Search 부분 (제목, 내용, 글쓴이, 제목+내용)
+exports.searchCommunity = (req, res) => {
+  let { selectValue, str } = req.body;
+
+  if (selectValue == "writer") selectValue = "userid"; //작성자는 userid로 대응되어야함
+  console.log("selectVal > ", selectValue);
+
+  if (
+    selectValue == "userid" ||
+    selectValue == "title" ||
+    selectValue == "content"
+  ) {
+    //제목 + 내용을 제외한 type 서치
+    const whereCondition = {};
+    whereCondition[selectValue] = {
+      [Op.like]: `%${str}%`,
+    };
+
+    CommunityTable.findAll({
+      where: whereCondition,
+    }).then((result) => {
+      console.log("search Community > ", result);
+    });
+  } else {
+    // title과 content에서 str을 찾아서 합치기
+    CommunityTable.findAll({
+      where: {
+        [Op.or]: [
+          { title: { [Op.like]: `%${str}%` } },
+          { content: { [Op.like]: `%${str}%` } },
+        ],
+      },
+    }).then((result) => {
+      console.log("-------------------------------");
+      console.log("Search result:", result);
+    });
+  }
 };

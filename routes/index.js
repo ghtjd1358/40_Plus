@@ -21,14 +21,17 @@ const controller = require("../controllers/Cboard");
  */
 
 // 게시물 제출 페이지
-router.get("/board", controller.board);
-router.post("/board", controller.postDB);
+//router.get("/board", controller.board);
+//router.post("/board", controller.createCommunity);
 
 // 게시물 확인 페이지
-router.get("/boardList", controller.boardList);
-router.post("/writeComment", controller.writeComment);
-router.post("/readComment", controller.readComment);
+//router.get("/boardList", controller.readCommunity);
+//router.post("/writeComment", controller.writeComment);
+//router.post("/readComment", controller.readComment);
 
 // 임시
-router.get("/allComment", controller.readAllComment);
+//router.get("/allComment", controller.readAllComment);
+
+// searchCommunity 부분
+router.post("/searchCommunity", controller.searchCommunity);
 module.exports = router;
