@@ -54,8 +54,6 @@ img{
     height: 100%;
 }
 
-
-
 #navigation-bar button {
     width: 15%;
     font-size: 1.6rem;
@@ -817,6 +815,7 @@ img{
 
 .payments-right-table{
     padding: 5px;
+    position: relative;
 }
 
 .payments-title{
@@ -1019,7 +1018,7 @@ img{
     background: #fff;
     width: 100%;
     height: 960px;
-    z-index:11;
+    z-index:30;
 }
 
 .scoreboard-inner h1{
@@ -1226,6 +1225,47 @@ footer {
 .active {
     display: flex;
 }
+
+/* check */
+.checked {
+    position: relative;
+}
+
+.checked img {
+    position: relative;
+    z-index: 1;
+}
+
+.checked::before {
+    content: "";
+    background: url('https://v1.kiosapp.kr/img/checked.19f6bddf.svg') no-repeat center center;
+    background-size: 15rem 15rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.payments-right-box img{
+    z-index: -1;
+}
+
+/* overlay */
+/* .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    pointer-events: none;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} */
+
 /* circleFirst */
 #circleFirst{
     position: absolute;
@@ -1238,4 +1278,42 @@ footer {
     text-align: center;
     line-height: 120px;
     color: #fff;
+}
+
+/* animation */
+.shadow-drop-2-center {
+    -webkit-animation: shadow-drop-2-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: shadow-drop-2-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@-webkit-keyframes shadow-drop-2-center {
+    0% {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+
+    100% {
+        -webkit-transform: translateZ(50px);
+        transform: translateZ(50px);
+        -webkit-box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
+        box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
+    }
+}
+
+@keyframes shadow-drop-2-center {
+    0% {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+
+    100% {
+        -webkit-transform: translateZ(50px);
+        transform: translateZ(50px);
+        -webkit-box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
+        box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
+    }
 }
