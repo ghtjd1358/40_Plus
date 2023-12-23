@@ -85,10 +85,17 @@
             background-color: #f5f5f5;
         }
 
+        input {
+            border-color: transparent;
+            background-color: transparent;
+            font-family: inherit;
+            outline: none;
+        }
+
         
     </style>
 </head>
-<body id="add_body">
+<!-- <body id="add_body">
     <form name="addword">
         <div class="add_C">
             <input type="text" class="add-text" name="name" id="name" placeholder="단어 이름">
@@ -96,24 +103,51 @@
             <button id="addWord" type="button">등록</button>
         </div>
         <p id="result"></p>
-    </form>
-        <% if (words.length > 0) {%>
+    </form> -->
+    
+    
+    <% if (words.length > 0) {%>
+        <table>
+            <tr>
+                <th class="th-number">번호</th>
+                <th class="th-word">단어 명</th>
+                <th class="th-meaning">단어 뜻</th>
+                <th class="th-username">유저명</th>
+                <th class="th-time">등록일</th>
+                <th> 생성 날짜</th>
+            </tr>
         <% for (const word of words) {%>
-            <form method="post" action="/admin/confirmword" name="forms" data-number="<%= word.number %>">
-                <input type="text" name="number" value="<%= word.number %>"> </input>
-                <input type="text" name="userid" value="<%= word.userid %>"></input>
-                <input type="text" name="word" value="<%= word.word %>"></input>
-                <input type="text" name="meaning" value="<%= word.meaning %>"></input>
-                <input type="text" name="createdAt" value="<%= word.createdAt %>"></input>
-                <input type="text" hidden name="updatedAt" value="<%= word.updatedAt %>">
-                <button class="delete" type="button">삭제</button>
-                <button id="approve" >승인</button>
-           
+            <tr><form method="post" action="/admin/confirmword" name="forms" data-number="<%= word.number %>">
+                <th>
+                    <input type="text" name="number" value="<%= word.number %>" readonly> </input>
+                </th>
+                <th>
+                    <input type="text" name="userid" value="<%= word.userid %>" readonly></input>
+                </th>
+                <th>               
+                    <input type="text" name="word" value="<%= word.word %>" readonly></input>
+                </th>
+                <th>
+                    <input type="text" name="meaning" value="<%= word.meaning %>" readonly></input>
+                </th>
+                <th>
+                    <input type="text" name="createdAt" value="<%= word.createdAt %>" readonly></input>
+                </th>
+                <th>
+                    <input type="text" name="updatedAt" value="<%= word.updatedAt %>" readonly>
+                </th>
+                <th>
+                    <button class="delete" type="button">삭제</button>
+                    <button id="approve" >승인</button>
+                </th>
+            </tr>
             </form>
         <% } %>
+ 
         <% } else {%>
             <h1>등록된 단어가 없습니다.</h1>
             <% } %>
+ 
 
   <script>
     const deleteButtonElements = document.querySelectorAll('.delete');
