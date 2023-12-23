@@ -1,4 +1,4 @@
-const totalPages = 13;
+const totalPages = 14;
 const pages =  document.querySelectorAll('.page')
 let currentPage = 1;
 
@@ -10,7 +10,8 @@ let selectedDivs = [];
 
 
 // 페이지
-        showPage(currentPage);
+showPage(currentPage);
+      console.log('Current Page:', currentPage);
 
         function showPage() {
             pages.forEach(page => {
@@ -30,6 +31,7 @@ let selectedDivs = [];
             showPage(currentPage);
             randomScore(); 
             resetSelection();
+            endTimer();
         }
 
         // 이전 버튼
@@ -37,7 +39,6 @@ let selectedDivs = [];
             if (currentPage > 1) {
                 currentPage--;
                 showPage(currentPage);
-                goToPage12()
                 resetSelection();
             }
         }
@@ -47,9 +48,10 @@ let selectedDivs = [];
             const modal = document.getElementById('modal');
             modal.style.display = 'none';
             currentPage = 1;
-            showPage(currentPage);
+            showPage();
             score = 105;
             subsScore();
+            // removeChecked();
             resetSelection();
 }
         
@@ -63,8 +65,12 @@ let selectedDivs = [];
             progressBar.textContent = `진행 상황: ${mathProgress}%`;
 }
 
-        function checkAnswer(divNumber) {
-    if (divNumber % 2 !== 0 && selectedDivs.indexOf(divNumber) === -1) {
+
+
+
+//정답 체크 및 초기화
+    function checkAnswer(divNumber) {
+    if (divNumber % 2 == 1 && selectedDivs.indexOf(divNumber) === -1) {
         selectedDivs.push(divNumber);
         if (selectedDivs.length === 1) {
             nextPage();
@@ -142,27 +148,53 @@ setDrink.forEach(product => createProduct(product, 'setDrink1'));
 
 
 
-// 타이머
-let startTime;
-let endTime;
+// 10 page
+const paymentsBoxs = document.querySelectorAll('.payments1');
+// console.log(paymentsBoxs)
 
-// function startTimer() {
-//     startTime = new Date();
-// }
+// paymentsBoxs.forEach((paymentsBox,i) => {
+//     paymentsBox.addEventListener('click', () => {
+//         paymentsBoxs.forEach((paymentsBoxj) => {
+//             paymentsBoxj.classList.remove('checked');
+//         })
+//         paymentsBoxs[i].classList.add('checked')
+//     })
+// })
 
-// function endTimer() {
-//     endTime = new Date();
-//     const elapsedTime = (endTime - startTime) / 1000;
-//     console.log(`페이지 전환에 소요된 시간: ${elapsedTime}`);
-// }
+paymentsBoxs.forEach(paymentsBox => {
+     paymentsBox.addEventListener('click', () => {
+            paymentsBox.classList.add('checked');
+    })   
+})
 
-
-
-let int = setTimeout(page10, 5000);
-function page10() {
-    const page10Element = document.querySelector('#page10');
+function removeChecked() {
+    paymentsBoxs.forEach(paymentsBox => {
+        paymentsBox.classList.remove('checked')
+    })
 }
 
+
+
+
+// 12 -> 13 page
+const paymentsTable = document.querySelector('.payments-modal3-table > p');
+
+function timeTable() {
+    paymentsTable.textContent = '결제 진행 중입니다. 잠시만 기다려주세요';
+}
+
+function handleClick() {
+    nextPage();
+    setTimeout(timeTable, 3000);
+    goToPage12()
+}
+    
+function goToPage12() {
+    setTimeout(function() { 
+        currentPage = 13;
+        showPage();
+    }, 5000);  
+}
 
 
 
@@ -171,47 +203,67 @@ function randomScore() {
     let randomNumber = Math.floor(Math.random() * 1000 + 1);
     const orderScore = document.querySelector('.account > h2');
     orderScore.textContent = randomNumber;
-    console.log(randomNumber);
+    // console.log(randomNumber);
 } 
+
+// 타이머
+
+let startTime;
+let endTime;
+let elapsedTime;
+
+function startTimer() {
+    startTime = new Date();
+    nextPage();
+}
+
+function endTimer() {
+    endTime = new Date();
+    elapsedTime = Number(Math.floor((endTime - startTime) / 1000));
+    // console.log(`타입 : `,typeof elapsedTime)
+    // console.log(`시간: ${elapsedTime}`);
+    updateScoreBoard();
+}
 
 // 점수판
 function subsScore() {
     score >= subScore ? score -= subScore : score = 0;
-    console.log('현재 점수:', score);
-    UpdateScoreBoard();  
+    // console.log('현재 점수:', score);
+    updateScoreBoard();
 }
 
 const scoreboardBox = document.querySelector('.scoreboard-box');
 
-function UpdateScoreBoard() {  // 함수 이름 수정
+function updateScoreBoard() {
     const scoreText = score > 50 ? `매장에서도 주문 가능합니다.` : `<span>${score}</span>점으로는 아무 것도 할 수 없습니다.`;
-
+    
     scoreboardBox.innerHTML = `
         <h3>총 점수 : <span>${score}</span>점</h3>
         <h3>총 평가 : ${scoreText}</h3>
+        <h3>총 소요된 : ${elapsedTime}초 입니다.</h3>
     `;
 }
 
-subsScore()
 
-// 11page
-const paymentsTable = document.querySelector('.payments-modal3-table > p');
+subsScore();
 
-function timeTable() {
-    paymentsTable.textContent = '결제 진행 중입니다. 잠시만 기다려주세요';
-}
 
-function handleClick() {
-        checkAnswer(1);
-    setTimeout(timeTable, 3000);
-    goToPage12()
-}
-    
-function goToPage12() {
-    setTimeout(function() { 
-        currentPage = 12;
-        showPage();
-    }, 5000);  
-}
 
-//11 -> 12page 
+
+// animation
+// document.addEventListener('click', hoverTag);
+// document.addEventListener('mouseout', hoverTag);
+
+// function hoverTag(e) {
+//     let currentElement = e.target;
+
+//     if (currentElement.tagName === 'BUTTON') {
+//         currentElement.classList.toggle('shadow-drop-2-center', e.type === 'mouseover');
+//     } else if (currentElement.tagName === 'DIV') {
+//         currentElement.classList.toggle('shadow-drop-2-center', e.type === 'mouseover');
+//     }
+// }
+
+
+
+
