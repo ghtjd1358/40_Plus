@@ -377,6 +377,8 @@
             const addr = item.address || "N/A";
             const charge = item.charge || "N/A";
 
+            console.log(name);
+
             function addEvent() {
               const coll = document.getElementsByClassName("collapsible");
               for (let n = 0; n < coll.length; n++) {
@@ -393,10 +395,31 @@
               }
             }
 
-            const libraryDiv = document.createElement("div");
+            const cultureDiv = document.createElement("div");
+            cultureDiv.innerHTML =
+              `<p class="grey name"> <span class="material-symbols-outlined"> local_library </span> 도서관 ${[
+                i + 1,
+              ]} </p>` +
+              `<p class="white"> ${name} </p>` +
+              `<p class='grey'> <span class="material-symbols-outlined"> alternate_email </span>
+            주소</p>` +
+              `<p class="white">${addr}</p>` +
+              `<p class="grey"><span class="material-symbols-outlined"> home </span> 홈페이지
+              </p>` +
+              `<p><a href=${charge} class="white page"> 홈페이지 바로가기 </a></p>` +
+              `<button type="button" class="grey collapsible">
+              <span class="material-symbols-outlined"> stop_circle </span> 휴무일
+              </button>` +
+              `<div class="white content">
+                ${issuedDate}
+              </div>` +
+              `<button type="button" class="grey collapsible">
+              <span class="material-symbols-outlined"> schedule </span> 영업시간
+            </button>` +
+              `<div class="white content">${category3}</div>`;
 
-            libraryDiv.classList.add("culture");
-            dataElem.appendChild(libraryDiv);
+            cultureDiv.classList.add("culture");
+            dataElem.appendChild(cultureDiv);
 
             addEvent();
           }
