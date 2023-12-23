@@ -54,18 +54,16 @@ app.use("/word", wordRouter);
 app.use("/admin", blockAdminMiddleware, adminRouter);
 
 // API 관련
-const serviceKey = process.env.CULTUREAPISERVICEKEY; // .env
+const libraryKey = process.env.lIBRARYAPISERVICEKEY; // .env
 
-const key = "cc2b7e47274edbc8c38943c9c0dd105e0a026bc5ab7de6e0cb4ec27027a241e9";
-
-app.get("/cultureAPI", async (req, res) => {
+app.get("/libraryAPI", async (req, res) => {
   const { selectRegion, selectDtl } = req.query;
   console.log("region>", selectRegion);
   console.log("dtl>", selectDtl);
 
   const serviceUrl = "http://data4library.kr/api/extends/libSrch?";
 
-  let URI = encodeURI("authKey") + "=" + key;
+  let URI = encodeURI("authKey") + "=" + libraryKey;
   URI += "&" + encodeURI("pageNo") + "=" + encodeURI("1");
   URI += "&" + encodeURI("pageSize") + "=" + encodeURI("10");
   URI += "&" + encodeURI("region") + "=" + encodeURI(selectRegion);
@@ -74,6 +72,35 @@ app.get("/cultureAPI", async (req, res) => {
   const url = serviceUrl + URI;
 
   console.log(URI);
+
+  try {
+    const result = await axios.get(url);
+    const data = result.data;
+    res.json(data);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+const classKey = process.env.CULTUREAPISERVICEKEY; // .env
+
+app.get("/classAPI", async (req, res) => {
+  // const { selectRegion, selectDtl } = req.query;
+  // console.log("region>", selectRegion);
+  // console.log("dtl>", selectDtl);
+
+  const serviceUrl = "http://api.kcisa.kr/openapi/API_CIA_081/request?";
+
+  let URI = encodeURI("serviceKey") + "=" + classKey;
+  URI += "&" + encodeURI("numOfRows") + "=" + encodeURI("10");
+  URI += "&" + encodeURI("pageNo") + "=" + encodeURI("1");
+  URI += "&" + encodeURI("returnType") + "=" + encodeURI("XML");
+  // URI += "&" + encodeURI("region") + "=" + encodeURI(selectRegion);
+  // URI += "&" + encodeURI("dtl_region") + "=" + encodeURI(selectDtl);
+
+  const url = serviceUrl + URI;
+
+  console.log(url);
 
   try {
     const result = await axios.get(url);

@@ -7,51 +7,58 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="/static/css/header.css" />
     <link rel="stylesheet" href="/static/css/component.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
     <title>culture</title>
 
     <style>
       .main-content {
         display: flex;
         width: 80%;
+        /* height: 100%; */
         /* background-color: pink; */
         flex-wrap: wrap;
         align-items: center;
         /* justify-content: space-evenly; */
       }
 
-      .mainContent {
-        width: 80%;
-        display: flex;
-      }
-
       .culture {
         background-color: white;
         border: 1px solid var(--color-black-1);
         border-radius: var(--border-radius-medium);
-        box-shadow: 1px 1px var(--color-black-1);
+        /* box-shadow: 1px 1px var(--color-black-1); */
         width: 30%;
-        height: 350px;
+        height: auto;
+
+        min-height: 300px;
+        max-height: 900px;
         margin-left: 2rem;
         margin-top: 1rem;
         display: flex;
         flex-direction: column;
         padding: 0.25rem;
+        align-items: center;
         /* align-items: center; */
+        padding: 0;
       }
 
-      p {
-        margin-top: 0.25rem;
+      .title {
+        margin: 0 0 var(--space-5);
       }
+
       .terms {
         width: 500px;
         height: 80px;
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: var(--color-grey);
+        /* background-color: var(--color-grey-0); */
         border-radius: var(--border-radius-medium);
-        box-shadow: var(--shadow);
-        margin-top: var(--space-2);
+        /* box-shadow: var(--shadow); */
+        margin: 0 0 var(--space-5);
       }
 
       #regionForm > select {
@@ -62,17 +69,93 @@
 
         border: none;
       }
-      button {
-        border-radius: var(--border-radius-small);
+
+      option {
+        background-color: white;
+      }
+
+      .btnS {
         background-color: var(--color-orange-4);
-        color: white;
-        width: 60px;
+        color: var(--color-grey-0);
+        border: 1px solid var(--color-orange-3);
+        border-radius: var(--border-radius-small);
         height: 30px;
-        border: none;
+        width: 80px;
+        margin-left: var(--space-2);
       }
 
       span {
         font-weight: 700;
+        margin-left: var(--space-1);
+      }
+
+      .name {
+        margin-top: 0;
+        line-height: 3;
+        border-radius: var(--border-radius-medium) var(--border-radius-medium) 0
+          0;
+      }
+
+      p {
+        margin-top: var(--space-1);
+        font-size: 18px;
+      }
+      .grey {
+        background-color: var(--color-grey-0);
+        width: 100%;
+        text-align: left;
+        font-weight: 700;
+      }
+
+      .white {
+        width: 90%;
+        text-align: center;
+        /* font-weight: 700; */
+        margin-bottom: var(--space-1);
+      }
+
+      .page {
+        color: var(--color-orange-3);
+      }
+
+      .material-symbols-outlined {
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 2;
+      }
+
+      .content {
+        padding: 0 18px;
+        height: auto;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-out;
+        width: 90%;
+        text-align: center;
+        /* font-weight: 700; */
+        margin-bottom: var(--space-1);
+        font-size: 18px;
+      }
+      .content::after {
+        height: 700px;
+      }
+      .collapsible {
+        border: none;
+        font-size: 18px;
+      }
+      .collapsible:after {
+        content: "\2303";
+        transform: rotate(180deg);
+        border-radius: 0px;
+        line-height: 25px;
+        float: right;
+        margin-right: var(--space-1);
+      }
+      .active:after {
+        content: "\2303";
+        transform: rotate(360deg);
+        line-height: 25px;
+        margin-top: 5px;
       }
     </style>
   </head>
@@ -81,10 +164,10 @@
 
     <main class="container">
       <div class="space"></div>
-      <h1>전국 도서관 정보 안내</h1>
+      <h1 class="title">전국 도서관 정보 안내</h1>
       <div class="terms">
         <form
-          action="/cultureAPI"
+          action="/libraryAPI"
           name="regionForm"
           id="regionForm"
           onsubmit="submitForm(event)"
@@ -96,7 +179,9 @@
           </select>
           <select name="dtl_region" id="dtl_region"></select>
 
-          <button type="submit" onclick="submitForm(event)">불러오기</button>
+          <button type="submit" onclick="submitForm(event)" class="btnS">
+            불러오기
+          </button>
         </form>
       </div>
 
@@ -140,6 +225,21 @@
           newOption3.value = "21050";
           newOption3.textContent = "동래구";
           dtl_region.add(newOption3);
+        } else if (region.value === "31") {
+          const newOption1 = document.createElement("option");
+          newOption1.value = "31103";
+          newOption1.textContent = "일산 동구";
+          dtl_region.add(newOption1);
+
+          const newOption2 = document.createElement("option");
+          newOption2.value = "31104";
+          newOption2.textContent = "일산 서구";
+          dtl_region.add(newOption2);
+
+          const newOption3 = document.createElement("option");
+          newOption3.value = "31191";
+          newOption3.textContent = "용인시 처인구";
+          dtl_region.add(newOption3);
         }
       }
 
@@ -153,7 +253,7 @@
         const selectDtl = dtl_region.value;
 
         fetch(
-          `/cultureAPI?selectRegion=${selectRegion}&selectDtl=${selectDtl}`,
+          `/libraryAPI?selectRegion=${selectRegion}&selectDtl=${selectDtl}`,
           {
             method: "get",
             headers: {
@@ -212,23 +312,50 @@
             const close = libClose[i].textContent || "N/A";
             const time = libTime[i].textContent || "N/A";
 
-            const libraryDiv = document.createElement("div");
-            const libraryInfo = document.createElement("p");
-            libraryDiv.innerHTML =
-              `<p>-도서관명-</p>` +
-              `<p> ${name} </p>` +
-              `<p>-주소-</p>` +
-              `<p>${address}</p>` +
-              `<p>-홈페이지-</p>` +
-              `<p><a href=${page}> 홈페이지 바로가기 </a></p>` +
-              `<p>-휴무일-</p>` +
-              `<p>${close}</p>` +
-              `<p>-영업시간-</p>` +
-              `<p>${time}</p>`;
+            function addEvent() {
+              const coll = document.getElementsByClassName("collapsible");
+              for (let n = 0; n < coll.length; n++) {
+                coll[n].addEventListener("click", function () {
+                  this.classList.toggle("active");
+                  var content = this.nextElementSibling;
 
-            libraryDiv.appendChild(libraryInfo);
+                  if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                  } else {
+                    content.style.maxHeight = "300px";
+                  }
+                });
+              }
+            }
+
+            const libraryDiv = document.createElement("div");
+
+            libraryDiv.innerHTML =
+              `<p class="grey name"> <span class="material-symbols-outlined"> local_library </span> 도서관 ${[
+                i + 1,
+              ]} </p>` +
+              `<p class="white"> ${name} </p>` +
+              `<p class='grey'> <span class="material-symbols-outlined"> alternate_email </span>
+            주소</p>` +
+              `<p class="white">${address}</p>` +
+              `<p class="grey"><span class="material-symbols-outlined"> home </span> 홈페이지
+              </p>` +
+              `<p><a href=${page} class="white page"> 홈페이지 바로가기 </a></p>` +
+              `<button type="button" class="grey collapsible">
+              <span class="material-symbols-outlined"> stop_circle </span> 휴무일
+              </button>` +
+              `<div class="white content">
+                ${close}
+              </div>` +
+              `<button type="button" class="grey collapsible">
+              <span class="material-symbols-outlined"> schedule </span> 영업시간
+            </button>` +
+              `<div class="white content">${time}</div>`;
+
             libraryDiv.classList.add("culture");
             dataElem.appendChild(libraryDiv);
+
+            addEvent();
           }
         } catch (error) {
           console.error("Error parsing or displaying data:", error);
