@@ -97,12 +97,23 @@ exports.readAllComment = (req, res, next) => {
     });
 };
 
+//
+// 아래는 게시판 기능
+//
+
+exports.community = (req, res) => {
+  res.render("community/community");
+};
+
+exports.writeCommunity = (req, res) => {
+  res.render("community/write");
+};
+
 // community Search 부분 (제목, 내용, 글쓴이, 제목+내용)
 exports.searchCommunity = (req, res) => {
   let { selectValue, str } = req.body;
 
   if (selectValue == "writer") selectValue = "userid"; //작성자는 userid로 대응되어야함
-  console.log("selectVal > ", selectValue);
 
   if (
     selectValue == "userid" ||
