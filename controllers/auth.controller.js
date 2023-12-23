@@ -38,12 +38,12 @@ async function existsAlready(req, res, next) {
       isUnique: false,
     });
   }
-  let existingUser
-  try{
+  let existingUser;
+  try {
     existingUser = await User.findOne({
       where: { userid: req.body.userid },
     });
-  }catch(err) {
+  } catch (err) {
     return next(err);
   }
 
@@ -57,12 +57,12 @@ async function existsAlready(req, res, next) {
 async function signup(req, res) {
   const { userid, password, confirmPassword, name, isUnique } = req.body;
   let existingUser;
-  
+
   try {
     existingUser = await User.findOne({
       where: { userid: req.body.userid },
-    });   
-  }catch(err) {
+    });
+  } catch (err) {
     return next(err);
   }
 
@@ -108,7 +108,7 @@ async function signup(req, res) {
       name: name,
       password: hashPW,
     });
-  } catch(err) {
+  } catch (err) {
     return next(err);
   }
 
@@ -117,10 +117,10 @@ async function signup(req, res) {
 }
 
 function getLogin(req, res) {
-  if(!req.session.accessToken) {
+  if (!req.session.accessToken) {
     res.render("user/login");
   } else {
-    res.redirect('/401');
+    res.redirect("/401");
   }
 }
 
@@ -157,8 +157,8 @@ async function login(req, res, next) {
         where: { userid: userid },
       }
     );
-  }catch(err) {
-    return next(err)
+  } catch (err) {
+    return next(err);
   }
 
   res.json({ msg: "성공", isError: false });
