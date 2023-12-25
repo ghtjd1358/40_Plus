@@ -102,11 +102,32 @@ exports.readAllComment = (req, res, next) => {
 //
 
 exports.community = (req, res) => {
-  res.render("community/community");
+  // 렌더될 때 커뮤니티 테이블에서 가져와서 출력해야함
+
+  CommunityTable.findAll({ raw: true }).then((result) => {
+    console.log("community load > ", result);
+    res.render("community/community", { communityData: result });
+  });
 };
 
 exports.writeCommunity = (req, res) => {
   res.render("community/write");
+};
+
+exports.readCommunity = (req, res) => {
+  const number = req.query.number;
+
+  CommunityTable.findOne({ where: { number: number } }).then((result) => {
+    res.render("community/read", { data: result.dataValues });
+  });
+};
+
+exports.detailCommunityPage = (req, res) => {
+  const number = req.body.number;
+
+  CommunityTable.findOne({ where: { number: number } }).then((result) => {
+    res.send(result);
+  });
 };
 
 // community Search 부분 (제목, 내용, 글쓴이, 제목+내용)
