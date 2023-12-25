@@ -14,6 +14,13 @@
     />
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    
+    <!-- 테이블 클릭 할 시 링크이동을 위한 스타일 -->
+    <style>
+      table tr {
+        cursor: pointer;
+      }
+    </style>
 
     <title>커뮤니티 게시판</title>
   </head>
@@ -32,20 +39,15 @@
           <th class="th-check">조회</th>
           <th class="th-time">작성일</th>
         </tr>
-        <tr>
-          <td>1</td>
-          <td>배고프다</td>
-          <td>홍길동</td>
-          <td>0</td>
-          <td></td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>점심 뭐 먹지</td>
-          <td>ㄴㄴㄴ</td>
-          <td>0</td>
-          <td></td>
-        </tr>
+        <% communityData.forEach((data) => { %>
+          <tr onclick="detailCommunityPage('<%= data.number %>')">
+              <td><%= data.number %></td>
+              <td><%= data.title %></td>
+              <td><%= data.userid %></td>
+              <td><%= data.views %></td>
+              <td><%= data.createdAt %></td>
+          </tr>
+      <% }); %>
       </table>
       <form>
         <div class="add-C">
@@ -72,13 +74,27 @@
         <button id="search-button" onclick="searchCommunity()">검색</button>
       </div>
     </div>
-    <script src="/static/javaScript/board.js"></script>
+    <script src="/static/javaScript/community.js"></script>
     <title>community</title>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="/static/css/header.css" />
     <link rel="stylesheet" href="/static/css/component.css" />
+
+    <script>
+      // 글 조회 시 세부 페이지 이동
+      function detailCommunityPage(postNumber){
+        axios({
+          method: "post",
+          url: "/detailCommunityPage",
+          data: { number: parseInt(postNumber) }, // 객체 형태로 전달
+        }).then((result) => {
+          location.href = "/readCommunity?number=" + JSON.stringify(result.data.number);
+        })
+      }
+    </script>
   </head>
   <body>
+
     <%- include("../component/header")%>
 
     <main class="container"></main>
