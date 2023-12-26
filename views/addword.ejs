@@ -8,8 +8,11 @@
     <link rel="stylesheet" href="/static/css/addword.css" />
     <link rel="stylesheet" href="/static/css/sidebarHeader.css" />
     <title>단어 추가</title>
-  </head>
-  <body id="add_body">
+</head>
+<body id="add_body">
+    <%- include('./component/header.ejs') %>
+    <main>
+
     <div>
         <form name="addword">
             <div class="add-C">
@@ -76,6 +79,8 @@
         <!-- 페이징 추가 될 공간 -->
       </div>
     </div>
+            
+</main>
     <script>
       // 밑에거를 토대로 개수 만들기
       let words = "<%- JSON.stringify(words) %>";
@@ -91,6 +96,6 @@
       }
     </script>
     <script src="/static/javaScript/addword.js" defer></script>
-    <script src="/static/javaScript/sidebar.js"></script>
-  </body>
+    <%- include('./component/footer.ejs') %>
+</body>
 </html>
