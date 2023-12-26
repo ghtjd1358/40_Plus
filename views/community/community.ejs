@@ -28,7 +28,7 @@
     <div>
       <form>
         <div class="add-C">
-          <button>글쓰기</button>
+          <button type="button" onclick="writeCommunity()">글쓰기</button>
         </div>
       </form>
       <table>
@@ -51,7 +51,7 @@
       </table>
       <form>
         <div class="add-C">
-          <button>글쓰기</button>
+          <button type="button" onclick="writeCommunity()">글쓰기</button>
         </div>
       </form>
       <div class="paging" id="paging">
@@ -91,6 +91,12 @@
           location.href = "/readCommunity?number=" + JSON.stringify(result.data.number);
         })
       }
+
+      // 글쓰기 페이지 이동
+      function writeCommunity() {
+        window.location.href = "/writeCommunity";
+      }
+
     </script>
   </head>
   <body>

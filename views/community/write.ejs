@@ -96,14 +96,21 @@
         const title = form.title.value;
         const content = form.content.value;
 
-        axios({
-          method: "post",
-          url: "/communityPost",
-          data: {
-            title: title,
-            content: content,
-          },
-        });
+        if (content != "") {
+          axios({
+            method: "post",
+            url: "/writeCommunity",
+            data: {
+              title: title,
+              content: content,
+            },
+          }).then((result) => {
+            location.href = "/community";
+            console.log("axios then");
+          });
+        } else {
+          alert("내용 또는 제목을 입력하세요");
+        }
       }
     </script>
   </body>
