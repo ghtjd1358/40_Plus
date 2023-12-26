@@ -220,10 +220,10 @@
 
       // 글 삭제 버튼
       function deleteCommunity(number) {
+        console.log("delete num > ", number);
         axios({
           method: "delete",
-          url: "/deleteCommunity",
-          data: parseInt(number),
+          url: `/deleteCommunity/${number}`, // URL에 number를 포함
         }).then((result) => {
           console.log("delete comm axios then", result);
           location.href = "/community";

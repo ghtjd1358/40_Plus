@@ -201,14 +201,17 @@ exports.communityPost = (req, res) => {
 };
 
 // 글 삭제
+// 컨트롤러에서는 req.params.number로 해당 값을 읽어옴
 exports.deleteCommunity = (req, res) => {
-  const number = req.body.number;
+  const number = req.params.number;
+  console.log("controller delete num >", number);
 
   CommunityTable.destroy({
     where: {
-      number: number,
+      number: parseInt(number),
     },
   }).then((result) => {
     console.log("delete DB 성공");
+    res.send({ success: true });
   });
 };
