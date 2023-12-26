@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .btn {
+            font-size: 20px;
+            position: relative;
+            width: 100px;
+            height: 50px;
+            border-radius: 5px;
+            cursor: pointer;
+            overflow: hidden;
+            background-color: white;
+            box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.8);
+        }
+        .btn:hover::before {
+            position: absolute;
+            content: "";
+            background-color: rgb(145, 145, 253);
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            animation: fill 0.5s;
+            animation-timing-function: linear;
+        }
+        @keyframes fill {
+            0% {
+                left: -100%;
+                width: 0px;
+                height: 0px;
+                border-bottom: 250px solid white;
+                border-left: 120px solid transparent;
+                border-right: 120px solid white;
+            }
+            50% {
+                left: -50%;
+                width: 0px;
+                height: 0px;
+            }
+            100% {
+                left: 0%;
+                width: 0px;
+                height: 0px;
+                border-bottom: 360px solid white;
+                border-left: 180px solid transparent;
+                border-right: 180px solid white;
+            }
+        }
+        .text {
+            position: relative;
+            z-index: 2;
+        }
+        .btn:hover .text {
+            animation: colorchange 0.5s linear forwards;
+        }
+        @keyframes colorchange {
+            50% {
+                color: white;
+            }
+            100% {
+                color: white;
+            }
+        }
+        * {
+            cursor: url(../pngegg.png) 5 5, auto;
+        }
+    </style>
+</head>
+<body>
+    <button class="btn"><span class="text">버튼</span></button>
+</body>
+</html>
