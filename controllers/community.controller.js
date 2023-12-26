@@ -55,6 +55,7 @@ exports.writeComment = (req, res, next) => {
       foreign_number: parseInt(number),
     }).then((result) => {
       console.log("댓글 추가 > ", result);
+      res.send("fg");
     });
   }
 };
@@ -116,12 +117,24 @@ exports.writeCommunity = (req, res) => {
   res.render("community/write");
 };
 
-exports.readCommunity = (req, res) => {
+exports.readCommunity = async (req, res) => {
   const number = req.query.number;
+  let data;
 
-  CommunityTable.findOne({ where: { number: number } }).then((result) => {
-    console.log("read comm > ", result.dataValues);
-    res.render("community/read", { data: result.dataValues });
+  await CommunityTable.findOne({ where: { number: number } }).then(
+    (resultCommunity) => {
+      console.log("read comm > ", resultCommunity.dataValues);
+      data = resultCommunity.dataValues;
+    }
+  );
+
+  // data2는 list로 들어옴
+  let data2 = await CommentTable.findAll({ where: { foreign_number: number } });
+
+  console.log(data, data2);
+  res.render("community/read", {
+    data: data,
+    data2: data2,
   });
 };
 
@@ -174,6 +187,7 @@ exports.searchCommunity = (req, res) => {
 exports.communityPost = (req, res) => {
   const { title, content } = req.body;
   console.log("community post > ", title, content);
+  console.log("req userid > ", req.session.userid);
 
   if (req.session.userid != "") {
     CommunityTable.create({
@@ -184,7 +198,5 @@ exports.communityPost = (req, res) => {
       console.log("post create");
       res.send({ createSuccess: true });
     });
-  } else {
-    res.send({ createSuccess: false });
   }
 };
