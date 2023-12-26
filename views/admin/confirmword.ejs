@@ -7,56 +7,37 @@
     <title>단어 승인</title>
     <style>
         #add_body {
-            font-family: 'Arial', sans-serif;
             background-color: #f5f5f5;
-            margin: 0;
-            /* display: block; */
+            margin-top: 10vh;
             display: flex;
             justify-content: center;
-            /* align-items: center; */
+            align-items: center;
         }
-        
-        /* 입력 칸 div */
-        .add_C {
-            display: flex;
-            display: block;
-            justify-content: center;
-            text-align: center;
-            margin: 20px;
-            border: 1px solid black;
-            
-        }
-
-        .add-text {
-            padding: 10px;
-            width: 150px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin-right: 10px;
-        }
-
         /* DB 표 */
         table {
+            /* position: absolute; */
             width: 80vw;
-            border-collapse: collapse;  /* 표 테두리 단선으로 */
+            border-collapse: collapse; 
             background-color: #fff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
             overflow: hidden;
             margin-top: 20px;
             text-align: center;
+            margin-bottom: 20px;
         }
 
         th, td {
-            padding: 15px;
             border-bottom: 1px solid #ddd;
-            position: relative;
+            padding: 15px;
         }
 
         th {
-            background-color: #4CAF50;
+            background-color: #4409c6;
             color: white;
+            top: 0;
         }
+        
 
         th:not(:first-child)::before,
         td:not(:first-child)::before {
@@ -80,74 +61,67 @@
             width: 1px;
             background-color: #ddd;
         }
-
+        
         tr:hover {
-            background-color: #f5f5f5;
+            background-color: #e6e6e6;
         }
 
         input {
-            border-color: transparent;
+            border: none;
             background-color: transparent;
             font-family: inherit;
             outline: none;
+            text-align: center;
+            font-size: larger;
+            width: 100%;
         }
 
         
     </style>
 </head>
-<!-- <body id="add_body">
-    <form name="addword">
-        <div class="add_C">
-            <input type="text" class="add-text" name="name" id="name" placeholder="단어 이름">
-            <input type="text" class="add-text" name="mean" id="mean" placeholder="해설"> <br>
-            <button id="addWord" type="button">등록</button>
-        </div>
-        <p id="result"></p>
-    </form> -->
-    
-    
-    <% if (words.length > 0) {%>
-        <table>
-            <tr>
-                <th class="th-number">번호</th>
-                <th class="th-word">단어 명</th>
-                <th class="th-meaning">단어 뜻</th>
-                <th class="th-username">유저명</th>
-                <th class="th-time">등록일</th>
-                <th> 생성 날짜</th>
-            </tr>
-        <% for (const word of words) {%>
-            <tr><form method="post" action="/admin/confirmword" name="forms" data-number="<%= word.number %>">
-                <th>
-                    <input type="text" name="number" value="<%= word.number %>" readonly> </input>
-                </th>
-                <th>
-                    <input type="text" name="userid" value="<%= word.userid %>" readonly></input>
-                </th>
-                <th>               
-                    <input type="text" name="word" value="<%= word.word %>" readonly></input>
-                </th>
-                <th>
-                    <input type="text" name="meaning" value="<%= word.meaning %>" readonly></input>
-                </th>
-                <th>
-                    <input type="text" name="createdAt" value="<%= word.createdAt %>" readonly></input>
-                </th>
-                <th>
-                    <input type="text" name="updatedAt" value="<%= word.updatedAt %>" readonly>
-                </th>
-                <th>
-                    <button class="delete" type="button">삭제</button>
-                    <button id="approve" >승인</button>
-                </th>
-            </tr>
-            </form>
-        <% } %>
- 
-        <% } else {%>
-            <h1>등록된 단어가 없습니다.</h1>
+<body id="add_body">
+        <% if (words.length > 0) {%>
+            <table>
+                <tr>
+                    <th class="th-number">번호</th>
+                    <th class="th-word">단어 명</th>
+                    <th class="th-meaning">단어 뜻</th>
+                    <th class="th-username">유저명</th>
+                    <th class="th-time">등록일</th>
+                    <th>생성 날짜</th>
+                    <th></th>
+                </tr>
+            <% for (const word of words) {%>
+                <tr><form method="post" action="/admin/confirmword" name="forms" data-number="<%= word.number %>">
+                    <td>
+                        <input type="text" name="number" value="<%= word.number %>" readonly> </input>
+                    </td>
+                    <td>
+                        <input type="text" name="userid" value="<%= word.userid %>" readonly></input>
+                    </td>
+                    <td>               
+                        <input type="text" name="word" value="<%= word.word %>" readonly></input>
+                    </td>
+                    <td>
+                        <input type="text" name="meaning" value="<%= word.meaning %>" readonly></input>
+                    </td>
+                    <td>
+                        <input type="text" name="createdAt" value="<%= word.createdAt %>" readonly></input>
+                    </td>
+                    <td>
+                        <input type="text" name="updatedAt" value="<%= word.updatedAt %>" readonly>
+                    </td>
+                    <td>
+                        <button id="approve" >승인</button>
+                        <button class="delete" type="button">삭제</button>
+                    </td>
+                </tr>
+                </form>
             <% } %>
- 
+     
+            <% } else {%>
+                <h1>등록된 단어가 없습니다.</h1>
+                <% } %>
 
   <script>
     const deleteButtonElements = document.querySelectorAll('.delete');
