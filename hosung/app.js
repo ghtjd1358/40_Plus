@@ -11,28 +11,22 @@ app.use(express.json());
 
 
 app.get('/', (req, res) => {
-    res.render('index')
+  res.render('index')
 });
 
 
 app.get('/kiosk', (req, res) => {
-    res.render('kiosk')
-});
-
-app.get('/', (req, res) => {
-  res.render('index', {
-    imagePath: (imageName) => `/img/${imageName}`
-  });
+  res.render('kiosk')
 });
 
 
 app.get('/word', (req, res) => {
-    res.render('word')
+  res.render('word')
 });
 
 
 app.listen(PORT, () => {
-    console.log(`http://localhost:${PORT}`);
+  console.log(`http://localhost:${PORT}`);
 })
 
 
