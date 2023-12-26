@@ -146,13 +146,16 @@
     <div class="big-C">
       <div class="small-C">
         <div class="title"><%= data.title %></div>
+        <button type="button" onclick="deleteCommunity('<%= data.number %>')">
+          삭제버튼
+        </button>
         <hr />
         <div class="meta-info">
           <span class="user-name"><%= data.userid %></span>
           <span class="space"> | </span>
           <span class="date">2023년 12월 23일</span>
           <span class="views">조회수: 120</span>
-          <span class="comments">댓글: 5</span>
+          <span class="comments">댓글: <%= data2.length %></span>
         </div>
         <hr />
         <div class="content"><%= data.content %></div>
@@ -174,8 +177,8 @@
           <% if (data2.length) {%> <% for (const dat of data2) {%>
           <div class="comment">
             <div class="comment-user"><%= dat.userid %></div>
-            <div class="comment-date">2023년 12월 23일</div>
-            <div class="comment-content"><%= data.content %></div>
+            <div class="comment-date">날짜입니다..</div>
+            <div class="comment-content"><%= dat.content %></div>
           </div>
           <% } %> <% } else { %>
           <div class="comment">
@@ -213,6 +216,18 @@
           alert("댓글을 입력하세요");
           location.href = `/readCommunity?number=${parseInt(number)}`;
         }
+      }
+
+      // 글 삭제 버튼
+      function deleteCommunity(number) {
+        axios({
+          method: "delete",
+          url: "/deleteCommunity",
+          data: parseInt(number),
+        }).then((result) => {
+          console.log("delete comm axios then", result);
+          location.href = "/community";
+        });
       }
     </script>
   </body>

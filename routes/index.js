@@ -45,6 +45,9 @@ router.get("/writeCommunity", controller.writeCommunity);
 router.get("/readCommunity", controller.readCommunity);
 router.post("/detailCommunityPage", controller.detailCommunityPage);
 
+// 글 삭제
+router.delete("/deleteCommunity", controller.deleteCommunity);
+
 // 댓글 관련
 router.post("/writeComment", controller.writeComment);
 
