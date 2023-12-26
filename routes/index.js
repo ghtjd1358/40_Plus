@@ -50,5 +50,6 @@ router.delete("/deleteCommunity/:number", controller.deleteCommunity);
 
 // 댓글 관련
 router.post("/writeComment", controller.writeComment);
+router.post("/likeComment", controller.likeComment);
 
 module.exports = router;
