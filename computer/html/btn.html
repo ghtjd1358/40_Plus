@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        * {
+            cursor: url(../basic.png) 10 10, auto;
+        }
         .btn {
             font-size: 20px;
             position: relative;
             width: 100px;
             height: 50px;
             border-radius: 5px;
-            cursor: pointer;
+            cursor: url(../pointer.png) 10 10, auto;
             overflow: hidden;
             background-color: white;
             box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.8);
@@ -52,6 +55,7 @@
         }
         .text {
             position: relative;
+            cursor: url(../pointer.png) 10 10, auto;
             z-index: 2;
         }
         .btn:hover .text {
@@ -64,9 +68,6 @@
             100% {
                 color: white;
             }
-        }
-        * {
-            cursor: url(../pngegg.png) 5 5, auto;
         }
     </style>
 </head>
