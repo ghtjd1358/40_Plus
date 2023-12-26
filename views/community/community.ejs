@@ -94,6 +94,12 @@
 
       // 글쓰기 페이지 이동
       function writeCommunity() {
+
+        if(!'<%= locals.userid%>'){
+          alert("로그인이 필요합니다.");
+          return location.href = "/login"
+        }
+
         window.location.href = "/writeCommunity";
       }
 

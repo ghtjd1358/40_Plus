@@ -161,27 +161,29 @@
           <form name="comment-form">
             <div class="comment-form">
               <textarea placeholder="댓글을 입력하세요" name="write"></textarea>
-              <button onclick="writeComment('<%= data.number %>')">
+              <button
+                type="button"
+                onclick="writeComment('<%= data.number %>')"
+              >
                 댓글 등록
               </button>
             </div>
           </form>
           <hr class="comments-hr" />
+
+          <% if (data2.length) {%> <% for (const dat of data2) {%>
           <div class="comment">
-            <div class="comment-user">댓글 작성자</div>
+            <div class="comment-user"><%= dat.userid %></div>
             <div class="comment-date">2023년 12월 23일</div>
-            <div class="comment-content">댓글 내용이 여기에 들어갑니다.</div>
+            <div class="comment-content"><%= data.content %></div>
           </div>
+          <% } %> <% } else { %>
           <div class="comment">
-            <div class="comment-user">댓글 작성자</div>
             <div class="comment-date">2023년 12월 23일</div>
-            <div class="comment-content">댓글 내용이 여기에 들어갑니다.</div>
+            <div class="comment-content">댓글이 없어요</div>
           </div>
-          <div class="comment">
-            <div class="comment-user">댓글 작성자</div>
-            <div class="comment-date">2023년 12월 23일</div>
-            <div class="comment-content">댓글 내용이 여기에 들어갑니다.</div>
-          </div>
+
+          <% } %>
         </div>
       </div>
     </div>
@@ -191,8 +193,6 @@
       function writeComment(number) {
         const form = document.forms["comment-form"];
         const content = form.write.value;
-        console.log("number > ", number);
-        console.log("number type > ", typeof number);
 
         if (content != "") {
           axios({
@@ -204,9 +204,7 @@
             },
           })
             .then((result) => {
-              console.log("axios 응답 코드:", result.status);
-              console.log("axios 응답 데이터:", result.data);
-              // location.href = `/readCommunity?number=${number}`;
+              location.href = `/readCommunity?number=${number}`;
             })
             .catch((error) => {
               console.error("axios 에러:", error);

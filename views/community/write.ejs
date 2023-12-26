@@ -85,7 +85,9 @@
             <label for="content">내용</label>
             <textarea id="content" placeholder="내용을 입력하세요"></textarea>
           </div>
-          <button class="submit-btn" type="button" onclick="submitPost()">작성완료</button>
+          <button class="submit-btn" type="button" onclick="submitPost()">
+            작성완료
+          </button>
         </div>
       </div>
     </form>
@@ -105,14 +107,7 @@
               content: content,
             },
           }).then((result) => {
-
-
-            if (result.data.createSuccess) {
-              // 포스팅 성공 -> 페이지 이동 필요
-              location.href = "/community";
-            } else {
-              // 포스팅 실패 -> 메인화면으로
-            }
+            location.href = "/community";
           });
         } else {
           alert("내용 또는 제목을 입력하세요");
