@@ -7,11 +7,18 @@
     <title>main page</title>
 
     <link rel="stylesheet" href="/static/css/component.css" />
-</head>
-<body>
+  </head>
+  <body>
     <!-- header -->
 
-    <h1>404 error! 잘못된 주소입니다.</h1>
-    <%- include('./footer')%>
-</body>
+    <main class="container">
+      <img src="/static/css/logo2.png" alt="" class="logo" />
+      <h1>404 error! 잘못된 주소입니다.</h1>
+      <p>원하시는 페이지의 주소가 잘못되었거나,</p>
+      <p>주소 변경 혹은 삭제로 인해 사용하실 수 없습니다.</p>
+
+      <p>주소를 다시 확인해주시거나, 메인 화면으로 이동해주세요!</p>
+      <a href="/"> 메인화면 이동하기 </a>
+    </main>
+  </body>
 </html>

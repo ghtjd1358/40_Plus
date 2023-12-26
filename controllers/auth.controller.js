@@ -11,6 +11,10 @@ function getIndex(req, res) {
   res.render("index");
 }
 
+const kiosk = (req, res) => {
+  res.render("kiosk");
+};
+
 const culture = (req, res) => {
   res.render("culture");
 };
@@ -186,4 +190,5 @@ module.exports = {
   library: library,
   dayClass: dayClass,
   community: community,
+  kiosk: kiosk,
 };
