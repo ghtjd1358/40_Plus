@@ -38,7 +38,7 @@ router.get("/community", controller.community);
 router.post("/searchCommunity", controller.searchCommunity);
 
 // 글 작성하기
-router.post("/writeCommunity", controller.communityPost);
+router.post("/submitCommunity", controller.communityPost);
 router.get("/writeCommunity", controller.writeCommunity);
 
 // 글 읽기

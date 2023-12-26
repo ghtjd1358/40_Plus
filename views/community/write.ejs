@@ -99,14 +99,20 @@
         if (content != "") {
           axios({
             method: "post",
-            url: "/writeCommunity",
+            url: "/submitCommunity",
             data: {
               title: title,
               content: content,
             },
           }).then((result) => {
-            location.href = "/community";
             console.log("axios then");
+
+            if (result.data.createSuccess) {
+              // 포스팅 성공 -> 페이지 이동 필요
+              location.href = "/community";
+            } else {
+              // 포스팅 실패 -> 메인화면으로
+            }
           });
         } else {
           alert("내용 또는 제목을 입력하세요");
