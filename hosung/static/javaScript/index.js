@@ -6,8 +6,8 @@ window.addEventListener('scroll', fixNav)
 
 function fixNav() {
   const scrolled = window.scrollY > nav.offsetHeight + 150
-    // nav.classList.add('active') : nav.classList.remove('active')
-    nav.classList.toggle('active', scrolled);
+  // nav.classList.add('active') : nav.classList.remove('active')
+  nav.classList.toggle('active', scrolled);
 }
 
 //--------------------------------------------------
@@ -64,8 +64,8 @@ function prevSlide() {
 function setActiveSlide() {
   slides.forEach((slide, i) => {
     activeSlide === i ? slide.classList.add('active') : slide.classList.remove('active');
-      activeSlide === i ? lis[i].classList.add('on') : lis[i].classList.remove('on');
-  });  
+    activeSlide === i ? lis[i].classList.add('on') : lis[i].classList.remove('on');
+  });
 }
 
 lis.forEach((li, i) => {
@@ -91,15 +91,15 @@ leftBtn.addEventListener('click', prevSlide);
 //   navUls.forEach(navUl => {
 //     navUl.classList.toggle('active', scrolled)
 // });
-  
+
 
 document.addEventListener('mouseover', hoverTag);
 document.addEventListener('mouseout', hoverTag);
 
 function hoverTag(e) {
-    let currentElement = e.target;
+  let currentElement = e.target;
 
-    if (currentElement.tagName === 'BUTTON') {
-        currentElement.classList.toggle('shadow-drop-2-center', e.type === 'mouseover');
-    }
+  if (currentElement.tagName === 'BUTTON') {
+    currentElement.classList.toggle('shadow-drop-2-center', e.type === 'mouseover');
+  }
 }
