@@ -7,11 +7,17 @@
     <title>main page</title>
 
     <link rel="stylesheet" href="/static/css/component.css" />
-</head>
-<body>
+  </head>
+  <body>
     <!-- header -->
+    <main class="container">
+      <img src="/static/css/logo2.png" alt="" class="logo" />
+      <h1>500 error! 서버 에러 발생.</h1>
 
-    <h1>500 error! 서버 에러 발생.</h1>
-    <%- include('./footer')%>
-</body>
+      <p>서버 오류로 인해 이용에 불편을 드려 죄송합니다.</p>
+      <p>원활한 이용을 위해 메인화면으로 이동해주세요!</p>
+
+      <a href="/"> 메인화면 이동하기 </a>
+    </main>
+  </body>
 </html>

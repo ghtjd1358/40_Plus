@@ -131,7 +131,6 @@ exports.readCommunity = async (req, res) => {
   // data2는 list로 들어옴
   let data2 = await CommentTable.findAll({ where: { foreign_number: number } });
 
-  console.log(data, data2);
   res.render("community/read", {
     data: data,
     data2: data2,
@@ -199,4 +198,20 @@ exports.communityPost = (req, res) => {
       res.send({ createSuccess: true });
     });
   }
+};
+
+// 글 삭제
+// 컨트롤러에서는 req.params.number로 해당 값을 읽어옴
+exports.deleteCommunity = (req, res) => {
+  const number = req.params.number;
+  console.log("controller delete num >", number);
+
+  CommunityTable.destroy({
+    where: {
+      number: parseInt(number),
+    },
+  }).then((result) => {
+    console.log("delete DB 성공");
+    res.send({ success: true });
+  });
 };

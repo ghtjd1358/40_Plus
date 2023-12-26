@@ -165,11 +165,6 @@ header {
   border-top: 1px solid #fff;
 }
 
-.navUser {
-  display: flex;
-  justify-content: space-between;
-}
-
 /* footer 영역 CSS  */
 footer {
   background-color: var(--color-grey-0);
