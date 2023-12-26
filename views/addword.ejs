@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <link rel="stylesheet" href="/static/css/component.css">
-    <link rel="stylesheet" href="/static/css/addword.css">
+    <link rel="stylesheet" href="/static/css/component.css" />
+    <link rel="stylesheet" href="/static/css/addword.css" />
+    <link rel="stylesheet" href="/static/css/sidebarHeader.css" />
     <title>단어 추가</title>
-</head>
-<body id="add_body">
+  </head>
+  <body id="add_body">
     <div>
         <form name="addword">
             <div class="add-C">
@@ -46,19 +47,50 @@
         <div class="paging" id="paging">
             <!-- 페이징 추가 될 공간 -->
         </div>
+        <p id="result"></p>
+      </form>
+      <table>
+        <tr>
+          <th class="th-number">번호</th>
+          <th class="th-word">단어 명</th>
+          <th class="th-meaning">단어 뜻</th>
+          <th class="th-username">유저명</th>
+          <th class="th-time">등록일</th>
+        </tr>
+        <% if (words) {%> <% for (let i = 0; i <= 4; i++) {%> <% if (!words[i])
+        break; %>
+        <tr>
+          <td><%= words[i].number %></td>
+          <td><%= words[i].word%></td>
+          <td><%= words[i].meaning %></td>
+          <td><%= words[i].name %></td>
+          <td class="createdAt"><%= words[i].createdAt %></td>
+        </tr>
+        <% } %> <% } else{%>
+        <tr>
+          <td>아직 등록된 단어가 없습니다.</td>
+        </tr>
+        <% } %>
+      </table>
+      <div class="paging" id="paging">
+        <!-- 페이징 추가 될 공간 -->
+      </div>
     </div>
     <script>
-        // 밑에거를 토대로 개수 만들기
-        let words = '<%- JSON.stringify(words) %>';
-        words = JSON.parse(words);
-        const createAtElements = document.querySelectorAll('.createdAt');
-        
-        for (let i = 0; i < 5; i++) {
-            const date = new Date(words[i].createdAt);
-            const realDay = `${date.getFullYear()}년 ${date.getMonth()+1}월 ${date.getDate()}일 ${date.getHours()}시 ${date.getMinutes()}분`;
-            createAtElements[i].textContent = realDay; 
-        }
+      // 밑에거를 토대로 개수 만들기
+      let words = "<%- JSON.stringify(words) %>";
+      words = JSON.parse(words);
+      const createAtElements = document.querySelectorAll(".createdAt");
+
+      for (let i = 0; i < 5; i++) {
+        const date = new Date(words[i].createdAt);
+        const realDay = `${date.getFullYear()}년 ${
+          date.getMonth() + 1
+        }월 ${date.getDate()}일 ${date.getHours()}시 ${date.getMinutes()}분`;
+        createAtElements[i].textContent = realDay;
+      }
     </script>
     <script src="/static/javaScript/addword.js" defer></script>
-</body>
+    <script src="/static/javaScript/sidebar.js"></script>
+  </body>
 </html>
