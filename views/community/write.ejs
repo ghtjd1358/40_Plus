@@ -97,6 +97,8 @@
         const form = document.forms["post-form"];
         const title = form.title.value;
         const content = form.content.value;
+        const date = getCurrentDate();
+        const view = 1; //글 생성은 조회수가 1임. (본인)
 
         if (content != "") {
           axios({
@@ -105,6 +107,8 @@
             data: {
               title: title,
               content: content,
+              date: date,
+              view: view,
             },
           }).then((result) => {
             location.href = "/community";
@@ -112,6 +116,22 @@
         } else {
           alert("내용 또는 제목을 입력하세요");
         }
+      }
+
+      // 현재 시각 구하기
+      function getCurrentDate() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = now.getMonth() + 1; // 월은 0부터 시작하므로 1을 더함
+        const day = now.getDate();
+
+        // 날짜를 "YYYY-MM-DD" 형식의 문자열로 반환
+        const formattedDate = `${year}-${String(month).padStart(
+          2,
+          "0"
+        )}-${String(day).padStart(2, "0")}`;
+
+        return new Date(formattedDate);
       }
     </script>
   </body>

@@ -16,6 +16,14 @@ const Comment = (Sequelize, DataTypes) => {
         type: DataTypes.TEXT("medium"),
         allowNull: false,
       },
+      date: {
+        type: DataTypes.DATEONLY,
+        allowNull: false,
+      },
+      like: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
     },
     {
       //tableName: "Comment", //실제 DB 테이블 이름(만들어줄 테이블 이름)

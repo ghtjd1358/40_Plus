@@ -40,7 +40,7 @@ const { Op } = require("sequelize");
 
 //댓글 추가
 exports.writeComment = (req, res, next) => {
-  const { number, content } = req.body;
+  const { number, content, date, like } = req.body;
 
   console.log("writeComment 값 받기 > ", req.body);
   console.log(number, content);
@@ -53,6 +53,8 @@ exports.writeComment = (req, res, next) => {
       userid: req.session.userid,
       content: content,
       foreign_number: parseInt(number),
+      date: date,
+      like: like,
     }).then((result) => {
       console.log("댓글 추가 > ", result);
       res.send("fg");
@@ -121,6 +123,7 @@ exports.readCommunity = async (req, res) => {
   const number = req.query.number;
   let data;
 
+  // 글 하나 가져오기
   await CommunityTable.findOne({ where: { number: number } }).then(
     (resultCommunity) => {
       console.log("read comm > ", resultCommunity.dataValues);
@@ -128,7 +131,7 @@ exports.readCommunity = async (req, res) => {
     }
   );
 
-  // data2는 list로 들어옴
+  // data2는 list로 들어옴 -> 해당 글에 대한 모든 댓글
   let data2 = await CommentTable.findAll({ where: { foreign_number: number } });
 
   res.render("community/read", {
@@ -141,7 +144,15 @@ exports.detailCommunityPage = (req, res) => {
   const number = req.body.number;
 
   CommunityTable.findOne({ where: { number: number } }).then((result) => {
-    res.send(result);
+    //console.log("detail res", result.dataValues.view);
+    // view의 값이 db에서 반영되지 않음.
+    result.view += 1;
+    console.log("result > ", result.view);
+
+    result.save().then((updateRes) => {
+      console.log("save and update view", updateRes);
+      res.send(updateRes);
+    });
   });
 };
 
@@ -184,8 +195,8 @@ exports.searchCommunity = (req, res) => {
 };
 
 exports.communityPost = (req, res) => {
-  const { title, content } = req.body;
-  console.log("community post > ", title, content);
+  const { title, content, date, view } = req.body;
+  console.log("community post > ", title, content, date, view);
   console.log("req userid > ", req.session.userid);
 
   if (req.session.userid != "") {
@@ -193,6 +204,8 @@ exports.communityPost = (req, res) => {
       userid: req.session.userid,
       title: title,
       content: content,
+      date: date,
+      view: view,
     }).then((result) => {
       console.log("post create");
       res.send({ createSuccess: true });
@@ -213,5 +226,21 @@ exports.deleteCommunity = (req, res) => {
   }).then((result) => {
     console.log("delete DB 성공");
     res.send({ success: true });
+  });
+};
+
+// 댓글 좋아요 버튼 누를 시 카운트
+exports.likeComment = (req, res) => {
+  console.log("like comment > ", req.body);
+  const { userid, content } = req.body;
+
+  CommentTable.findOne({
+    where: { userid: userid, content: content },
+  }).then((result) => {
+    result.like += 1;
+
+    result.save().then((updateRes) => {
+      res.send(updateRes);
+    });
   });
 };
