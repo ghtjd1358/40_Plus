@@ -11,25 +11,41 @@
   </head>
   <body id="add_body">
     <div>
-      <form name="addword">
-        <div class="add-C">
-          <input
-            type="text"
-            class="add-text"
-            name="name"
-            id="name"
-            placeholder="단어 이름"
-          />
-          <br />
-          <input
-            type="text"
-            class="add-text"
-            name="mean"
-            id="mean"
-            placeholder="해설"
-          />
-          <br />
-          <button id="addWord" class="add-btn" type="button">등록</button>
+        <form name="addword">
+            <div class="add-C">
+                <input type="text" class="add-text" name="name" id="name" placeholder="단어 이름"> <br>
+                <input type="text" class="add-text" name="mean" id="mean" placeholder="해설"> <br>
+                <button id="addWord" class="add-btn" type="button">등록</button>
+            </div>
+            <p id="result"></p>
+        </form>
+        <table>
+            <tr>
+                <th class="th-number">번호</th>
+                <th class="th-word">단어 명</th>
+                <th class="th-meaning">단어 뜻</th>
+                <th class="th-username">유저명</th>
+                <th class="th-time">등록일</th>
+            </tr>
+            <% if (words) {%>
+            <% for (let i = 0; i < 5; i++) {%>
+                <% if (!words[i]) break; %>
+            <tr>
+                <td ><%= words[i].number %></td>
+                <td ><%= words[i].word%></td>
+                <td ><%= words[i].meaning %></td>
+                <td ><%= words[i].name %></td>
+                <td class="createdAt"><%= words[i].createdAt %></td>
+            </tr>
+            <% } %>
+            <% } else{%>
+            <tr>
+                <td>아직 등록된 단어가 없습니다.</td>
+            </tr>
+            <% } %>
+        </table>
+        <div class="paging" id="paging">
+            <!-- 페이징 추가 될 공간 -->
         </div>
         <p id="result"></p>
       </form>

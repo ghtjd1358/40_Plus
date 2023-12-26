@@ -38,6 +38,14 @@ router.get("/community", controller.community);
 router.post("/searchCommunity", controller.searchCommunity);
 
 // 글 작성하기
-router.post("/communityPost", controller.communityPost);
-router.get("/writeCommnunity", controller.writeCommunity);
+router.post("/submitCommunity", controller.communityPost);
+router.get("/writeCommunity", controller.writeCommunity);
+
+// 글 읽기
+router.get("/readCommunity", controller.readCommunity);
+router.post("/detailCommunityPage", controller.detailCommunityPage);
+
+// 댓글 관련
+router.post("/writeComment", controller.writeComment);
+
 module.exports = router;

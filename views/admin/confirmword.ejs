@@ -119,7 +119,7 @@
         <% for (const word of words) {%>
             <tr><form method="post" action="/admin/confirmword" name="forms" data-number="<%= word.number %>">
                 <th>
-                    <input type="text" name="number" value="<%= word.number %>" readonly> </input>
+                    <input type="text" name="number" id="number" value="<%= word.number %>" readonly> </input>
                 </th>
                 <th>
                     <input type="text" name="userid" value="<%= word.userid %>" readonly></input>
@@ -159,7 +159,7 @@
                 url: '/admin/confirmword',
                 method: 'delete',
                 data: {
-                    number: form.dataset.number
+                    number: document.querySelector('#number').value
                 }
             })
             location.href = '/admin/confirmword'

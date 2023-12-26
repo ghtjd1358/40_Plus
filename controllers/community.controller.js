@@ -40,73 +40,110 @@ const { Op } = require("sequelize");
 
 //댓글 추가
 exports.writeComment = (req, res, next) => {
-  const { foreign_number, content } = req.body;
+  const { number, content } = req.body;
 
   console.log("writeComment 값 받기 > ", req.body);
-  console.log(foreign_number, content);
-  CommentTable.create({
-    userid: req.session.userid,
-    content: content,
-    foreign_number: foreign_number,
-  })
-    .then((result) => {
+  console.log(number, content);
+  console.log("number type > ", typeof number);
+  console.log("session > ", req.session.userid);
+
+  if (content != "") {
+    //무플 방지..
+    CommentTable.create({
+      userid: req.session.userid,
+      content: content,
+      foreign_number: parseInt(number),
+    }).then((result) => {
       console.log("댓글 추가 > ", result);
-    })
-    .catch((error) => {
-      return next(error);
+      res.send("fg");
     });
+  }
 };
 
 // 댓글 읽어오기 -> foreign number(게시물 번호) 이용
-exports.readComment = (req, res, next) => {
-  console.log("req.body > ", req.body);
-  const number = req.body.number;
+// exports.readComment = (req, res, next) => {
+//   console.log("req.body > ", req.body);
+//   const number = req.body.number;
 
-  console.log("readComment number > ", number);
-  CommentTable.findAll({
-    where: { foreign_number: number },
-  })
-    .then((result) => {
-      const commentArray = [];
-      result.forEach((comment) => {
-        // commentArray = [userid, content] 배열
-        commentArray.push([
-          comment.dataValues.userid,
-          comment.dataValues.content,
-        ]);
-      });
+//   console.log("readComment number > ", number);
+//   CommentTable.findAll({
+//     where: { foreign_number: number },
+//   })
+//     .then((result) => {
+//       const commentArray = [];
+//       result.forEach((comment) => {
+//         // commentArray = [userid, content] 배열
+//         commentArray.push([
+//           comment.dataValues.userid,
+//           comment.dataValues.content,
+//         ]);
+//       });
 
-      console.log("Comment Array >  ", commentArray);
-      res.send({ commentArray: commentArray });
-    })
-    .catch((error) => {
-      return next(error);
-    });
-};
+//       console.log("Comment Array >  ", commentArray);
+//       res.send({ commentArray: commentArray });
+//     })
+//     .catch((error) => {
+//       return next(error);
+//     });
+// };
 
 // 임시 댓글 출력용
-exports.readAllComment = (req, res, next) => {
-  CommentTable.findAll({
-    raw: true,
-  })
-    .then((result) => {
-      console.log("All comment > ", result);
-    })
-    .catch((error) => {
-      return next(error);
-    });
-};
+// exports.readAllComment = (req, res, next) => {
+//   CommentTable.findAll({
+//     raw: true,
+//   })
+//     .then((result) => {
+//       console.log("All comment > ", result);
+//     })
+//     .catch((error) => {
+//       return next(error);
+//     });
+// };
 
 //
 // 아래는 게시판 기능
 //
 
 exports.community = (req, res) => {
-  res.render("community/community");
+  // 렌더될 때 커뮤니티 테이블에서 가져와서 출력해야함
+
+  CommunityTable.findAll({ raw: true }).then((result) => {
+    console.log("community load > ", result);
+    res.render("community/community", { communityData: result });
+  });
 };
 
 exports.writeCommunity = (req, res) => {
   res.render("community/write");
+};
+
+exports.readCommunity = async (req, res) => {
+  const number = req.query.number;
+  let data;
+
+  await CommunityTable.findOne({ where: { number: number } }).then(
+    (resultCommunity) => {
+      console.log("read comm > ", resultCommunity.dataValues);
+      data = resultCommunity.dataValues;
+    }
+  );
+
+  // data2는 list로 들어옴
+  let data2 = await CommentTable.findAll({ where: { foreign_number: number } });
+
+  console.log(data, data2);
+  res.render("community/read", {
+    data: data,
+    data2: data2,
+  });
+};
+
+exports.detailCommunityPage = (req, res) => {
+  const number = req.body.number;
+
+  CommunityTable.findOne({ where: { number: number } }).then((result) => {
+    res.send(result);
+  });
 };
 
 // community Search 부분 (제목, 내용, 글쓴이, 제목+내용)
@@ -150,12 +187,16 @@ exports.searchCommunity = (req, res) => {
 exports.communityPost = (req, res) => {
   const { title, content } = req.body;
   console.log("community post > ", title, content);
+  console.log("req userid > ", req.session.userid);
 
-  CommunityTable.create({
-    userid: req.session.userid,
-    title: title,
-    content: content,
-  }).then((result) => {
-    console.log("post create");
-  });
+  if (req.session.userid != "") {
+    CommunityTable.create({
+      userid: req.session.userid,
+      title: title,
+      content: content,
+    }).then((result) => {
+      console.log("post create");
+      res.send({ createSuccess: true });
+    });
+  }
 };
