@@ -158,10 +158,12 @@
         <div class="content"><%= data.content %></div>
         <hr />
         <div class="comments-area">
-          <form>
+          <form name="comment-form">
             <div class="comment-form">
-              <textarea placeholder="댓글을 입력하세요"></textarea>
-              <button>댓글 등록</button>
+              <textarea placeholder="댓글을 입력하세요" name="write"></textarea>
+              <button onclick="writeComment('<%= data.number %>')">
+                댓글 등록
+              </button>
             </div>
           </form>
           <hr class="comments-hr" />
@@ -183,5 +185,37 @@
         </div>
       </div>
     </div>
+
+    <script>
+      // 댓글 텍스트 전송
+      function writeComment(number) {
+        const form = document.forms["comment-form"];
+        const content = form.write.value;
+        console.log("number > ", number);
+        console.log("number type > ", typeof number);
+
+        if (content != "") {
+          axios({
+            method: "post",
+            url: "/writeComment",
+            data: {
+              number: parseInt(number),
+              content: content,
+            },
+          })
+            .then((result) => {
+              console.log("axios 응답 코드:", result.status);
+              console.log("axios 응답 데이터:", result.data);
+              // location.href = `/readCommunity?number=${number}`;
+            })
+            .catch((error) => {
+              console.error("axios 에러:", error);
+            });
+        } else {
+          alert("댓글을 입력하세요");
+          location.href = `/readCommunity?number=${parseInt(number)}`;
+        }
+      }
+    </script>
   </body>
 </html>
