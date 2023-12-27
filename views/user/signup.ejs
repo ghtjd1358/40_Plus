@@ -9,18 +9,34 @@
     <link rel="stylesheet" href="/static/css/component.css" />
 
     <style>
+      .container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        width: 100%;
+        height: calc(100vh - 120px);
+
+        /* border-top: 1px solid var(--color-grey-0); */
+
+        background-color: var(--color-grey-0);
+      }
+
       .signupContent {
         width: 700px;
         /* height: 700px; */
         background-color: var(--color-white-0);
+        height: auto;
 
         display: flex;
         align-items: center;
         flex-direction: column;
-        border-radius: var(--border-radius-medium);
+        border-radius: var(--border-radius-large);
         /* box-shadow: var(--shadow); */
         border: 2px solid var(--color-grey-0);
         /* margin-top: var(--space-1); */
+        margin-top: 50px;
       }
 
       #userid {
@@ -112,11 +128,9 @@
     </style>
   </head>
   <body>
-    <%- include("../component/header")%>
+    <header><%- include("../component/header")%></header>
 
     <main class="container">
-      <div class="space"></div>
-
       <div class="signupContent">
         <h1 class="title">회원가입</h1>
         <div class="signupBox">
@@ -209,5 +223,19 @@
 
     validCheckButtonElement.addEventListener("click", getIsValid);
     signUpButtonElement.addEventListener("click", signup);
+
+    function enterKey() {
+      const inputs = document.querySelectorAll("input");
+      inputs.forEach(function (input) {
+        input.addEventListener("keyup", function (event) {
+          if (event.keyCode === 13) {
+            event.preventDefault();
+            signup();
+          }
+        });
+      });
+    }
+
+    enterKey();
   </script>
 </html>
