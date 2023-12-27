@@ -74,10 +74,6 @@ html {
   height: 100px;
 }
 
-button {
-  cursor: pointer;
-}
-
 li {
   list-style: none;
 }
@@ -88,7 +84,7 @@ body {
 
 a {
   text-decoration: none;
-  cursor: pointer;
+  cursor: url(./img/pointer.png) 10 10, auto;
 }
 
 .btn {
@@ -197,9 +193,9 @@ footer {
 
 /* 메인 콘텐츠 영역 */
 
-/* 버튼 */
+/* 인풋창 */
 input {
-  cursor: pointer;
+  cursor: url(./img/pointer.png) 10 10, auto;
 }
 
 input:focus {

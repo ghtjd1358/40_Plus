@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="/static/css/component.css">
     <title>단어 승인</title>
     <style>
         #add_body {
@@ -15,21 +16,21 @@
         }
         /* DB 표 */
         table {
-            /* position: absolute; */
+            position: relative;
             width: 80vw;
             border-collapse: collapse; 
             background-color: #fff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
             overflow: hidden;
-            margin-top: 20px;
+            /* margin-top: 20px; */
             text-align: center;
             margin-bottom: 20px;
         }
-
         th, td {
             border-bottom: 1px solid #ddd;
             padding: 15px;
+            position: relative;
         }
 
         th {
@@ -37,19 +38,6 @@
             color: white;
             top: 0;
         }
-        
-
-        th:not(:first-child)::before,
-        td:not(:first-child)::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 1px;
-            background-color: #ddd;
-        }
-
         /* data 사이 간격 */
         th:not(:last-child)::after,
         td:not(:last-child)::after {
@@ -58,7 +46,7 @@
             right: 0;
             top: 0;
             height: 100%;
-            width: 1px;
+            width: 2px;
             background-color: #ddd;
         }
         
@@ -74,8 +62,14 @@
             text-align: center;
             font-size: larger;
             width: 100%;
+            cursor: url(/static/css/img/basic.png) 10 10, auto;
         }
-
+        .common-btn.approve:hover::before{
+            background-color: green;
+        }
+        .common-btn.delete:hover::before{
+            background-color: red;
+        }
         
     </style>
 </head>
@@ -92,9 +86,10 @@
                     <th></th>
                 </tr>
             <% for (const word of words) {%>
-                <tr><form method="post" action="/admin/confirmword" name="forms" data-number="<%= word.number %>">
+                <tr>
+                    <form method="post" action="/admin/confirmword" name="forms" data-number="<%= word.number %>">
                     <td>
-                        <input type="text" name="number" value="<%= word.number %>" readonly> </input>
+                        <input type="text" id="number" name="number" value="<%= word.number %>" readonly> </input>
                     </td>
                     <td>
                         <input type="text" name="userid" value="<%= word.userid %>" readonly></input>
@@ -112,58 +107,12 @@
                         <input type="text" name="updatedAt" value="<%= word.updatedAt %>" readonly>
                     </td>
                     <td>
-                        <button id="approve" >승인</button>
-                        <button class="delete" type="button">삭제</button>
+                        <button id="approve" class="common-btn approve"><span class="common-text">승인</span></button>
+                        <button class="common-btn delete" type="button"><span class="common-text">삭제</span></button>
                     </td>
+                    </form>
                 </tr>
-                </form>
-<!-- <body id="add_body">
-    <form name="addword">
-        <div class="add_C">
-            <input type="text" class="add-text" name="name" id="name" placeholder="단어 이름">
-            <input type="text" class="add-text" name="mean" id="mean" placeholder="해설"> <br>
-            <button id="addWord" type="button">등록</button>
-        </div>
-        <p id="result"></p>
-    </form> -->
-    
-    
-    <% if (words.length > 0) {%>
-        <table>
-            <tr>
-                <th class="th-number">번호</th>
-                <th class="th-word">단어 명</th>
-                <th class="th-meaning">단어 뜻</th>
-                <th class="th-username">유저명</th>
-                <th class="th-time">등록일</th>
-                <th> 생성 날짜</th>
-            </tr>
-        <% for (const word of words) {%>
-            <tr><form method="post" action="/admin/confirmword" name="forms" data-number="<%= word.number %>">
-                <th>
-                    <input type="text" name="number" id="number" value="<%= word.number %>" readonly> </input>
-                </th>
-                <th>
-                    <input type="text" name="userid" value="<%= word.userid %>" readonly></input>
-                </th>
-                <th>               
-                    <input type="text" name="word" value="<%= word.word %>" readonly></input>
-                </th>
-                <th>
-                    <input type="text" name="meaning" value="<%= word.meaning %>" readonly></input>
-                </th>
-                <th>
-                    <input type="text" name="createdAt" value="<%= word.createdAt %>" readonly></input>
-                </th>
-                <th>
-                    <input type="text" name="updatedAt" value="<%= word.updatedAt %>" readonly>
-                </th>
-                <th>
-                    <button class="delete" type="button">삭제</button>
-                    <button id="approve" >승인</button>
-                </th>
-            </tr>
-            </form>
+                
         <% } %>
  
         <% } else {%>
@@ -171,9 +120,6 @@
 
             <% } %>
      
-            <% } else {%>
-                <h1>등록된 단어가 없습니다.</h1>
-                <% } %>
 
   <script>
     const deleteButtonElements = document.querySelectorAll('.delete');

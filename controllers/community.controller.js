@@ -93,6 +93,37 @@ exports.deleteCommunity = (req, res) => {
   });
 };
 
+// 글 수정
+// 수정할 글을 전달
+exports.sendModifyCommunity = (req, res) => {
+  const { title, content, number } = req.body;
+  req.session.data = { title, content, number };
+
+  console.log("req session", req.session.data);
+  res.send("session store");
+};
+// 수정할 글을 세팅
+exports.reciveModifyCommunity = (req, res) => {
+  const data = req.session.data;
+
+  req.session.data = null;
+
+  console.log("recive > ", data);
+  res.render("community/modify", { data: data });
+};
+// 수정할 글 db에 전달
+exports.submitModifyCommunity = (req, res) => {
+  const { title, content, number } = req.body;
+  console.log("tttt", title, content, number);
+  // 데이터 수정
+  CommunityTable.update(
+    { title: title, content: content },
+    { where: { userid: req.session.userid, number: number } } // userid, 글 번호 number로 확인 후 수정
+  ).then((result) => {
+    res.send({ ddd: "ddd" });
+  });
+};
+
 // ///////////////// 댓글 부분
 
 // 댓글 좋아요 버튼 누를 시 카운트
