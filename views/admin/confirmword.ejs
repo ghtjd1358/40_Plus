@@ -81,8 +81,6 @@
                     <th class="th-word">단어 명</th>
                     <th class="th-meaning">단어 뜻</th>
                     <th class="th-username">유저명</th>
-                    <th class="th-time">등록일</th>
-                    <th>생성 날짜</th>
                     <th></th>
                 </tr>
             <% for (const word of words) {%>
@@ -100,12 +98,9 @@
                     <td>
                         <input type="text" name="meaning" value="<%= word.meaning %>" readonly></input>
                     </td>
-                    <td>
-                        <input type="text" name="createdAt" value="<%= word.createdAt %>" readonly></input>
-                    </td>
-                    <td>
-                        <input type="text" name="updatedAt" value="<%= word.updatedAt %>" readonly>
-                    </td>
+                        <input type="hidden" name="createdAt" value="<%= word.createdAt %>" readonly></input>
+                        <input type="hidden" name="updatedAt" value="<%= word.updatedAt %>" readonly>
+  
                     <td>
                         <button id="approve" class="common-btn approve"><span class="common-text">승인</span></button>
                         <button class="common-btn delete" type="button"><span class="common-text">삭제</span></button>
