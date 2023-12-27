@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/static/css/header.css" />
     <link rel="stylesheet" href="/static/css/component.css" />
 
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <style>
       .container {
         position: relative;
@@ -217,7 +219,13 @@
       });
       resultElement.textContent = res.data.msg;
       if (!res.data.isError) {
-        location.href = "/";
+        swal(
+          "회원가입이 완료되었습니다!",
+          "가입하신 아이디, 비밀번호로 로그인해주세요!",
+          "success"
+        ).then(function () {
+          location.href = "/";
+        });
       }
     }
 

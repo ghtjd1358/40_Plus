@@ -18,6 +18,7 @@ router.post("/isvalid", controller.existsAlready);
 router.get("/culture", controller.culture);
 router.get("/culture/library", controller.library);
 router.get("/culture/class", controller.dayClass);
+router.get("/culture/festival", controller.festival);
 
 router.get("/kiosk", controller.kiosk);
 

@@ -111,6 +111,32 @@ app.get("/classAPI", async (req, res) => {
   }
 });
 
+var request = require("request");
+
+var url = "http://ws.bus.go.kr/api/rest/arrive/getArrInfoByRouteAll";
+var queryParams =
+  "?" +
+  encodeURIComponent("serviceKey") +
+  "=" +
+  "3My5wxErgvzcHFEYeskyVvjOncM6Io53p7VZhbzmShc0p92hypEUqjxBlIr5pWtHVdRcCKv7mkFT2B3OrE3EeA=="; /* Service Key*/
+queryParams +=
+  "&" +
+  encodeURIComponent("busRouteId") +
+  "=" +
+  encodeURIComponent("100100118"); /* */
+
+request(
+  {
+    url: url + queryParams,
+    method: "GET",
+  },
+  function (error, response, body) {
+    console.log("Status", response.statusCode);
+    console.log("Headers", JSON.stringify(response.headers));
+    console.log("Reponse received", body);
+  }
+);
+
 app.use("/mypage", checkAccessTokenMiddleware, mypageRouter);
 
 app.use(notFoundMiddleWare);

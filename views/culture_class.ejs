@@ -7,6 +7,7 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="/static/css/header.css" />
     <link rel="stylesheet" href="/static/css/component.css" />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <link
       rel="stylesheet"
@@ -84,44 +85,14 @@
         margin-left: var(--space-2);
       }
 
-      span {
-        font-weight: 700;
-        margin-left: var(--space-1);
-      }
-
       .name {
         margin-top: 0;
         line-height: 3;
         border-radius: var(--border-radius-medium) var(--border-radius-medium) 0
           0;
       }
-
-      p {
-        margin-top: var(--space-1);
-        font-size: 18px;
-      }
-      .grey {
-        background-color: var(--color-grey-0);
-        width: 100%;
-        text-align: left;
-        font-weight: 700;
-      }
-
-      .white {
-        width: 90%;
-        text-align: center;
-        /* font-weight: 700; */
-        margin-bottom: var(--space-1);
-      }
-
       .page {
         color: var(--color-orange-3);
-      }
-
-      .material-symbols-outlined {
-        font-weight: 700;
-        font-size: 16px;
-        line-height: 2;
       }
 
       .content {
@@ -136,112 +107,264 @@
         margin-bottom: var(--space-1);
         font-size: 18px;
       }
-      .content::after {
-        height: 700px;
+
+      .mainContent {
+        margin-top: 50px;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        align-items: center;
+        justify-content: center;
       }
-      .collapsible {
-        border: none;
+
+      h1 {
+        transform: translateY(20px);
+        transition: all 0.4s ease;
+        transition-delay: 0.2s;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      p {
         font-size: 18px;
+        line-height: 24px;
+        color: black;
+        transform: translateY(20px);
+        transition: all 0.4s ease;
+        transition-delay: 0.3s;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
-      .collapsible:after {
-        content: "\2303";
-        transform: rotate(180deg);
-        border-radius: 0px;
-        line-height: 25px;
-        float: right;
-        margin-right: var(--space-1);
+
+      .swiper-wrapper {
+        height: 100%;
+        max-height: none;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        z-index: 1;
+        position: relative;
+
+        margin: auto;
       }
-      .active:after {
-        content: "\2303";
-        transform: rotate(360deg);
-        line-height: 25px;
-        margin-top: 5px;
+
+      .swiper-container {
+        width: 600px;
+        height: 500px;
+        position: relative;
+        margin: auto;
+        border-radius: var(--border-radius-medium);
+      }
+
+      .slider-item {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+        opacity: 0;
+        background: var(--color-white-0);
+
+        border-radius: var(--border-radius-medium);
+        border: 2px solid var(--color-grey-0);
+      }
+
+      .sampleSlider {
+        background: var(--color-white-0);
+        display: flex;
+        flex-direction: column;
+        margin: var(--space-2) auto auto;
+        height: 50%;
+        width: 100%;
+
+        border-radius: var(--border-radius-medium);
+        border: 2px solid var(--color-grey-0);
+      }
+
+      .slider-item-content {
+        padding: 32px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        transition: 0.4s;
+      }
+      .slider-item-content > * {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      .swiper-slide-active .slider-item-content > * {
+        transform: translateY(0px);
+        opacity: 1;
+      }
+
+      .swiper-pagination {
+        position: absolute;
+        /* background-color: red; */
+        left: 50%;
+        top: 1%;
+        /* bottom: 8px; */
+        transform: translatex(-50%);
+        z-index: 10;
+        width: auto !important;
+      }
+
+      .swiper-pagination-bullet {
+        width: 20px;
+        height: 10px;
+        border-radius: 10px;
+        opacity: 1;
+        background: var(--color-orange-2);
+        display: inline-block;
+        margin-right: 3px;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .swiper-pagination-bullet-active {
+        background: var(--color-orange-4);
+        width: 50px;
+        height: 10px;
+        border-radius: 10px;
+      }
+
+      .slider-buttons {
+        /* position: relative; */
+        /* display: flex; */
+        display: none;
+        justify-content: center;
+        /* background-color: pink; */
+        width: 100%;
+        height: 5%;
+        margin-top: var(--space-2);
+      }
+
+      .swiper-button-next,
+      .swiper-button-prev {
+        font-size: 16px;
+        position: relative;
+        margin-left: 4px;
+        background-color: var(--color-orange-4);
+        color: var(--color-grey-1);
+        border: none;
+        border-radius: var(--border-radius-small);
+        width: 80px;
+      }
+      .swiper-button-next:active,
+      .swiper-button-prev:active {
+        background-color: var(--color-orange-3);
+      }
+      .swiper-button-next:hover,
+      .swiper-button-prev:hover {
+        background-color: var(--color-orange-3);
+      }
+
+      .sTitle {
+        font-weight: 700;
+        /* background-color: pink; */
+        color: var(--color-black-5);
+        margin-top: var(--space-2);
+        display: block;
+      }
+      .sText {
+        /* background-color: red; */
+        height: auto;
+        margin-top: var(--space-0);
+        display: block;
+      }
+
+      .sampleText1 {
+        height: auto;
+        font-size: 24px;
+        margin-top: 10%;
+        display: block;
+        color: var(--color-black-2);
+        text-align: center;
+      }
+      .sampleText2 {
+        height: auto;
+        font-size: 18px;
+        margin-top: var(--space-3);
+        display: block;
+        color: var(--color-black-2);
+        text-align: center;
       }
     </style>
   </head>
   <body>
     <%- include("./component/header")%>
 
-    <main class="container">
-      <div class="space"></div>
-      <h1 class="title">지역별 일일 클래스 안내</h1>
-      <div class="terms">
-        <form
-          action="/classAPI"
-          name="regionForm"
-          id="regionForm"
-          onsubmit="submitForm(event)"
-        >
-          <!-- <select name="region" id="region">
-            <option value="11">서울특별시</option>
-            <option value="21">부산광역시</option>
-            <option value="31">경기도</option>
-          </select>
-          <select name="dtl_region" id="dtl_region"></select> -->
-
-          <button type="submit" onclick="submitForm(event)" class="btnS">
-            불러오기
-          </button>
-        </form>
+    <main id="main">
+      <div class="mainContent">
+        <h1 class="title">지역별 일일 클래스 안내</h1>
+        <div class="terms">
+          <form
+            action="/classAPI"
+            name="regionForm"
+            id="regionForm"
+            onsubmit="submitForm(event)"
+          >
+            <button type="submit" onclick="submitForm(event)" class="btnS">
+              불러오기
+            </button>
+          </form>
+        </div>
       </div>
 
-      <section class="main-content"></section>
+      <div class="swiper-container">
+        <div class="swiper-pagination"></div>
+        <div class="swiper-wrapper">
+          <!--  -->
+          <!-- <div class="slider-item swiper-slide sampleSlider"> -->
+          <div class="sampleSlider">
+            <p class="sampleText1">
+              원하는 지역을 선택후 불러오기 버튼을 눌러주세요!
+            </p>
+            <p class="sampleText2">아래 실시간 도서관 정보가 표시됩니다!</p>
+          </div>
+          <!-- </div> -->
+          <!--  -->
+        </div>
+        <div class="slider-buttons">
+          <button class="swiper-button-prev">이전으로</button>
+          <button class="swiper-button-next">다음으로</button>
+        </div>
+      </div>
     </main>
+    <!-- partial -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.5/swiper-bundle.min.js"></script>
+    <script>
+      var swiper = new Swiper(".swiper-container", {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        effect: "fade",
+        loop: true,
+        speed: 300,
+        mousewheel: {
+          invert: false,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+          dynamicBullets: true,
+        },
+        // Navigation arrows
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+    </script>
 
     <script>
       const regionForm = document.forms["regionForm"];
       const region = regionForm.querySelector("#region");
       const dtl_region = regionForm.querySelector("#dtl_region");
-
-      // function option() {
-      //   dtl_region.innerHTML = "";
-      //   if (region.value === "11") {
-      //     const newOption1 = document.createElement("option");
-      //     newOption1.value = "11010";
-      //     newOption1.textContent = "종로구";
-      //     dtl_region.add(newOption1);
-
-      //     const newOption2 = document.createElement("option");
-      //     newOption2.value = "11190";
-      //     newOption2.textContent = "영등포구";
-      //     dtl_region.add(newOption2);
-
-      //     const newOption3 = document.createElement("option");
-      //     newOption3.value = "11140";
-      //     newOption3.textContent = "마포구";
-      //     dtl_region.add(newOption3);
-      //   } else if (region.value === "21") {
-      //     const newOption1 = document.createElement("option");
-      //     newOption1.value = "21090";
-      //     newOption1.textContent = "해운대구";
-      //     dtl_region.add(newOption1);
-
-      //     const newOption2 = document.createElement("option");
-      //     newOption2.value = "21110";
-      //     newOption2.textContent = "금정구";
-      //     dtl_region.add(newOption2);
-
-      //     const newOption3 = document.createElement("option");
-      //     newOption3.value = "21050";
-      //     newOption3.textContent = "동래구";
-      //     dtl_region.add(newOption3);
-      //   } else if (region.value === "31") {
-      //     const newOption1 = document.createElement("option");
-      //     newOption1.value = "31103";
-      //     newOption1.textContent = "일산 동구";
-      //     dtl_region.add(newOption1);
-
-      //     const newOption2 = document.createElement("option");
-      //     newOption2.value = "31104";
-      //     newOption2.textContent = "일산 서구";
-      //     dtl_region.add(newOption2);
-
-      //     const newOption3 = document.createElement("option");
-      //     newOption3.value = "31191";
-      //     newOption3.textContent = "용인시 처인구";
-      //     dtl_region.add(newOption3);
-      //   }
-      // }
 
       region.addEventListener("change", option);
       option();
@@ -270,102 +393,11 @@
         return false;
       }
 
-      // function apiData(data) {
-      //   // console.log("data2>", data);
-
-      //   // xml 데이터 변환
-      //   const parser = new DOMParser();
-      //   const xmlDoc = parser.parseFromString(data, "text/xml");
-
-      //   const title = xmlDoc.getElementsByTagName("title");
-      //   const issuedDate = xmlDoc.getElementsByTagName("issuedDate");
-      //   const category3 = xmlDoc.getElementsByTagName("category3");
-      //   const address = xmlDoc.getElementsByTagName("address");
-      //   const charge = xmlDoc.getElementsByTagName("charge");
-
-      //   // 각 데이터 길이 확인
-      //   console.log("title length:", title.length);
-      //   console.log("issuedDate length:", issuedDate.length);
-      //   console.log("category3 length:", category3.length);
-      //   console.log("address length:", address.length);
-      //   console.log("charge length:", charge.length);
-      //   try {
-      //     const parser = new DOMParser();
-      //     const xmlDoc = parser.parseFromString(data, "text/xml");
-
-      //     const title = xmlDoc.getElementsByTagName("title");
-      //     const issuedDate = xmlDoc.getElementsByTagName("issuedDate");
-      //     const category3 = xmlDoc.getElementsByTagName("category3");
-      //     const address = xmlDoc.getElementsByTagName("address");
-      //     const charge = xmlDoc.getElementsByTagName("charge");
-
-      //     const dataElem = document.querySelector(".main-content");
-      //     dataElem.innerHTML = "";
-
-      //     for (let i = 0; i < libName.length; i++) {
-      //       const name = title[i].textContent || "N/A";
-      //       const address = issuedDate[i].textContent || "N/A";
-      //       const page = category3[i].textContent || "N/A";
-      //       const close = address[i].textContent || "N/A";
-      //       const time = charge[i].textContent || "N/A";
-
-      //       function addEvent() {
-      //         const coll = document.getElementsByClassName("collapsible");
-      //         for (let n = 0; n < coll.length; n++) {
-      //           coll[n].addEventListener("click", function () {
-      //             this.classList.toggle("active");
-      //             var content = this.nextElementSibling;
-
-      //             if (content.style.maxHeight) {
-      //               content.style.maxHeight = null;
-      //             } else {
-      //               content.style.maxHeight = "300px";
-      //             }
-      //           });
-      //         }
-      //       }
-
-      //       const libraryDiv = document.createElement("div");
-
-      //       libraryDiv.classList.add("culture");
-      //       dataElem.appendChild(libraryDiv);
-
-      //       addEvent();
-      //     }
-      //   } catch (error) {
-      //     console.error("Error parsing or displaying data:", error);
-      //   }
-      // }
-
-      // function submitForm(event) {
-      //   event.preventDefault();
-
-      //   // const selectRegion = region.value;
-      //   // const selectDtl = dtl_region.value;
-
-      //   fetch(`/classAPI?`, {
-      //     method: "get",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //   })
-      //     .then((response) => response.json())
-      //     .then((data) => {
-      //       // 서버로부터 받은 JSON 데이터를 처리
-      //       console.log("data >", data);
-      //       apiData(data);
-      //     })
-      //     .catch((error) => {
-      //       console.error("Error fetching data:", error);
-      //     });
-      //   return false;
-      // }
-
       function apiData(data) {
         try {
           const items = data.response.body.items.item;
 
-          const dataElem = document.querySelector(".main-content");
+          const dataElem = document.querySelector(".swiper-wrapper");
           dataElem.innerHTML = "";
 
           for (let i = 0; i < items.length; i++) {
@@ -379,53 +411,53 @@
 
             console.log(name);
 
-            function addEvent() {
-              const coll = document.getElementsByClassName("collapsible");
-              for (let n = 0; n < coll.length; n++) {
-                coll[n].addEventListener("click", function () {
-                  this.classList.toggle("active");
-                  var content = this.nextElementSibling;
+            const buttondiv = document.querySelector(".slider-buttons");
+            buttondiv.style.display = "flex";
+            const libraryDiv = document.createElement("div");
+            libraryDiv.classList.add("slider-item", "swiper-slide");
 
-                  if (content.style.maxHeight) {
-                    content.style.maxHeight = null;
-                  } else {
-                    content.style.maxHeight = "300px";
-                  }
-                });
-              }
-            }
+            const libraryDiv2 = document.createElement("div");
+            libraryDiv2.classList.add("slider-item-content");
 
-            const cultureDiv = document.createElement("div");
-            cultureDiv.innerHTML =
-              `<p class="grey name"> <span class="material-symbols-outlined"> local_library </span> 도서관 ${[
-                i + 1,
-              ]} </p>` +
-              `<p class="white"> ${name} </p>` +
-              `<p class='grey'> <span class="material-symbols-outlined"> alternate_email </span>
-            주소</p>` +
-              `<p class="white">${addr}</p>` +
-              `<p class="grey"><span class="material-symbols-outlined"> home </span> 홈페이지
-              </p>` +
-              `<p><a href=${charge} class="white page"> 홈페이지 바로가기 </a></p>` +
-              `<button type="button" class="grey collapsible">
-              <span class="material-symbols-outlined"> stop_circle </span> 휴무일
-              </button>` +
-              `<div class="white content">
-                ${issuedDate}
-              </div>` +
-              `<button type="button" class="grey collapsible">
-              <span class="material-symbols-outlined"> schedule </span> 영업시간
-            </button>` +
-              `<div class="white content">${category3}</div>`;
+            const libraryButton = document.createElement("div");
+            libraryButton.classList.add("slider-buttons");
 
-            cultureDiv.classList.add("culture");
-            dataElem.appendChild(cultureDiv);
+            libraryDiv2.innerHTML =
+              `<h1> ${name}</h1>` +
+              `<p class="sTitle">주소</p>` +
+              `<p class="sText">${addr}</p>` +
+              `<p class="sTitle">영업시간 </p>` +
+              `<p class="sText">${issuedDate}</p>` +
+              `<p class="sTitle">휴무일 </p>` +
+              `<p class="sText"> ${charge} </p>` +
+              `<p class="sTitle"> <a href=${category3}>홈페이지 바로가기 </a></p>`;
 
-            addEvent();
+            libraryDiv.appendChild(libraryDiv2);
+
+            // libraryButton.innerHTML =
+            //   `<button class="swiper-button-prev">이전으로</button>` +
+            //   `<button class="swiper-button-next">다음으로</button>`;
+            // mainDiv.appendChild(libraryButton);
+
+            // libraryDiv.classList.add("culture");
+            dataElem.appendChild(libraryDiv);
+            swiper.update();
+            // addEvent();
           }
         } catch (error) {
           console.error("Error parsing or displaying data:", error);
         }
+      }
+
+      async function logout(event) {
+        event.preventDefault();
+        const res = await axios({
+          method: "post",
+          url: "/logout",
+        });
+        swal("로그아웃이 완료되었습니다!", "", "success").then(function () {
+          location.href = "/culture/class";
+        });
       }
     </script>
   </body>
