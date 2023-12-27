@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>게시판 글 작성</title>
+    <link rel="stylesheet" href="/static/css/component.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <style>
+      .big-C {
+        background-color: #f5f5f5;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .small-C {
+        background-color: #ffffff;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        padding: 20px;
+        width: 80%;
+        height: 80%;
+        max-width: 700px;
+        text-align: center;
+      }
+
+      .input-group {
+        margin-bottom: 20px;
+      }
+
+      .input-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #333333;
+      }
+
+      .input-group input {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #dddddd;
+        border-radius: 5px;
+        margin-bottom: 10px;
+      }
+
+      .input-group textarea {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #dddddd;
+        border-radius: 5px;
+        height: 300px;
+        resize: none;
+        margin-bottom: 10px;
+      }
+
+      .submit-btn {
+        background-color: #4caf50;
+        color: #ffffff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      .submit-btn:hover {
+        background-color: #45a049;
+      }
+
+      .label-text {
+        font-size: larger;
+      }
+    </style>
+  </head>
+  <body>
+    <form name="post-form">
+      <div class="big-C">
+        <div class="small-C">
+          <div class="input-group">
+            <label class="label-text" for="title">제목</label>
+            <input type="text" id="title" placeholder="제목을 입력하세요" />
+          </div>
+
+          <div class="input-group">
+            <label class="label-text" for="content">내용</label>
+            <textarea id="content" placeholder="내용을 입력하세요"></textarea>
+          </div>
+          <button
+            class="submit-btn"
+            type="button"
+            onclick="submitModifyCommunity('<%= data.number %>')"
+          >
+            수정완료
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <script>
+      window.onload = function () {
+        var titleValue = `<%= data.title %>`;
+        document.getElementById("title").value = titleValue;
+
+        var contentValue = `<%= data.content.replace(/\n/g, "\\n").replace(/\r/g, "\\r") %>`;
+        document.getElementById("content").value = contentValue;
+      };
+
+      function submitModifyCommunity(number) {
+        const title = document.getElementById("title").value;
+        const content = document.getElementById("content").value;
+
+        console.log("sss", title, content);
+
+        axios({
+          method: "patch",
+          url: "/submitModifyCommunity",
+          data: {
+            title: title,
+            content: content,
+            number: number,
+          },
+        }).then((result) => {
+          console.log("수정 완료");
+          swal("수정이 완료되었습니다.", "", "success").then(function () {
+            location.href = "/community";
+          });
+        });
+      }
+    </script>
+  </body>
+</html>
