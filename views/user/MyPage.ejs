@@ -370,6 +370,17 @@
       changeNameBtnElement.addEventListener("click", changeName);
       changePasswordBtnElement.addEventListener("click", changePassword);
       deleteUserBtnElement.addEventListener("click", deleteUser);
+
+      async function logout(event) {
+        event.preventDefault();
+        const res = await axios({
+          method: "post",
+          url: "/logout",
+        });
+        swal("로그아웃 완료!", "", "success").then(function () {
+          location.href = "/";
+        });
+      }
     </script>
   </body>
 </html>

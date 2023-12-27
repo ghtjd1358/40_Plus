@@ -111,31 +111,32 @@ app.get("/classAPI", async (req, res) => {
   }
 });
 
-var request = require("request");
+const festivalKey = process.env.FESTIVALAPISERVICEKEY; // .env
 
-var url = "http://ws.bus.go.kr/api/rest/arrive/getArrInfoByRouteAll";
-var queryParams =
-  "?" +
-  encodeURIComponent("serviceKey") +
-  "=" +
-  "3My5wxErgvzcHFEYeskyVvjOncM6Io53p7VZhbzmShc0p92hypEUqjxBlIr5pWtHVdRcCKv7mkFT2B3OrE3EeA=="; /* Service Key*/
-queryParams +=
-  "&" +
-  encodeURIComponent("busRouteId") +
-  "=" +
-  encodeURIComponent("100100118"); /* */
+app.get("/festivalAPI", async (req, res) => {
+  // const { selectRegion, selectDtl } = req.query;
+  // console.log("region>", selectRegion);
+  // console.log("dtl>", selectDtl);
 
-request(
-  {
-    url: url + queryParams,
-    method: "GET",
-  },
-  function (error, response, body) {
-    console.log("Status", response.statusCode);
-    console.log("Headers", JSON.stringify(response.headers));
-    console.log("Reponse received", body);
+  const serviceUrl =
+    "http://api.kcisa.kr/openapi/service/rest/meta4/getKCPG0504?";
+
+  let URI = encodeURI("serviceKey") + "=" + festivalKey;
+  URI += "&" + encodeURI("numOfRows") + "=" + encodeURI("100000");
+  URI += "&" + encodeURI("pageNo") + "=" + encodeURI("1");
+
+  const url = serviceUrl + URI;
+
+  console.log(url);
+
+  try {
+    const result = await axios.get(url);
+    const data = result.data;
+    res.json(data);
+  } catch (err) {
+    console.log(err);
   }
-);
+});
 
 app.use("/mypage", checkAccessTokenMiddleware, mypageRouter);
 
