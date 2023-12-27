@@ -5,36 +5,55 @@ const checkJwt = require("../utility/checkJwt");
 const User = models.User;
 const getCookieConfig = require("../config/cookie.config");
 const clearUserInfo = require("../utility/clearUserInfo");
-require('dotenv').config();
+require("dotenv").config();
 
 function getIndex(req, res) {
   res.render("index");
+}
+
+const kiosk = (req, res) => {
+  res.render("kiosk");
 };
 
 const culture = (req, res) => {
   res.render("culture");
 };
 
+const library = (req, res) => {
+  res.render("culture_library");
+};
+
+const dayClass = (req, res) => {
+  res.render("culture_class");
+};
+
+const festival = (req, res) => {
+  res.render("culture_festival");
+};
+
 const community = (req, res) => {
   res.render("community");
 };
-
-
 
 function getSignup(req, res) {
   res.render("user/signup");
 }
 
-async function existsAlready(req, res) {
+async function existsAlready(req, res, next) {
   if (req.body.userid.trim().length <= 3) {
     return res.json({
       msg: "아이디를 4자 이상으로 입력해주세요.",
       isUnique: false,
     });
   }
-  const existingUser = await User.findOne({
-    where: { userid: req.body.userid },
-  });
+  let existingUser;
+  try {
+    existingUser = await User.findOne({
+      where: { userid: req.body.userid },
+    });
+  } catch (err) {
+    return next(err);
+  }
 
   if (existingUser) {
     res.json({ msg: "이미 존재하는 아이디입니다.", isUnique: false });
@@ -45,10 +64,16 @@ async function existsAlready(req, res) {
 
 async function signup(req, res) {
   const { userid, password, confirmPassword, name, isUnique } = req.body;
+  let existingUser;
 
-  const existingUser = await User.findOne({
-    where: { userid: req.body.userid },
-  });
+  try {
+    existingUser = await User.findOne({
+      where: { userid: req.body.userid },
+    });
+  } catch (err) {
+    return next(err);
+  }
+
   if (!isUnique || isUnique === false || existingUser) {
     return res.json({
       msg: "중복검사를 실시하지 않았거나 이미 존재하는 아이디입니다.",
@@ -85,23 +110,30 @@ async function signup(req, res) {
   }
 
   const hashPW = bcrypt.hashSync(password, parseInt(process.env.HASHROUND));
-
-  const result = await User.create({
-    userid: userid,
-    name: name,
-    password: hashPW,
-  });
+  try {
+    const result = await User.create({
+      userid: userid,
+      name: name,
+      password: hashPW,
+    });
+  } catch (err) {
+    return next(err);
+  }
 
   return res.json({ msg: "완료.", isError: false });
   // 프론트에서 res.data.isError가 true면 => redirect('/');
 }
 
 function getLogin(req, res) {
-  res.render("user/login");
+  if (!req.session.accessToken) {
+    res.render("user/login");
+  } else {
+    res.redirect("/401");
+  }
 }
 
-async function login(req, res) {
-    clearUserInfo(req, res);
+async function login(req, res, next) {
+  clearUserInfo(req, res);
   const { userid, password } = req.body;
 
   if (!userid || userid.trim().length === 0) {
@@ -124,15 +156,18 @@ async function login(req, res) {
   // 데이터베이스의 토큰 업데이트
   newRefreshToken = checkJwt.makeRefreshJwt(userid, existingUser.name);
   res.cookie("refreshToken", newRefreshToken, getCookieConfig());
-
-  await User.update(
-    {
-      RefreshToken: newRefreshToken,
-    },
-    {
-      where: { userid: userid },
-    }
-  );
+  try {
+    await User.update(
+      {
+        RefreshToken: newRefreshToken,
+      },
+      {
+        where: { userid: userid },
+      }
+    );
+  } catch (err) {
+    return next(err);
+  }
 
   res.json({ msg: "성공", isError: false });
 }
@@ -147,7 +182,6 @@ function logout(req, res) {
   res.send("완료");
 }
 
-
 module.exports = {
   getSignup: getSignup,
   signup: signup,
@@ -157,5 +191,9 @@ module.exports = {
   getIndex: getIndex,
   logout: logout,
   culture: culture,
+  library: library,
+  dayClass: dayClass,
+  festival: festival,
   community: community,
+  kiosk: kiosk,
 };

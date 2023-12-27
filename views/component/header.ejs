@@ -1,40 +1,50 @@
-<header class="header">
-  <div class="logo">
-    <a href="/">
-      <img src="/static/css/test1.png" alt="" class="logo" />
-    </a>
-  </div>
+<div class="headerContainer">
+  <nav class="nav header">
+    <!-- 로고 -->
+    <a href="/"
+      ><img
+        src="https://kdt10-bucket-jihun.s3.ap-northeast-2.amazonaws.com/logo.png"
+        alt=""
+        class="logo"
+    /></a>
+    <!-- 헤더 nav -->
+    <ul class="navMenu">
+      <li class="navi-li indexli">
+        <a href="/word/keyboard">컴퓨터</a>
+      </li>
 
-  <div class="mainHeader"></div>
+      <li class="navi-li indexli">
+        <a href="/kiosk">생활편의</a>
+      </li>
 
-  <ul class="nav">
-    <li><a href="">이용 안내</a></li>
-    <li>
-      <% if(locals.accessToken) {%>
-      <!-- <button id="logout" onclick="logout()">로그아웃</button> -->
-      <a href="" onclick="logout()" id="logout">로그아웃</a>
+      <li class="navi-li indexli">
+        <a href="/culture">문화생활</a>
+      </li>
 
-      <%} else { %>
-      <a href="/login">로그인</a>
-      <%}%>
-    </li>
-    <li>
-      <% if(locals.accessToken) {%>
-      <a href="/mypage"> 마이페이지 </a>
-      <%} else { %>
+      <li class="navi-li indexli">
+        <a href="/community">게시판</a>
+      </li>
+    </ul>
+    <!-- 로그인 -->
+    <ul class="navUser">
+      <li class="navi-li indexli"><a href="">이용 안내</a></li>
+      <li class="navi-li indexli">
+        <% if(locals.accessToken) {%>
+        <!-- <button id="logout" onclick="logout()">로그아웃</button> -->
+        <a onclick="logout(window.event)" id="logout">로그아웃</a>
 
-      <a href="/signup"> 회원가입</a>
-      <%}%>
-    </li>
-  </ul>
-      <script>
-      async function logout() {
-        const res = await axios({
-          method: "post",
-          url: "/logout",
-        });
+        <%} else { %>
+        <a href="/login">로그인</a>
+        <%}%>
+      </li>
+      <li class="navi-li indexli">
+        <% if(locals.accessToken) {%>
+        <a href="/Mypage"> 마이페이지 </a>
+        <%} else { %>
 
-        location.href = "/";
-      }
-    </script>
-</header>
+        <a href="/signup"> 회원가입</a>
+        <%}%>
+      </li>
+    </ul>
+  </nav>
+</div>

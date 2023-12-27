@@ -7,6 +7,8 @@ router.get('/', controller.getAddWord);
 
 router.post('/addword', controller.addWord);
 
+router.get('/keyboard', controller.getKeyboard);
+
 
 
 module.exports = router;

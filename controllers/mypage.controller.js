@@ -4,18 +4,22 @@ const models = require("../models/index");
 const User = models.User;
 const getCookieConfig = require("../config/cookie.config");
 const clearUserInfo = require("../utility/clearUserInfo");
-require('dotenv').config();
+require("dotenv").config();
 
-
-async function getMyPage(req, res) {
-  const userInfo = await User.findOne({
-    where: { userid: req.session.userid },
-    attributes: ["userid", "name"],
-  });
+async function getMyPage(req, res, next) {
+  let userInfo;
+  try {
+    userInfo = await User.findOne({
+      where: { userid: req.session.userid },
+      attributes: ["userid", "name"],
+    });
+  } catch (err) {
+    return next(err);
+  }
   res.render("user/MyPage", { userInfo: userInfo });
 }
 
-async function changeUserName(req, res) {
+async function changeUserName(req, res, next) {
   const newUserName = req.body.name;
 
   try {
@@ -36,13 +40,17 @@ async function changeUserName(req, res) {
   }
 }
 
-async function changeUserPassword(req, res) {
+async function changeUserPassword(req, res, next) {
   const { currentPassword, newPassword, confirmPassword } = req.body;
-
-  const userPassword = await User.findOne({
-    where: { userid: req.session.userid },
-    attributes: ["password"],
-  });
+  let userPassword;
+  try {
+    userPassword = await User.findOne({
+      where: { userid: req.session.userid },
+      attributes: ["password"],
+    });
+  }catch(err) {
+    return next(err);
+  }
 
   const result = bcrypt.compareSync(currentPassword, userPassword.password);
   if (!result) {
@@ -63,14 +71,28 @@ async function changeUserPassword(req, res) {
     });
   }
 
-  if (bcrypt.compareSync(newPassword, userPassword.password)) {
+  let isSame;
+  try {
+    isSame = bcrypt.compareSync(newPassword, userPassword.password);
+  }catch(err) {
+    return next(err);
+  }
+
+  if (isSame) {
     return res.json({
       msg: "이전 비밀번호와 동일한 비밀번호입니다.",
       isError: true,
     });
   }
-
-  const hashedNewPassword = bcrypt.hashSync(newPassword, parseInt(process.env.HASHROUND));
+  let hashedNewPassword;
+  try {
+    hashedNewPassword = bcrypt.hashSync(
+      newPassword,
+      parseInt(process.env.HASHROUND)
+    );
+  }catch(err) {
+    return next(err);
+  }
 
   try {
     await User.update(
@@ -106,7 +128,7 @@ async function deleteUser(req, res) {
       msg: "삭제완료",
       isError: false,
     });
-  } catch(err) {
+  } catch (err) {
     res.json({
       msg: "오류가 발생하였습니다. 새로고침 후 다시 시도해주세요",
       isError: true,

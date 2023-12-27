@@ -4,20 +4,41 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <title>Document</title>
+    <title>회원가입</title>
+    <link rel="stylesheet" href="/static/css/header.css" />
     <link rel="stylesheet" href="/static/css/component.css" />
 
-    <style>
-      .signupContent {
-        width: 700px;
-        height: 400px;
-        background-color: var(--color-grey);
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
+    <style>
+      .container {
+        position: relative;
         display: flex;
         flex-direction: column;
-        border-radius: var(--border-radius-medium);
-        box-shadow: var(--shadow);
+        align-items: center;
+
+        width: 100%;
+        height: calc(100vh - 120px);
+
+        /* border-top: 1px solid var(--color-grey-0); */
+
+        background-color: var(--color-grey-0);
+      }
+
+      .signupContent {
+        width: 700px;
+        /* height: 700px; */
+        background-color: var(--color-white-0);
+        height: auto;
+
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        border-radius: var(--border-radius-large);
+        /* box-shadow: var(--shadow); */
+        border: 2px solid var(--color-grey-0);
         /* margin-top: var(--space-1); */
+        margin-top: 50px;
       }
 
       #userid {
@@ -26,11 +47,26 @@
 
       input {
         width: 500px;
-        height: 50px;
-        border: 1px solid var(--color-black-1);
-        border-radius: var(--border-radius-small);
+        height: 40px;
+        border: none;
+        border-bottom: 2px solid var(--color-black-1);
+        /* border-radius: var(--border-radius-small); */
         font-size: 18px;
-        margin-bottom: var(--space-1);
+        margin-bottom: var(--space-3);
+      }
+
+      input:focus {
+        background-color: none;
+        border-bottom: 3px solid var(--color-orange-4);
+      }
+
+      label {
+        font-size: 18px;
+      }
+
+      input::placeholder {
+        font-size: 18px;
+        color: var(--color-black-2);
       }
 
       .btnLarge {
@@ -40,8 +76,19 @@
         color: var(--color-grey-0);
         font-size: 18px;
         border: 1px solid var(--color-orange-3);
-        width: 500px;
+
         border-radius: var(--border-radius-small);
+        margin-bottom: var(--space-5);
+      }
+
+      .btnS {
+        background-color: var(--color-orange-4);
+        color: var(--color-grey-0);
+        border: 1px solid var(--color-orange-3);
+        border-radius: var(--border-radius-small);
+        height: 30px;
+        width: 80px;
+        margin-left: var(--space-2);
       }
 
       .signupBox {
@@ -49,38 +96,83 @@
         flex-direction: column;
         justify-content: center;
         /* background-color: pink; */
-        margin-top: var(--space-3);
+        margin-top: var(--space-5);
       }
 
       form {
         display: flex;
         flex-direction: column;
         /* justify-content: center; */
-        align-items: center;
+      }
+
+      .title {
+        margin-top: var(--space-5);
+      }
+
+      span {
+        color: var(--color-red-4);
+        font-size: 16px;
+      }
+
+      /* .password {
+        margin-bottom: var(--space-2);
+      } */
+
+      .resultContent {
+        margin: var(--space-2) 0;
+      }
+
+      #result {
+        color: var(--color-red-4);
+        font-weight: 700;
+        text-align: center;
       }
     </style>
   </head>
   <body>
-    <%- include("../component/header")%>
+    <header><%- include("../component/header")%></header>
 
     <main class="container">
       <div class="signupContent">
+        <h1 class="title">회원가입</h1>
         <div class="signupBox">
           <form name="signup">
-            <input type="text" id="userid" name="userid" placeholder="id" />
-            <button type="button" id="valid-check">중복검사</button>
-            <span id="valid-check-result"></span>
-            <br />
-            <input type="password" name="password" placeholder="pw" /><br />
+            <label for="userid">
+              아이디<span>*</span> <span id="valid-check-result"></span
+            ></label>
+
+            <div>
+              <input
+                type="text"
+                id="userid"
+                name="userid"
+                placeholder="아이디"
+              />
+
+              <button type="button" id="valid-check" class="btnS">
+                중복검사
+              </button>
+            </div>
+
+            <label for="password"> 비밀번호<span>*</span> </label>
+            <input
+              type="password"
+              name="password"
+              class="password"
+              placeholder="비밀번호"
+            />
+
+            <label for="confirm-password">비밀번호 확인<span>*</span></label>
             <input
               type="password"
               name="confirm-password"
               placeholder="비밀번호 확인"
-            /><br />
+            />
 
-            <input type="text" placeholder="이름" name="name" /><br />
+            <label for="name">이름<span>*</span> </label>
+            <input type="text" placeholder="이름" name="name" />
 
-            <div>
+            <div class="resultContent">
               <p id="result"></p>
             </div>
             <button type="button" id="signup" class="btnLarge">회원가입</button>
@@ -127,11 +219,31 @@
       });
       resultElement.textContent = res.data.msg;
       if (!res.data.isError) {
-        location.href = "/";
+        swal(
+          "회원가입이 완료되었습니다!",
+          "가입하신 아이디, 비밀번호로 로그인해주세요!",
+          "success"
+        ).then(function () {
+          location.href = "/";
+        });
       }
     }
 
     validCheckButtonElement.addEventListener("click", getIsValid);
     signUpButtonElement.addEventListener("click", signup);
+
+    function enterKey() {
+      const inputs = document.querySelectorAll("input");
+      inputs.forEach(function (input) {
+        input.addEventListener("keyup", function (event) {
+          if (event.keyCode === 13) {
+            event.preventDefault();
+            signup();
+          }
+        });
+      });
+    }
+
+    enterKey();
   </script>
 </html>

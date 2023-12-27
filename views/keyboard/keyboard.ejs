@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/component.css">
+    <link rel="stylesheet" href="/static/css/keyboard.css">
+    <link rel="stylesheet" href="/static/css/sidebarHeader.css" />
+    
+    <title>MZ어 타자검정</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <%- include("../component/sidebarHeader")%>
+    <div id="main">
+        <!-- 화면 출력 -->
+        <div id="moniter">
+            <div id="text-to-type"></div>
+            <input type="text" id="user-input" placeholder="여기에 입력하세요" oninput="checkTyping()">
+            <div id="mean-by"><span id="mean-by-text"></span></div>
+            <!-- "토클" 버튼 -->
+            <button id="toggleKeyboard" onclick="toggleKeyboard()">영문자</button>
+            <div id="result-box">
+                <div id="result"></div>
+                <div id="result2">타자속도 :  -  </div>
+            </div>
+        </div>
+        
+        <!-- 키보드 -->
+        <!-- 한글 자판 -->
+        <div class="big_C" id="hgkeyboard">
+            <div class="sml_C" id="hg_1">
+                <div class="key Backquote">
+                    <div class="top">~</div>
+                    <div class="bottom">`</div>
+                </div>
+                <div class="key Digit1">
+                    <div class="top">!</div>
+                    <div class="bottom">1</div>
+                </div>
+                <div class="key Digit2">
+                    <div class="top">@</div>
+                    <div class="bottom">2</div>
+                </div>
+                <div class="key Digit3">
+                    <div class="top">#</div>
+                    <div class="bottom">3</div>
+                </div>
+                <div class="key Digit4">
+                    <div class="top">$</div>
+                    <div class="bottom">4</div>
+                </div>
+                <div class="key Digit5">
+                    <div class="top">%</div>
+                    <div class="bottom">5</div>
+                </div>
+                <div class="key Digit6">
+                    <div class="top">^</div>
+                    <div class="bottom">6</div>
+                </div>
+                <div class="key Digit7">
+                    <div class="top">&</div>
+                    <div class="bottom">7</div>
+                </div>
+                <div class="key Digit8">
+                    <div class="top">*</div>
+                    <div class="bottom">8</div>
+                </div>
+                <div class="key Digit9">
+                    <div class="top">(</div>
+                    <div class="bottom">9</div>
+                </div>
+                <div class="key Digit0">
+                    <div class="top">)</div>
+                    <div class="bottom">0</div>
+                </div>
+                <div class="key Minus">
+                    <div class="top">_</div>
+                    <div class="bottom">-</div>
+                </div>
+                <div class="key Equal">
+                    <div class="top">+</div>
+                    <div class="bottom">=</div>
+                </div>
+                <div class="key delete-key Backspace">Delete</div>
+            </div>
+            <!-- 2번 째 줄 -->
+            <div class="sml_C" id="hg_2">
+                <div class="key tab-key Tab">Tab</div>
+                <div class="key KeyQ">
+                    <div class="top">ㅃ</div>
+                    <div class="bottom">ㅂ</div>
+                </div>
+                <div class="key KeyW">
+                    <div class="top">ㅉ</div>
+                    <div class="bottom">ㅈ</div>
+                </div>
+                <div class="key KeyE">
+                    <div class="top">ㄸ</div>
+                    <div class="bottom">ㄷ</div>
+                </div>
+                <div class="key KeyR">
+                    <div class="top">ㄲ</div>
+                    <div class="bottom">ㄱ</div>
+                </div>
+                <div class="key KeyT">
+                    <div class="top">ㅆ</div>
+                    <div class="bottom">ㅅ</div>
+                </div>
+                <div class="key KeyY">ㅛ</div>
+                <div class="key KeyU">ㅕ</div>
+                <div class="key KeyI">ㅑ</div>
+                <div class="key KeyO">
+                    <div class="top">ㅒ</div>
+                    <div class="bottom">ㅐ</div>
+                </div>
+                <div class="key KeyP">
+                    <div class="top">ㅖ</div>
+                    <div class="bottom">ㅔ</div>
+                </div>
+                <div class="key BracketLeft">
+                    <div class="top">{</div>
+                    <div class="bottom">[</div>
+                </div>
+                <div class="key BracketRight">
+                    <div class="top">}</div>
+                    <div class="bottom">]</div>
+                </div>
+                <div class="key Backslash">
+                    <div class="top">|</div>
+                    <div class="bottom">\</div>
+                </div>
+            </div>
+            <!-- 3번째 줄 -->
+            <div class="sml_C hg_3">
+                <div class="key caps-lock-key CapsLock">Caps Lock</div>
+                <div class="key KeyA">ㅁ</div>
+                <div class="key KeyS">ㄴ</div>
+                <div class="key KeyD">ㅇ</div>
+                <div class="key KeyF">ㄹ</div>
+                <div class="key KeyG">ㅎ</div>
+                <div class="key KeyH">ㅗ</div>
+                <div class="key KeyJ">ㅓ</div>
+                <div class="key KeyK">ㅏ</div>
+                <div class="key KeyL">ㅣ</div>
+                <div class="key Semicolon">
+                    <div class="top">:</div>
+                    <div class="bottom">;</div>
+                </div>
+                <div class="key Quote">
+                    <div class="top">"</div>
+                    <div class="bottom">'</div>
+                </div>
+                <div class="key enter-key Enter">Enter</div>
+            </div>
+            <!-- 4번째 줄 -->
+            <div class="sml_C" id="hg_4">
+                <div class="key shift-key ShiftLeft">Shift</div>
+                <div class="key KeyZ">ㅋ</div>
+                <div class="key KeyX">ㅌ</div>
+                <div class="key KeyC">ㅊ</div>
+                <div class="key KeyV">ㅍ</div>
+                <div class="key KeyB">ㅠ</div>
+                <div class="key KeyN">ㅜ</div>
+                <div class="key KeyM">ㅡ</div>
+                <div class="key Comma">
+                    <div class="top"><</div>
+                    <div class="bottom">,</div>
+                </div>
+                <div class="key Period">
+                    <div class="top">></div>
+                    <div class="bottom">.</div>
+                </div>
+                <div class="key Slash">
+                    <div class="top">?</div>
+                    <div class="bottom">/</div>
+                </div>
+                <div class="key shift-key ShiftRight">Shift</div>
+            </div>        
+            <!-- 5번째 줄 -->
+            <div class="sml_C hg_5">
+                <div class="key ctrl-key ControlLeft">Ctrl</div>
+                <div class="key"> </div>
+                <div class="key AltLeft">Alt</div>
+                <div class="key space-key Space">Space</div>
+                <div class="key HangulMode">한/영</div>
+                <div class="key HanjaMode">한자</div>
+                <div class="key"> </div>
+                <div class="key ctrl-key ControlRight">Ctrl</div>
+            </div>
+        </div>
+        <!-- 영어 자판 -->
+        <div class="big_C" id="egkeyboard" style="display: none;">
+            <div class="sml_C" id="eg_1">
+                <div class="key Backquote">`</div>
+                <div class="key Digit1">1</div>
+                <div class="key Digit2">2</div>
+                <div class="key Digit3">3</div>
+                <div class="key Digit4">4</div>
+                <div class="key Digit5">5</div>
+                <div class="key Digit6">6</div>
+                <div class="key Digit7">7</div>
+                <div class="key Digit8">8</div>
+                <div class="key Digit9">9</div>
+                <div class="key Digit0">0</div>
+                <div class="key Minus">-</div>
+                <div class="key Equal">=</div>
+                <div class="key delete-key Backspace">Delete</div>
+            </div>
+            <!-- 2번 째 줄 -->
+            <div class="sml_C" id="eg_2">
+                <div class="key tab-key Tab">Tab</div>
+                <div class="key KeyQ">q</div>
+                <div class="key KeyW">w</div>
+                <div class="key KeyE">e</div>
+                <div class="key KeyR">r</div>
+                <div class="key KeyT">t</div>
+                <div class="key KeyY">y</div>
+                <div class="key KeyU">u</div>
+                <div class="key KeyI">i</div>
+                <div class="key KeyO">o</div>
+                <div class="key KeyP">p</div>
+                <div class="key BracketLeft">[</div>
+                <div class="key BracketRight">]</div>
+                <div class="key Backslash">\</div>
+            </div>
+            <!-- 3번째 줄 -->
+            <div class="sml_C" id="eg_3">
+                <div class="key caps-lock-key CapsLock">Caps Lock</div>
+                <div class="key KeyA">a</div>
+                <div class="key KeyS">s</div>
+                <div class="key KeyD">d</div>
+                <div class="key KeyF">f</div>
+                <div class="key KeyG">g</div>
+                <div class="key KeyH">h</div>
+                <div class="key KeyJ">j</div>
+                <div class="key KeyK">k</div>
+                <div class="key KeyL">l</div>
+                <div class="key Semicolon">;</div>
+                <div class="key Quote">'</div>
+                <div class="key enter-key Enter">Enter</div>
+            </div>
+            <!-- 4번째 줄 -->
+            <div class="sml_C" id="eg_4">
+                <div class="key shift-key ShiftLeft">Shift</div>
+                <div class="key KeyZ">z</div>
+                <div class="key KeyX">x</div>
+                <div class="key KeyC">c</div>
+                <div class="key KeyV">v</div>
+                <div class="key KeyB">b</div>
+                <div class="key KeyN">n</div>
+                <div class="key KeyM">m</div>
+                <div class="key Comma">,</div>
+                <div class="key Period">.</div>
+                <div class="key Slash">/</div>
+                <div class="key shift-key ShiftRight">Shift</div>
+            </div>
+            
+            <!-- 5번째 줄 -->
+            <div class="sml_C" id="eg_5">
+                <div class="key ctrl-key ControlLeft">Ctrl</div>
+                <div class="key"> </div>
+                <div class="key AltLeft">Alt</div>
+                <div class="key space-key Space">Space</div>
+                <div class="key HangulMode">한/영</div>
+                <div class="key HanjaMode">한자</div>
+                <div class="key"> </div>
+                <div class="key ctrl-key ControlRight">Ctrl</div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let word = [];
+        let mean = [];
+        '<% for (const wor of words) {%>'
+            word.push('<%=wor.word%>');
+            mean.push('<%=wor.meaning%>');
+        '<%}%>'
+    </script>
+    <script src="/static/javaScript/keyboard.js"></script> 
+    <script src="/static/javaScript/sidebar.js"></script>
+</body>
+</html>

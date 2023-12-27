@@ -7,13 +7,12 @@ const PORT = process.env.SERVERPORT;
 
 const swaggerRouter = require("./routes/swagger.router");
 
-const signupRouter = require('./routes/signup.router');
-const errorRouter = require('./routes/error.routes');
-const mypageRouter = require('./routes/mypage.routes');
-const yongRouter = require('./routes/index');
-const wordRouter = require('./routes/words.routes');
-const adminRouter = require('./routes/admin.routes');
-
+const signupRouter = require("./routes/signup.router");
+const errorRouter = require("./routes/error.routes");
+const mypageRouter = require("./routes/mypage.routes");
+const yongRouter = require("./routes/index");
+const wordRouter = require("./routes/words.routes");
+const adminRouter = require("./routes/admin.routes");
 
 const db = require("./models/index");
 const app = express();
@@ -25,6 +24,8 @@ const checkIdTokenMiddleware = require("./middlewares/checkIdToken");
 const checkAccessTokenMiddleware = require("./middlewares/checkAccessToken");
 const notFoundMiddleWare = require("./middlewares/not-found");
 const errorHanderMiddleware = require("./middlewares/error-handler");
+const checkAdminMiddleware = require("./middlewares/checkAdmin");
+const blockAdminMiddleware = require("./middlewares/blockNotAdmin");
 
 app.set("view engine", "ejs");
 
@@ -43,33 +44,31 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 const sessionConfig = getSessionConfig();
 app.use(expressSession(sessionConfig));
 
+
 app.use(checkIdTokenMiddleware);
+app.use(checkAdminMiddleware);
 
 app.use(errorRouter);
 app.use(signupRouter);
 app.use(yongRouter);
-app.use('/word', wordRouter);
-app.use('/admin', adminRouter);
+app.use("/word", wordRouter);
+app.use("/admin", blockAdminMiddleware, adminRouter);
 
 // API 관련
-const serviceKey = process.env.CULTUREAPISERVICEKEY; // .env
+const libraryKey = process.env.lIBRARYAPISERVICEKEY; // .env
 
-const bodyParser = require("body-parser");
-app.use(bodyParser.json());
+app.get("/libraryAPI", async (req, res) => {
+  const { selectRegion, selectDtl } = req.query;
+  console.log("region>", selectRegion);
+  console.log("dtl>", selectDtl);
 
-app.get("/cultureAPI", async (req, res) => {
-  const serviceUrl =
-    "http://api.kcisa.kr/openapi/service/rest/convergence/conver6?";
+  const serviceUrl = "http://data4library.kr/api/extends/libSrch?";
 
-  let URI = encodeURI("serviceKey") + "=" + serviceKey;
-  URI += "&" + encodeURI("numOfRows") + "=" + encodeURI("2");
+  let URI = encodeURI("authKey") + "=" + libraryKey;
   URI += "&" + encodeURI("pageNo") + "=" + encodeURI("1");
-  // URI += "&" + encodeURI("charge") + "=" + encodeURI("무료");
-
-  const charge = req.query.cost;
-  if (charge && charge === "무료") {
-    URI += "&" + encodeURI("charge") + "=" + encodeURI("무료");
-  }
+  URI += "&" + encodeURI("pageSize") + "=" + encodeURI("10");
+  URI += "&" + encodeURI("region") + "=" + encodeURI(selectRegion);
+  URI += "&" + encodeURI("dtl_region") + "=" + encodeURI(selectDtl);
 
   const url = serviceUrl + URI;
 
@@ -78,23 +77,66 @@ app.get("/cultureAPI", async (req, res) => {
   try {
     const result = await axios.get(url);
     const data = result.data;
-
-    // 사용자가 "무료"를 선택한 경우에만 데이터 필터링 적용
-    if (charge && charge === "무료") {
-      const filteredData = data.items.item.filter((item) => {
-        return item.charge && item.charge.includes("무료");
-      });
-
-      // 클라이언트에 필터링된 데이터 전송
-      res.json(filteredData);
-    } else {
-      // 클라이언트에 전체 데이터 전송
-      res.json(data);
-    }
+    res.json(data);
   } catch (err) {
     console.log(err);
   }
 });
+
+const classKey = process.env.CULTUREAPISERVICEKEY; // .env
+
+app.get("/classAPI", async (req, res) => {
+  // const { selectRegion, selectDtl } = req.query;
+  // console.log("region>", selectRegion);
+  // console.log("dtl>", selectDtl);
+
+  const serviceUrl = "http://api.kcisa.kr/openapi/API_CIA_081/request?";
+
+  let URI = encodeURI("serviceKey") + "=" + classKey;
+  URI += "&" + encodeURI("numOfRows") + "=" + encodeURI("10");
+  URI += "&" + encodeURI("pageNo") + "=" + encodeURI("1");
+  URI += "&" + encodeURI("returnType") + "=" + encodeURI("XML");
+  // URI += "&" + encodeURI("region") + "=" + encodeURI(selectRegion);
+  // URI += "&" + encodeURI("dtl_region") + "=" + encodeURI(selectDtl);
+
+  const url = serviceUrl + URI;
+
+  console.log(url);
+
+  try {
+    const result = await axios.get(url);
+    const data = result.data;
+    res.json(data);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+var request = require("request");
+
+var url = "http://ws.bus.go.kr/api/rest/arrive/getArrInfoByRouteAll";
+var queryParams =
+  "?" +
+  encodeURIComponent("serviceKey") +
+  "=" +
+  "3My5wxErgvzcHFEYeskyVvjOncM6Io53p7VZhbzmShc0p92hypEUqjxBlIr5pWtHVdRcCKv7mkFT2B3OrE3EeA=="; /* Service Key*/
+queryParams +=
+  "&" +
+  encodeURIComponent("busRouteId") +
+  "=" +
+  encodeURIComponent("100100118"); /* */
+
+request(
+  {
+    url: url + queryParams,
+    method: "GET",
+  },
+  function (error, response, body) {
+    console.log("Status", response.statusCode);
+    console.log("Headers", JSON.stringify(response.headers));
+    console.log("Reponse received", body);
+  }
+);
 
 app.use("/mypage", checkAccessTokenMiddleware, mypageRouter);
 

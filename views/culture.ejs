@@ -5,215 +5,107 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="/static/css/header.css" />
     <link rel="stylesheet" href="/static/css/component.css" />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <title>culture</title>
 
     <style>
-      a {
-        cursor: pointer;
-      }
-
-      .header {
+      .mainContent {
+        display: flex;
         width: 100%;
-        height: 150px;
-        background-color: white;
-        position: fixed;
-        display: flex;
-        z-index: 100;
-        border-bottom: 2px solid var(--color-black-1);
-        justify-content: space-around;
-        align-items: center;
-      }
-
-      .main-content {
-        display: flex;
-      }
-      .container {
-        position: relative;
-        display: flex;
-
-        flex-direction: column;
-        align-items: center;
-
-        width: 100%;
-        height: 80%;
-        top: 180px;
-        /* background-color: var(--color-black-1); */
-      }
-
-      .culture {
-        background-color: white;
-        border: 1px solid var(--color-black-1);
-        border-radius: 20px;
-        box-shadow: 1px 1px var(--color-black-1);
-        width: 400px;
-        height: 600px;
-
-        margin: 30px;
-      }
-
-      .terms {
-        /* background-color: pink; */
-        width: 400px;
-        height: 50px;
-        display: flex;
         align-items: center;
         justify-content: center;
+        margin-top: 50px;
+      }
+
+      .content-box {
+        width: 400px;
+        height: 500px;
+
+        margin: 0 var(--space-1);
+        background-color: var(--color-white-0);
+        border: 1px solid var(--color-black-1);
+        border-radius: var(--border-radius-medium);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .content-box img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        object-position: center top;
+        /* object-position: 50% 50%; */
+        /* opacity: 0.5; */
+        filter: grayscale(60%);
+      }
+
+      .content img {
+        transition: all 0.4s linear;
+      }
+
+      .content:hover img {
+        transform: scale(1.4);
+        filter: grayscale(80%);
+      }
+
+      .content a {
+        transition: all 0.5s linear;
+      }
+
+      .content:hover a {
+        color: var(--color-white-0);
+        font-size: 30px;
+      }
+
+      .textButton {
+        position: absolute;
+        width: 100%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: var(--color-black-0);
+        font-size: 0;
+        font-weight: bold;
+        text-align: center;
       }
     </style>
   </head>
   <body>
-    <%- include("./component/header")%>
+    <header><%- include("./component/header")%></header>
 
-    <main class="container">
-      <div class="terms">
-        <form action="/cultureAPI" name="termsForm" id="termsFrom">
-          <input type="date" name="date" id="date" />
-          <!-- <select name="location" id="location">
-            <option value="서울">서울</option>
-            <option value="부산">부산</option>
-          </select> -->
-
-          <select name="cost" id="cost">
-            <option value="무료">무료</option>
-            <option value="1">유로</option>
-          </select>
-        </form>
-      </div>
-
-      <button onclick="submit()">검색하기</button>
-      <button onclick="result()">불러오기</button>
-
-      <section class="main-content">
-        <div class="culture">
-          <div></div>
+    <main id="main">
+      <section class="mainContent">
+        <div class="content-box content class">
+          <img src="/static//css/university-105709_1280.jpg" alt="" />
+          <a href="/culture/class" class="textButton"> 지역별 일일 클래스 </a>
         </div>
-        <div class="culture"></div>
+        <div class="content-box content">
+          <img src="/static//css/books-1281581_1280.jpg" alt="" />
+          <a href="/culture/library" class="textButton"> 지역별 도서관 정보</a>
+        </div>
+        <div class="content-box content">
+          <img src="/static/css/fireworks-180553_1280.jpg" alt="" />
+          <a href="/culture/festival" class="textButton">지역별 축제 정보</a>
+          >
+        </div>
       </section>
     </main>
 
     <script>
-      // async function submit() {
-      //   const forms = document.forms["termsFrom"];
-      //   const period = forms.date.value;
-      //   // const location = forms.location.value;
-      //   const charge = forms.cost.value;
-
-      //   try {
-      //     const respons = await fetch(
-      //       `/cultureAPI?period=${period}&charge=${charge}`
-      //     );
-      //     const data = await response.json();
-      //     displayData(data);
-      //   } catch (error) {
-      //     console.error(error);
-      //   }
-
-      // const forms = document.forms["termsForm"];
-      // const period = forms.date.value;
-      // const location = forms.location.value;
-      // const cost = forms.cost.value;
-
-      // try {
-      //   const response = await fetch(
-      //     `/cultureAPI?period=${period}&location=${location}&cost=${cost}`
-      //   );
-      //   const data = await response.json();
-      //   displayData(data);
-      // } catch (error) {
-      //   console.error(error);
-      // }
-
-      // const response = await fetch("/cultureAPI", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({ preiod, lociton, cost }),
-      // });
-
-      // const data = await response.json();
-      // displayData(data);
-
-      // console.log({
-      //   period,
-      //   charge,
-      // });
-
-      async function result() {
-        const cost = document.getElementById("cost");
-        const costValue = cost.value;
-        try {
-          const response = await fetch(`/cultureAPI?charge=${costValue}`);
-          const data = await response.json();
-          displayData(data);
-
-          console.log(data);
-        } catch (error) {
-          console.error(error);
-        }
-      }
-
-      function displayData(data) {
-        const cultureDivs = document.querySelectorAll(".main-content .culture");
-
-        cultureDivs.forEach((div) => {
-          div.innerHTML = "";
+      async function logout(event) {
+        event.preventDefault();
+        const res = await axios({
+          method: "post",
+          url: "/logout",
         });
-
-        const items = data.response?.body?.items?.item;
-
-        if (items && items.length > 0) {
-          items.forEach((item, index) => {
-            const itemDiv = document.createElement("div");
-
-            const titleDiv = document.createElement("div");
-            titleDiv.textContent = `Title: ${item.title}`;
-            itemDiv.appendChild(titleDiv);
-
-            // period
-            const periodDiv = document.createElement("div");
-            periodDiv.textContent = `Period: ${item.period}`;
-            itemDiv.appendChild(periodDiv);
-
-            // time
-            const timeDiv = document.createElement("div");
-            timeDiv.textContent = `Time: ${item.time}`;
-            itemDiv.appendChild(timeDiv);
-
-            // url
-            const urlDiv = document.createElement("div");
-            urlDiv.innerHTML = `<a href="${item.url}" target="_blank">링크 바로가기 </a>`;
-            itemDiv.appendChild(urlDiv);
-
-            // grade
-            const gradeDiv = document.createElement("div");
-            gradeDiv.textContent = `Grade: ${item.grade}`;
-            itemDiv.appendChild(gradeDiv);
-
-            // creator
-            const creatorDiv = document.createElement("div");
-            creatorDiv.textContent = `Creator: ${item.creator}`;
-            itemDiv.appendChild(creatorDiv);
-
-            // charge
-            const chargeDiv = document.createElement("div");
-            chargeDiv.textContent = `Charge: ${item.charge}`;
-            itemDiv.appendChild(chargeDiv);
-
-            // // img;
-            const imgDiv = document.createElement("div");
-            imgDiv.innerHTML = `<img src="${item.referenceIdentifier}" alt="">`;
-            itemDiv.appendChild(imgDiv);
-
-            cultureDivs[index].appendChild(itemDiv);
-          });
-        } else {
-          // 검색 결과가 없는 경우 메시지 표시
-          cultureDivs.forEach((div) => {
-            div.textContent = "검색 결과가 없습니다.";
-          });
-        }
+        swal("로그아웃 완료!", "", "success").then(function () {
+          location.href = "/culture";
+        });
       }
     </script>
   </body>

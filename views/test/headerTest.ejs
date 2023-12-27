@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/css/component.css" />
+    <link rel="stylesheet" href="/static/css/header.css" />
+    <link rel="stylesheet" href="/static/css/sidebar.css" />
+
+    <title>Sidebar 예제</title>
+    <style></style>
+  </head>
+  <body>
+    <header>
+      <div id="toggle-btn" onclick="toggleSidebar()">☰</div>
+      <div id="back-btn" onclick="goBack()">↩︎</div>
+
+      <!-- 사이드 바 -->
+      <div id="sidebar">
+        <img src="/static/css/logo2.png" alt="" class="logo" />
+
+        <ul class="full-line">
+          <li class="main-line" id="home"><a href="/">Home</a></li>
+          <li class="main-line" id="computer">
+            <a href="#">컴퓨터</a>
+            <ol>
+              <li class="sub-line">
+                <a href="#">MZ어 타자검정</a>
+              </li>
+            </ol>
+          </li>
+          <li class="main-line" id="life">
+            <a href="#">생활/편의</a>
+            <ol>
+              <li class="sub-line">
+                <a href="#">키오스크</a>
+              </li>
+            </ol>
+          </li>
+          <li class="main-line" id="culture">
+            <a href="#">문화/여가</a>
+            <ol>
+              <li class="sub-line">
+                <a href="">무료 구청 교육</a>
+              </li>
+              <li class="sub-line">
+                <a href="/culture/class">동네 문화 생활</a>
+              </li>
+              <li class="sub-line">
+                <a href="/culture/library">도서관 영업 시간</a>
+              </li>
+            </ol>
+          </li>
+        </ul>
+        <!-- 추가적인 메뉴 항목을 원하는 만큼 추가할 수 있습니다. -->
+      </div>
+
+      <nav class="headerNav">
+        <ul class="navUser">
+          <li class="navi-li headerli">
+            <% if(locals.accessToken) {%>
+            <!-- <button id="logout" onclick="logout()">로그아웃</button> -->
+            <a onclick="logout(window.event)" id="logout"> 로그아웃</a>
+
+            <%} else { %>
+            <a href="/login">로그인</a>
+            <%}%>
+          </li>
+          <li class="navi-li headerli">
+            <% if(locals.accessToken) {%>
+            <a href="/Mypage"> 마이페이지 </a>
+            <%} else { %>
+
+            <a href="/signup"> 회원가입</a>
+            <%}%>
+          </li>
+        </ul>
+      </nav>
+      <script>
+        async function logout(event) {
+          event.preventDefault();
+          const res = await axios({
+            method: "post",
+            url: "/logout",
+          });
+
+          location.href = "/";
+        }
+      </script>
+    </header>
+
+    <!-- 내용 -->
+    <div id="main"></div>
+
+    <script src="/static/javaScript/sidebar.js"></script>
+  </body>
+</html>
