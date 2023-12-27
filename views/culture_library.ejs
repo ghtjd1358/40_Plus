@@ -19,6 +19,8 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"
     />
 
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <title>culture</title>
 
     <style>
@@ -178,6 +180,19 @@
         border-radius: var(--border-radius-medium);
         border: 2px solid var(--color-grey-0);
       }
+
+      .sampleSlider {
+        background: var(--color-white-0);
+        display: flex;
+        flex-direction: column;
+        margin: var(--space-2) auto auto;
+        height: 50%;
+        width: 100%;
+
+        border-radius: var(--border-radius-medium);
+        border: 2px solid var(--color-grey-0);
+      }
+
       .slider-item-content {
         padding: 32px;
         display: flex;
@@ -273,7 +288,7 @@
       .sampleText1 {
         height: auto;
         font-size: 24px;
-        margin-top: 30%;
+        margin-top: 10%;
         display: block;
         color: var(--color-black-2);
         text-align: center;
@@ -319,14 +334,14 @@
         <div class="swiper-pagination"></div>
         <div class="swiper-wrapper">
           <!--  -->
-          <div class="slider-item swiper-slide">
-            <div class="slider-item-content">
-              <p class="sampleText1">
-                원하는 지역을 선택후 불러오기 버튼을 눌러주세요!
-              </p>
-              <p class="sampleText2">아래 실시간 도서관 정보가 표시됩니다!</p>
-            </div>
+          <!-- <div class="slider-item swiper-slide sampleSlider"> -->
+          <div class="sampleSlider">
+            <p class="sampleText1">
+              원하는 지역을 선택후 불러오기 버튼을 눌러주세요!
+            </p>
+            <p class="sampleText2">아래 실시간 도서관 정보가 표시됩니다!</p>
           </div>
+          <!-- </div> -->
           <!--  -->
         </div>
         <div class="slider-buttons">
@@ -334,33 +349,32 @@
           <button class="swiper-button-next">다음으로</button>
         </div>
       </div>
-
-      <!-- partial -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.5/swiper-bundle.min.js"></script>
-      <script>
-        var swiper = new Swiper(".swiper-container", {
-          slidesPerView: 1,
-          spaceBetween: 20,
-          effect: "fade",
-          loop: true,
-          speed: 300,
-          mousewheel: {
-            invert: false,
-          },
-          pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
-            dynamicBullets: true,
-          },
-          // Navigation arrows
-          navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
-          },
-        });
-      </script>
     </main>
+    <!-- partial -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.5/swiper-bundle.min.js"></script>
+    <script>
+      var swiper = new Swiper(".swiper-container", {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        effect: "fade",
+        loop: true,
+        speed: 300,
+        mousewheel: {
+          invert: false,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+          dynamicBullets: true,
+        },
+        // Navigation arrows
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+    </script>
 
     <script>
       const regionForm = document.forms["regionForm"];
@@ -523,7 +537,17 @@
           console.error("Error parsing or displaying data:", error);
         }
       }
+
+      async function logout(event) {
+        event.preventDefault();
+        const res = await axios({
+          method: "post",
+          url: "/logout",
+        });
+        swal("로그아웃이 완료되었습니다!", "", "success").then(function () {
+          location.href = "/culture/library";
+        });
+      }
     </script>
-    <script src="/static/javaScript/sidebar.js"></script>
   </body>
 </html>

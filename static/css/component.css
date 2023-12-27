@@ -207,3 +207,13 @@ input:focus {
 input:focus::placeholder {
   font-size: 0px;
 }
+
+/* alert창 */
+.swal-modal {
+  margin-top: -20%;
+}
+.swal-button {
+  padding: 7px 19px;
+  background-color: var(--color-orange-5);
+  font-size: 12px;
+}

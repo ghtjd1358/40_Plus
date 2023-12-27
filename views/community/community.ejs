@@ -18,6 +18,10 @@
     <link rel="stylesheet" href="/static/css/borad.css" />
     <link rel="stylesheet" href="/static/css/header.css" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <!-- 테이블 클릭 할 시 링크이동을 위한 스타일 -->
     <style>
       .header {
@@ -118,6 +122,23 @@
         }
 
         window.location.href = "/writeCommunity";
+      }
+
+      async function logout(event) {
+        event.preventDefault();
+        const res = await axios({
+          method: "post",
+          url: "/logout",
+        });
+        swal(
+          "로그아웃이 완료되었습니다!",
+          "게시글 작성을 위해 로그인해주세요!",
+          "success"
+        ).then(function () {
+          location.href = "/community";
+        });
+
+        // location.href = "/";
       }
     </script>
   </body>
