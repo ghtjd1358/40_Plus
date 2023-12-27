@@ -74,10 +74,6 @@ html {
   height: 100px;
 }
 
-button {
-  cursor: pointer;
-}
-
 li {
   list-style: none;
 }
@@ -88,7 +84,7 @@ body {
 
 a {
   text-decoration: none;
-  cursor: pointer;
+  cursor: url(./img/pointer.png) 10 10, auto;
 }
 
 .btn {
@@ -282,7 +278,7 @@ footer {
 
 /* 버튼 */
 input {
-  cursor: pointer;
+  cursor: url(./img/pointer.png) 10 10, auto;
 }
 
 input:focus {
