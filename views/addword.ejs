@@ -95,7 +95,9 @@
         }월 ${date.getDate()}일 ${date.getHours()}시 ${date.getMinutes()}분`;
         createAtElements[i].textContent = realDay;
       }
+    </script>
 
+    <script>
       async function logout(event) {
         event.preventDefault();
         const res = await axios({
@@ -109,6 +111,7 @@
         // location.href = "/";
       }
     </script>
+
     <script src="/static/javaScript/addword.js" defer></script>
   </body>
 </html>
