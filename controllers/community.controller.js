@@ -188,6 +188,7 @@ exports.searchCommunity = (req, res) => {
       where: whereCondition,
     }).then((result) => {
       console.log("search Community > ", result);
+      res.send({ data: result });
     });
   } else {
     // title과 content에서 str을 찾아서 합치기
@@ -199,8 +200,8 @@ exports.searchCommunity = (req, res) => {
         ],
       },
     }).then((result) => {
-      console.log("-------------------------------");
       console.log("Search result:", result);
+      res.send({ data: result });
     });
   }
 };
