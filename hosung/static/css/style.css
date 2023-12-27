@@ -482,6 +482,10 @@ section {
   height: 100%;
 }
 
+.sns a img:hover {
+  opacity: 0.5;
+}
+
 /* bottom */
 .footer-bottom{
   width: 100%;
