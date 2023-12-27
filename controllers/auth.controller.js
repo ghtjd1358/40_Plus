@@ -125,11 +125,15 @@ async function signup(req, res) {
 }
 
 function getLogin(req, res) {
-  if (!req.session.accessToken) {
-    res.render("user/login");
-  } else {
-    res.redirect("/401");
+  if (!req.session.accessToken && req.session.url) {
+    return res.render("user/login", {url: req.session.url});
+  } 
+    
+  if (!req.session.accessToken && !req.session.url) {
+    return res.render("user/login", {url: '/'});
   }
+  res.redirect("/401");
+  
 }
 
 async function login(req, res, next) {

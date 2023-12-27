@@ -6,13 +6,33 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="/static/css/component.css" />
     <link rel="stylesheet" href="/static/css/addword.css" />
-    <link rel="stylesheet" href="/static/css/sidebarHeader.css" />
+
+    <link rel="stylesheet" href="/static/css/header.css" />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <title>단어 추가</title>
+
+    <style>
+      .header {
+        background-color: white;
+      }
+      body {
+        background-color: #f5f5f5;
+      }
+      #add-body {
+        width: 80%;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin: auto;
+      }
+    </style>
   </head>
-  <body id="add_body">
-    <main>
+  <body>
+    <header><%- include("./component/header")%></header>
+    <main id="add-body">
       <div>
         <form name="addword">
+
             <div class="add-C">
               <h1>현재 개의 단어가 등록되어 있습니다.</h1>
                 <input type="text" class="add-text" name="name" id="name" placeholder="단어 명"> <br>
@@ -20,6 +40,28 @@
                 <button id="addWord" class="common-btn" type="button"><span class="common-text">등록 요청</span></button>
             </div>
             <p id="result"></p>
+
+          <div class="add-C">
+            <input
+              type="text"
+              class="add-text"
+              name="name"
+              id="name"
+              placeholder="단어 명"
+            />
+            <br />
+            <input
+              type="text"
+              class="add-text"
+              name="mean"
+              id="mean"
+              placeholder="단어 뜻"
+            />
+            <br />
+            <button id="addWord" class="add-btn" type="button">등록</button>
+          </div>
+          <p id="result"></p>
+
         </form>
         <table>
           <tr>
@@ -52,16 +94,34 @@
     </main>
     <script>
       // 밑에거를 토대로 개수 만들기
-      let words = '<%- JSON.stringify(words) %>';
+      let words = "<%- JSON.stringify(words) %>";
       words = JSON.parse(words);
       const createAtElements = document.querySelectorAll(".createdAt");
 
       for (let i = 0; i < 5; i++) {
         const date = new Date(words[i].createdAt);
-        const realDay = `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일 ${date.getHours()}시 ${date.getMinutes()}분`;
+        const realDay = `${date.getFullYear()}년 ${
+          date.getMonth() + 1
+        }월 ${date.getDate()}일 ${date.getHours()}시 ${date.getMinutes()}분`;
         createAtElements[i].textContent = realDay;
       }
     </script>
+
+    <script>
+      async function logout(event) {
+        event.preventDefault();
+        const res = await axios({
+          method: "post",
+          url: "/logout",
+        });
+        swal("로그아웃이 완료되었습니다!", "", "success").then(function () {
+          location.href = "/word";
+        });
+
+        // location.href = "/";
+      }
+    </script>
+
     <script src="/static/javaScript/addword.js" defer></script>
   </body>
 </html>

@@ -1,9 +1,10 @@
 const checkAccessMiddleware = require("../middlewares/checkAccessToken");
+const getUrlMiddleware = require('../middlewares/getUrl');
 const controller = require("../controllers/auth.controller");
 const express = require("express");
 const router = express();
 
-router.get("/", controller.getIndex);
+router.get("/", getUrlMiddleware, controller.getIndex);
 
 router.get("/signup", controller.getSignup);
 
@@ -21,7 +22,7 @@ router.get("/culture/library", controller.library);
 router.get("/culture/class", controller.dayClass);
 router.get("/culture/festival", controller.festival);
 
-router.get("/kiosk", controller.kiosk);
+router.get("/kiosk", getUrlMiddleware, controller.kiosk);
 
 router.post("/logout", controller.logout);
 

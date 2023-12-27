@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express();
-
+const getUrlMiddleware= require('../middlewares/getUrl');
 const controller = require('../controllers/word.controller');
 
-router.get('/', controller.getAddWord);
+router.get('/word', getUrlMiddleware, controller.getAddWord);
 
-router.post('/addword', controller.addWord);
+router.post('/word/addword', controller.addWord);
 
-router.get('/keyboard', controller.getKeyboard);
+router.get('/word/keyboard', getUrlMiddleware, controller.getKeyboard);
 
 
 

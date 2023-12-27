@@ -7,11 +7,15 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="/static/css/header.css" />
     <link rel="stylesheet" href="/static/css/component.css" />
+    <link rel="stylesheet" href="/static/css/footer.css" />
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <title>culture</title>
 
     <style>
+      .header {
+        background-color: white;
+      }
       .mainContent {
         display: flex;
         width: 100%;
@@ -41,7 +45,7 @@
         object-position: center top;
         /* object-position: 50% 50%; */
         /* opacity: 0.5; */
-        filter: grayscale(60%);
+        filter: grayscale(100%);
       }
 
       .content img {
@@ -49,8 +53,8 @@
       }
 
       .content:hover img {
-        transform: scale(1.4);
-        filter: grayscale(80%);
+        transform: scale(1.5);
+        filter: grayscale(30%);
       }
 
       .content a {
@@ -59,7 +63,9 @@
 
       .content:hover a {
         color: var(--color-white-0);
-        font-size: 30px;
+        font-family: 700;
+        text-shadow: var(--shadow);
+        font-size: 38px;
       }
 
       .textButton {
@@ -96,6 +102,7 @@
       </section>
     </main>
 
+    <%- include("./component/footer")%>
     <script>
       async function logout(event) {
         event.preventDefault();

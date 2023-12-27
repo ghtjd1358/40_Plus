@@ -7,6 +7,7 @@
     <title>로그인</title>
     <link rel="stylesheet" href="/static/css/header.css" />
     <link rel="stylesheet" href="/static/css/component.css" />
+    <link rel="stylesheet" href="/static/css/footer.css" />
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <link
@@ -15,6 +16,12 @@
     />
 
     <style>
+      .header {
+        background-color: white;
+      }
+      .footer {
+        margin-top: 0px;
+      }
       body {
         background-color: var(--color-white-0);
       }
@@ -26,7 +33,7 @@
         align-items: center;
 
         width: 100%;
-        height: calc(100vh - 120px);
+        height: 80vh;
 
         /* border-top: 1px solid var(--color-grey-0); */
 
@@ -133,7 +140,6 @@
   </head>
   <body>
     <header><%- include("../component/header")%></header>
-
     <main class="container">
       <!-- 로그인 콘텐츠 영역 -->
       <div class="loginContent">
@@ -162,6 +168,7 @@
         </div>
       </div>
     </main>
+    <%- include("../component/footer")%>
   </body>
   <script>
     const loginButtonElement = document.querySelector("#login");
@@ -182,7 +189,7 @@
         return (resultElement.textContent = res.data.msg);
       }
       swal("로그인 완료되었습니다.", "", "success").then(function () {
-        location.href = '/';
+        location.href = "<%= url %>";
       });
     }
 
