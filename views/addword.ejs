@@ -32,6 +32,15 @@
     <main id="add-body">
       <div>
         <form name="addword">
+
+            <div class="add-C">
+              <h1>현재 개의 단어가 등록되어 있습니다.</h1>
+                <input type="text" class="add-text" name="name" id="name" placeholder="단어 명"> <br>
+                <input type="text" class="add-text" name="mean" id="mean" placeholder="단어 뜻"> <br>
+                <button id="addWord" class="common-btn" type="button"><span class="common-text">등록 요청</span></button>
+            </div>
+            <p id="result"></p>
+
           <div class="add-C">
             <input
               type="text"
@@ -52,6 +61,7 @@
             <button id="addWord" class="add-btn" type="button">등록</button>
           </div>
           <p id="result"></p>
+
         </form>
         <table>
           <tr>
@@ -95,7 +105,9 @@
         }월 ${date.getDate()}일 ${date.getHours()}시 ${date.getMinutes()}분`;
         createAtElements[i].textContent = realDay;
       }
+    </script>
 
+    <script>
       async function logout(event) {
         event.preventDefault();
         const res = await axios({
@@ -109,6 +121,7 @@
         // location.href = "/";
       }
     </script>
+
     <script src="/static/javaScript/addword.js" defer></script>
   </body>
 </html>

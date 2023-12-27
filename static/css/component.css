@@ -72,6 +72,7 @@ html {
 .logo {
   width: 200px;
   height: 100px;
+  cursor: url(./img/pointer.png) 10 10, auto;
 }
 
 li {
@@ -157,38 +158,6 @@ a {
 /* <button class="common-btn"><span class="common-text">버튼</span></button> 이런식으로 */
 header {
   font-size: 18px;
-}
-
-/* footer 영역 CSS  */
-footer {
-  background-color: var(--color-grey-0);
-  width: 100%;
-  height: 80px;
-  position: absolute;
-  top: 100px;
-  bottom: 0;
-  color: var(--color-black-1);
-}
-
-.footer-nav-box {
-  border: 1px solid black;
-  border-radius: 20px;
-  height: 100px;
-  width: 80%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
-
-.footer-nav-box > ul {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  line-height: 100%;
-  height: 100%;
-  margin: 0px;
-  padding: 0;
-  width: 100%;
 }
 
 /* 메인 콘텐츠 영역 */
