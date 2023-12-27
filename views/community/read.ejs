@@ -6,6 +6,9 @@
     <title>게시판 글 읽기</title>
 
     <link rel="stylesheet" href="/static/css/component.css" />
+    <link rel="stylesheet" href="/static/css/read.css">
+    <link rel="stylesheet" href="/static/css/footer.css" />
+    <link rel="stylesheet" href="/static/css/header.css" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link
@@ -13,167 +16,24 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
     />
     <style>
-      body {
-        margin: 0;
-      }
-      .big-C {
-        min-height: 100vh;
-        background-color: #f5f5f5;
-        margin: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .small-C {
-        background-color: #ffffff;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
-        padding: 20px;
-        width: 80%;
-        max-width: 700px;
-        text-align: left;
-      }
-      /* 제목 */
-      .title {
-        font-size: 24px;
-        font-weight: bold;
-        color: #333333;
-        margin-bottom: 20px;
-      }
-      /* 내용 */
-      .content {
-        font-size: 16px;
-        color: #555555;
-        line-height: 1.5;
-        margin-bottom: 20px;
-        white-space: pre-wrap;
-      }
-
-      /* 기타 정보 */
-      .meta-info {
-        font-size: 14px;
-        color: #888888;
-        margin-bottom: 20px;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-      }
-      hr {
-        margin-bottom: 20px;
-      }
-      .space {
-        margin-left: 10px;
-        margin-right: 5px;
-      }
-      .date {
-        margin-left: 5px;
-      }
-      .views {
-        margin-left: auto;
-        margin-right: 5px;
-      }
-      .comments {
-        margin-right: 5px;
-      }
-      .comments-hr {
-        border: 0; /* 기본 테두리 제거 */
-        height: 2px; /* 선의 높이(두께) 조절 */
-        background-color: #3498db; /* 파란색으로 변경 */
-        margin-top: 20px;
-        margin-bottom: 20px;
-      }
-
-      /* 댓글 창 스타일 */
-      .comments-area {
-        margin-top: 30px;
-      }
-      /* 댓글 입력 폼 */
-      .comment-form {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 20px;
-      }
-
-      .comment-form textarea {
-        width: 100%;
-        padding: 10px;
-        box-sizing: border-box;
-        border: 1px solid #dddddd;
-        border-radius: 5px;
-        height: 80px;
-        resize: none;
-        margin-bottom: 20px;
-      }
-
-      .comment-form button {
-        background-color: #4caf50;
-        color: #ffffff;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-        width: 20%;
-        margin-left: auto;
-      }
-
-      .comment-form button:hover {
-        background-color: #45a049;
-      }
-
-      /* 각 댓글 보기 스타일 */
-      .comment {
-        margin-bottom: 20px;
-        padding: 15px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        background-color: #f9f9f9;
-        display: flex;
-
-        flex-direction: column;
-      }
-
-      .comment-user {
-        font-weight: bold;
-        margin-bottom: 5px;
-      }
-
-      .comment-date {
-        color: #888888;
-        font-size: 12px;
-        margin-left: auto;
-        margin-bottom: 10px;
-      }
-      .comment-like-button {
-        color: #888888;
-        font-size: 16px;
-        margin-left: auto;
-        margin-bottom: 10px;
-      }
-
-      .comment-content {
-        border-top: 1px solid #ddd; /* 구분선 스타일 추가 */
-        padding-top: 10px; /* 구분선과의 간격 조절 */
-        white-space: pre-wrap;
-      }
     </style>
   </head>
   <body>
+    <header><%- include("../component/header")%></header>
     <!-- B 페이지의 EJS 파일 -->
 
     <div class="big-C">
       <div class="small-C">
         <div class="title"><%= data.title %></div>
         <% if (locals.userid == data.userid){ %>
-        <button type="button" onclick="deleteCommunity('<%= data.number %>')">
-          삭제버튼
-        </button>
+        
         <button
-          type="button"
+          type="button" class="common-btn edit"
           onclick="sendModifyCommunity('<%= data.number %>')"
         >
-          수정버튼
+          <span class="common-text">수정버튼</span>
+        </button><button type="button" class="common-btn delete" onclick="deleteCommunity('<%= data.number %>')">
+          <span class="common-text">삭제버튼</span>
         </button>
         <% } %>
         <hr />
@@ -192,10 +52,10 @@
             <div class="comment-form">
               <textarea placeholder="댓글을 입력하세요" name="write"></textarea>
               <button
-                type="button"
+                type="button" class="common-btn add"
                 onclick="writeComment('<%= data.number %>', '<%= locals.userid %>')"
               >
-                댓글 등록
+                <span class="common-text">댓글 등록</span>
               </button>
             </div>
           </form>
@@ -233,6 +93,8 @@
         </div>
       </div>
     </div>
+
+    <%- include("../component/footer")%>
 
     <script>
       // 댓글 텍스트 전송
