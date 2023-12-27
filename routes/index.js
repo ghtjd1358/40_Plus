@@ -2,6 +2,7 @@
 
 const express = require("express");
 const router = express.Router();
+const getUrlMiddleware = require('../middlewares/getUrl');
 const controller = require("../controllers/community.controller");
 
 /**
@@ -32,7 +33,7 @@ const controller = require("../controllers/community.controller");
 // 임시
 //router.get("/allComment", controller.readAllComment);
 
-router.get("/community", controller.community);
+router.get("/community", getUrlMiddleware, controller.community);
 
 // searchCommunity 부분
 router.post("/searchCommunity", controller.searchCommunity);
@@ -42,7 +43,7 @@ router.post("/submitCommunity", controller.communityPost);
 router.get("/writeCommunity", controller.writeCommunity);
 
 // 글 읽기
-router.get("/readCommunity", controller.readCommunity);
+router.get("/readCommunity", getUrlMiddleware, controller.readCommunity);
 router.post("/detailCommunityPage", controller.detailCommunityPage);
 
 // 글 삭제

@@ -122,7 +122,7 @@ async function signup(req, res) {
 
 function getLogin(req, res) {
   if (!req.session.accessToken) {
-    res.render("user/login");
+    res.render("user/login", {url: req.session.url});
   } else {
     res.redirect("/401");
   }

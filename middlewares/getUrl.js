@@ -1,5 +1,9 @@
 function getUrl(req, res, next) {
-    res.locals.url = req.url();
+    if (req.session.accessToken) {
+        return next();
+    }
+    req.session.url = req.url;
+    console.log(req.session.url);
     next();
 }
 
