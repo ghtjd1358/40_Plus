@@ -5,6 +5,70 @@
     justify-content: center;
     align-items: center;
 }
+.header {
+    background-color: white;
+}
+#add-body {
+width: 80%;
+flex-direction: column;
+margin: auto;
+}
+.h1-text {
+    text-align: center;
+    color: #fff;
+    /* font-size: 24px; */
+    /* margin-bottom: 20px; */
+    border: 1px solid black;
+    border-radius: 8px;
+}
+
+h1 {
+    font-size: 36px;
+    letter-spacing: 2px;
+    margin: 0;
+    padding: 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.h3-text {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 24px;
+}
+.sml_C {
+    display: flex;
+}
+.add-div {
+    /* border: 1px solid black; */
+    display: inline-block;
+    text-align: center;
+    width: 50%;
+}
+.tooltip {
+    position: relative; 
+    margin: 20px; 
+    padding: 20px;
+    width: 50%;
+    color: var(--color-black-5); 
+    border-radius: 10px; 
+    background-color: var(--color-red-3);
+    font-size: 2em;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+.tooltip::after {
+    content: '';
+    position: absolute;
+    top: 45px;
+    left: -30px;
+    border-right: 30px solid var(--color-red-3); 
+    border-top: 10px solid transparent; 
+    border-bottom: 10px solid transparent;}
 
 /* 입력 칸 div */
 .add-C {
@@ -14,22 +78,21 @@
     margin: 20px 0;
     border: 1px solid black;
     box-shadow: 0 7px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
 .add-text {
     padding: 10px;
-    width: 250px;
-    border: 1px solid #ddd;
+    width: 80%;
+    border: 1px solid darkblue;
     border-radius: 5px;
     margin-right: 10px;
-}
-
-#mean {
-    width: 500px;
+    margin-top: 20px;
+    font-size: larger;
 }
 
 .common-btn {
-    margin: 0 auto;
+    margin: 20px 0;
 }
 .common-btn:hover::before {
     position: absolute;
@@ -54,6 +117,7 @@ table {
     overflow: hidden;
     margin-top: 20px;
     text-align: center;
+    font-size: larger;
 }
 
 th, td {

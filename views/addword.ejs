@@ -6,25 +6,13 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="/static/css/component.css" />
     <link rel="stylesheet" href="/static/css/addword.css" />
-
     <link rel="stylesheet" href="/static/css/header.css" />
+    <link rel="stylesheet" href="/static/css/footer.css" />
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <title>단어 추가</title>
 
     <style>
-      .header {
-        background-color: white;
-      }
-      body {
-        background-color: #f5f5f5;
-      }
-      #add-body {
-        width: 80%;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        margin: auto;
-      }
+      
     </style>
   </head>
   <body>
@@ -34,35 +22,20 @@
         <form name="addword">
 
             <div class="add-C">
-              <h1>현재 개의 단어가 등록되어 있습니다.</h1>
-                <input type="text" class="add-text" name="name" id="name" placeholder="단어 명"> <br>
-                <input type="text" class="add-text" name="mean" id="mean" placeholder="단어 뜻"> <br>
-                <button id="addWord" class="common-btn" type="button"><span class="common-text">등록 요청</span></button>
+              <div class="h1-text"><h1>현재 개의 단어가 등록되어 있습니다.</h1></div>
+                <!-- <div class="h3-text"><h3>단어 등록</h3></div> -->
+                <div class="sml_C">
+                  <div class="add-div">
+                    <input type="text" class="add-text" name="name" id="name" placeholder="단어 명"> <br>
+                    <input type="text" class="add-text" name="mean" id="mean" placeholder="단어 뜻"> <br>
+                    <button id="addWord" class="common-btn" type="button"><span class="common-text">등록 신청</span></button>
+                    <p id="result"></p>
+                  </div>
+                  <div class="tooltip">나만의 MZ어를 등록하여 다른 사람들과 공유해보세요! <br> 관리자의 승인이 허가 되면 문제로 출제됩니다!! </div>
+                </div>
             </div>
-            <p id="result"></p>
-
-          <div class="add-C">
-            <input
-              type="text"
-              class="add-text"
-              name="name"
-              id="name"
-              placeholder="단어 명"
-            />
-            <br />
-            <input
-              type="text"
-              class="add-text"
-              name="mean"
-              id="mean"
-              placeholder="단어 뜻"
-            />
-            <br />
-            <button id="addWord" class="add-btn" type="button">등록</button>
-          </div>
-          <p id="result"></p>
-
         </form>
+        <!-- <div class="h3-text"><h3>단어 목록</h3></div> -->
         <table>
           <tr>
             <th class="th-number">번호</th>
@@ -92,9 +65,11 @@
         <p id="result"></p>
       </div>
     </main>
+    <%- include("./component/footer")%>
+    
     <script>
       // 밑에거를 토대로 개수 만들기
-      let words = "<%- JSON.stringify(words) %>";
+      let words = '<%- JSON.stringify(words) %>';
       words = JSON.parse(words);
       const createAtElements = document.querySelectorAll(".createdAt");
 

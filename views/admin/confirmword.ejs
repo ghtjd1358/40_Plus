@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="/static/css/component.css">
+    <link rel="stylesheet" href="/static/css/header.css" />
     <title>단어 승인</title>
     <style>
         #add_body {
@@ -73,6 +74,7 @@
         
     </style>
 </head>
+<header><%- include("../component/header")%></header>
 <body id="add_body">
         <% if (words.length > 0) {%>
             <table>

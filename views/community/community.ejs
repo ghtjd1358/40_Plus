@@ -25,18 +25,12 @@
         background-color: white;
       }
 
-      table tr {
-        cursor: pointer;
-      }
-
       body {
         background-color: #f5f5f5;
       }
 
       #add-body {
         width: 80%;
-        align-items: center;
-        justify-content: center;
         flex-direction: column;
         margin: auto;
       }
@@ -50,7 +44,7 @@
     <div id="add-body">
       <form>
         <div class="add-C">
-          <button type="button" onclick="writeCommunity()">글쓰기</button>
+          <button type="button" class="common-btn" onclick="writeCommunity()"><span class="common-text">글쓰기</span></button>
         </div>
       </form>
       <table class="table">
@@ -92,7 +86,7 @@
           id="search-input"
           placeholder="검색어를 입력하세요"
         />
-        <button id="search-button" onclick="searchCommunity()">검색</button>
+        <button id="search-button" class="common-btn" onclick="searchCommunity()"><span class="common-text">검색</span></button>
       </div>
     </div>
 
