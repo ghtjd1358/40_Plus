@@ -133,7 +133,6 @@
   </head>
   <body>
     <header><%- include("../component/header")%></header>
-
     <main class="container">
       <!-- 로그인 콘텐츠 영역 -->
       <div class="loginContent">
@@ -182,7 +181,7 @@
         return (resultElement.textContent = res.data.msg);
       }
       swal("로그인 완료되었습니다.", "", "success").then(function () {
-        location.href = '/';
+        location.href = '<%= url %>';
       });
     }
 

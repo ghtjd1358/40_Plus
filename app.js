@@ -44,14 +44,13 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 const sessionConfig = getSessionConfig();
 app.use(expressSession(sessionConfig));
 
-
 app.use(checkIdTokenMiddleware);
 app.use(checkAdminMiddleware);
 
 app.use(errorRouter);
 app.use(signupRouter);
+app.use(wordRouter);
 app.use(yongRouter);
-app.use("/word", wordRouter);
 app.use("/admin", blockAdminMiddleware, adminRouter);
 
 // API 관련
@@ -61,9 +60,9 @@ app.get("/libraryAPI", async (req, res) => {
   const { selectRegion, selectDtl } = req.query;
   console.log("region>", selectRegion);
   console.log("dtl>", selectDtl);
-
+  
   const serviceUrl = "http://data4library.kr/api/extends/libSrch?";
-
+  
   let URI = encodeURI("authKey") + "=" + libraryKey;
   URI += "&" + encodeURI("pageNo") + "=" + encodeURI("1");
   URI += "&" + encodeURI("pageSize") + "=" + encodeURI("10");
