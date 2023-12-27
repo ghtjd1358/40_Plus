@@ -87,7 +87,7 @@ section {
 }
 
 .navInner {
-  width: 23%;
+  width: 40%;
   display: flex;
   justify-content: space-between;
   margin-top: 0.5rem;
@@ -182,7 +182,7 @@ section {
 }
 
 .slider-container {
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.56), 0 3px 6px rgba(0, 0, 0, 0.63);
   height: 80vh;
   width: 80%;
   position: relative;
@@ -197,7 +197,7 @@ section {
   opacity: 0;
   height: 80vh;
   width: 80vw;
-  transition: 0.4s ease; 
+  transition: 0.7s ease; 
 }
 
 .slide-left::before {
@@ -219,23 +219,33 @@ section {
   width: 40vw;
   height: 100%;
   position: relative;
+  background: url('/static/img/airplane.jpg') no-repeat center bottom;
+  background-size: 100% 100%;
+  z-index: -2;
 }
 
-/* .slide-left::before {
-  content: '';
-  background: url('/static/img/view.jpg') no-repeat bottom center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: -1;
-} */
+.res {
+  background: url('/static/img/restaurant.jpg') no-repeat center bottom;
+}
 
-.slide-left img {
-  width: 100%;
-  height: 100%;
+.bank {
+  background: url('/static/img/bank.jpg') no-repeat center bottom;
+}
+
+.hos {
+  background: url('/static/img/hosp.jpg') no-repeat center bottom;
+}
+
+
+.slide-left::before {
+  content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: -1;
 }
 
 .slide-right {
@@ -251,12 +261,11 @@ section {
 .slide-right p {
   text-align: center;
   font-size: 1.2rem;
-  width: 90%;
+  width: 80%;
   margin: 0 auto;
   line-height: 2.5rem;
   word-spacing: 0.1rem;
 }
-
 
 .arrow {
   position: absolute;
@@ -266,6 +275,7 @@ section {
   transform: translateY(-50%);
   cursor: pointer;
   background-color: none;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.56), 0 3px 6px rgba(0, 0, 0, 0.63);
 }
 
 /* .arrow:focus {
@@ -273,11 +283,11 @@ section {
 } */
 
 .left-arrow {
-  left: 0%;
+  left: 5%;
 }
 
 .right-arrow {
-  right: 0%;
+  right: 5%;
 }
 
 /* indicator */
@@ -306,7 +316,7 @@ section {
 
 .video-container {
   margin-top: 60px;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.56), 0 3px 6px rgba(0, 0, 0, 0.63);
   height: 80vh;
   width: 80vw;
   position: relative;
@@ -323,7 +333,7 @@ section {
 }
 
 .game-container {
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.56), 0 3px 6px rgba(0, 0, 0, 0.63);
   height: 80vh;
   width: 80vw;
   display: flex;
@@ -342,114 +352,176 @@ section {
   align-items: center;
   font-size: 2.5rem;
   font-weight: bold;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.56), 0 3px 6px rgba(0, 0, 0, 0.63);
+}
+
+.gamebox:hover {
+  background-color: #3498db;
+  animation: scale-up-center 0.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 }
 
 
+/* animation */
+.scale-up-center {
+  -webkit-animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+  animation: scale-up-center 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
 
+@-webkit-keyframes scale-up-center {
+  0% {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+  }
 
-/* --------------------티켓팅---------------- */
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+@keyframes scale-up-center {
+  0% {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
+  }
+
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
 
 /* footer */
 .footer {
   text-align: center;
   background: #000;
   margin-top: 240px;
+  color: #eee;
 }
 
 .footer a {
-  font-size: 1.8em;
-  color: #ffffff;
+  font-size: 1.4rem;
+  color: #eee;
   display: block;
 }
 
 .footer-inner{
   width: 90%;
-  height: 90%;
+  height: 100%;
   margin: auto;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  padding: 10px;
-}
-
-.footer-left{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+}
+
+.footer-top{
+  width: 100%;
+  border-bottom: 2px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px auto 20px;
+}
+
+.footer-top-left{
   width: 60%;
   height: 100%;
+  display: flex;
+  justify-content: start;
+  margin-bottom: 20px;
 }
 
-
-.footer-left ul li {
-  width: 100%;
-  height: 100%;
-
+.logofoot{
+  width: 80%;
+  display: flex;
+  align-items: center;
 }
 
-.logofoot a {
-  display: block;
-  width:  15rem;
-  height: 5rem;
-  margin: 10px auto 5px;
-}
-
-.logofoot a img {
-  width: 100%;
-  height: 100%;
-}
-
-.logofoot small {
-  color: #ffffff;
-}
-
-.sns {
-  margin-top: 40px;
-  padding-bottom: 50px;
-}
-
-.sns a {
+.logofoot a{
   display: inline-block;
-  margin-left: 20px;
-  width: 2rem;
-  height: 2rem;
+  width: 10rem;
+  height: 5rem;
+  margin-right: 5%;
 }
 
-.sns a:first-child {
-  margin-left: 0;
-}
-.sns a img {
+.logofoot a img{
+  width: 100%;
   height: 100%;
 }
 
-/* center */
-.footer-center{
-  width: 50%;
-  height: 100%;
-  border: 2px solid red;
-  text-align: center;
-  color: #ffd;
+.logofoot p{
+  word-spacing: 2rem;
+  font-size: 0.8rem;
 }
 
 
-/* right */
+.footer-top-right {
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+  margin-right: 2%;
+}
 
-
-.footer-right{
+.sns{
   width: 50%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sns a{
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.sns a img{
+  width: 100%;
+  height: 100%;
+}
+
+/* bottom */
+.footer-bottom{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  margin: 5px auto 50px;
+}
+
+.footer-bottom-left{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  
+}
+
+.footer-bottom-left p{
+  margin-top: 5px;
+  font-size: 0.8rem;
+}
+
+.footer-bottom-right {
+  width: 50%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
 }
 
 .footer-ul{
-  padding: 10px;
+  width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
+  align-items: center;
+
 }
 
-.footer-ul > li{
-  margin-left:20px ;
+.footer-ul > li {
+  margin-right: 2%;
 }
 
-.footer-ul > li:first-child {
-  margin-left: 0px;
+.footer-ul > li > a{
+  font-size: 1rem;
 }

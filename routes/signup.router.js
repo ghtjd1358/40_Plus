@@ -17,9 +17,10 @@ router.post("/login", controller.login);
 
 router.post("/isvalid", controller.existsAlready);
 
-router.get("/culture", getUrlMiddleware, controller.culture);
-router.get("/culture/library", getUrlMiddleware, controller.library);
-router.get("/culture/class", getUrlMiddleware, controller.dayClass);
+router.get("/culture", controller.culture);
+router.get("/culture/library", controller.library);
+router.get("/culture/class", controller.dayClass);
+router.get("/culture/festival", controller.festival);
 
 router.get("/kiosk", getUrlMiddleware, controller.kiosk);
 

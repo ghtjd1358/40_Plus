@@ -18,6 +18,9 @@
     <link rel="stylesheet" href="/static/css/borad.css" />
     <link rel="stylesheet" href="/static/css/header.css" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <!-- 테이블 클릭 할 시 링크이동을 위한 스타일 -->
     <style>
       .header {
@@ -91,7 +94,6 @@
         <button id="search-button" onclick="searchCommunity()">검색</button>
       </div>
     </div>
-    
 
     <script src="/static/javaScript/community.js"></script>
 
@@ -110,14 +112,59 @@
 
       // 글쓰기 페이지 이동
       function writeCommunity() {
-        if(!'<%= locals.userid%>'){
+        if (!"<%= locals.userid%>") {
           return swal("로그인이 필요합니다.", "", "error").then(function () {
             location.href = "/login";
           });
-
         }
 
         window.location.href = "/writeCommunity";
+      }
+
+      async function logout(event) {
+        event.preventDefault();
+        const res = await axios({
+          method: "post",
+          url: "/logout",
+        });
+        swal(
+          "로그아웃이 완료되었습니다!",
+          "게시글 작성을 위해 로그인해주세요!",
+          "success"
+        ).then(function () {
+          location.href = "/community";
+        });
+
+        // location.href = "/";
+      }
+
+      // 검색어로 찾기
+      function searchCommunity() {
+        const selectValue = document.getElementById("search-type").value;
+        const str = document.getElementById("search-input").value;
+
+        axios({
+          method: "post",
+          url: "/searchCommunity",
+          data: {
+            selectValue: selectValue,
+            str: str,
+          },
+        }).then((result) => {
+          console.log("searchCommunity 전송 성공");
+          console.log(result);
+
+          // 검색 결과가 있을 때만 모달 창 열기
+          if (result.data.data.length > 0) {
+            // 결과 배열을 반복하여 모달 박스에 아이템 추가
+            for (let i = 0; i < result.data.data.length; i++) {
+              console.log(result.data.data[i]);
+            }
+          } else {
+            // 검색 결과가 없을 때의 처리 (예: 알림 메시지 등)
+            console.log("검색 결과가 없습니다.");
+          }
+        });
       }
     </script>
   </body>

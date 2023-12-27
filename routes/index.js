@@ -41,6 +41,9 @@ router.post("/searchCommunity", controller.searchCommunity);
 // 글 작성하기
 router.post("/submitCommunity", controller.communityPost);
 router.get("/writeCommunity", controller.writeCommunity);
+router.post("/modifyCommunity", controller.sendModifyCommunity);
+router.get("/modifyCommunity", controller.reciveModifyCommunity);
+router.patch("/submitModifyCommunity", controller.submitModifyCommunity);
 
 // 글 읽기
 router.get("/readCommunity", getUrlMiddleware, controller.readCommunity);

@@ -27,6 +27,10 @@ const dayClass = (req, res) => {
   res.render("culture_class");
 };
 
+const festival = (req, res) => {
+  res.render("culture_festival");
+};
+
 const community = (req, res) => {
   res.render("community");
 };
@@ -193,6 +197,7 @@ module.exports = {
   culture: culture,
   library: library,
   dayClass: dayClass,
+  festival: festival,
   community: community,
   kiosk: kiosk,
 };

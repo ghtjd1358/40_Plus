@@ -7,6 +7,7 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="/static/css/header.css" />
     <link rel="stylesheet" href="/static/css/component.css" />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <title>culture</title>
 
@@ -88,11 +89,24 @@
           <a href="/culture/library" class="textButton"> 지역별 도서관 정보</a>
         </div>
         <div class="content-box content">
-          <a href="/" class="menu"> <img src="" alt="" />???</a>
+          <img src="/static/css/fireworks-180553_1280.jpg" alt="" />
+          <a href="/culture/festival" class="textButton">지역별 축제 정보</a>
+          >
         </div>
       </section>
     </main>
 
-    <script src="/static/javaScript/sidebar.js"></script>
+    <script>
+      async function logout(event) {
+        event.preventDefault();
+        const res = await axios({
+          method: "post",
+          url: "/logout",
+        });
+        swal("로그아웃 완료!", "", "success").then(function () {
+          location.href = "/culture";
+        });
+      }
+    </script>
   </body>
 </html>

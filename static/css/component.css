@@ -193,7 +193,7 @@ footer {
 
 /* 메인 콘텐츠 영역 */
 
-/* 버튼 */
+/* 인풋창 */
 input {
   cursor: url(./img/pointer.png) 10 10, auto;
 }
@@ -206,4 +206,14 @@ input:focus {
 
 input:focus::placeholder {
   font-size: 0px;
+}
+
+/* alert창 */
+.swal-modal {
+  margin-top: -20%;
+}
+.swal-button {
+  padding: 7px 19px;
+  background-color: var(--color-orange-5);
+  font-size: 12px;
 }
