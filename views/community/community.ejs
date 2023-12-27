@@ -13,6 +13,7 @@
     />
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     
     <!-- 테이블 클릭 할 시 링크이동을 위한 스타일 -->
     <style>
@@ -76,7 +77,7 @@
         <button id="search-button" onclick="searchCommunity()">검색</button>
       </div>
     </div>
-    <script src="/static/javaScript/board.js"></script>
+    
 
     <script src="/static/javaScript/community.js"></script>
     <title>community</title>
@@ -98,10 +99,10 @@
 
       // 글쓰기 페이지 이동
       function writeCommunity() {
-
         if(!'<%= locals.userid%>'){
-          alert("로그인이 필요합니다.");
-          return location.href = "/login"
+          return swal("로그인이 필요합니다.", "", "error").then(function () {
+            location.href = "/login";
+          });
         }
 
         window.location.href = "/writeCommunity";

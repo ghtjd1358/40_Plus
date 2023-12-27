@@ -6,6 +6,11 @@
     <title>게시판 글 읽기</title>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
     <style>
       .big-C {
         background-color: #f5f5f5;
@@ -137,7 +142,7 @@
       }
       .comment-like-button {
         color: #888888;
-        font-size: 12px;
+        font-size: 16px;
         margin-left: auto;
         margin-bottom: 10px;
       }
@@ -155,9 +160,11 @@
     <div class="big-C">
       <div class="small-C">
         <div class="title"><%= data.title %></div>
+        <% if (locals.userid == data.userid){ %>
         <button type="button" onclick="deleteCommunity('<%= data.number %>')">
           삭제버튼
         </button>
+        <% } %>
         <button type="button" onclick="modifyCommunity()">수정버튼</button>
         <hr />
         <div class="meta-info">
@@ -176,7 +183,7 @@
               <textarea placeholder="댓글을 입력하세요" name="write"></textarea>
               <button
                 type="button"
-                onclick="writeComment('<%= data.number %>')"
+                onclick="writeComment('<%= data.number %>', '<%= locals.userid %>')"
               >
                 댓글 등록
               </button>
@@ -189,13 +196,23 @@
           <div class="comment">
             <div class="comment-user"><%= data2[i].userid %></div>
             <div class="comment-date"><%= data2[i].date %></div>
-            <button
+            <div
               class="comment-like-button"
-              onclick="likeComment('<%= data2[i].userid %>','<%= data2[i].content %>','<%= data2[i].like %>', '<%= i %>')"
+              style="display: flex; align-items: center"
             >
-              like:
-              <span id="likeCount_<%= i %>"><%= data2[i].like %></span>
-            </button>
+              <span
+                style="cursor: pointer"
+                class="material-symbols-outlined"
+                onclick="likeComment('<%= data2[i].userid %>','<%= data2[i].content %>','<%= data2[i].like %>', '<%= i %>', '<%= locals.userid %>')"
+              >
+                thumb_up </span
+              ><span
+                id="likeCount_<%= i %>"
+                style="margin-left: 0.5rem; cursor: pointer"
+              >
+                <%= data2[i].like %></span
+              >
+            </div>
             <div class="comment-content"><%= data2[i].content %></div>
           </div>
           <% } %> <% } else { %>
@@ -209,32 +226,39 @@
 
     <script>
       // 댓글 텍스트 전송
-      function writeComment(number) {
+      function writeComment(number, islogin) {
         const form = document.forms["comment-form"];
         const content = form.write.value;
         const date = getCurrentDate();
         const like = 0;
 
-        if (content != "") {
-          axios({
-            method: "post",
-            url: "/writeComment",
-            data: {
-              number: parseInt(number),
-              content: content,
-              date: date,
-              like: like,
-            },
-          })
-            .then((result) => {
-              location.href = `/readCommunity?number=${number}`;
-            })
-            .catch((error) => {
-              console.error("axios 에러:", error);
-            });
+        if (!islogin) {
+          return swal("로그인이 필요합니다.", "", "error").then(function () {
+            location.href = "/login";
+          });
         } else {
-          alert("댓글을 입력하세요");
-          location.href = `/readCommunity?number=${parseInt(number)}`;
+          if (content != "") {
+            axios({
+              method: "post",
+              url: "/writeComment",
+              data: {
+                number: parseInt(number),
+                content: content,
+                date: date,
+                like: like,
+              },
+            })
+              .then((result) => {
+                location.href = `/readCommunity?number=${number}`;
+              })
+              .catch((error) => {
+                console.error("axios 에러:", error);
+              });
+          } else {
+            swal("댓글을 입력하세요.", "", "error").then(function () {
+              location.href = `/readCommunity?number=${parseInt(number)}`;
+            });
+          }
         }
       }
 
@@ -251,25 +275,35 @@
       }
 
       // 댓글 좋아요 버튼 (userid와 content를 db에서 검증), index는 댓글 순서
-      function likeComment(userid, content, like, index) {
-        axios({
-          method: "post",
-          url: "/likeComment",
-          data: {
-            userid: userid,
-            content: content,
-            like: like,
-          },
-        }).then((result) => {
-          // like를 db에서 증가시키면 여기서도 index를 통해 바로 증가시킴
-          const likeCountSpan = document.getElementById(`likeCount_${index}`);
-          if (likeCountSpan) {
-            likeCountSpan.textContent = result.data.like;
-          }
-        });
+      function likeComment(userid, content, like, index, islogin) {
+        if (!islogin) {
+          return swal("로그인이 필요합니다.", "", "error").then(function () {
+            location.href = "/login";
+          });
+        } else {
+          axios({
+            method: "post",
+            url: "/likeComment",
+            data: {
+              userid: userid,
+              content: content,
+              like: like,
+            },
+          }).then((result) => {
+            // like를 db에서 증가시키면 여기서도 index를 통해 바로 증가시킴
+            const likeCountSpan = document.getElementById(`likeCount_${index}`);
+            if (likeCountSpan) {
+              likeCountSpan.textContent = result.data.like;
+            }
+          });
+        }
       }
 
-      function modifyCommunity() {}
+      function modifyCommunity() {
+        const title = document.querySelector(".title").textContent;
+        const content = document.querySelector(".content").textContent;
+        console.log("t > ", title, content);
+      }
 
       // 현재 시각 구하기
       function getCurrentDate() {
