@@ -4,6 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <link rel="stylesheet" href="/static/css/component.css" />
+    <link rel="stylesheet" href="/static/css/borad.css" />
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
@@ -11,24 +14,39 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-
+    <link rel="stylesheet" href="/static/css/component.css" />
+    <link rel="stylesheet" href="/static/css/borad.css" />
+    <link rel="stylesheet" href="/static/css/header.css" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    
     <!-- 테이블 클릭 할 시 링크이동을 위한 스타일 -->
     <style>
+      .header {
+        background-color: white;
+      }
+
       table tr {
         cursor: pointer;
       }
+
+      body {
+        background-color: #f5f5f5;
+      }
+
+      #add-body {
+        width: 80%;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin: auto;
+      }
     </style>
 
-    <link rel="stylesheet" href="/static/css/component.css" />
-    <link rel="stylesheet" href="/static/css/borad.css" />
-    <link rel="stylesheet" href="/static/css/sidebarHeader.css" />
     <title>커뮤니티 게시판</title>
   </head>
-  <body id="add_body">
-    <div>
+
+  <body>
+    <header><%- include("../component/header")%></header>
+    <div id="add-body">
       <form>
         <div class="add-C">
           <button type="button" onclick="writeCommunity()">글쓰기</button>
@@ -43,20 +61,16 @@
           <th class="th-time">작성일</th>
         </tr>
         <% communityData.forEach((data) => { %>
-          <tr onclick="detailCommunityPage('<%= data.number %>')">
-              <td><%= data.number %></td>
-              <td><%= data.title %></td>
-              <td><%= data.userid %></td>
-              <td><%= data.view %></td>
-              <td><%= data.date %></td>
-          </tr>
-      <% }); %>
+        <tr onclick="detailCommunityPage('<%= data.number %>')">
+          <td><%= data.number %></td>
+          <td><%= data.title %></td>
+          <td><%= data.userid %></td>
+          <td><%= data.view %></td>
+          <td><%= data.date %></td>
+        </tr>
+        <% }); %>
       </table>
-      <form>
-        <div class="add-C">
-          <button type="button" onclick="writeCommunity()">글쓰기</button>
-        </div>
-      </form>
+      <div class="add-C"></div>
       <div class="paging" id="paging">
         <!-- 페이징 추가 될 공간 -->
       </div>
@@ -80,21 +94,18 @@
     
 
     <script src="/static/javaScript/community.js"></script>
-    <title>community</title>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <link rel="stylesheet" href="/static/css/header.css" />
-    <link rel="stylesheet" href="/static/css/component.css" />
 
     <script>
       // 글 조회 시 세부 페이지 이동
-      function detailCommunityPage(postNumber){
+      function detailCommunityPage(postNumber) {
         axios({
           method: "post",
           url: "/detailCommunityPage",
           data: { number: parseInt(postNumber) }, // 객체 형태로 전달
         }).then((result) => {
-          location.href = "/readCommunity?number=" + JSON.stringify(result.data.number);
-        })
+          location.href =
+            "/readCommunity?number=" + JSON.stringify(result.data.number);
+        });
       }
 
       // 글쓰기 페이지 이동
@@ -103,17 +114,11 @@
           return swal("로그인이 필요합니다.", "", "error").then(function () {
             location.href = "/login";
           });
+
         }
 
         window.location.href = "/writeCommunity";
       }
-
     </script>
-  </head>
-  <body>
-
-    <%- include("../component/header")%>
-
-    <main class="container"></main>
   </body>
 </html>

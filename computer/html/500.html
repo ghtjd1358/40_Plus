@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/css/component.css">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <title>401 Error</title>
+    <title>500 Error</title>
     <style>
     html, body {
       width: 100%;
@@ -30,7 +30,7 @@
     .head {
       width: 70px;
       height: 70px;
-      background-color: purple;
+      background-color: rgb(35, 190, 251);
       border-radius: 50%;
       animation-name: body;
       animation-duration: 4s;
@@ -41,7 +41,7 @@
     .body {
       height: 144px;
       width: 62px;
-      background-color: purple;
+      background-color: rgb(35, 190, 251);
       border-radius: 100% 20% 0 0;
       transform: skewX(-2deg);
       position: relative;
@@ -68,7 +68,7 @@
       height: 14px;
       border-radius: 10px 80% 4px 4px;
       transform: skewX(5deg);
-      background-color: purple;
+      background-color: rgb(35, 190, 251);
       display: inline-block;
       animation-name: foot;
       animation-duration: 1.8s;
@@ -114,14 +114,15 @@
 
     .textarea h1 {
       font-size: 2.5em;
-      color: purple;
+      color: rgb(35, 190, 251);
+      
     }
 
     .textarea h5 {
       font-size: 1.2em;
       margin: 10px 0;
     }
-    .common-btn{
+    .common-btn {
       margin: 5vh;
     }
     </style>
@@ -136,11 +137,11 @@
       </div>
     </div>
     <div class="textarea">
-      <h1>401 Error</h1>
-      <h5>인증 오류가 발생했습니다.</h5>
-      <h5>잠시 후 다시 시도 해 주세요</h5>
-      <h5>이용에 불편을 드려 죄송합니다.</h5>
-      <a href="/"><button class="common-btn"><span class="common-text">메인으로</span></button></a>
+      <h1>500 Error</h1>
+      <h5>서버 에러 발생 !!</h5>
+      <h5>서버 오류로 인해 이용에 불편을 드려 죄송합니다.</h5>
+      <h5>원활한 이용을 위해 메인화면으로 이동해주세요!</h5>
+      <button class="common-btn"><span class="common-text">메인으로</span></button>
     </div>
 </body>
 </html>

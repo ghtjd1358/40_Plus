@@ -20,6 +20,7 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <link
       rel="stylesheet"
@@ -357,6 +358,14 @@
         color: var(--color-black-4);
         font-weight: 300;
       }
+      .swal-modal {
+        margin-top: -20%;
+      }
+      .swal-button {
+        padding: 7px 19px;
+        background-color: var(--color-orange-5);
+        font-size: 12px;
+      }
     </style>
     <title>main page</title>
   </head>
@@ -617,7 +626,14 @@
           url: "/logout",
         });
 
-        location.href = "/";
+        swal(
+          "로그아웃이 완료되었습니다!.",
+          "원활한 서비스 이용을 위해 다시 로그인 해주세요!",
+          "success"
+        ).then(function () {
+          location.href = "/";
+        });
+        // location.href = "/";
       }
     </script>
     <script src="/static/css/script.js"></script>
