@@ -53,7 +53,7 @@
           <button type="button" onclick="writeCommunity()">글쓰기</button>
         </div>
       </form>
-      <table>
+      <table class="table">
         <tr>
           <th class="th-number">번호</th>
           <th class="th-title">제목</th>
@@ -62,7 +62,10 @@
           <th class="th-time">작성일</th>
         </tr>
         <% communityData.forEach((data) => { %>
-        <tr onclick="detailCommunityPage('<%= data.number %>')">
+        <tr
+          onclick="detailCommunityPage('<%= data.number %>')"
+          class="tableRow"
+        >
           <td><%= data.number %></td>
           <td><%= data.title %></td>
           <td><%= data.userid %></td>
@@ -152,13 +155,28 @@
         }).then((result) => {
           console.log("searchCommunity 전송 성공");
           console.log(result);
+          const table = document.querySelector(".table");
+          const tableRow = document.querySelectorAll(".tableRow");
 
+          let html = "";
           // 검색 결과가 있을 때만 모달 창 열기
           if (result.data.data.length > 0) {
-            // 결과 배열을 반복하여 모달 박스에 아이템 추가
+            for (let i = 0; i < tableRow.length; i++) {
+              tableRow[i].remove();
+            }
             for (let i = 0; i < result.data.data.length; i++) {
               console.log(result.data.data[i]);
+              const { number, userid, title, content, view, date } =
+                result.data.data[i];
+              html += `<tr onclick="detailCommunityPage('${number}')" class="tableRow">
+              <td>${number}</td>
+              <td>${title}</td>
+              <td>${userid}</td>
+              <td>${view}</td>
+              <td>${date}</td>
+            </tr>`;
             }
+            table.insertAdjacentHTML("beforeend", html);
           } else {
             // 검색 결과가 없을 때의 처리 (예: 알림 메시지 등)
             console.log("검색 결과가 없습니다.");
