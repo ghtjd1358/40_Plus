@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/component.css">
     <title>단어</title>
     <style>
         /* setting */
@@ -37,6 +38,11 @@
              line-height: 3.5rem;
         }
 
+        .wrap{
+            width: 80%;
+            margin: auto;
+            border: 2px solid #000;
+        }
   
 
         /* nav */
@@ -69,7 +75,7 @@
         }   
 
         #navigation-bar button {
-            width: 15%;
+            width: 20vw;
             font-size: 1.6rem;
             font-weight: bold;
             padding: 10px 50px;
@@ -103,7 +109,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    width: 80vw;
+    width: 75vw;
     height: 60vh;
     border-radius: 5px;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
@@ -132,17 +138,17 @@
 </head>
 
 <body>
-    <!-- nav  -->
+    <div class="wrap">
+         <!-- nav  -->
     <header>
         <div id="navigation-bar">
             <h1>
                 <a href="../index.html"><img src="/static/img/logo.png" alt="logo"></a>
             </h1>
-            <button onclick="prevPage()">돌아가기</button>
+            <button onclick="prevPage()" class="common-btn"><span class="common-text">돌아가기</span></button>
             <!-- <button onclick="firstPage()">처음</button> -->
         </div>
     </header>
-
     <!-- 키오스크 컨테이너 -->
     <section>
        <div id="kiosk-container">
@@ -150,7 +156,7 @@
                   <h2>단어 숙지</h2>
                     <p>궁금한 단어를 눌러주세요!</p>
                 <div class="word-box">
-                    <button id="button1">키오스크</button>
+                    <button id="button1" class="common-btn"><span class="common-text">키오스크</span></button>
                     <button id="button2">터치</button>
                     <button id="button3">ATM</button>
                     <button id="button4">미션</button>
@@ -274,11 +280,9 @@
                 </div>
             </div>
     </div>
-
     </section>
-    
+    </div> 
     <script>
-  
     //button
     function wordButton() {
         const buttons = document.querySelectorAll('.word-box > button');
