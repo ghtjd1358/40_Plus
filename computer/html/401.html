@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/component.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>401 Error</title>
     <style>
     html, body {
@@ -28,7 +30,7 @@
     .head {
       width: 70px;
       height: 70px;
-      background-color: rgb(253, 88, 215);
+      background-color: purple;
       border-radius: 50%;
       animation-name: body;
       animation-duration: 4s;
@@ -39,7 +41,7 @@
     .body {
       height: 144px;
       width: 62px;
-      background-color: rgb(253, 88, 215);
+      background-color: purple;
       border-radius: 100% 20% 0 0;
       transform: skewX(-2deg);
       position: relative;
@@ -66,7 +68,7 @@
       height: 14px;
       border-radius: 10px 80% 4px 4px;
       transform: skewX(5deg);
-      background-color: rgb(253, 88, 215);
+      background-color: purple;
       display: inline-block;
       animation-name: foot;
       animation-duration: 1.8s;
@@ -100,28 +102,27 @@
     }
 
     .textarea {
-      width: 35vw;
-      height: 38vh;
+      width: 50vw;
+      height: 59vh;
       color: black;
       padding: 20px;
       border-radius: 10px;
-      width: 500px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
       margin-top: 20px;
       text-align: center;
     }
 
     .textarea h1 {
-      font-size: 3em;
-      color: rgb(253, 88, 215);
+      font-size: 2.5em;
+      color: purple;
     }
 
     .textarea h5 {
       font-size: 1.2em;
-      margin: 5px 0;
+      margin: 10px 0;
     }
-    .home-btn {
-      margin: 20px;
+    .common-btn{
+      margin: 5vh;
     }
     </style>
 </head>
@@ -139,7 +140,7 @@
       <h5>인증 오류가 발생했습니다.</h5>
       <h5>잠시 후 다시 시도 해 주세요</h5>
       <h5>이용에 불편을 드려 죄송합니다.</h5>
-      <button class="home-btn">메인으로</button>
+      <button class="common-btn"><span class="common-text">메인으로</span></button>
     </div>
 </body>
 </html>

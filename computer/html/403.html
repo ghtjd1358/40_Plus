@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/component.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>403 Error</title>
     <style>
     html, body {
@@ -100,29 +102,29 @@
     }
 
     .textarea {
-      width: 35vw;
-      height: 38vh;
+      width: 50vw;
+      height: 59vh;
       color: black;
       padding: 20px;
       border-radius: 10px;
-      width: 500px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
       margin-top: 20px;
       text-align: center;
     }
 
     .textarea h1 {
-      font-size: 3em;
+      font-size: 2.5em;
       color: darkblue;
     }
 
     .textarea h5 {
       font-size: 1.2em;
-      margin: 5px 0;
+      margin: 10px 0;
     }
-    .home-btn {
-      margin: 20px;
+    .common-btn{
+      margin: 5vh;
     }
+
     </style>
 </head>
 <body>
@@ -139,7 +141,7 @@
       <h5>요청하신 페이지에 접근이 거부되었습니다.</h5>
       <h5>입력하신 페이지의 주소가 정확한지</h5>
       <h5>다시 한번 확인해주시기 바랍니다.</h5>
-      <button class="home-btn">메인으로</button>
+      <button class="common-btn"><span class="common-text">메인으로</span></button>
     </div>
 </body>
 </html>
