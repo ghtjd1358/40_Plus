@@ -168,20 +168,6 @@ ol {
   background-color: #555; /* 호버 시 배경 색상 변경 */
   transform: scale(1.2); /* 활성화 시 크기 확대 */
 }
-/* 반응형 웹 */
-@media screen and (max-width: 600px) {
-  #sidebar {
-    margin-left: 0;
-  }
-
-  #main {
-    margin-left: 300px;
-  }
-
-  #toggle-btn {
-    display: block;
-  }
-}
 
 #main {
   width: 80%;
