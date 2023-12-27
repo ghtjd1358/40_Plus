@@ -56,7 +56,7 @@ html {
   padding: 0;
   color: var(--color-black-0);
   /* 마우스 포인트 */
-  cursor: url(../basic.png) 10 10, auto;
+  cursor: url(./img/basic.png) 10 10, auto;
 }
 
 /* 로고 */
@@ -83,7 +83,7 @@ a {
 }
 
 .btn {
-  cursor: url(../pointer.png) 10 10, auto;
+  cursor: url(./img/pointer.png) 10 10, auto;
 }
 
 /* 공용 버튼 */
@@ -93,7 +93,7 @@ a {
   width: 100px;
   height: 50px;
   border-radius: 5px;
-  cursor: url(../pointer.png) 10 10, auto;
+  cursor: url(./img/pointer.png) 10 10, auto;
   overflow: hidden;
   background-color: white;
   box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.8);
@@ -135,7 +135,7 @@ a {
 /* 공용 버튼 안에 글자 */
 .common-text {
   position: relative;
-  cursor: url(../pointer.png) 10 10, auto;
+  cursor: url(./img/pointer.png) 10 10, auto;
   z-index: 2;
 }
 .common-btn:hover .common-text {
