@@ -169,8 +169,13 @@
         <button type="button" onclick="deleteCommunity('<%= data.number %>')">
           삭제버튼
         </button>
+        <button
+          type="button"
+          onclick="sendModifyCommunity('<%= data.number %>')"
+        >
+          수정버튼
+        </button>
         <% } %>
-        <button type="button" onclick="modifyCommunity()">수정버튼</button>
         <hr />
         <div class="meta-info">
           <span class="user-name"><%= data.userid %></span>
@@ -304,10 +309,22 @@
         }
       }
 
-      function modifyCommunity() {
+      function sendModifyCommunity(number) {
         const title = document.querySelector(".title").textContent;
         const content = document.querySelector(".content").textContent;
-        console.log("t > ", title, content);
+
+        axios({
+          method: "post",
+          url: "/modifyCommunity",
+          data: {
+            title: title,
+            content: content,
+            number: number,
+          },
+        }).then((result) => {
+          console.log("글 작성 페이지로 값 전송 완료");
+          location.href = "/modifyCommunity";
+        });
       }
 
       // 현재 시각 구하기
