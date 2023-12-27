@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="/static/css/header.css" />
     <link rel="stylesheet" href="/static/css/component.css" />
+    <link rel="stylesheet" href="/static/css/footer.css" />
 
     <link
       rel="stylesheet"
@@ -24,11 +25,14 @@
     <title>culture</title>
 
     <style>
+      .header {
+        background-color: white;
+      }
       .main-content {
         display: flex;
         width: 80%;
         /* height: 100%; */
-        /* background-color: pink; */
+
         flex-wrap: wrap;
         align-items: center;
         /* justify-content: space-evenly; */
@@ -271,10 +275,13 @@
         background-color: var(--color-orange-3);
       }
 
+      .sMainTitle {
+        font-size: 26px;
+      }
       .sTitle {
         font-weight: 700;
         /* background-color: pink; */
-        color: var(--color-black-5);
+        color: var(--color-orange-4);
         margin-top: var(--space-2);
         display: block;
       }
@@ -300,6 +307,21 @@
         display: block;
         color: var(--color-black-2);
         text-align: center;
+      }
+      .back {
+        margin: var(--space-5) auto auto auto;
+
+        width: fit-content;
+      }
+
+      .back > a,
+      span {
+        color: var(--color-black-2);
+        font-size: 20px;
+      }
+
+      .footer {
+        margin-top: 80px;
       }
     </style>
   </head>
@@ -340,6 +362,13 @@
               원하는 지역을 선택후 불러오기 버튼을 눌러주세요!
             </p>
             <p class="sampleText2">아래 실시간 도서관 정보가 표시됩니다!</p>
+            <p class="back">
+              <a href="/culture"
+                >이전 메뉴로 돌아가기<span class="material-symbols-outlined">
+                  undo
+                </span></a
+              >
+            </p>
           </div>
           <!-- </div> -->
           <!--  -->
@@ -350,6 +379,8 @@
         </div>
       </div>
     </main>
+
+    <%- include("./component/footer")%>
     <!-- partial -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.5/swiper-bundle.min.js"></script>
@@ -512,7 +543,7 @@
             libraryButton.classList.add("slider-buttons");
 
             libraryDiv2.innerHTML =
-              `<h1> ${name}</h1>` +
+              `<h1 class="sMainTitle"> ${name}</h1>` +
               `<p class="sTitle">주소</p>` +
               `<p class="sText">${address}</p>` +
               `<p class="sTitle">영업시간 </p>` +
