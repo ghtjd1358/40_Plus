@@ -41,6 +41,7 @@
         color: #555555;
         line-height: 1.5;
         margin-bottom: 20px;
+        white-space: pre-wrap;
       }
 
       /* 기타 정보 */
@@ -138,9 +139,17 @@
         margin-left: auto;
         margin-bottom: 10px;
       }
+      .comment-like-button {
+        color: #888888;
+        font-size: 12px;
+        margin-left: auto;
+        margin-bottom: 10px;
+      }
+
       .comment-content {
         border-top: 1px solid #ddd; /* 구분선 스타일 추가 */
         padding-top: 10px; /* 구분선과의 간격 조절 */
+        white-space: pre-wrap;
       }
     </style>
   </head>
@@ -150,13 +159,17 @@
     <div class="big-C">
       <div class="small-C">
         <div class="title"><%= data.title %></div>
+        <button type="button" onclick="deleteCommunity('<%= data.number %>')">
+          삭제버튼
+        </button>
+        <button type="button" onclick="modifyCommunity()">수정버튼</button>
         <hr />
         <div class="meta-info">
           <span class="user-name"><%= data.userid %></span>
           <span class="space"> | </span>
-          <span class="date">2023년 12월 23일</span>
-          <span class="views">조회수: 120</span>
-          <span class="comments">댓글: 5</span>
+          <span class="date">작성일: <%= data.date %></span>
+          <span class="views">조회수: <%= data.view %></span>
+          <span class="comments">댓글: <%= data2.length %></span>
         </div>
         <hr />
         <div class="content"><%= data.content %></div>
@@ -175,18 +188,24 @@
           </form>
           <hr class="comments-hr" />
 
-          <% if (data2.length) {%> <% for (const dat of data2) {%>
+          <% if (data2.length) { %> <% for (let i = 0; i < data2.length; i++) {
+          %>
           <div class="comment">
-            <div class="comment-user"><%= dat.userid %></div>
-            <div class="comment-date">2023년 12월 23일</div>
-            <div class="comment-content"><%= data.content %></div>
+            <div class="comment-user"><%= data2[i].userid %></div>
+            <div class="comment-date"><%= data2[i].date %></div>
+            <button
+              class="comment-like-button"
+              onclick="likeComment('<%= data2[i].userid %>','<%= data2[i].content %>','<%= data2[i].like %>', '<%= i %>')"
+            >
+              like:
+              <span id="likeCount_<%= i %>"><%= data2[i].like %></span>
+            </button>
+            <div class="comment-content"><%= data2[i].content %></div>
           </div>
           <% } %> <% } else { %>
           <div class="comment">
-            <div class="comment-date">2023년 12월 23일</div>
             <div class="comment-content">댓글이 없어요</div>
           </div>
-
           <% } %>
         </div>
       </div>
@@ -197,6 +216,8 @@
       function writeComment(number) {
         const form = document.forms["comment-form"];
         const content = form.write.value;
+        const date = getCurrentDate();
+        const like = 0;
 
         if (content != "") {
           axios({
@@ -205,6 +226,8 @@
             data: {
               number: parseInt(number),
               content: content,
+              date: date,
+              like: like,
             },
           })
             .then((result) => {
@@ -217,6 +240,55 @@
           alert("댓글을 입력하세요");
           location.href = `/readCommunity?number=${parseInt(number)}`;
         }
+      }
+
+      // 글 삭제 버튼
+      function deleteCommunity(number) {
+        console.log("delete num > ", number);
+        axios({
+          method: "delete",
+          url: `/deleteCommunity/${number}`, // URL에 number를 포함
+        }).then((result) => {
+          console.log("delete comm axios then", result);
+          location.href = "/community";
+        });
+      }
+
+      // 댓글 좋아요 버튼 (userid와 content를 db에서 검증), index는 댓글 순서
+      function likeComment(userid, content, like, index) {
+        axios({
+          method: "post",
+          url: "/likeComment",
+          data: {
+            userid: userid,
+            content: content,
+            like: like,
+          },
+        }).then((result) => {
+          // like를 db에서 증가시키면 여기서도 index를 통해 바로 증가시킴
+          const likeCountSpan = document.getElementById(`likeCount_${index}`);
+          if (likeCountSpan) {
+            likeCountSpan.textContent = result.data.like;
+          }
+        });
+      }
+
+      function modifyCommunity() {}
+
+      // 현재 시각 구하기
+      function getCurrentDate() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = now.getMonth() + 1; // 월은 0부터 시작하므로 1을 더함
+        const day = now.getDate();
+
+        // 날짜를 "YYYY-MM-DD" 형식의 문자열로 반환
+        const formattedDate = `${year}-${String(month).padStart(
+          2,
+          "0"
+        )}-${String(day).padStart(2, "0")}`;
+
+        return new Date(formattedDate);
       }
     </script>
   </body>

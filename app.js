@@ -24,8 +24,8 @@ const checkIdTokenMiddleware = require("./middlewares/checkIdToken");
 const checkAccessTokenMiddleware = require("./middlewares/checkAccessToken");
 const notFoundMiddleWare = require("./middlewares/not-found");
 const errorHanderMiddleware = require("./middlewares/error-handler");
-const checkAdminMiddleware = require('./middlewares/checkAdmin');
-const blockAdminMiddleware = require('./middlewares/blockNotAdmin');
+const checkAdminMiddleware = require("./middlewares/checkAdmin");
+const blockAdminMiddleware = require("./middlewares/blockNotAdmin");
 
 app.set("view engine", "ejs");
 

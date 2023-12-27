@@ -7,20 +7,21 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="/static/css/header.css" />
     <link rel="stylesheet" href="/static/css/component.css" />
+
     <title>culture</title>
 
     <style>
       .mainContent {
         display: flex;
-        width: 80%;
-        /* background-color: pink; */
+        width: 100%;
         align-items: center;
         justify-content: center;
+        margin-top: 50px;
       }
 
       .content-box {
-        width: 300px;
-        height: 400px;
+        width: 400px;
+        height: 500px;
 
         margin: 0 var(--space-1);
         background-color: var(--color-white-0);
@@ -60,10 +61,6 @@
         font-size: 30px;
       }
 
-      /* .class {
-        background-image: url("/static//css/university-105709_1280.jpg");
-      } */
-
       .textButton {
         position: absolute;
         width: 100%;
@@ -78,10 +75,9 @@
     </style>
   </head>
   <body>
-    <%- include("./component/header")%>
+    <header><%- include("./component/header")%></header>
 
-    <main class="container">
-      <div class="space"></div>
+    <main id="main">
       <section class="mainContent">
         <div class="content-box content class">
           <img src="/static//css/university-105709_1280.jpg" alt="" />
@@ -96,5 +92,7 @@
         </div>
       </section>
     </main>
+
+    <script src="/static/javaScript/sidebar.js"></script>
   </body>
 </html>

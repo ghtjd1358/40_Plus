@@ -9,7 +9,22 @@
     <link rel="stylesheet" href="/static/css/header.css" />
     <link rel="stylesheet" href="/static/css/component.css" />
     <style>
+      .container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        width: 100%;
+        height: calc(100vh - 120px);
+
+        /* border-top: 1px solid var(--color-grey-0); */
+
+        background-color: var(--color-grey-0);
+      }
+
       .userContent {
+        margin-top: 50px;
         width: 700px;
         /* height: 600px; */
 
@@ -22,7 +37,7 @@
         align-items: center; */
         background-color: var(--color-white-0);
         border-radius: var(--border-radius-medium);
-        box-shadow: var(--shadow);
+        /* box-shadow: var(--shadow); */
       }
 
       .registerBox {
@@ -169,9 +184,8 @@
   </head>
   <body>
     <!-- header -->
-    <%- include("../component/header")%>
+    <header><%- include("../component/header")%></header>
     <main class="container">
-      <div class="space"></div>
       <div class="userContent">
         <h1 class="title">회원 정보</h1>
         <div class="registerBox">

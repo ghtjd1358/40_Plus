@@ -1,9 +1,9 @@
 const totalPages = 14;
-const pages =  document.querySelectorAll('.page')
+const pages = document.querySelectorAll('.page')
 let currentPage = 1;
 
-const subScore = 5; 
-let score = 105; 
+const subScore = 5;
+let score = 105;
 
 let selectedDivs = [];
 
@@ -11,96 +11,96 @@ let selectedDivs = [];
 
 // 페이지
 showPage(currentPage);
-      console.log('Current Page:', currentPage);
+console.log('Current Page:', currentPage);
 
-        function showPage() {
-            pages.forEach(page => {
-                page.style.display = 'none';
-            });
+function showPage() {
+    pages.forEach(page => {
+        page.style.display = 'none';
+    });
 
-            const currentPages = document.getElementById(`page${currentPage}`);
-            if (currentPages) {
-                currentPages.style.display = 'block';
-            }
-            progressBar();
-        }
-
-        // 다음 버튼
-        function nextPage() {
-            currentPage++;
-            showPage(currentPage);
-            randomScore(); 
-            resetSelection();
-            endTimer();
-        }
-
-        // 이전 버튼
-        function prevPage() {
-            if (currentPage > 1) {
-                currentPage--;
-                showPage(currentPage);
-                resetSelection();
-            }
-        }
-
-        // 초기화 버튼
-        function firstPage() {
-            const modal = document.getElementById('modal');
-            modal.style.display = 'none';
-            currentPage = 1;
-            showPage();
-            score = 105;
-            subsScore();
-            // removeChecked();
-            resetSelection();
+    const currentPages = document.getElementById(`page${currentPage}`);
+    if (currentPages) {
+        currentPages.style.display = 'block';
+    }
+    progressBar();
 }
-        
+
+// 다음 버튼
+function nextPage() {
+    currentPage++;
+    showPage(currentPage);
+    randomScore();
+    resetSelection();
+    endTimer();
+}
+
+// 이전 버튼
+function prevPage() {
+    if (currentPage > 1) {
+        currentPage--;
+        showPage(currentPage);
+        resetSelection();
+    }
+}
+
+// 초기화 버튼
+function firstPage() {
+    const modal = document.getElementById('modal');
+    modal.style.display = 'none';
+    currentPage = 1;
+    showPage();
+    score = 105;
+    subsScore();
+    // removeChecked();
+    resetSelection();
+}
+
 
 // 진행률        
-        function progressBar() {
-            const progressBar = document.getElementById('progressbar');
-            const progress = (currentPage - 1) / (totalPages - 1) * 100 + '%';
-            progressBar.style.width = progress;
-            const mathProgress = Math.floor(parseFloat(progress))
-            progressBar.textContent = `진행 상황: ${mathProgress}%`;
+function progressBar() {
+    const progressBar = document.getElementById('progressbar');
+    const progress = (currentPage - 1) / (totalPages - 1) * 100 + '%';
+    progressBar.style.width = progress;
+    const mathProgress = Math.floor(parseFloat(progress))
+    progressBar.textContent = `진행 상황: ${mathProgress}%`;
 }
 
 
 
 
 //정답 체크 및 초기화
-    function checkAnswer(divNumber) {
+function checkAnswer(divNumber) {
     if (divNumber % 2 == 1 && selectedDivs.indexOf(divNumber) === -1) {
         selectedDivs.push(divNumber);
         if (selectedDivs.length === 1) {
             nextPage();
         }
     } else {
-        subsScore(); 
+        subsScore();
         showModal();
     }
 }
 
 // 초기화
 function resetSelection() {
-            selectedDivs = [];
-        }
+    selectedDivs = [];
+}
 
 
 // 모달
-        function showModal() {
-            const modal = document.getElementById('modal');
-            modal.style.display = 'flex';
-        }
+function showModal() {
+    const modal = document.getElementById('modal');
+    modal.style.display = 'flex';
+}
 
-        function hideModal() {
-            const modal = document.getElementById('modal');
-            modal.style.display = 'none';
-        }
+function hideModal() {
+    const modal = document.getElementById('modal');
+    modal.style.display = 'none';
+}
 
-        // page3 menu-selector
-    const menuHeaders = document.querySelectorAll('.menu-header > div');
-    const menuSelects = document.querySelectorAll('.menu-select');
+// page3 menu-selector
+const menuHeaders = document.querySelectorAll('.menu-header > div');
+const menuSelects = document.querySelectorAll('.menu-select');
 
 menuHeaders.forEach((menuHeader, i) => {
     menuHeader.addEventListener('click', () => {
@@ -115,14 +115,14 @@ const setMenu = [
     { name: "착한AZ버거세트", price: '7,900', image: "https://v1.kiosapp.kr/img/101.09780be2.jpg" },
     { name: "착한doublex2버거세트", price: '7,900', image: "https://v1.kiosapp.kr/img/101.09780be2.jpg" },
     { name: "착한핫크리스피세트", price: '7,900', image: "https://v1.kiosapp.kr/img/101.09780be2.jpg" },
-    { name: "착한리아미라클버거", price: '7,900', image: "https://v1.kiosapp.kr/img/101.09780be2.jpg" }       
+    { name: "착한리아미라클버거", price: '7,900', image: "https://v1.kiosapp.kr/img/101.09780be2.jpg" }
 ];
 
 // 추천메뉴
 const recommend = [
     { name: "착한한우세트", price: '7,900', image: "https://v1.kiosapp.kr/img/101.09780be2.jpg" },
     { name: "착한AZ버거세트", price: '7,900', image: "https://v1.kiosapp.kr/img/101.09780be2.jpg" },
-    { name: "착한doublex2버거세트", price: '7,900', image: "https://v1.kiosapp.kr/img/101.09780be2.jpg" }     
+    { name: "착한doublex2버거세트", price: '7,900', image: "https://v1.kiosapp.kr/img/101.09780be2.jpg" }
 ];
 
 // 사이드
@@ -131,8 +131,8 @@ const side = [
     { name: "포테이토", price: '1,500', image: "https://v1.kiosapp.kr/img/1001.6cf745db.jpg" },
     { name: "포테이토(L)", price: '1,900', image: "https://v1.kiosapp.kr/img/1001.6cf745db.jpg" },
     { name: "양념감자", price: '2,000', image: "https://v1.kiosapp.kr/img/1002.d6327997.jpg" },
-    { name: "치즈스틱", price: '2,000', image: "https://v1.kiosapp.kr/img/1003.e6f82a2a.jpg" },       
-     { name: "롱치즈스틱", price: '1,800', image: "https://v1.kiosapp.kr/img/1008.d97316a6.jpg" },    
+    { name: "치즈스틱", price: '2,000', image: "https://v1.kiosapp.kr/img/1003.e6f82a2a.jpg" },
+    { name: "롱치즈스틱", price: '1,800', image: "https://v1.kiosapp.kr/img/1008.d97316a6.jpg" },
 ];
 
 // 음료
@@ -141,22 +141,22 @@ const drink = [
     { name: "레몬에이드", price: '2,500', image: "https://v1.kiosapp.kr/img/2013.8c2f5993.jpg" },
     { name: "콜라(L)", price: '1,900', image: "https://v1.kiosapp.kr/img/2003.082ff860.jpg" },
     { name: "사이다", price: '2,000', image: "https://v1.kiosapp.kr/img/2002.4b96fccc.jpg" },
-    { name: "콜라", price: '2,000', image: "https://v1.kiosapp.kr/img/2001.082ff860.jpg" }  
+    { name: "콜라", price: '2,000', image: "https://v1.kiosapp.kr/img/2001.082ff860.jpg" }
 ];
 
 // 세트디저트
 const setSide = [
     { name: "양념감자", price: '500', image: "https://v1.kiosapp.kr/img/1002.d6327997.jpg" },
-    { name: "치즈스틱", price: '500', image: "https://v1.kiosapp.kr/img/1003.e6f82a2a.jpg" }, 
+    { name: "치즈스틱", price: '500', image: "https://v1.kiosapp.kr/img/1003.e6f82a2a.jpg" },
     { name: "오징어링", price: '700', image: "https://v1.kiosapp.kr/img/1001.6cf745db.jpg" },
     { name: "쉨쉨치킨", price: '1,000', image: "https://v1.kiosapp.kr/img/1005.8d795c26.jpg" },
-     { name: "포테이토(L)", price: '400', image: "https://v1.kiosapp.kr/img/1001.6cf745db.jpg" },
+    { name: "포테이토(L)", price: '400', image: "https://v1.kiosapp.kr/img/1001.6cf745db.jpg" },
     { name: "치즈인더에그", price: '1,000', image: "https://v1.kiosapp.kr/img/1015.cb95b7e1.jpg" },
-    { name: "콘샐러드", price: '200', image: "https://v1.kiosapp.kr/img/1007.d51198db.jpg" },  
-    { name: "롱치즈스틱", price: '300', image: "https://v1.kiosapp.kr/img/1008.d97316a6.jpg" },  
-    { name: "아이스크림", price: '0', image: "https://v1.kiosapp.kr/img/1009.ddee81f3.jpg" }, 
-    { name: "토네이도-초코", price: '300', image: "https://v1.kiosapp.kr/img/1010.8f5a36bf.jpg" }, 
-    { name: "토네이도-딸기", price: '300', image: "https://v1.kiosapp.kr/img/1011.5b8cf999.jpg" }, 
+    { name: "콘샐러드", price: '200', image: "https://v1.kiosapp.kr/img/1007.d51198db.jpg" },
+    { name: "롱치즈스틱", price: '300', image: "https://v1.kiosapp.kr/img/1008.d97316a6.jpg" },
+    { name: "아이스크림", price: '0', image: "https://v1.kiosapp.kr/img/1009.ddee81f3.jpg" },
+    { name: "토네이도-초코", price: '300', image: "https://v1.kiosapp.kr/img/1010.8f5a36bf.jpg" },
+    { name: "토네이도-딸기", price: '300', image: "https://v1.kiosapp.kr/img/1011.5b8cf999.jpg" },
     { name: "토네이도-녹차", price: '300', image: "https://v1.kiosapp.kr/img/1012.b328cfbb.jpg" }
 ];
 
@@ -179,7 +179,7 @@ const setDrink = [
 function createProduct(product, menuSelectId) {
     const productDiv = document.createElement("div");
     productDiv.className = "selectable";
-    productDiv.onclick = function() { checkAnswer(2); };
+    productDiv.onclick = function () { checkAnswer(2); };
 
     const img = document.createElement("img");
     img.src = product.image;
@@ -227,9 +227,9 @@ const paymentsBoxs = document.querySelectorAll('.payments1');
 // })
 
 paymentsBoxs.forEach(paymentsBox => {
-     paymentsBox.addEventListener('click', () => {
-            paymentsBox.classList.add('checked');
-    })   
+    paymentsBox.addEventListener('click', () => {
+        paymentsBox.classList.add('checked');
+    })
 })
 
 function removeChecked() {
@@ -253,12 +253,12 @@ function handleClick() {
     setTimeout(timeTable, 1500);
     goToPage12()
 }
-    
+
 function goToPage12() {
-    setTimeout(function() { 
+    setTimeout(function () {
         currentPage = 13;
         showPage();
-    }, 3000);  
+    }, 3000);
 }
 
 
@@ -269,7 +269,7 @@ function randomScore() {
     const orderScore = document.querySelector('.account > h2');
     orderScore.textContent = randomNumber;
     // console.log(randomNumber);
-} 
+}
 
 // 타이머
 
@@ -301,7 +301,7 @@ const scoreboardBox = document.querySelector('.scoreboard-box');
 
 function updateScoreBoard() {
     const scoreText = score > 50 ? `매장에서도 주문 가능합니다.` : `<span>${score}</span>점으로는 아무 것도 할 수 없습니다.`;
-    
+
     scoreboardBox.innerHTML = `
         <h3>총 점수 : <span>${score}</span>점</h3>
         <h3>총 평가 : ${scoreText}</h3>
@@ -314,6 +314,16 @@ subsScore();
 
 
 
+// hover
+document.addEventListener('mouseover', hoverTag);
+document.addEventListener('mouseout', hoverTag);
 
+function hoverTag(e) {
+    let currentElement = e.target;
 
-
+    if (currentElement.tagName === 'BUTTON') {
+        currentElement.classList.toggle('shadow-drop-2-center', e.type === 'mouseover');
+    } else if (currentElement.tagName === 'IMG') {
+        currentElement.classList.toggle('shadow-drop-2-center', e.type === 'mouseover');
+    }
+}

@@ -53,39 +53,6 @@ for (let i = 0; i <= totalPages; i++) {
   }
 }
 
-// 테이블과 페이지 번호를 관리할 함수
-// function showPage(currentPage) {
-//   const tableRows = document.querySelectorAll("table tr"); // [tr], [tr], [tr]
-//   const pagingDiv = document.getElementById("paging");
-//   const totalPages = Math.ceil((words.length - 1) / postPerPage); // 총 페이지 수 계산
-
-//   const startPage = Math.max(1, currentPage - Math.floor(numDisplayPage / 2)); // 표시할 페이지 범위의 시작
-//   const endPage = Math.min(totalPages, startPage + numDisplayPage - 1); // 표시할 페이지 범위의 끝
-
-//   console.log(totalPages); // 이게 왜 반올림이 되는가...?
-
-  // 페이지 번호가 유효한지 확인
-//   if (currentPage < 1 || currentPage > totalPages) {
-//     return;
-//   }
-
-  // 모든 행 숨김
-  //  tableRows.forEach(row => row.style.display = 'none');
-
-  // 헤더 행을 보이게 설정
-  //  tableRows[0].style.display = '';
-
-  // 현재 페이지에 해당하는 행들을 보이게 설정
-//   const startIndex = (currentPage - 1) * postPerPage + 1; // th 제외
-//   const endIndex = startIndex + postPerPage;
-//   for (let i = startIndex; i < endIndex && i < tableRows.length; i++) {
-//     tableRows[i].style.display = "";
-//   }
-
-//   // 페이지 번호 갱신
-//   updatepaging(totalPages, currentPage, startPage, endPage);
-// }
-
 // 페이지 번호 갱신 함수
 function updatepaging(totalPages, currentPage, startPage, endPage) {
   const pagingDiv = document.getElementById("paging");
