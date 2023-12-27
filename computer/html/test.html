@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>말풍선 스타일 div</title>
+    <style>
+        .box {padding: 20px;}
+
+.pull {
+    position:relative; 
+    margin: 50px; 
+    padding: 20px;
+    width:200px; 
+    height:60px; 
+    color: #FFF; 
+    border-radius: 10px; 
+    background-color: #000;
+}
+.pull:after {
+    content:""; 
+    position: absolute; 
+    top: 21px; 
+    right: -30px; 
+    border-left: 30px solid #000; 
+    border-top: 10px solid transparent; 
+    border-bottom: 10px solid transparent;}
+
+.pull.rd {background-color: #ff0000;}
+.pull.rd:after {
+    content:""; 
+    position: absolute; 
+    top: -40px; 
+    right: 100px; 
+    border-left: 20px solid transparent; 
+    border-right: 20px solid transparent; 
+    border-bottom: 30px solid #ff0000;
+}
+
+.pull.gr {background-color: #22ac38;}
+.pull.gr:after {content:""; position: absolute; right: 100px; top: 100px; border-left: 20px solid transparent; border-right: 20px solid transparent; border-top: 30px solid #22ac38;}
+    </style>
+  </head>
+  <body>
+    <div class="box">
+        <div class="pull">말풍선1</div>
+        <div class="pull rd">말풍선2</div>
+        <div class="pull gr">말풍선3</div>
+      </div>
+  </body>
+</html>

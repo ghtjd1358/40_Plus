@@ -4,12 +4,14 @@ const homeMenu = document.getElementById("home");
 const computerMenu = document.getElementById("computer");
 const lifeMenu = document.getElementById("life");
 const cultureMenu = document.getElementById("culture");
+const communityMenu = document.getElementById("community");
 
 // 각 상위 메뉴에서 a 선택.
 const homeLink = homeMenu.querySelector("a");
 const computerLink = computerMenu.querySelector("a");
 const lifeLink = lifeMenu.querySelector("a");
 const cultureLink = cultureMenu.querySelector("a");
+const communityLink = communityMenu.querySelector("a");
 
 // --------------------- 구 분 선 ----------------------
 // 사이드바 토글 함수
@@ -38,6 +40,7 @@ function toggleSidebar() {
     computerLink.classList.remove("fade-in");
     lifeLink.classList.remove("fade-in");
     cultureLink.classList.remove("fade-in");
+    communityLink.classList.remove("fade-in");
   } else {
     // 사이드 바 보여주기
     sidebar.style.marginLeft = "0";
@@ -52,6 +55,7 @@ function toggleSidebar() {
     computerLink.classList.add("fade-in");
     lifeLink.classList.add("fade-in");
     cultureLink.classList.add("fade-in");
+    communityLink.classList.add("fade-in");
 
     // 활성화된 서브메뉴 일 때 사이드 바 닫고 다시 열었을 때 backbtn 다시 보여주기
     if (activeSubmenu) {
