@@ -9,6 +9,7 @@ router.get("/signup", controller.getSignup);
 
 router.post("/signup", controller.signup);
 
+
 router.get("/login", controller.getLogin);
 
 router.post("/login", controller.login);
