@@ -49,9 +49,24 @@
             padding: 10px;
         }
 
+        
+
         #navigation-bar h1{
             margin: auto 20px;
         }
+
+        #navigation-bar a {
+            display: block;
+            width: 10%;
+            height: 5%;
+            /* border: 1px solid red; */
+        }
+
+        #navigation-bar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; 
+        }   
 
         #navigation-bar button {
             width: 15%;
@@ -66,6 +81,10 @@
             color: #fff;
         }
 
+        #navigation-bar button:hover{
+            background-color: #c64444;
+        }
+
         /* section */
         #kiosk-container {
             width: 100%;
@@ -78,14 +97,6 @@
             padding: 10px;
             margin: 10px;
         }
-
-        /* page1 */
- 
-
-
-        
-
-
 
     .word-box{
     display: flex;
@@ -113,6 +124,10 @@
   font-weight: bold;
   cursor: pointer;
 }
+
+ .word-box > button:hover{
+    background-color: #E2E8F0;
+ }
     </style>
 </head>
 
@@ -121,7 +136,7 @@
     <header>
         <div id="navigation-bar">
             <h1>
-                <a href="../index.html"><img src="" alt="logo">40+</a>
+                <a href="../index.html"><img src="/static/img/logo.png" alt="logo"></a>
             </h1>
             <button onclick="prevPage()">돌아가기</button>
             <!-- <button onclick="firstPage()">처음</button> -->
