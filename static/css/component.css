@@ -72,6 +72,7 @@ html {
 .logo {
   width: 200px;
   height: 100px;
+  cursor: url(./img/pointer.png) 10 10, auto;
 }
 
 li {
