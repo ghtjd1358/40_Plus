@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <link rel="stylesheet" href="/static/css/sidebarHeader.css" />
+
+    <link rel="stylesheet" href="/static/css/header.css" />
     <link rel="stylesheet" href="/static/css/component.css" />
 
     <link
@@ -114,10 +115,11 @@
       }
 
       .mainContent {
-        margin-top: 5%;
+        margin-top: 50px;
         display: flex;
         flex-direction: column;
         width: 100%;
+
         align-items: center;
         justify-content: center;
       }
@@ -144,18 +146,22 @@
 
       .swiper-wrapper {
         height: 100%;
+        max-height: none;
         width: 100%;
         display: flex;
         align-items: center;
         z-index: 1;
         position: relative;
+
+        margin: auto;
       }
 
       .swiper-container {
         width: 600px;
-        height: 600px;
+        height: 500px;
         position: relative;
-        border-radius: 10px;
+        margin: auto;
+        border-radius: var(--border-radius-medium);
       }
 
       .slider-item {
@@ -220,13 +226,14 @@
       }
 
       .slider-buttons {
-        position: absolute;
-        display: flex;
+        /* position: relative; */
+        /* display: flex; */
+        display: none;
         justify-content: center;
-
+        /* background-color: pink; */
         width: 100%;
         height: 5%;
-        margin-top: 90%;
+        margin-top: var(--space-2);
       }
 
       .swiper-button-next,
@@ -234,7 +241,7 @@
         font-size: 16px;
         position: relative;
         margin-left: 4px;
-        background-color: var(--color-orange-2);
+        background-color: var(--color-orange-4);
         color: var(--color-grey-1);
         border: none;
         border-radius: var(--border-radius-small);
@@ -242,11 +249,11 @@
       }
       .swiper-button-next:active,
       .swiper-button-prev:active {
-        background-color: var(--color-orange-4);
+        background-color: var(--color-orange-3);
       }
       .swiper-button-next:hover,
       .swiper-button-prev:hover {
-        background-color: var(--color-orange-4);
+        background-color: var(--color-orange-3);
       }
 
       .sTitle {
@@ -262,10 +269,27 @@
         margin-top: var(--space-0);
         display: block;
       }
+
+      .sampleText1 {
+        height: auto;
+        font-size: 24px;
+        margin-top: 30%;
+        display: block;
+        color: var(--color-black-2);
+        text-align: center;
+      }
+      .sampleText2 {
+        height: auto;
+        font-size: 18px;
+        margin-top: var(--space-3);
+        display: block;
+        color: var(--color-black-2);
+        text-align: center;
+      }
     </style>
   </head>
   <body>
-    <%- include("./component/sidebarHeader")%>
+    <header><%- include("./component/header")%></header>
 
     <main id="main">
       <div class="mainContent">
@@ -291,32 +315,23 @@
         </div>
       </div>
 
-      <!-- <section class="main-content"></section> -->
-
       <div class="swiper-container">
         <div class="swiper-pagination"></div>
         <div class="swiper-wrapper">
           <!--  -->
-          <!-- <div class="slider-item swiper-slide">
+          <div class="slider-item swiper-slide">
             <div class="slider-item-content">
-              <h1>서울특별시교육청정독도서관</h1>
-              <p class="sTitle">주소</p>
-              <p class="sText">서울특별시 종로구 북촌로5길 48</p>
-              <p class="sTitle">영업시간</p>
-              <p class="sText">평일 09:00~18:00, 주말 09:00~17:00</p>
-              <p class="sTitle">휴무일</p>
-              <p class="sText">
-                매월 첫째주, 셋째주 월요일 / 일요일을 제외한 법정공휴일, 도서관
-                사정으로 임시로 정하는 휴일
+              <p class="sampleText1">
+                원하는 지역을 선택후 불러오기 버튼을 눌러주세요!
               </p>
-              <p class="sTitle"><a href="/">홈페이지바로가기</a></p>
+              <p class="sampleText2">아래 실시간 도서관 정보가 표시됩니다!</p>
             </div>
-            <div class="slider-buttons">
-              <button class="swiper-button-prev">이전으로</button>
-              <button class="swiper-button-next">다음으로</button>
-            </div>
-          </div> -->
+          </div>
           <!--  -->
+        </div>
+        <div class="slider-buttons">
+          <button class="swiper-button-prev">이전으로</button>
+          <button class="swiper-button-next">다음으로</button>
         </div>
       </div>
 
@@ -471,6 +486,8 @@
             const close = libClose[i].textContent || "N/A";
             const time = libTime[i].textContent || "N/A";
 
+            const buttondiv = document.querySelector(".slider-buttons");
+            buttondiv.style.display = "flex";
             const libraryDiv = document.createElement("div");
             libraryDiv.classList.add("slider-item", "swiper-slide");
 
@@ -492,14 +509,14 @@
 
             libraryDiv.appendChild(libraryDiv2);
 
-            libraryButton.innerHTML =
-              `<button class="swiper-button-prev">이전으로</button>` +
-              `<button class="swiper-button-next">다음으로</button>`;
-            libraryDiv.appendChild(libraryButton);
+            // libraryButton.innerHTML =
+            //   `<button class="swiper-button-prev">이전으로</button>` +
+            //   `<button class="swiper-button-next">다음으로</button>`;
+            // mainDiv.appendChild(libraryButton);
 
             // libraryDiv.classList.add("culture");
             dataElem.appendChild(libraryDiv);
-
+            swiper.update();
             // addEvent();
           }
         } catch (error) {
