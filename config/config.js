@@ -10,5 +10,5 @@ function getDBConfig() {
     }
 }
 
-    
+
 module.exports = getDBConfig; 
