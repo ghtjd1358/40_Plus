@@ -24,6 +24,11 @@
         <%}%>
       </li>
       <li class="main-line" id="home"><a href="/">Home</a></li>
+      <% if(locals.userid === 'admin') {%>
+        <li class="main-line">
+          <a href="/admin/confirmword">단어승인</a>
+        </li>
+        <% } %>
       <li class="main-line" id="computer">
         <a href="#">컴퓨터</a>
         <ol>

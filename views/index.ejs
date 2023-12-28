@@ -385,6 +385,11 @@
           /></a>
           <!-- 헤더 nav -->
           <ul class="navMenu">
+            <% if(locals.userid === 'admin') {%>
+              <li class="navi-li indexli">
+                <a href="/admin/confirmword">단어승인</a>
+              </li>
+              <% } %>
             <li class="navi-li indexli">
               <a href="/computer">컴퓨터</a>
             </li>
@@ -647,7 +652,6 @@
       // nav bar
       const nav = document.querySelector(".nav");
       const navUls = document.querySelectorAll(".nav-ul");
-      console.log(navUls);
 
       window.addEventListener("scroll", fixNav);
 
