@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/static/css/read.css" />
     <link rel="stylesheet" href="/static/css/footer.css" />
     <link rel="stylesheet" href="/static/css/header.css" />
+    <link rel="stylesheet" href="/static/css/sidebarHeader.css" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link
@@ -25,11 +26,12 @@
     </style>
   </head>
   <body>
-    <header><%- include("../component/header")%></header>
+    <header id="mainheader"><%- include("../component/header")%></header>
+    <header id="sideheader"><%- include("../component/sidebarHeader")%></header>
     <!-- B 페이지의 EJS 파일 -->
-
+    
     <div class="big-C">
-      <div class="small-C">
+      <div class="small-C"  id="main">
         <div class="title"><%= data.title %></div>
         <% if (locals.userid == data.userid){ %>
 
@@ -222,5 +224,6 @@
         });
       }
     </script>
+    <script src="/static/javaScript/sidebar.js"></script>
   </body>
 </html>
