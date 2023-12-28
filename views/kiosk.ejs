@@ -4,8 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <link rel="stylesheet" href="/static/css/kiosk.css" />
-    <!-- <link rel="stylesheet" href="/static/css/component.css" /> -->
+
+    <link rel="stylesheet" href="/static/css/component.css" />
+    <link rel="stylesheet" href="/static/css/kiosk.css">
+
     <link rel="stylesheet" href="/static/css/sidebarHeader.css" />
 
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -1190,93 +1192,71 @@
               <!-- 메뉴-하단 -->
               <div class="menu-footer2">
                 <div class="menu-footer2-inner">
-                  <div class="menu-first">
-                    <h3>총 주문내역</h3>
-                    <p><span>1</span>개</p>
-                    <h2>9,000</h2>
-                  </div>
-                  <div class="menu-last">
-                    <p>한우불고기세트</p>
-                    <p>1개</p>
-                    <div class="menu-last-button" onclick="checkAnswer(2)">
-                      <button>
-                        <img src="/static/img/arrow.png" alt="" />
-                      </button>
-                      <button>
-                        <img
-                          src="/static/img/arrow.png"
-                          alt=""
-                          style="transform: rotate(180deg)"
-                        />
-                      </button>
-                    </div>
-                    <p>9,000</p>
 
-                    <div class="menu-last-button2">
-                      <button onclick="checkAnswer(2)">토핑추가</button>
-                      <button onclick="checkAnswer(2)">변경</button>
-                      <button onclick="checkAnswer(2)">삭제</button>
+                    <div class="menu-first">
+                        <h3>총 주문내역</h3>
+                        <p><span>1</span>개</p>
+                        <h2>9,000</h2>
                     </div>
+                    <div class="menu-last">
+                            <p>한우불고기세트</p>
+                            <p>1개</p>
+                            <div class="menu-last-button" onclick="checkAnswer(2)">
+                             <button>
+                                <img src="/static/css/img/arrow.png" alt="">
+                            </button>
+                            <button>
+                                 <img src="/static/css/img/arrow.png" alt="" style="transform: rotate(180deg);">
+                            </button>
+                            </div>
+                            <p>9,000</p>
 
-                    <div class="menu-last-button" onclick="checkAnswer(2)">
-                      <button>
-                        <img src="/static/img/arrow.png" alt="" />
-                      </button>
-                      <button>
-                        <img
-                          src="/static/img/arrow.png"
-                          alt=""
-                          style="transform: rotate(180deg)"
-                        />
-                      </button>
-                    </div>
-                  </div>
+                            <div class="menu-last-button2">
+                                <button onclick="checkAnswer(2)">토핑추가</button>
+                                <button onclick="checkAnswer(2)">변경</button>
+                                <button onclick="checkAnswer(2)">삭제</button>
+                            </div>
 
-                  <div class="menu-footer2-bot">
-                    <div class="menu-footer2-left">
-                      <div class="menu-footer2-box">
-                        <img
-                          src="https://v1.kiosapp.kr/img/icon-1.df954fb7.svg"
-                          alt=""
-                        />
-                        <p>장애인</p>
-                      </div>
-                      <div class="menu-footer2-box">
-                        <img
-                          src="https://v1.kiosapp.kr/img/icon-2.b4f3d9c4.svg"
-                          alt=""
-                        />
-                        <p>돋보기</p>
-                      </div>
-                      <div class="menu-footer2-box">
-                        <img
-                          src="https://v1.kiosapp.kr/img/icon-3.c0771af4.svg"
-                          alt=""
-                        />
-                        <p>직원호출</p>
-                      </div>
-                      <div class="menu-footer2-box">
-                        <img
-                          src="https://v1.kiosapp.kr/img/icon-4.092756a8.svg"
-                          alt=""
-                        />
-                        <p>이전</p>
-                      </div>
+                            <div class="menu-last-button"  onclick="checkAnswer(2)">
+                              <button>
+                                <img src="/static/css/img/arrow.png" alt="">
+                            </button>
+                            <button>
+                                 <img src="/static/css/img/arrow.png" alt="" style="transform: rotate(180deg);">
+                            </button>
+                            </div>  
                     </div>
 
-                    <div class="menu-footer2-right">
-                      <div
-                        class="selectable"
-                        id="menu-footer2-button"
-                        onclick="checkAnswer(2)"
-                      >
-                        <button>취소하기</button>
-                      </div>
-                      <div id="menu-footer2-button" onclick="checkAnswer(1)">
-                        <button>결제하기</button>
-                      </div>
+                    <div class="menu-footer2-bot">
+                        <div class="menu-footer2-left">
+                             <div class="menu-footer2-box" >
+                                 <img src="https://v1.kiosapp.kr/img/icon-1.df954fb7.svg" alt="">
+                                 <p>장애인</p>
+                             </div>
+                        <div class="menu-footer2-box">
+                            <img src="https://v1.kiosapp.kr/img/icon-2.b4f3d9c4.svg" alt="">
+                            <p>돋보기</p>
+                        </div>
+                        <div class="menu-footer2-box">
+                            <img src="https://v1.kiosapp.kr/img/icon-3.c0771af4.svg" alt="">
+                            <p>직원호출</p>
+                        </div>
+                        <div class="menu-footer2-box">
+                            <img src="https://v1.kiosapp.kr/img/icon-4.092756a8.svg" alt="">
+                            <p>이전</p>
+                        </div>
+                        </div>
+    
+                        <div class="menu-footer2-right">
+                            <div class="selectable" id="menu-footer2-button" onclick="checkAnswer(2)">
+                                <button>취소하기</button>
+                            </div>
+                            <div id="menu-footer2-button" onclick="checkAnswer(1)">
+                                <button>결제하기</button>
+                            </div>
+                       </div>
                     </div>
-                  </div>
+
                 </div>
               </div>
             </div>
@@ -1444,40 +1424,34 @@
                       <h2>9,000</h2>
                     </div>
                     <div class="menu-last">
-                      <p>한우불고기세트</p>
-                      <p>1개</p>
-                      <div class="menu-last-button" onclick="checkAnswer(2)">
-                        <button>
-                          <img src="/static/img/arrow.png" alt="" />
-                        </button>
-                        <button>
-                          <img
-                            src="/static/img/arrow.png"
-                            alt=""
-                            style="transform: rotate(180deg)"
-                          />
-                        </button>
-                      </div>
-                      <p>9,000</p>
 
-                      <div class="menu-last-button2">
-                        <button onclick="checkAnswer(2)">토핑추가</button>
-                        <button onclick="checkAnswer(2)">변경</button>
-                        <button onclick="checkAnswer(2)">삭제</button>
-                      </div>
+                            <p>한우불고기세트</p>
+                            <p>1개</p>
+                            <div class="menu-last-button" onclick="checkAnswer(2)">
+                            <button >
+                                <img src="/static/css/img/arrow.png" alt="">
+                            </button>
+                            <button>
+                                <img src="/static/css/img/arrow.png" alt="" style="transform: rotate(180deg);">
+                            </button>
+                            </div>
+                            <p>9,000</p>
 
-                      <div class="menu-last-button" onclick="checkAnswer(2)">
-                        <button>
-                          <img src="/static/img/arrow.png" alt="" />
-                        </button>
-                        <button>
-                          <img
-                            src="/static/img/arrow.png"
-                            alt=""
-                            style="transform: rotate(180deg)"
-                          />
-                        </button>
-                      </div>
+                            <div class="menu-last-button2">
+                                <button onclick="checkAnswer(2)">토핑추가</button>
+                                <button onclick="checkAnswer(2)">변경</button>
+                                <button onclick="checkAnswer(2)">삭제</button>
+                            </div>
+
+                            <div class="menu-last-button"  onclick="checkAnswer(2)">
+                            <button>
+                                <img src="/static/css/img/arrow.png" alt="">
+                            </button>
+                            <button>
+                                 <img src="/static/css/img/arrow.png" alt="" style="transform: rotate(180deg);">
+                            </button>
+                            </div>  
+
                     </div>
 
                     <div class="menu-footer2-bot">
@@ -1690,40 +1664,34 @@
                       <h2>9,000</h2>
                     </div>
                     <div class="menu-last">
-                      <p>한우불고기세트</p>
-                      <p>1개</p>
-                      <div class="menu-last-button" onclick="checkAnswer(2)">
-                        <button>
-                          <img src="/static/img/arrow.png" alt="" />
-                        </button>
-                        <button>
-                          <img
-                            src="/static/img/arrow.png"
-                            alt=""
-                            style="transform: rotate(180deg)"
-                          />
-                        </button>
-                      </div>
-                      <p>9,000</p>
 
-                      <div class="menu-last-button2">
-                        <button onclick="checkAnswer(2)">토핑추가</button>
-                        <button onclick="checkAnswer(2)">변경</button>
-                        <button onclick="checkAnswer(2)">삭제</button>
-                      </div>
+                            <p>한우불고기세트</p>
+                            <p>1개</p>
+                            <div class="menu-last-button" onclick="checkAnswer(2)">
+                            <button >
+                                <img src="/static/css/img/arrow.png" alt="">
+                            </button>
+                            <button>
+                                <img src="/static/css/img/arrow.png" alt="" style="transform: rotate(180deg);">
+                            </button>
+                            </div>
+                            <p>9,000</p>
 
-                      <div class="menu-last-button" onclick="checkAnswer(2)">
-                        <button>
-                          <img src="/static/img/arrow.png" alt="" />
-                        </button>
-                        <button>
-                          <img
-                            src="/static/img/arrow.png"
-                            alt=""
-                            style="transform: rotate(180deg)"
-                          />
-                        </button>
-                      </div>
+                            <div class="menu-last-button2">
+                                <button onclick="checkAnswer(2)">토핑추가</button>
+                                <button onclick="checkAnswer(2)">변경</button>
+                                <button onclick="checkAnswer(2)">삭제</button>
+                            </div>
+
+                            <div class="menu-last-button"  onclick="checkAnswer(2)">
+                            <button>
+                                <img src="/static/css/img/arrow.png" alt="">
+                            </button>
+                            <button>
+                                 <img src="/static/css/img/arrow.png" alt="" style="transform: rotate(180deg);">
+                            </button>
+                            </div>  
+
                     </div>
 
                     <div class="menu-footer2-bot">
@@ -1937,40 +1905,34 @@
                       <h2>9,000</h2>
                     </div>
                     <div class="menu-last">
-                      <p>한우불고기세트</p>
-                      <p>1개</p>
-                      <div class="menu-last-button" onclick="checkAnswer(2)">
-                        <button>
-                          <img src="/static/img/arrow.png" alt="" />
-                        </button>
-                        <button>
-                          <img
-                            src="/static/img/arrow.png"
-                            alt=""
-                            style="transform: rotate(180deg)"
-                          />
-                        </button>
-                      </div>
-                      <p>9,000</p>
 
-                      <div class="menu-last-button2">
-                        <button onclick="checkAnswer(2)">토핑추가</button>
-                        <button onclick="checkAnswer(2)">변경</button>
-                        <button onclick="checkAnswer(2)">삭제</button>
-                      </div>
+                            <p>한우불고기세트</p>
+                            <p>1개</p>
+                            <div class="menu-last-button" onclick="checkAnswer(2)">
+                            <button >
+                                <img src="/static/css/img/arrow.png" alt="">
+                            </button>
+                            <button>
+                                <img src="/static/css/img/arrow.png" alt="" style="transform: rotate(180deg);">
+                            </button>
+                            </div>
+                            <p>9,000</p>
 
-                      <div class="menu-last-button" onclick="checkAnswer(2)">
-                        <button>
-                          <img src="/static/img/arrow.png" alt="" />
-                        </button>
-                        <button>
-                          <img
-                            src="/static/img/arrow.png"
-                            alt=""
-                            style="transform: rotate(180deg)"
-                          />
-                        </button>
-                      </div>
+                            <div class="menu-last-button2">
+                                <button onclick="checkAnswer(2)">토핑추가</button>
+                                <button onclick="checkAnswer(2)">변경</button>
+                                <button onclick="checkAnswer(2)">삭제</button>
+                            </div>
+
+                            <div class="menu-last-button"  onclick="checkAnswer(2)">
+                            <button>
+                                <img src="/static/css/img/arrow.png" alt="">
+                            </button>
+                            <button>
+                                 <img src="/static/css/img/arrow.png" alt="" style="transform: rotate(180deg);">
+                            </button>
+                            </div>  
+
                     </div>
 
                     <div class="menu-footer2-bot">
@@ -2190,40 +2152,34 @@
                       <h2>9,000</h2>
                     </div>
                     <div class="menu-last">
-                      <p>한우불고기세트</p>
-                      <p>1개</p>
-                      <div class="menu-last-button" onclick="checkAnswer(2)">
-                        <button>
-                          <img src="/static/img/arrow.png" alt="" />
-                        </button>
-                        <button>
-                          <img
-                            src="/static/img/arrow.png"
-                            alt=""
-                            style="transform: rotate(180deg)"
-                          />
-                        </button>
-                      </div>
-                      <p>9,000</p>
 
-                      <div class="menu-last-button2">
-                        <button onclick="checkAnswer(2)">토핑추가</button>
-                        <button onclick="checkAnswer(2)">변경</button>
-                        <button onclick="checkAnswer(2)">삭제</button>
-                      </div>
+                            <p>한우불고기세트</p>
+                            <p>1개</p>
+                            <div class="menu-last-button" onclick="checkAnswer(2)">
+                            <button >
+                                <img src="/static/css/img/arrow.png" alt="">
+                            </button>
+                            <button>
+                                <img src="/static/css/img/arrow.png" alt="" style="transform: rotate(180deg);">
+                            </button>
+                            </div>
+                            <p>9,000</p>
 
-                      <div class="menu-last-button" onclick="checkAnswer(2)">
-                        <button>
-                          <img src="/static/img/arrow.png" alt="" />
-                        </button>
-                        <button>
-                          <img
-                            src="/static/img/arrow.png"
-                            alt=""
-                            style="transform: rotate(180deg)"
-                          />
-                        </button>
-                      </div>
+                            <div class="menu-last-button2">
+                                <button onclick="checkAnswer(2)">토핑추가</button>
+                                <button onclick="checkAnswer(2)">변경</button>
+                                <button onclick="checkAnswer(2)">삭제</button>
+                            </div>
+
+                            <div class="menu-last-button"  onclick="checkAnswer(2)">
+                            <button>
+                                <img src="/static/css/img/arrow.png" alt="">
+                            </button>
+                            <button>
+                                 <img src="/static/css/img/arrow.png" alt="" style="transform: rotate(180deg);">
+                            </button>
+                            </div>  
+
                     </div>
 
                     <div class="menu-footer2-bot">
