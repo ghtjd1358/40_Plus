@@ -1,8 +1,5 @@
 /* setting */
 body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
     text-align: center;
     font-size: 0.625rem;
 }
@@ -10,17 +7,12 @@ body {
     color: var(--color-black-0);
 }
 
-li {
-    list-style: none;
-}
-
 button {
     cursor: pointer;
 }
 
 a {
-    text-decoration: none;
-    color: #000;
+    color: var(--color-black-0);
 }
 
 .page {
@@ -32,23 +24,22 @@ img{
 }
 
 /* wrap */
-.wrap{
+#main{
     width: 80%;
-    margin: 0 auto;
-    /* border: 1px solid #000; */
+    margin: auto ;
 }
 
 /* nav */
 #navigation-bar {
+    margin: 0 auto;
     width: 100%;
-    height: 50px;
+    height: 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #B1F9C6;
-    color: #000;
+    color: var(--color-black-0);
     padding: 10px 0;
-    position: relative;
     z-index: 10;
 }
 
@@ -65,7 +56,7 @@ img{
 }
 
 #navigation-bar button {
-    width: 15%;
+    width: 12%;
     font-size: 1.6rem;
     font-weight: bold;
     padding: 10px 20px;
@@ -78,7 +69,7 @@ img{
 }
 
 #navigation-bar button:last-child {
-   margin-right: 1%;
+    margin-right: 1%;
     background-color: #CF0A0A;
 }
 
@@ -87,7 +78,6 @@ img{
 #kiosk-container {
     width: 100%;
     height: 680px;
-    margin: 0 auto;
 }
 
 .selectable {
@@ -106,7 +96,7 @@ img{
 /* ------------------------------page 1--------------------  */
 
 .screen{
-            height: 635px;
+        height: 635px;
         }
 
         .screen-container{
@@ -133,10 +123,11 @@ img{
 #page2 h3{
     font-size: 1.8rem;
     font-weight: bold;
+    margin-top: 30px;
 }
 
 #page2 p{
-    margin-top: -10px;
+    margin: 30px auto 20px;
     font-size: 1rem;
     font-weight: bold;
 }
@@ -152,13 +143,17 @@ img{
     margin-bottom: 5px;
 }
 
+.payment_2{
+    width: 100%;
+}
+
 .payment-container {
     border: 2px solid #eee;
 }
 
 #card {
     width: 100%;
-    height: 230px;
+    height: 250px;
 }
 
 #card img {
@@ -175,8 +170,8 @@ img{
 }
 
 #payment-coupon {
-    width: 60%;
-    height: 230px;
+    width: 62%;
+    height: 250px;
     border: 2px solid #eee;
 }
 
@@ -186,8 +181,8 @@ img{
 }
 
 #payment-money {
-    width: 60%;
-    height: 230px;
+    width: 62%;
+    height: 250px;
     border: 2px solid #eee;
 }
 
@@ -266,15 +261,13 @@ img{
     position: absolute;
     color: #CF0A0A;
     align-self: flex-end;
+    margin-bottom: 10px;
 }
 
 /* page 3 메뉴하단 */
 .menu-footer {
-    position: fixed;
     bottom: 137px;
-    left: 0;
-    right: 0;
-    width: 80%;
+    width: 100%;
     height: 120px;
     margin: auto;
     background-color: #eee;
@@ -298,13 +291,14 @@ img{
 
 .menu-footer-box img {
     cursor: pointer;
-    width: 45%;
+    width: 35%;
 }
 
 .menu-footer-box p {
     font-size: 0.8rem;
     line-height: 1px;
     font-weight: bold;
+    margin-top: 15px;
 
 }
 
@@ -319,7 +313,7 @@ img{
 
 #menu-footer-button button {
     width: 17vw;
-    height: 80px;
+    height: 8vh;
     font-size: 1.5rem;
     font-weight: bold;
     border: 1px solid black;
@@ -328,7 +322,6 @@ img{
     color: #000;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     z-index: 2;
-    margin-bottom: 5%;
 }
 
 #menu-footer-button:last-child button {
@@ -1098,35 +1091,26 @@ img{
 
 /* -----------------------footer progress---------------------------------- */
 footer {
-    position: fixed;
-    bottom: 0%;
-    left: 0;
-    right: 0;
-    width: 80%;
-    /* min-height: 120px; */
+    width: 100%;
     margin: 0 auto;
     background-color: #B1F9C6;
     z-index: 10;
 }
 
 #progressbar-text {
-    /* margin-left: 25%; */
     display: flex;
     text-align: center;
     height: 100px;
-    position: relative;
 }
 
 #progressbar-inner{
     width: 99%;
     margin: 0 auto;
-    /* padding: 10px; */
+    line-height: 100px;
 }
 
 #progressbar-text h3 {
-    /* width: 50rem; */
     font-size: 1.4rem;
-    line-height: 25px;
 }
 
 #progressbar-text span {
@@ -1303,21 +1287,6 @@ footer {
 .payments-right-box img{
     z-index: -1;
 }
-
-/* overlay */
-/* .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.7);
-    pointer-events: none;
-    z-index: 5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-} */
 
 /* circleFirst */
 #circleFirst{

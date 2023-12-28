@@ -120,9 +120,11 @@ const setMenu = [
 
 // 추천메뉴
 const recommend = [
-    { name: "착한한우세트", price: '7,900', image: "https://v1.kiosapp.kr/img/101.09780be2.jpg" },
-    { name: "착한AZ버거세트", price: '7,900', image: "https://v1.kiosapp.kr/img/101.09780be2.jpg" },
-    { name: "착한doublex2버거세트", price: '7,900', image: "https://v1.kiosapp.kr/img/101.09780be2.jpg" }
+    { name: "착한한우세트", price: '8,900', image: "https://v1.kiosapp.kr/img/101.09780be2.jpg" },
+    { name: "착한AZ버거세트", price: '8,700', image: "https://v1.kiosapp.kr/img/101.09780be2.jpg" },
+    { name: "착한doublex2버거세트", price: '9,500', image: "https://v1.kiosapp.kr/img/101.09780be2.jpg" },
+    { name: "착한크리스피버거세트", price: '7,900', image: "https://v1.kiosapp.kr/img/104.ff604441.jpg" },
+    { name: "착한리아미라클버거세트", price: '8,100', image: "https://v1.kiosapp.kr/img/308.4809b6f6.jpg" }
 ];
 
 // 사이드
