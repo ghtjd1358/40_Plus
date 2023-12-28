@@ -135,3 +135,7 @@
 .footer-ul > li > a {
   font-size: 1rem;
 }
+
+.github {
+  opacity: 0.6;
+}

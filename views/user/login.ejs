@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="/static/css/header.css" />
     <link rel="stylesheet" href="/static/css/component.css" />
     <link rel="stylesheet" href="/static/css/footer.css" />
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <link
       rel="stylesheet"
@@ -87,17 +88,6 @@
         color: var(--color-black-2);
       }
 
-      .btnLarge {
-        width: 500px;
-        height: 50px;
-        background-color: var(--color-orange-4);
-        color: var(--color-grey-0);
-        font-size: 18px;
-        border: 1px solid var(--color-orange-3);
-        width: 500px;
-        border-radius: var(--border-radius-small);
-      }
-
       #result {
         color: var(--color-red-4);
         font-weight: 700;
@@ -136,6 +126,90 @@
         background-color: var(--color-orange-5);
         font-size: 12px;
       }
+
+      .common-btn {
+        box-shadow: none;
+        font-size: 20px;
+        position: relative;
+        width: 500px;
+        height: 50px;
+        border-radius: var(--border-radius-small);
+        cursor: url(./img/pointer.png) 10 10, auto;
+        overflow: hidden;
+        background-color: var(--color-grey-0);
+        /* box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.8); */
+      }
+      .common-btn:hover::before {
+        position: absolute;
+        content: "";
+        background-color: var(--color-orange-5);
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        animation: fill 0.7s;
+        animation-timing-function: linear;
+      }
+      @keyframes fill {
+        0% {
+          left: -100%;
+          width: 0px;
+          height: 0px;
+          border-bottom: 250px solid var(--color-grey-0);
+          border-left: 100px solid transparent;
+          border-right: 100px solid var(--color-grey-0);
+        }
+
+        25% {
+          left: -750%;
+          width: 0px;
+          height: 0px;
+          border-bottom: 270px solid var(--color-grey-0);
+          border-left: 120px solid transparent;
+          border-right: 120px solid var(--color-grey-0);
+        }
+        50% {
+          left: -50%;
+          width: 0px;
+          height: 0px;
+        }
+
+        75% {
+          left: -25%;
+          width: 0px;
+          height: 0px;
+          border-bottom: 330px solid var(--color-grey-0);
+          border-left: 150px solid transparent;
+          border-right: 150px solid var(--color-grey-0);
+        }
+
+        100% {
+          left: 0%;
+          width: 0px;
+          height: 0px;
+          border-bottom: 360px solid var(--color-grey-0);
+          border-left: 180px solid transparent;
+          border-right: 180px solid var(--color-grey-0);
+        }
+      }
+      /* 공용 버튼 안에 글자 */
+      .common-text {
+        color: black;
+        position: relative;
+        cursor: url(./img/pointer.png) 10 10, auto;
+        z-index: 2;
+      }
+      .common-btn:hover .common-text {
+        animation: colorchange 0.7s linear forwards;
+      }
+      @keyframes colorchange {
+        50% {
+          color: white;
+        }
+        100% {
+          color: white;
+        }
+      }
     </style>
   </head>
   <body>
@@ -157,7 +231,9 @@
             <div class="resultContent">
               <p id="result"></p>
             </div>
-            <button type="button" id="login" class="btnLarge">로그인</button>
+            <button type="button" id="login" class="common-btn">
+              <span class="common-text">로그인</span>
+            </button>
           </form>
           <div class="link">
             <p>
@@ -188,7 +264,17 @@
       if (res.data.isError) {
         return (resultElement.textContent = res.data.msg);
       }
-      swal("로그인 완료되었습니다.", "", "success").then(function () {
+      // swal("로그인 완료되었습니다.", "", "success").then(function () {
+      //   location.href = "";
+      // });
+      Swal.fire({
+        title: "로그아웃이 완료되었습니다.",
+        text: "",
+        icon: "success",
+        // confirmButtonColor: "#e87d30",
+        confirmButtonText: `<span class="common-text">확인</span>`,
+        buttonsStyling: false,
+      }).then(function () {
         location.href = "<%= url %>";
       });
     }

@@ -9,17 +9,18 @@
     <link rel="stylesheet" href="/static/css/header.css" />
     <link rel="stylesheet" href="/static/css/footer.css" />
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>단어 추가</title>
 
-    <style>
-      
-    </style>
+    <style></style>
   </head>
   <body>
     <header><%- include("./component/header")%></header>
     <main id="add-body">
       <div>
         <form name="addword">
+
 
             <div class="add-C">
               <div class="h1-text"><h1>현재 <%= words.length %>개의 단어가 등록되어 있습니다.</h1></div>
@@ -32,7 +33,38 @@
                   </div>
                   <div class="tooltip">나만의 MZ어를 등록하여 다른 사람들과 공유해보세요! <br> 관리자의 승인이 허가 되면 문제로 출제됩니다!! </div>
                 </div>
+
             </div>
+            <!-- <div class="h3-text"><h3>단어 등록</h3></div> -->
+            <div class="sml_C">
+              <div class="add-div">
+                <input
+                  type="text"
+                  class="add-text"
+                  name="name"
+                  id="name"
+                  placeholder="단어 명"
+                />
+                <br />
+                <input
+                  type="text"
+                  class="add-text"
+                  name="mean"
+                  id="mean"
+                  placeholder="단어 뜻"
+                />
+                <br />
+                <button id="addWord" class="common-btn" type="button">
+                  <span class="common-text">등록 신청</span>
+                </button>
+                <p id="result"></p>
+              </div>
+              <div class="tooltip">
+                나만의 MZ어를 등록하여 다른 사람들과 공유해보세요! <br />
+                관리자의 승인이 허가 되면 문제로 출제됩니다!!
+              </div>
+            </div>
+          </div>
         </form>
         <!-- <div class="h3-text"><h3>단어 목록</h3></div> -->
         <table>
@@ -65,10 +97,10 @@
       </div>
     </main>
     <%- include("./component/footer")%>
-    
+
     <script>
       // 밑에거를 토대로 개수 만들기
-      let words = '<%- JSON.stringify(words) %>';
+      let words = `<%- JSON.stringify(words) %>`;
       words = JSON.parse(words);
       const createAtElements = document.querySelectorAll(".createdAt");
 
@@ -88,7 +120,14 @@
           method: "post",
           url: "/logout",
         });
-        swal("로그아웃이 완료되었습니다!", "", "success").then(function () {
+        Swal.fire({
+          title: "로그아웃이 완료되었습니다.",
+          text: "",
+          icon: "success",
+          // confirmButtonColor: "#e87d30",
+          confirmButtonText: `<span class="common-text">확인</span>`,
+          buttonsStyling: false,
+        }).then(function () {
           location.href = "/word";
         });
 
