@@ -15,6 +15,11 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
     />
+    <style>
+      .footer {
+          margin: 0;
+      }
+    </style>
   </head>
   <body>
     <header><%- include("../component/header")%></header>
@@ -73,13 +78,11 @@
                 class="material-symbols-outlined"
                 onclick="likeComment('<%= data2[i].userid %>','<%= data2[i].content %>','<%= data2[i].like %>', '<%= i %>', '<%= locals.userid %>')"
               >
-                thumb_up </span
-              ><span
+                thumb_up </span><span
                 id="likeCount_<%= i %>"
-                style="margin-left: 0.5rem; cursor: pointer"
+                style="margin-left: 0.5rem;"
               >
-                <%= data2[i].like %></span
-              >
+                <%= data2[i].like %></span>
             </div>
             <div class="comment-content"><%= data2[i].content %></div>
           </div>

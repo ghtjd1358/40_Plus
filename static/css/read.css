@@ -39,19 +39,20 @@ body {
     border-radius: 10px;
     padding: 20px;
     width: 80%;
-    max-width: 700px;
+    max-width: 900px;
     text-align: left;
+    margin: 50px 0;
 }
 /* 제목 */
 .title {
-    font-size: 24px;
+    font-size: 36px;
     font-weight: bold;
     color: #333333;
     margin-bottom: 20px;
 }
 /* 내용 */
 .content {
-    font-size: 16px;
+    font-size: 24px;
     color: #555555;
     line-height: 1.5;
     margin-bottom: 20px;
@@ -60,7 +61,7 @@ body {
 
 /* 기타 정보 */
 .meta-info {
-    font-size: 14px;
+    font-size: 18px;
     color: #888888;
     margin-bottom: 20px;
     display: flex;
@@ -111,6 +112,7 @@ hr {
     border-radius: 5px;
     height: 80px;
     resize: none;
+    font-size: 20px;
     margin-bottom: 20px;
 }
 
@@ -133,6 +135,7 @@ hr {
 
 .comment-user {
     font-weight: bold;
+    font-size: 24px;
     margin-bottom: 5px;
 }
 
