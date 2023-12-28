@@ -210,6 +210,17 @@
 
         return new Date(formattedDate);
       }
+
+      async function logout(event) {
+        event.preventDefault();
+        const res = await axios({
+          method: "post",
+          url: "/logout",
+        });
+        swal("로그아웃 완료!", "", "success").then(function () {
+          location.href = "/community";
+        });
+      }
     </script>
   </body>
 </html>

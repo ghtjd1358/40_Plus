@@ -6,27 +6,33 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="/static/css/component.css">
     <link rel="stylesheet" href="/static/css/header.css" />
+     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <title>단어 승인</title>
     <style>
+
+        .header {
+            background-color: white;
+        }
+
         #add_body {
             background-color: #f5f5f5;
-            margin-top: 10vh;
+            height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: center;
+            /* align-items: center; */
         }
         /* DB 표 */
         table {
             position: relative;
             width: 80vw;
+            height: 60vh;
             border-collapse: collapse; 
             background-color: #fff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
             overflow: hidden;
-            /* margin-top: 20px; */
             text-align: center;
-            margin-bottom: 20px;
+            margin-top: 5vh;
         }
         th, td {
             border-bottom: 1px solid #ddd;
@@ -75,7 +81,8 @@
     </style>
 </head>
 <header><%- include("../component/header")%></header>
-<body id="add_body">
+<body >
+    <main id="add_body">
         <% if (words.length > 0) {%>
             <table>
                 <tr>
@@ -116,7 +123,7 @@
             <h1>등록된 단어가 없습니다.</h1>
 
             <% } %>
-     
+     </main>
 
   <script>
     const deleteButtonElements = document.querySelectorAll('.delete');
@@ -140,6 +147,16 @@
     for (const deleteButtonElement of deleteButtonElements) {
         deleteButtonElement.addEventListener('click', deleteWord);
     }
+       async function logout(event) {
+        event.preventDefault();
+        const res = await axios({
+          method: "post",
+          url: "/logout",
+        });
+        swal("로그아웃 완료!", "", "success").then(function () {
+          location.href = "/";
+        });
+      }
   </script>
 </body>
 </html>

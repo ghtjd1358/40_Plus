@@ -132,14 +132,3 @@ document.getElementById("life").addEventListener("click", function () {
 document.getElementById("culture").addEventListener("click", function () {
   toggleSubmenu("culture");
 });
-
-// 로그인 부분
-async function logout(event) {
-  event.preventDefault();
-  const res = await axios({
-    method: "post",
-    url: "/logout",
-  });
-
-  location.href = "/";
-}
