@@ -5,6 +5,7 @@ function checkAdmin(req, res, next) {
         return next();
     }
     req.session.isAdmin = null;
+    res.locals.isAdmin = null;
     next();
 }
 
