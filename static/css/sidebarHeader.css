@@ -185,6 +185,7 @@ ol {
   height: 150px;
   position: absolute;
   top: 100px;
+  cursor: url(./img/basic.png) 10 10, auto;
 }
 
 .headerNav {

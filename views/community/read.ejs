@@ -15,7 +15,6 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
-    <style></style>
   </head>
   <body>
     <header><%- include("../component/header")%></header>
@@ -31,13 +30,10 @@
           class="common-btn edit"
           onclick="sendModifyCommunity('<%= data.number %>')"
         >
-          <span class="common-text">수정하기</span></button
-        ><button
-          type="button"
-          class="common-btn delete"
-          onclick="deleteCommunity('<%= data.number %>')"
-        >
-          <span class="common-text">삭제하기</span>
+
+          <span class="common-text">수정</span>
+        </button><button type="button" class="common-btn delete" onclick="deleteCommunity('<%= data.number %>')">
+          <span class="common-text">삭제</span>
         </button>
         <% } %>
         <hr />
