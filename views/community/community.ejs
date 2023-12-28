@@ -4,13 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-      integrity="sha512-BKTRJSBv9tQDe+qZqRr9LJQktGMxwwkIs6mH3l5x0epjQQ2glzB6tDM1gJnbxoJFqP4iTVgfk4DSbsnmRvhVw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
     <link rel="stylesheet" href="/static/css/component.css" />
     <link rel="stylesheet" href="/static/css/borad.css" />
     <link rel="stylesheet" href="/static/css/header.css" />
@@ -44,7 +37,9 @@
     <div id="add-body">
       <form>
         <div class="add-C">
-          <button type="button" class="common-btn" onclick="writeCommunity()"><span class="common-text">글쓰기</span></button>
+          <button type="button" class="common-btn" onclick="writeCommunity()">
+            <span class="common-text">글쓰기</span>
+          </button>
         </div>
       </form>
       <table class="table">
@@ -86,7 +81,13 @@
           id="search-input"
           placeholder="검색어를 입력하세요"
         />
-        <button id="search-button" class="common-btn" onclick="searchCommunity()"><span class="common-text">검색</span></button>
+        <button
+          id="search-button"
+          class="common-btn"
+          onclick="searchCommunity()"
+        >
+          <span class="common-text">검색</span>
+        </button>
       </div>
     </div>
 

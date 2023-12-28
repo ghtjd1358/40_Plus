@@ -23,6 +23,8 @@ router.get("/culture/class", controller.dayClass);
 router.get("/culture/festival", controller.festival);
 
 router.get("/kiosk", getUrlMiddleware, controller.kiosk);
+router.get("/word", getUrlMiddleware, controller.word);
+router.get("/sub_kiosk", getUrlMiddleware, controller.sub_kiosk);
 
 router.post("/logout", controller.logout);
 
