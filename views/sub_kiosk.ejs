@@ -23,25 +23,7 @@
     <!-- header -->
     <header>
        <!-- nav -->
-    <nav class="nav">
-      <div class="container">
-        <h1 class="logo"><a href="/index.html">40 +</a></h1>
-        <ul class="navInner">    
-          <li class="navi-li"><a href="#">컴퓨터</a></li>
-          <li class="navi-li"><a href="#" class="current">생활편의</a></li>
-          <li class="navi-li"><a href="#">문화여가</a></li>
-          <li class="navi-li"><a href="#">게시판</a></li>
-        </ul>
-
-        <!-- 로그인 -->
-        <ul class="user">
-          <!-- <li><a href="#">serch</a></li> -->
-          <li><a href="#">로그인</a></li>
-          <li><a href="#">비회원</a></li>
-          <li><a href="#">고객센터</a></li>
-        </ul>
-      </div>
-    </nav>
+     <%- include("./component/header")%>
    
       <!-- visual -->
     <div class="visual">
@@ -133,12 +115,12 @@
         <h3>키오스크 실전</h3>
         <p>키오스크를 실전에서 체험해보세요! 아래 게임과 활동을 통해 키오스크의 다양한 기능을 경험해보세요</p>
         <div class="game-container">
-          <a href="./word/word.html" target="_blank">
+          <a href="/views/word.ejs" target="_blank">
             <div class="gamebox word" style="background: url('/static/img/word.jpg') no-repeat center bottom;">
                 단어정리 하러가기
               </div>
           </a>
-             <a href="./kiosk/kiosk.html" target="_blank" >
+             <a href="/views/kiosk.ejs" target="_blank" >
                <div class="gamebox image" style="background: url('/static/img/game.jpg') no-repeat center top;">
                 키오스크 체험하기
               </div>
@@ -147,6 +129,7 @@
         </div>
       </div>
   </section>
+  <%- include("./component/footer")%>
   </div> 
  
 
