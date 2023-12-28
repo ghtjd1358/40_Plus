@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/static/css/header.css" />
     <link rel="stylesheet" href="/static/css/footer.css" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <style>
       .footer {
         margin: 0;
@@ -83,6 +84,17 @@
         )}-${String(day).padStart(2, "0")}`;
 
         return new Date(formattedDate);
+      }
+
+      async function logout(event) {
+        event.preventDefault();
+        const res = await axios({
+          method: "post",
+          url: "/logout",
+        });
+        swal("로그아웃 완료!", "", "success").then(function () {
+          location.href = "/community";
+        });
       }
     </script>
   </body>

@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="/static/css/footer.css" />
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>단어 추가</title>
 
     <style></style>
@@ -108,18 +107,9 @@
           method: "post",
           url: "/logout",
         });
-        Swal.fire({
-          title: "로그아웃이 완료되었습니다.",
-          text: "",
-          icon: "success",
-          // confirmButtonColor: "#e87d30",
-          confirmButtonText: `<span class="common-text">확인</span>`,
-          buttonsStyling: false,
-        }).then(function () {
+        swal("로그아웃 완료!", "", "success").then(function () {
           location.href = "/word";
         });
-
-        // location.href = "/";
       }
     </script>
 
