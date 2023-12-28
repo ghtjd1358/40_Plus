@@ -133,7 +133,6 @@ function createIndexButton(text, currentPage) {
 
 
 const addWordButtonElement = document.querySelector("#addWord");
-const resultElement = document.querySelector("#result");
 const form = document.forms["addword"];
 async function addWord() {
   const res = await axios({
@@ -144,7 +143,20 @@ async function addWord() {
       mean: form.mean.value,
     },
   });
-  resultElement.textContent = res.data.msg;
-  form.reset();
-}
+  if(res.data.msg === '로그인 후 이용해주세요.') {
+    swal(res.data.msg, "", "error").then(function () {
+      location.href = "/login";
+    })};
+  if(res.data.msg === '단어와 뜻을 입력해주세요.') {
+    swal(res.data.msg, "", "error").then(function () {
+      form.reset();
+    });
+  }
+  if(res.data.msg === '신청 완료! 관리자의 승인 후 등록됩니다.') {
+    swal(res.data.msg, "", "success").then(function () {
+      form.reset();
+    });
+  }
+  }
+
 addWordButtonElement.addEventListener("click", addWord);

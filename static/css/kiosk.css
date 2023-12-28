@@ -6,6 +6,9 @@ body {
     text-align: center;
     font-size: 0.625rem;
 }
+.navi-li.headerli a {
+    color: var(--color-black-0);
+}
 
 li {
     list-style: none;
