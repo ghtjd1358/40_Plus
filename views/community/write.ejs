@@ -5,11 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>게시판 글 작성</title>
     <link rel="stylesheet" href="/static/css/component.css" />
-    <link rel="stylesheet" href="/static/css/write.css">
+    <link rel="stylesheet" href="/static/css/write.css" />
     <link rel="stylesheet" href="/static/css/header.css" />
     <link rel="stylesheet" href="/static/css/footer.css" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <style>
+      .footer {
+          margin: 0;
+      .header {
+        background-color: white;
+      }
     </style>
   </head>
   <body>
@@ -26,7 +31,11 @@
             <label class="label-text" for="content">내용</label>
             <textarea id="content" placeholder="내용을 입력하세요"></textarea>
           </div>
-          <button class="submit-btn common-btn" type="button" onclick="submitPost()">
+          <button
+            class="submit-btn common-btn"
+            type="button"
+            onclick="submitPost()"
+          >
             <span class="common-text">작성완료</span>
           </button>
         </div>

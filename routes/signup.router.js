@@ -24,6 +24,11 @@ router.get("/culture/festival", controller.festival);
 router.get("/computer", controller.computer);
 router.get("/kiosk", getUrlMiddleware, controller.kiosk);
 
+router.get("/subkiosk/kiosk", getUrlMiddleware, controller.kiosk);
+router.get("/sub_kiosk/kiosk_word", getUrlMiddleware, controller.kiosk_word);
+router.get("/sub_kiosk", getUrlMiddleware, controller.sub_kiosk);
+
+
 router.post("/logout", controller.logout);
 
 module.exports = router;

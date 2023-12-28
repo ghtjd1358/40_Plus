@@ -15,6 +15,14 @@ const kiosk = (req, res) => {
   res.render("kiosk");
 };
 
+const kiosk_word = (req, res) => {
+  res.render("kiosk_word");
+};
+
+const sub_kiosk = (req, res) => {
+  res.render("sub_kiosk");
+};
+
 const culture = (req, res) => {
   res.render("culture");
 };
@@ -134,7 +142,8 @@ function getLogin(req, res) {
   }
 
   if (!req.session.accessToken && !req.session.url) {
-    return res.render("user/login", { url: "/" });
+
+    return res.render("user/login", { url: '/' });
   }
   res.redirect("/401");
 }
@@ -203,5 +212,10 @@ module.exports = {
   festival: festival,
   community: community,
   kiosk: kiosk,
+
   computer: computer,
+  
+  kiosk_word: kiosk_word,
+  sub_kiosk: sub_kiosk,
+
 };
