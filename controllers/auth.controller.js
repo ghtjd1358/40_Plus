@@ -15,7 +15,7 @@ const kiosk = (req, res) => {
   res.render("kiosk");
 };
 
-const word = (req, res) => {
+const kiosk_word = (req, res) => {
   res.render("kiosk_word");
 };
 
