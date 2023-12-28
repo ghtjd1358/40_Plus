@@ -92,3 +92,85 @@ function searchCommunity() {
 
 // 초기 페이지 로드 시 첫 번째 페이지 표시
 showPage(1);
+
+// /////
+function detailCommunityPage(postNumber) {
+  axios({
+    method: "post",
+    url: "/detailCommunityPage",
+    data: { number: parseInt(postNumber) }, // 객체 형태로 전달
+  }).then((result) => {
+    location.href =
+      "/readCommunity?number=" + JSON.stringify(result.data.number);
+  });
+}
+
+// 글쓰기 페이지 이동
+function writeCommunity() {
+  if (!"<%= locals.userid%>") {
+    return swal("로그인이 필요합니다.", "", "error").then(function () {
+      location.href = "/login";
+    });
+  }
+
+  window.location.href = "/writeCommunity";
+}
+
+async function logout(event) {
+  event.preventDefault();
+  const res = await axios({
+    method: "post",
+    url: "/logout",
+  });
+  swal(
+    "로그아웃이 완료되었습니다!",
+    "게시글 작성을 위해 로그인해주세요!",
+    "success"
+  ).then(function () {
+    location.href = "/community";
+  });
+
+  // location.href = "/";
+}
+
+// 검색어로 찾기
+function searchCommunity() {
+  const selectValue = document.getElementById("search-type").value;
+  const str = document.getElementById("search-input").value;
+
+  axios({
+    method: "post",
+    url: "/searchCommunity",
+    data: {
+      selectValue: selectValue,
+      str: str,
+    },
+  }).then((result) => {
+    const table = document.querySelector(".table");
+    const tableRow = document.querySelectorAll(".tableRow");
+
+    let html = "";
+    // 검색 결과가 있을 때만 모달 창 열기
+    if (result.data.data.length > 0) {
+      for (let i = 0; i < tableRow.length; i++) {
+        tableRow[i].remove();
+      }
+      for (let i = 0; i < result.data.data.length; i++) {
+        const { number, userid, title, content, view, date } =
+          result.data.data[i];
+        html += `<tr onclick="detailCommunityPage('${number}')" class="tableRow">
+        <td>${number}</td>
+        <td>${title}</td>
+        <td>${userid}</td>
+        <td>${view}</td>
+        <td>${date}</td>
+      </tr>`;
+      }
+      table.insertAdjacentHTML("beforeend", html);
+      showPage(1);
+    } else {
+      // 검색 결과가 없을 때의 처리 (예: 알림 메시지 등)
+      console.log("검색 결과가 없습니다.");
+    }
+  });
+}
