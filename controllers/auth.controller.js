@@ -35,6 +35,10 @@ const community = (req, res) => {
   res.render("community");
 };
 
+const computer = (req, res) => {
+  res.render("computer");
+};
+
 function getSignup(req, res) {
   res.render("user/signup");
 }
@@ -126,14 +130,13 @@ async function signup(req, res) {
 
 function getLogin(req, res) {
   if (!req.session.accessToken && req.session.url) {
-    return res.render("user/login", {url: req.session.url});
-  } 
-    
+    return res.render("user/login", { url: req.session.url });
+  }
+
   if (!req.session.accessToken && !req.session.url) {
-    return res.render("user/login", {url: '/'});
+    return res.render("user/login", { url: "/" });
   }
   res.redirect("/401");
-  
 }
 
 async function login(req, res, next) {
@@ -200,4 +203,5 @@ module.exports = {
   festival: festival,
   community: community,
   kiosk: kiosk,
+  computer: computer,
 };
