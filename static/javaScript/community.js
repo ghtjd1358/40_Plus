@@ -9,7 +9,6 @@ function showPage(currentPage) {
   const tableRows = document.querySelectorAll("table tr"); // [tr], [tr], [tr]
   const pagingDiv = document.getElementById("paging");
   const totalPages = Math.ceil((tableRows.length - 1) / postPerPage); // 총 페이지 수 계산
-  console.log(totalPages); // 이게 왜 반올림이 되는가...?
   const startPage = Math.max(1, currentPage - Math.floor(numDisplayPage / 2)); // 표시할 페이지 범위의 시작
   const endPage = Math.min(totalPages, startPage + numDisplayPage - 1); // 표시할 페이지 범위의 끝
 
@@ -78,8 +77,6 @@ function createPageButton(text, currentPage) {
 function searchCommunity() {
   const selectValue = document.getElementById("search-type").value;
   const str = document.getElementById("search-input").value;
-
-  console.log(selectValue, str);
 
   axios({
     method: "post",

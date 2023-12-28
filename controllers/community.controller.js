@@ -10,7 +10,6 @@ exports.community = (req, res) => {
   // 렌더될 때 커뮤니티 테이블에서 가져와서 출력해야함
 
   CommunityTable.findAll({ raw: true }).then((result) => {
-    console.log("community load > ", result);
     res.render("community/community", { communityData: result });
   });
 };
@@ -26,7 +25,6 @@ exports.readCommunity = async (req, res) => {
   // 글 하나 가져오기
   await CommunityTable.findOne({ where: { number: number } }).then(
     (resultCommunity) => {
-      console.log("read comm > ", resultCommunity.dataValues);
       data = resultCommunity.dataValues;
     }
   );
@@ -45,13 +43,10 @@ exports.detailCommunityPage = (req, res) => {
   const number = req.body.number;
 
   CommunityTable.findOne({ where: { number: number } }).then((result) => {
-    //console.log("detail res", result.dataValues.view);
-    // view의 값이 db에서 반영되지 않음.
     result.view += 1;
-    console.log("result > ", result.view);
 
+    // db에 수정된 값을 저장.
     result.save().then((updateRes) => {
-      console.log("save and update view", updateRes);
       res.send(updateRes);
     });
   });
@@ -60,8 +55,6 @@ exports.detailCommunityPage = (req, res) => {
 // 글 생성
 exports.communityPost = (req, res) => {
   const { title, content, date, view } = req.body;
-  console.log("community post > ", title, content, date, view);
-  console.log("req userid > ", req.session.userid);
 
   if (req.session.userid != "") {
     CommunityTable.create({
@@ -71,7 +64,6 @@ exports.communityPost = (req, res) => {
       date: date,
       view: view,
     }).then((result) => {
-      console.log("post create");
       res.send({ createSuccess: true });
     });
   }
@@ -81,14 +73,12 @@ exports.communityPost = (req, res) => {
 // 컨트롤러에서는 req.params.number로 해당 값을 읽어옴
 exports.deleteCommunity = (req, res) => {
   const number = req.params.number;
-  console.log("controller delete num >", number);
 
   CommunityTable.destroy({
     where: {
       number: parseInt(number),
     },
   }).then((result) => {
-    console.log("delete DB 성공");
     res.send({ success: true });
   });
 };
@@ -99,7 +89,6 @@ exports.sendModifyCommunity = (req, res) => {
   const { title, content, number } = req.body;
   req.session.data = { title, content, number };
 
-  console.log("req session", req.session.data);
   res.send("session store");
 };
 // 수정할 글을 세팅
@@ -108,13 +97,12 @@ exports.reciveModifyCommunity = (req, res) => {
 
   req.session.data = null;
 
-  console.log("recive > ", data);
   res.render("community/modify", { data: data });
 };
 // 수정할 글 db에 전달
 exports.submitModifyCommunity = (req, res) => {
   const { title, content, number } = req.body;
-  console.log("tttt", title, content, number);
+
   // 데이터 수정
   CommunityTable.update(
     { title: title, content: content },
@@ -128,7 +116,6 @@ exports.submitModifyCommunity = (req, res) => {
 
 // 댓글 좋아요 버튼 누를 시 카운트
 exports.likeComment = (req, res) => {
-  console.log("like comment > ", req.body);
   const { userid, content } = req.body;
 
   CommentTable.findOne({
@@ -146,11 +133,6 @@ exports.likeComment = (req, res) => {
 exports.writeComment = (req, res, next) => {
   const { number, content, date, like } = req.body;
 
-  console.log("writeComment 값 받기 > ", req.body);
-  console.log(number, content);
-  console.log("number type > ", typeof number);
-  console.log("session > ", req.session.userid);
-
   if (content != "") {
     //무플 방지..
     CommentTable.create({
@@ -160,7 +142,6 @@ exports.writeComment = (req, res, next) => {
       date: date,
       like: like,
     }).then((result) => {
-      console.log("댓글 추가 > ", result);
       res.send("fg");
     });
   }
@@ -187,7 +168,6 @@ exports.searchCommunity = (req, res) => {
     CommunityTable.findAll({
       where: whereCondition,
     }).then((result) => {
-      console.log("search Community > ", result);
       res.send({ data: result });
     });
   } else {
@@ -200,7 +180,6 @@ exports.searchCommunity = (req, res) => {
         ],
       },
     }).then((result) => {
-      console.log("Search result:", result);
       res.send({ data: result });
     });
   }
