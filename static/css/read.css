@@ -4,10 +4,10 @@ body {
 .common-btn {
     margin-bottom: 10px;
     width: 80px;
-    height: 40px;
+    height: 40px; 
+    margin-left: 80%;
 }
 .common-btn.edit {
-    margin-left: 490px;
     margin-right: 10px;
 }
 .common-btn.delete {
