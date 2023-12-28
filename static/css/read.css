@@ -157,3 +157,40 @@ hr {
     padding-top: 10px; /* 구분선과의 간격 조절 */
     white-space: pre-wrap;
 }
+/* 헤더 온 오프 */
+@media screen and (min-width: 769px) {
+    #sideheader {
+      display: none;
+    }
+    
+  }
+  @media screen and (max-width: 768px) {
+    .headerContainer {
+      display: none;
+    }
+    #sideheader {
+      display: block;
+    }
+    footer {
+      display: none;
+    }
+  }
+  @media screen and (max-width:1140px) {
+    .small-C {
+        min-width: 700px;
+    }
+    .common-btn {
+        margin-left: 73%
+    }
+  }
+  @media screen and (min-width: 1921px) {
+    .small-C {
+      max-width: 1200px;
+    }
+    .input-group input::placeholder, .input-group textarea::placeholder {
+      font-size: larger;
+    }
+    .common-btn {
+        margin-left: 85%;
+    }
+  }

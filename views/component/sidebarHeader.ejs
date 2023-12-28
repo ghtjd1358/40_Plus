@@ -4,9 +4,25 @@
 
   <!-- 사이드 바 -->
   <div id="sidebar">
-    <img src="/static/css/logo2.png" alt="" class="logo" />
-
+    <img src="/static/css/logo2.png" alt="" class="logo-sidebar" />
     <ul class="full-line">
+      <li class="navi-li headerli main-line">
+        <% if(locals.accessToken) {%>
+        <!-- <button id="logout" onclick="logout()">로그아웃</button> -->
+        <a onclick="logout(window.event)" id="logout"> 로그아웃</a>
+
+        <%} else { %>
+        <a href="/login">로그인</a>
+        <%}%>
+      </li>
+      <li class="navi-li headerli main-line">
+        <% if(locals.accessToken) {%>
+        <a href="/Mypage"> 마이페이지 </a>
+        <%} else { %>
+
+        <a href="/signup"> 회원가입</a>
+        <%}%>
+      </li>
       <li class="main-line" id="home"><a href="/">Home</a></li>
       <li class="main-line" id="computer">
         <a href="#">컴퓨터</a>
@@ -46,25 +62,5 @@
     <!-- 추가적인 메뉴 항목을 원하는 만큼 추가할 수 있습니다. -->
   </div>
 
-  <nav class="headerNav">
-    <ul class="navUser">
-      <li class="navi-li headerli">
-        <% if(locals.accessToken) {%>
-        <!-- <button id="logout" onclick="logout()">로그아웃</button> -->
-        <a onclick="logout(window.event)" id="logout"> 로그아웃</a>
-
-        <%} else { %>
-        <a href="/login">로그인</a>
-        <%}%>
-      </li>
-      <li class="navi-li headerli">
-        <% if(locals.accessToken) {%>
-        <a href="/Mypage"> 마이페이지 </a>
-        <%} else { %>
-
-        <a href="/signup"> 회원가입</a>
-        <%}%>
-      </li>
-    </ul>
-  </nav>
+  
 </header>
