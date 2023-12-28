@@ -9,6 +9,11 @@
     /></a>
     <!-- 헤더 nav -->
     <ul class="navMenu">
+      <% if(locals.userid === 'admin') {%>
+        <li class="navi-li indexli">
+          <a href="/admin/confirmword">단어승인</a>
+        </li>
+        <% } %>
       <li class="navi-li indexli">
         <a href="/computer">컴퓨터</a>
       </li>
