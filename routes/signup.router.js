@@ -16,12 +16,12 @@ router.post("/login", controller.login);
 
 router.post("/isvalid", controller.existsAlready);
 
-router.get("/culture", controller.culture);
-router.get("/culture/library", controller.library);
-router.get("/culture/class", controller.dayClass);
-router.get("/culture/festival", controller.festival);
+router.get("/culture", getUrlMiddleware, controller.culture);
+router.get("/culture/library", getUrlMiddleware, controller.library);
+router.get("/culture/class", getUrlMiddleware, controller.dayClass);
+router.get("/culture/festival", getUrlMiddleware, controller.festival);
 
-router.get("/computer", controller.computer);
+router.get("/computer", getUrlMiddleware, controller.computer);
 router.get("/kiosk", getUrlMiddleware, controller.kiosk);
 
 router.get("/subkiosk/kiosk", getUrlMiddleware, controller.kiosk);
