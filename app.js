@@ -60,9 +60,9 @@ app.get("/libraryAPI", async (req, res) => {
   const { selectRegion, selectDtl } = req.query;
   console.log("region>", selectRegion);
   console.log("dtl>", selectDtl);
-  
+
   const serviceUrl = "http://data4library.kr/api/extends/libSrch?";
-  
+
   let URI = encodeURI("authKey") + "=" + libraryKey;
   URI += "&" + encodeURI("pageNo") + "=" + encodeURI("1");
   URI += "&" + encodeURI("pageSize") + "=" + encodeURI("10");
@@ -122,7 +122,7 @@ app.get("/festivalAPI", async (req, res) => {
     "http://api.kcisa.kr/openapi/service/rest/meta4/getKCPG0504?";
 
   let URI = encodeURI("serviceKey") + "=" + festivalKey;
-  URI += "&" + encodeURI("numOfRows") + "=" + encodeURI("100000");
+  URI += "&" + encodeURI("numOfRows") + "=" + encodeURI("10");
   URI += "&" + encodeURI("pageNo") + "=" + encodeURI("1");
 
   const url = serviceUrl + URI;
