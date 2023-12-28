@@ -171,13 +171,13 @@ color: white;
     background-color: var(--color-red-3);
 }
 /* 헤더 온 오프 */
-@media screen and (min-width: 1001px) {
+@media screen and (min-width: 769px) {
     #sideheader {
       display: none;
     }
     
   }
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 768px) {
     .headerContainer {
       display: none;
     }
