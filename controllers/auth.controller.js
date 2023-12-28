@@ -15,8 +15,8 @@ const kiosk = (req, res) => {
   res.render("kiosk");
 };
 
-const word = (req, res) => {
-  res.render("word");
+const kiosk_word = (req, res) => {
+  res.render("kiosk_word");
 };
 
 const sub_kiosk = (req, res) => {
@@ -208,6 +208,6 @@ module.exports = {
   festival: festival,
   community: community,
   kiosk: kiosk,
-  word: word,
+  kiosk_word: kiosk_word,
   sub_kiosk: sub_kiosk,
 };
