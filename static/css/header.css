@@ -70,8 +70,8 @@ section {
 
 .logo {
   margin: 0 var(--space-5);
-  width: 250px;
-  height: 150px;
+  width: 200px;
+  height: 100px;
 }
 .navMenu {
   width: auto;

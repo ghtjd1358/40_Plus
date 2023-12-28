@@ -18,7 +18,7 @@
     />
     <style>
       .footer {
-          margin: 0;
+        margin: 0;
       }
       .header {
         background-color: white;
@@ -40,9 +40,12 @@
           class="common-btn edit"
           onclick="sendModifyCommunity('<%= data.number %>')"
         >
-
-          <span class="common-text">수정</span>
-        </button><button type="button" class="common-btn delete" onclick="deleteCommunity('<%= data.number %>')">
+          <span class="common-text">수정</span></button
+        ><button
+          type="button"
+          class="common-btn delete"
+          onclick="deleteCommunity('<%= data.number %>')"
+        >
           <span class="common-text">삭제</span>
         </button>
         <% } %>
@@ -86,11 +89,10 @@
                 class="material-symbols-outlined"
                 onclick="likeComment('<%= data2[i].userid %>','<%= data2[i].content %>','<%= data2[i].like %>', '<%= i %>', '<%= locals.userid %>')"
               >
-                thumb_up </span><span
-                id="likeCount_<%= i %>"
-                style="margin-left: 0.5rem;"
+                thumb_up </span
+              ><span id="likeCount_<%= i %>" style="margin-left: 0.5rem">
+                <%= data2[i].like %></span
               >
-                <%= data2[i].like %></span>
             </div>
             <div class="comment-content"><%= data2[i].content %></div>
           </div>
@@ -145,12 +147,10 @@
 
       // 글 삭제 버튼
       function deleteCommunity(number) {
-        console.log("delete num > ", number);
         axios({
           method: "delete",
           url: `/deleteCommunity/${number}`, // URL에 number를 포함
         }).then((result) => {
-          console.log("delete comm axios then", result);
           location.href = "/community";
         });
       }
@@ -193,7 +193,6 @@
             number: number,
           },
         }).then((result) => {
-          console.log("글 작성 페이지로 값 전송 완료");
           location.href = "/modifyCommunity";
         });
       }
@@ -212,6 +211,17 @@
         )}-${String(day).padStart(2, "0")}`;
 
         return new Date(formattedDate);
+      }
+
+      async function logout(event) {
+        event.preventDefault();
+        const res = await axios({
+          method: "post",
+          url: "/logout",
+        });
+        swal("로그아웃 완료!", "", "success").then(function () {
+          location.href = "/community";
+        });
       }
     </script>
     <script src="/static/javaScript/sidebar.js"></script>
