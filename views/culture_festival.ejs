@@ -311,18 +311,11 @@
         <h1 class="title">지역별 축제 정보 안내</h1>
         <div class="terms">
           <form
-            action="/libraryAPI"
+            action="/festivalAPI"
             name="regionForm"
             id="regionForm"
             onsubmit="submitForm(event)"
           >
-            <select name="region" id="region">
-              <option value="11">서울특별시</option>
-              <option value="21">부산광역시</option>
-              <option value="31">경기도</option>
-            </select>
-            <select name="dtl_region" id="dtl_region"></select>
-
             <button type="submit" onclick="submitForm(event)" class="btnS">
               불러오기
             </button>
@@ -381,74 +374,21 @@
       const region = regionForm.querySelector("#region");
       const dtl_region = regionForm.querySelector("#dtl_region");
 
-      function option() {
-        dtl_region.innerHTML = "";
-        if (region.value === "11") {
-          const newOption1 = document.createElement("option");
-          newOption1.value = "11010";
-          newOption1.textContent = "종로구";
-          dtl_region.add(newOption1);
-
-          const newOption2 = document.createElement("option");
-          newOption2.value = "11190";
-          newOption2.textContent = "영등포구";
-          dtl_region.add(newOption2);
-
-          const newOption3 = document.createElement("option");
-          newOption3.value = "11140";
-          newOption3.textContent = "마포구";
-          dtl_region.add(newOption3);
-        } else if (region.value === "21") {
-          const newOption1 = document.createElement("option");
-          newOption1.value = "21090";
-          newOption1.textContent = "해운대구";
-          dtl_region.add(newOption1);
-
-          const newOption2 = document.createElement("option");
-          newOption2.value = "21110";
-          newOption2.textContent = "금정구";
-          dtl_region.add(newOption2);
-
-          const newOption3 = document.createElement("option");
-          newOption3.value = "21050";
-          newOption3.textContent = "동래구";
-          dtl_region.add(newOption3);
-        } else if (region.value === "31") {
-          const newOption1 = document.createElement("option");
-          newOption1.value = "31103";
-          newOption1.textContent = "일산 동구";
-          dtl_region.add(newOption1);
-
-          const newOption2 = document.createElement("option");
-          newOption2.value = "31104";
-          newOption2.textContent = "일산 서구";
-          dtl_region.add(newOption2);
-
-          const newOption3 = document.createElement("option");
-          newOption3.value = "31191";
-          newOption3.textContent = "용인시 처인구";
-          dtl_region.add(newOption3);
-        }
-      }
-
       region.addEventListener("change", option);
       option();
 
       function submitForm(event) {
         event.preventDefault();
 
-        const selectRegion = region.value;
-        const selectDtl = dtl_region.value;
+        // const selectRegion = region.value;
+        // const selectDtl = dtl_region.value;
 
-        fetch(
-          `/libraryAPI?selectRegion=${selectRegion}&selectDtl=${selectDtl}`,
-          {
-            method: "get",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        )
+        fetch(`/festivalAPI?`, {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
           .then((response) => response.json())
           .then((data) => {
             // 서버로부터 받은 데이터를 처리
@@ -465,71 +405,70 @@
         // console.log("data2>", data);
 
         // xml 데이터 변환
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(data, "text/xml");
+        // const parser = new DOMParser();
+        // const xmlDoc = parser.parseFromString(data, "text/xml");
 
-        const libName = xmlDoc.getElementsByTagName("libName");
-        const libAddress = xmlDoc.getElementsByTagName("address");
-        const libPage = xmlDoc.getElementsByTagName("homepage");
-        const libClose = xmlDoc.getElementsByTagName("closed");
-        const libTime = xmlDoc.getElementsByTagName("operatingTime");
+        // const title = xmlDoc.getElementsByTagName("title");
+        // const location = xmlDoc.getElementsByTagName("spatialCoverage");
+        // const date = xmlDoc.getElementsByTagName("regDate");
+        // const page = xmlDoc.getElementsByTagName("referenceIdentifier");
+        // const dsec = xmlDoc.getElementsByTagName("description");
 
-        // 각 데이터 길이 확인
-        console.log("libName length:", libName.length);
-        console.log("libAddress length:", libAddress.length);
-        console.log("libPage length:", libPage.length);
-        console.log("libClose length:", libClose.length);
-        console.log("libTime length:", libTime.length);
+        // // 각 데이터 길이 확인
+        // console.log("titel length:", title.length);
+        // console.log("location length:", location.length);
+        // console.log("date length:", date.length);
+        // console.log("page length:", page.length);
+        // console.log("dsec length:", desc.length);
         try {
-          const parser = new DOMParser();
-          const xmlDoc = parser.parseFromString(data, "text/xml");
+          const items = data.response.body.items.item;
+          // const parser = new DOMParser();
+          // const xmlDoc = parser.parseFromString(data, "text/xml");
 
-          const libName = xmlDoc.getElementsByTagName("libName");
-          const libAddress = xmlDoc.getElementsByTagName("address");
-          const libPage = xmlDoc.getElementsByTagName("homepage");
-          const libClose = xmlDoc.getElementsByTagName("closed");
-          const libTime = xmlDoc.getElementsByTagName("operatingTime");
+          // const title = xmlDoc.getElementsByTagName("title");
+          // const location = xmlDoc.getElementsByTagName("spatialCoverage");
+          // const date = xmlDoc.getElementsByTagName("regDate");
+          // const page = xmlDoc.getElementsByTagName("referenceIdentifier");
+          // const dsec = xmlDoc.getElementsByTagName("description");
 
           const dataElem = document.querySelector(".swiper-wrapper");
           dataElem.innerHTML = "";
 
-          for (let i = 0; i < libName.length; i++) {
-            const name = libName[i].textContent || "N/A";
-            const address = libAddress[i].textContent || "N/A";
-            const page = libPage[i].textContent || "N/A";
-            const close = libClose[i].textContent || "N/A";
-            const time = libTime[i].textContent || "N/A";
+          for (let i = 0; i < items.length; i++) {
+            const item = items[i];
+
+            const title = item.title || "N/A";
+            const location = item.spatialCoverage || "N/A";
+            const date = item.regDate || "N/A";
+            const page = item.referenceIdentifier || "N/A";
+            const dsec = item.description || "N/A";
+
+            console.log(title);
 
             const buttondiv = document.querySelector(".slider-buttons");
             buttondiv.style.display = "flex";
-            const libraryDiv = document.createElement("div");
-            libraryDiv.classList.add("slider-item", "swiper-slide");
+            const fetivalDiv = document.createElement("div");
+            fetivalDiv.classList.add("slider-item", "swiper-slide");
 
-            const libraryDiv2 = document.createElement("div");
-            libraryDiv2.classList.add("slider-item-content");
+            const festivalDiv2 = document.createElement("div");
+            festivalDiv2.classList.add("slider-item-content");
 
-            const libraryButton = document.createElement("div");
-            libraryButton.classList.add("slider-buttons");
+            const festivalBtn = document.createElement("div");
+            festivalBtn.classList.add("slider-buttons");
 
-            libraryDiv2.innerHTML =
-              `<h1> ${name}</h1>` +
+            festivalDiv2.innerHTML =
+              `<h1> ${title}</h1>` +
               `<p class="sTitle">주소</p>` +
-              `<p class="sText">${address}</p>` +
+              `<p class="sText">${location}</p>` +
               `<p class="sTitle">영업시간 </p>` +
-              `<p class="sText">${time}</p>` +
+              `<p class="sText">${date}</p>` +
               `<p class="sTitle">휴무일 </p>` +
-              `<p class="sText"> ${close} </p>` +
+              `<p class="sText"> ${dsec} </p>` +
               `<p class="sTitle"> <a href=${page}>홈페이지 바로가기 </a></p>`;
 
-            libraryDiv.appendChild(libraryDiv2);
+            fetivalDiv.appendChild(festivalDiv2);
 
-            // libraryButton.innerHTML =
-            //   `<button class="swiper-button-prev">이전으로</button>` +
-            //   `<button class="swiper-button-next">다음으로</button>`;
-            // mainDiv.appendChild(libraryButton);
-
-            // libraryDiv.classList.add("culture");
-            dataElem.appendChild(libraryDiv);
+            dataElem.appendChild(fetivalDiv);
             swiper.update();
             // addEvent();
           }
