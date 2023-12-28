@@ -1,7 +1,7 @@
 body {
     height: fit-content;
     text-align: center;
-    overflow: hidden;
+    /* overflow: hidden; */
     overflow-x: auto;
 }
 /* 모니터 화면 */
@@ -60,7 +60,7 @@ body {
     font-weight: bold;
     text-align: center;
     background-color: #2ecc71; /* 배경색 변경 */
-    margin-top: 6vh;
+    margin-top: 4.5vh;
     border-radius: 10px;
     box-shadow: 2px 2px 2px 2px grey;
 }
@@ -76,10 +76,8 @@ body {
 }
 /* 결과 창 */
 #result-box {
-    position: relative;
-    left: 45vw;
-    top:  -22vh;
-    width: 15vw;
+    width: 18vw;
+    margin: 1vh auto; 
     height: fit-content;
     font-weight: bold;
     font-size: larger;
@@ -182,10 +180,13 @@ body {
 #toggleKeyboard {
     position: absolute;
     color: black;
-    left: 82vw;
+    width: 80px;
+    height: 80px;
+    transform: translate(800px,130px);
+    /* left: 82vw;
     top: 55vh;
     width: 5vw;
-    height: 5vw;
+    height: 5vw; */
     background-color: rgb(162, 246, 137);
     border-radius: 50%;
     font-size: 25px;
@@ -212,9 +213,9 @@ body {
     color: var(--color-red-5);
     font-weight: bold;
 }
-@media screen and (max-width: 1300px) and (max-height: 960px) {
-    #main{
-        min-width: 500px;
-        min-height: 500px;
+
+@media screen and (min-width: 2400px) {
+    .key {
+        font-size: 36px;
     }
 }
