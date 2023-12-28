@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="/static/css/kiosk.css">
-    <link rel="stylesheet" href="/static/css/component.css" />
+    <!-- <link rel="stylesheet" href="/static/css/component.css" /> -->
     <link rel="stylesheet" href="/static/css/sidebarHeader.css" />
     <title>kiosk</title>
     <style></style>
@@ -13,6 +13,17 @@
   <body>
     <%- include("./component/sidebarHeader")%>
     <div class="wrap">
+         <header>
+                <div id="navigation-bar">
+                <button onclick="prevPage()">이전</button>
+                <h1>
+                <a href="#">
+                    <img src="/static/img/logo.png" alt="logo">
+                </a>
+                </h1>
+                <button onclick="firstPage()">처음</button>
+            </div>
+        </header>
     <!-- 키오스크 컨테이너 -->
     <section>
         <div id="kiosk-container">
