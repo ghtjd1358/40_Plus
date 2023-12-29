@@ -11,6 +11,7 @@
   justify-content: center;
   /* background-color: rgba(17, 17, 17, 0.8); */
   background-color: var(--color-black-4);
+  z-index: 30;
 }
 /* 배경 뿌옇게 보이기 */
 #sidebar::before {
@@ -22,7 +23,7 @@
   height: 100%;
   background: rgba(0, 0, 0, 0.3);
   /* background: var(--color-black-3); */
-  z-index: -1; /* 가상 요소를 화면의 뒷 배경에 위치시키기 위해 음수 z-index 사용 */
+  z-index: 100; /* 가상 요소를 화면의 뒷 배경에 위치시키기 위해 음수 z-index 사용 */
   display: none; /* 초기에는 가상 요소를 숨김 */
 }
 
@@ -72,6 +73,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: 200;
 }
 .full-line a {
   color: var(--color-white-0);
@@ -97,7 +99,7 @@ ol {
   position: fixed;
   margin-left: 25px;
   margin-top: 10px;
-  z-index: 1;
+  z-index: 300;
   color: var(--color-black-0);
   display: block;
   transition: 1s;
@@ -182,6 +184,7 @@ ol {
   position: absolute;
   top: 3vh;
   cursor: url(./img/basic.png) 10 10, auto;
+  z-index: 200;
 }
 
 #sidebar .navi-li a {
