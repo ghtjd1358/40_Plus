@@ -3,8 +3,6 @@ function getUrl(req, res, next) {
         return next();
     }
     req.session.url = req.url;
-    console.log(req.session.url);
     next();
 }
-
 module.exports = getUrl;

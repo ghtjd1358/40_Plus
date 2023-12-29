@@ -1,8 +1,8 @@
 const checkJwt = require('../utility/checkJwt');
 const clearUserInfo = require('../utility/clearUserInfo');
+const getCookieConfig = require('../config/cookie.config');
 
 const models = require('../models/index');
-const getCookieConfig = require('../config/cookie.config');
 const User = models.User;
 
 

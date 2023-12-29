@@ -11,7 +11,6 @@
     />
     <link rel="stylesheet" href="/static/css/header.css" />
     <link rel="stylesheet" href="/static/css/footer.css" />
-
     <link rel="stylesheet" href="/static/css/component.css" />
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -29,7 +28,7 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
     />
 
-    <link rel="icon" href="./static/css/favicon.png" />
+    <link rel="icon" href="./static/css/img/favicon.png" />
 
     <style>
       /* 사진 아래 부분 */
@@ -386,6 +385,11 @@
           /></a>
           <!-- 헤더 nav -->
           <ul class="navMenu">
+            <% if(locals.userid === 'admin') {%>
+              <li class="navi-li indexli">
+                <a href="/admin/confirmword">단어승인</a>
+              </li>
+              <% } %>
             <li class="navi-li indexli">
               <a href="/computer">컴퓨터</a>
             </li>
@@ -404,7 +408,6 @@
           </ul>
           <!-- 로그인 -->
           <ul class="navUser">
-            <!-- <li class="navi-li indexli"><a href="">이용 안내</a></li> -->
             <li class="navi-li indexli">
               <% if(locals.accessToken) {%>
               <!-- <button id="logout" onclick="logout()">로그아웃</button> -->
@@ -644,13 +647,11 @@
         ).then(function () {
           location.href = "/";
         });
-        // location.href = "/";
       }
 
       // nav bar
       const nav = document.querySelector(".nav");
       const navUls = document.querySelectorAll(".nav-ul");
-      console.log(navUls);
 
       window.addEventListener("scroll", fixNav);
 
@@ -681,7 +682,5 @@
         });
       });
     </script>
-
-    <!-- <script src="/static/css/script.js"></script> -->
   </body>
 </html>
