@@ -613,6 +613,7 @@ img{
     height: 290px;
     margin: 0 auto;
     background-color: #eee;
+    z-index: 1;
     /* border: 1px solid #000; */
 }
 

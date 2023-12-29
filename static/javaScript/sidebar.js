@@ -21,8 +21,12 @@ function toggleSidebar() {
   const togglebtn = document.getElementById("toggle-btn");
   const backbtn = document.getElementById("back-btn");
   const activeSubmenu = document.querySelector(".main-line-active");
-  const nav = document.querySelector(".headerNav");
-  const commonbtn = document.querySelectorAll(".common-btn");
+ let nav;
+ nav = document.querySelector(".headerNav");
+  let commonbtn;
+  commonbtn = document.querySelectorAll(".common-btn");
+  let footer2s;
+  footer2s = document.querySelectorAll('.menu-footer2');
 
   if (sidebar.style.marginLeft === "0px") {
     // 사이드 바 닫을 때
@@ -34,8 +38,19 @@ function toggleSidebar() {
     togglebtn.innerText = "☰"; // '✕' 에서 다시 '☰' 로 변경
     sidebar.classList.remove("toggle-sidebar"); // 클래스 제거
     main.style.margin = "0 0 0 10%";
-    commonbtn.style.display = "block";
-    nav.style.opacity = "1";
+    if (commonbtn) {
+      for (const commonbt of commonbtn) {
+        commonbt.style.display = "block";
+      }
+    }
+    if (nav) {
+      nav.style.opacity = "1";
+    }
+    for (const footer2 of footer2s) {
+      footer2.style.transition = 'transform 1s';
+      footer2.style.transform = 'translateX(0px)';
+    }
+    
 
     // 각 링크들 애니메이션 삭제하기
     homeLink.classList.remove("fade-in");
@@ -50,8 +65,18 @@ function toggleSidebar() {
     togglebtn.classList.add("toggle-btn-after");
     togglebtn.innerText = "✕"; // '☰' 에서 '✕'로 변경
     sidebar.classList.add("toggle-sidebar"); // 클래스 추가
-    commonbtn.style.display = "none";
-    nav.style.opacity = "0";
+    if (commonbtn) {
+      for (const commonbt of commonbtn) {
+        commonbt.style.display = "none";
+      }
+    }
+    if (nav) {
+      nav.style.opacity = "0";
+    }
+    for (const footer2 of footer2s) {
+      footer2.style.transition = 'transform 1s';
+      footer2.style.transform = 'translateX(180px)';
+    }
 
 
     // 각 li(링크)들 애니메이션 추가하기
