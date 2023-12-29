@@ -1,10 +1,14 @@
 /* setting */
 body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     text-align: center;
     font-size: 0.625rem;
 }
-.navi-li.headerli a {
-    color: var(--color-black-0);
+
+li {
+    list-style: none;
 }
 
 button {
@@ -12,52 +16,53 @@ button {
 }
 
 a {
-    color: var(--color-black-0);
+    text-decoration: none;
+    color: #000;
 }
 
 .page {
     display: none;
 }
 
-img{
+img {
     z-index: -1;
 }
 
 /* wrap */
-#main{
+.wrap {
     width: 80%;
-    margin: auto ;
+    margin: 0 auto;
+    /* border: 1px solid #000; */
 }
 
 /* nav */
 #navigation-bar {
-    margin: 0 auto;
     width: 100%;
-    height: 60px;
+    height: 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #B1F9C6;
-    color: var(--color-black-0);
+    color: #000;
     padding: 10px 0;
     position: relative;
     z-index: 10;
 }
 
-#navigation-bar a{
+#navigation-bar a {
     display: inline-block;
     width: 20rem;
     height: 70px;
     /* border: 2px solid rebeccapurple; */
 }
 
-#navigation-bar img{
+#navigation-bar img {
     width: 100%;
     height: 100%;
 }
 
 #navigation-bar button {
-    width: 12%;
+    width: 15%;
     font-size: 1.6rem;
     font-weight: bold;
     padding: 10px 20px;
@@ -79,7 +84,7 @@ img{
 #kiosk-container {
     width: 100%;
     height: 680px;
-    overflow: hidden;
+    margin: 0 auto;
 }
 
 .selectable {
@@ -97,44 +102,43 @@ img{
 
 /* ------------------------------page 1--------------------  */
 
-.screen{
-        height: 635px;
-        }
-
-        .screen-container{
-            width: 80%;
-            height: 95%;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            align-items: center;
-        }
-
-        .screen-container img:first-child{
-            width: 800px;
-            height: 450px;
-        }
-
-        .screen-container img:last-child {
-            width: 800px;
-            height: 450px;
-        }
-
-/* ------------------------------page 2--------------------  */
-#page2 h3{
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin-top: 30px;
+.screen {
+    height: 635px;
 }
 
-#page2 p{
-    margin: 30px auto 20px;
+.screen-container {
+    width: 80%;
+    height: 95%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.screen-container img:first-child {
+    width: 800px;
+    height: 450px;
+}
+
+.screen-container img:last-child {
+    width: 800px;
+    height: 450px;
+}
+
+/* ------------------------------page 2--------------------  */
+#page2 h3 {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+#page2 p {
+    margin-top: -10px;
     font-size: 1rem;
     font-weight: bold;
 }
 
-.payment{
+.payment {
     width: 100%;
     height: 60px;
     margin: 0 auto;
@@ -145,17 +149,13 @@ img{
     margin-bottom: 5px;
 }
 
-.payment_2{
-    width: 100%;
-}
-
 .payment-container {
     border: 2px solid #eee;
 }
 
 #card {
     width: 100%;
-    height: 250px;
+    height: 230px;
 }
 
 #card img {
@@ -172,8 +172,8 @@ img{
 }
 
 #payment-coupon {
-    width: 55%;
-    height: 250px;
+    width: 60%;
+    height: 230px;
     border: 2px solid #eee;
 }
 
@@ -183,8 +183,8 @@ img{
 }
 
 #payment-money {
-    width: 55%;
-    height: 250px;
+    width: 60%;
+    height: 230px;
     border: 2px solid #eee;
 }
 
@@ -208,7 +208,7 @@ img{
     cursor: pointer;
 }
 
-.menu-header > div{
+.menu-header>div {
     width: 15%;
 }
 
@@ -241,7 +241,7 @@ img{
     position: relative;
 }
 
-.menu-select>.selectable:hover{
+.menu-select>.selectable:hover {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.36), 0 3px 6px rgba(0, 0, 0, 0.53);
 }
 
@@ -263,13 +263,15 @@ img{
     position: absolute;
     color: #CF0A0A;
     align-self: flex-end;
-    margin-bottom: 10px;
 }
 
 /* page 3 메뉴하단 */
 .menu-footer {
+    position: fixed;
     bottom: 137px;
-    width: 100%;
+    left: 0;
+    right: 0;
+    width: 80%;
     height: 120px;
     margin: auto;
     background-color: #eee;
@@ -293,14 +295,13 @@ img{
 
 .menu-footer-box img {
     cursor: pointer;
-    width: 35%;
+    width: 45%;
 }
 
 .menu-footer-box p {
     font-size: 0.8rem;
     line-height: 1px;
     font-weight: bold;
-    margin-top: 15px;
 
 }
 
@@ -315,7 +316,7 @@ img{
 
 #menu-footer-button button {
     width: 17vw;
-    height: 8vh;
+    height: 80px;
     font-size: 1.5rem;
     font-weight: bold;
     border: 1px solid black;
@@ -324,6 +325,7 @@ img{
     color: #000;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
     z-index: 2;
+    margin-bottom: 5%;
 }
 
 #menu-footer-button:last-child button {
@@ -370,8 +372,8 @@ img{
     position: relative;
 }
 
-.menu-header-modal > div{
-    background-color: #fff;
+.menu-header-modal>div {
+    background-color: #000;
 }
 
 .menu-select-modal>.selectable img {
@@ -444,7 +446,7 @@ img{
 
 #menu-btn-modal button {
     width: 17vw;
-    height: 70px;
+    height: 80px;
     font-size: 1.6rem;
     font-weight: bold;
     border: 1px solid black;
@@ -455,7 +457,7 @@ img{
     z-index: -1;
 }
 
-#menu-btn-modal:last-child button{
+#menu-btn-modal:last-child button {
     background-color: #fff;
 }
 
@@ -493,20 +495,19 @@ img{
     position: absolute;
     top: 0;
     left: 0;
-    
 }
 
 #menu-list-text h2 {
     color: #000;
     text-align: center;
-    line-height: 80px;
+    line-height: 25px;
     font-size: 2rem;
 }
 
-.menu-list-header{
+.menu-list-header {
     width: 103.8%;
     height: 60px;
-    margin-left:-1.9% ;
+    margin-left: -1.9%;
     margin-top: 60px;
     display: flex;
     align-items: center;
@@ -520,15 +521,10 @@ img{
     cursor: pointer;
 }
 
-.menu-list-header div{
+.menu-list-header div {
     font-size: 1.8rem;
     font-weight: bold;
     cursor: pointer;
-}
-
-.menu-list-header div:hover {
-    border-radius: 10px 10px 0 0;
-    background-color: #bebebe;
 }
 
 .menu-select-list {
@@ -539,18 +535,18 @@ img{
     text-align: left;
 }
 
-.menu-select-list > div{
+.menu-select-list>div {
     width: 21%;
     height: 70px;
     margin: 20px 0 120px 2%;
     text-align: center;
 }
 
-.menu-select-list img{
+.menu-select-list img {
     width: 80%;
 }
 
-.menu-select-list h2{
+.menu-select-list h2 {
     font-size: 1.2rem;
 }
 
@@ -560,7 +556,7 @@ img{
 }
 
 /* ------------------------------   8 page   ------------------------------ */
-.menu-select-footer{
+.menu-select-footer {
     width: 100%;
     height: 70px;
     display: flex;
@@ -570,7 +566,7 @@ img{
 
 }
 
-.menu-select-text{
+.menu-select-text {
     width: 25vw;
     /* border: 1px solid black; */
     padding: 0 50px;
@@ -579,47 +575,48 @@ img{
     font-size: 1rem;
 }
 
-.menu-select-button{
+.menu-select-button {
     display: flex;
     width: 120%;
     justify-content: space-between;
     padding: 0 50px;
 }
 
-.menu-select-button > div{
-        color: #000;
-        width: 13vw;
-        height: 70px;
-        border: none;
-        border-radius: 5px;
-        background-color: #eee;
-        font-size: 1.5rem;
-        font-weight: bold;
-        padding: 10px 20px;
-        cursor: pointer;
-        line-height: 55px;
+.menu-select-button>div {
+    color: #000;
+    width: 13vw;
+    height: 70px;
+    border: none;
+    border-radius: 5px;
+    background-color: #eee;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    cursor: pointer;
+    line-height: 70px;
 }
 
-.menu-select-button > div:hover{
+.menu-select-button>div:hover {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.36), 0 3px 6px rgba(0, 0, 0, 0.53);
 }
 
 
 
 
-.menu-select-button div:last-child{
+.menu-select-button div:last-child {
     background-color: #B1F9C6;
 }
 
 /* 9page */
 .menu-footer2 {
-    position: relative;
+    position: fixed;
     bottom: 140px;
-    width: 100%;
+    left: 0;
+    right: 0;
+    width: 80%;
     height: 290px;
     margin: 0 auto;
     background-color: #eee;
-    z-index: 1;
     /* border: 1px solid #000; */
 }
 
@@ -630,7 +627,7 @@ img{
     justify-content: space-between;
 }
 
-.menu-first{
+.menu-first {
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -639,27 +636,27 @@ img{
     height: 60px;
 }
 
-.menu-first h3{
+.menu-first h3 {
     margin-left: 3%;
     font-size: 1.4rem;
 }
 
-.menu-first p{
+.menu-first p {
     margin-right: 40%;
     font-size: 1rem;
 }
 
-.menu-first p > span{
+.menu-first p>span {
     font-size: 1.2rem;
     font-weight: bold;
 }
 
-.menu-first h2{
+.menu-first h2 {
     font-size: 1.6rem;
     color: #CF0A0A;
 }
 
-.menu-last{
+.menu-last {
     display: flex;
     justify-content: space-evenly;
     align-items: flex-start;
@@ -669,52 +666,51 @@ img{
     height: 100px;
 }
 
-.menu-last p{
-    margin-left: 2%;
-    margin-top: 1%;
+.menu-last p {
+    margin-left: 3%;
     font-size: 1.4rem;
 }
 
-.menu-last p:nth-child(2){
+.menu-last p:nth-child(2) {
     margin-left: 5%;
 }
 
-.menu-last-button{
+.menu-last-button {
     display: flex;
     flex-direction: column;
 }
 
-.menu-last-button button{
-    width: 1.2rem;
-    height: 1.2rem;
-    margin-top: 6%;
+.menu-last-button button {
+    width: 1.5rem;
+    height: 2rem;
+    margin-top: 8%;
     border: 1px solid #99b1d1;
     border-radius: 5px;
     background: none;
 }
 
-.menu-last-button img{
-    width: 90%;
+.menu-last-button img {
+    width: 100%;
 }
 
 
-.menu-last-button:last-child button{
-    width: 2rem;
-    height: 2.5rem;
+.menu-last-button:last-child button {
+    width: 2.5rem;
+    height: 3rem;
 }
 
-.menu-last-button2{
+.menu-last-button2 {
     margin-top: 1%;
     width: 20%;
 }
 
-.menu-last-button2 button{
-    width: 4rem;
-    height: 1.5rem;
+.menu-last-button2 button {
+    width: 5rem;
+    height: 2rem;
     margin-left: 1%;
 }
 
-.menu-footer2-bot{
+.menu-footer2-bot {
     display: flex;
     align-items: center;
 }
@@ -729,13 +725,12 @@ img{
 
 .menu-footer2-box img {
     cursor: pointer;
-    margin-top: -5px;
-    width: 30%;
+    width: 42%;
 }
 
 .menu-footer2-box p {
     font-size: 0.8rem;
-    line-height: 25px;
+    line-height: 1px;
     font-weight: bold;
 
 }
@@ -751,8 +746,8 @@ img{
 }
 
 #menu-footer2-button button {
-    width: 15vw;
-    height: 60px;
+    width: 17vw;
+    height: 80px;
     font-size: 1.5rem;
     font-weight: bold;
     border: 1px solid #000;
@@ -768,7 +763,7 @@ img{
     background-color: #fff;
 }
 
-.menu-last-button2 button{
+.menu-last-button2 button {
     border: 1px solid #99b1d1;
     border-radius: 5px;
     background: none;
@@ -776,19 +771,19 @@ img{
 }
 
 /* page10 */
-.payments{
+.payments {
     width: 100%;
     padding: 8px;
     max-height: 340px;
     overflow-y: auto;
 }
 
-.payments-table{
+.payments-table {
     display: flex;
     padding: 5px;
 }
 
-.payments-left{
+.payments-left {
     border: 2px solid #E2E8F0;
     border-radius: 10px;
     width: 49%;
@@ -797,11 +792,11 @@ img{
     margin-right: 1%;
 }
 
-.payments-left-box{
+.payments-left-box {
     display: flex;
     justify-content: space-between;
-    padding:0px 10px;
-    border: 1px solid #E2E8F0 ;
+    padding: 0px 10px;
+    border: 1px solid #E2E8F0;
 }
 
 .payments-left-box p {
@@ -823,7 +818,7 @@ img{
 }
 
 
-.payments-left-box2 h2{
+.payments-left-box2 h2 {
     font-size: 1.6rem;
 }
 
@@ -845,7 +840,7 @@ img{
 }
 
 
-.payments-right{
+.payments-right {
     width: 49%;
     display: flex;
     flex-direction: column;
@@ -855,41 +850,41 @@ img{
     padding: 5px;
 }
 
-.payments-right-table{
+.payments-right-table {
     padding: 5px;
     position: relative;
 }
 
-.payments-title{
+.payments-title {
     background-color: #CF0A0A;
     height: 45px;
 }
 
-.payments-title h2{
+.payments-title h2 {
     color: #fff;
     line-height: 40px;
 }
 
 
-.payments-right-box{
+.payments-right-box {
     display: flex;
     justify-content: space-between;
-    
+
 }
 
-.payments-right-box > div{
+.payments-right-box>div {
     width: 50%;
     margin-top: 1%;
     padding: 10px;
     border: 1px solid #000;
-    border-top:none ;
-    border-bottom:none ;
-    
+    border-top: none;
+    border-bottom: none;
+
 }
 
-.payments-right-box img{
+.payments-right-box img {
     width: 55%;
-   
+
     /* height: 100%; */
 }
 
@@ -897,7 +892,7 @@ img{
 
 
 /* last-page account */
-.account{
+.account {
     margin-top: 20px;
     width: 100%;
 }
@@ -906,35 +901,36 @@ img{
     font-size: 2rem;
 }
 
-.account p{
+.account p {
     font-size: 1rem;
 }
 
-.account h2{
+.account h2 {
     font-size: 3rem;
 }
 
-.account img{
+.account img {
     width: 23%;
 }
 
-.account-footer{
+.account-footer {
     width: 100%;
     height: 60px;
     background-color: #333;
 }
 
 /* ---------------------------12page-------------------------------- */
-.payments-modal2-table{
-    position:fixed;
-    top: 0;left: 0;
+.payments-modal2-table {
+    position: fixed;
+    top: 0;
+    left: 0;
     background-color: rgba(0, 0, 0, 0.7);
     width: 100%;
     height: 100%;
     z-index: 5;
 }
 
-.payments-modal2-box{
+.payments-modal2-box {
     margin: 80px auto 20px;
     background-color: #fff;
     width: 70%;
@@ -945,7 +941,7 @@ img{
     justify-content: center;
 }
 
-.payments-modal2-inner{
+.payments-modal2-inner {
     width: 100%;
     height: 100%;
     display: flex;
@@ -953,7 +949,7 @@ img{
     align-items: flex-start;
 }
 
-.payments-modal2-left{
+.payments-modal2-left {
     margin-top: 3%;
     width: 40%;
     height: 60%;
@@ -962,7 +958,7 @@ img{
 .payments-modal2-left img {
     margin-top: 2rem;
     width: 90%;
-    
+
     /* border: 1px solid rebeccapurple; */
 }
 
@@ -976,18 +972,18 @@ img{
     height: 60%;
 }
 
-.payments-modal2-right h2{
+.payments-modal2-right h2 {
     margin-top: 3rem;
     font-size: 1.8rem;
 }
 
-.payments-modal2-right p{
-    background-color:#4A5568 ;
+.payments-modal2-right p {
+    background-color: #4A5568;
     color: #fff;
     font-size: 1.5rem;
 }
 
-.payments-modal2-footer{
+.payments-modal2-footer {
     width: 70%;
     height: 70%;
     display: flex;
@@ -995,16 +991,16 @@ img{
     justify-content: space-between;
 }
 
-.payments-modal2-footer button{
+.payments-modal2-footer button {
     width: 20rem;
-        height: 80px;
-        font-size: 1.6rem;
-        font-weight: bold;
-        background: none;
-        border: 1px solid #bdb5b5;
-        border-radius: 5px;
-        color: #000;
-        z-index: 2;
+    height: 80px;
+    font-size: 1.6rem;
+    font-weight: bold;
+    background: none;
+    border: 1px solid #bdb5b5;
+    border-radius: 5px;
+    color: #000;
+    z-index: 2;
 }
 
 /*------------------------------ 10page ------------------------------------*/
@@ -1021,13 +1017,13 @@ img{
 }
 
 /*------------------------------ 11page ------------------------------------*/
-.payments-modal3-box{
+.payments-modal3-box {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.payments-modal3-text{
+.payments-modal3-text {
     width: 100%;
     height: 60px;
     background-color: #D1FEFF;
@@ -1036,16 +1032,16 @@ img{
     font-weight: bold;
 }
 
-.payments-modal3-table{
+.payments-modal3-table {
     width: 50%;
     margin-bottom: 5rem;
 }
 
-.payments-modal3-table p{
+.payments-modal3-table p {
     font-size: 1.7rem;
 }
 
-.payments-modal3-table img{
+.payments-modal3-table img {
     margin: 10px auto 20px;
 }
 
@@ -1054,20 +1050,21 @@ img{
 }
 
 /*------------------------------ 점수판 ------------------------------------*/
-.scoreboard{
+.scoreboard {
     position: fixed;
-    top: 0;left: 0;
+    top: 0;
+    left: 0;
     background: #fff;
     width: 100%;
     height: 960px;
-    z-index:30;
+    z-index: 30;
 }
 
-.scoreboard-inner h1{
+.scoreboard-inner h1 {
     font-size: 3.5rem;
 }
 
-.scoreboard-inner h2{
+.scoreboard-inner h2 {
     font-size: 2.5rem;
 }
 
@@ -1075,16 +1072,16 @@ img{
     font-size: 1.5rem;
 }
 
-.scoreboard-inner > button {
+.scoreboard-inner>button {
     width: 20rem;
     height: 80px;
-        font-size: 1.6rem;
-        font-weight: bold;
-        border-radius: 5px;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    font-size: 1.6rem;
+    font-weight: bold;
+    border-radius: 5px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
-.scoreboard-box{
+.scoreboard-box {
     margin: 0 auto;
     border: 2px solid black;
     width: 80%;
@@ -1093,37 +1090,42 @@ img{
     margin-bottom: 2rem;
 }
 
-.scoreboard-box > h3 >span{
+.scoreboard-box>h3>span {
     color: #CF0A0A;
 }
 
 
 /* -----------------------footer progress---------------------------------- */
 footer {
-    width: 100%;
+    position: fixed;
+    bottom: 0%;
+    left: 0;
+    right: 0;
+    width: 80%;
+    /* min-height: 120px; */
     margin: 0 auto;
     background-color: #B1F9C6;
-    position: relative;
     z-index: 10;
 }
 
 #progressbar-text {
+    /* margin-left: 25%; */
     display: flex;
     text-align: center;
-    width: 100%;
     height: 100px;
+    position: relative;
 }
 
-#progressbar-inner{
+#progressbar-inner {
     width: 99%;
     margin: 0 auto;
+    /* padding: 10px; */
 }
 
 #progressbar-text h3 {
-    width: 100%;
-    height: 100px;
+    /* width: 50rem; */
     font-size: 1.4rem;
-    line-height: 60px;
+    line-height: 25px;
 }
 
 #progressbar-text span {
@@ -1229,7 +1231,7 @@ footer {
     width: 50%;
     margin-top: 10%;
     margin-left: 24%;
-    height: 500px;
+    height: 450px;
     background-color: #fff;
     padding: 20px;
     text-align: center;
@@ -1237,31 +1239,32 @@ footer {
     position: relative;
 }
 
-#menu-modal-text{
+#menu-modal-text {
     width: 100%;
     height: 80px;
     background-color: #D1FEFF;
     position: absolute;
-    top: 0;left: 0;
+    top: 0;
+    left: 0;
 }
 
 #menu-modal-text h2 {
     color: #000;
     text-align: center;
-    line-height: 90px;
+    line-height: 25px;
     font-size: 2rem;
 }
 
-#menu-modal-box{
+#menu-modal-box {
     display: flex;
     align-items: center;
     justify-content: space-around;
     margin-top: 100px;
 }
 
-#menu-modal-box h3{
+#menu-modal-box h3 {
     font-size: 1.8rem;
-    line-height: 60px;
+    line-height: 0px;
     color: #CF0A0A;
 }
 
@@ -1297,15 +1300,32 @@ footer {
     height: 80%;
 }
 
-.payments-right-box img{
+.payments-right-box img {
     z-index: -1;
 }
 
-/* circleFirst */
-#circleFirst{
+/* overlay */
+/* .overlay {
     position: absolute;
-    top: 27%;left: 8%;
-    width: 120px;height: 120px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.7);
+    pointer-events: none;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} */
+
+/* circleFirst */
+#circleFirst {
+    position: absolute;
+    top: 28%;
+    left: 9.5%;
+    width: 120px;
+    height: 120px;
     background-color: rgba(0, 0, 0, 0.7);
     border-radius: 50%;
     font-size: 3rem;
@@ -1353,4 +1373,3 @@ footer {
         box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.35);
     }
 }
-
