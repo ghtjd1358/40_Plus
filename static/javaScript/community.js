@@ -133,6 +133,46 @@ async function logout(event) {
   // location.href = "/";
 }
 
+// 글 조회 시 세부 페이지 이동
+function detailCommunityPage(postNumber) {
+  axios({
+    method: "post",
+    url: "/detailCommunityPage",
+    data: { number: parseInt(postNumber) }, // 객체 형태로 전달
+  }).then((result) => {
+    location.href =
+      "/readCommunity?number=" + JSON.stringify(result.data.number);
+  });
+}
+
+// 글쓰기 페이지 이동
+function writeCommunity() {
+  if (!"<%= locals.userid%>") {
+    return swal("로그인이 필요합니다.", "", "error").then(function () {
+      location.href = "/login";
+    });
+  }
+
+  window.location.href = "/writeCommunity";
+}
+
+async function logout(event) {
+  event.preventDefault();
+  const res = await axios({
+    method: "post",
+    url: "/logout",
+  });
+  swal(
+    "로그아웃이 완료되었습니다!",
+    "게시글 작성을 위해 로그인해주세요!",
+    "success"
+  ).then(function () {
+    location.href = "/community";
+  });
+
+  // location.href = "/";
+}
+
 // 검색어로 찾기
 function searchCommunity() {
   const selectValue = document.getElementById("search-type").value;
@@ -146,6 +186,8 @@ function searchCommunity() {
       str: str,
     },
   }).then((result) => {
+    console.log("searchCommunity 전송 성공");
+    console.log(result);
     const table = document.querySelector(".table");
     const tableRow = document.querySelectorAll(".tableRow");
 
@@ -156,15 +198,16 @@ function searchCommunity() {
         tableRow[i].remove();
       }
       for (let i = 0; i < result.data.data.length; i++) {
+        console.log(result.data.data[i]);
         const { number, userid, title, content, view, date } =
           result.data.data[i];
         html += `<tr onclick="detailCommunityPage('${number}')" class="tableRow">
-        <td>${number}</td>
-        <td>${title}</td>
-        <td>${userid}</td>
-        <td>${view}</td>
-        <td>${date}</td>
-      </tr>`;
+              <td>${number}</td>
+              <td>${title}</td>
+              <td>${userid}</td>
+              <td>${view}</td>
+              <td>${date}</td>
+            </tr>`;
       }
       table.insertAdjacentHTML("beforeend", html);
       showPage(1);

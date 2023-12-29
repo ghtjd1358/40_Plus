@@ -7,8 +7,6 @@ const { Op } = require("sequelize");
 // ///////////////// 페이지 렌더 부분
 
 exports.community = (req, res) => {
-  // 렌더될 때 커뮤니티 테이블에서 가져와서 출력해야함
-
   CommunityTable.findAll({ raw: true }).then((result) => {
     res.render("community/community", { communityData: result });
   });
