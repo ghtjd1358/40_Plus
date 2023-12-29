@@ -158,6 +158,19 @@
     </div>
     </section>
     </div> 
+
+    <script>
+      async function logout(event) {
+        event.preventDefault();
+        const res = await axios({
+          method: "post",
+          url: "/logout",
+        });
+        swal("로그아웃 완료!", "", "success").then(function () {
+          location.href = "/word/keyboard";
+        });
+      }
+    </script>
     <script src="/static/javaScript/kiosk_word.js"></script>
     <script src="/static/javaScript/sidebar.js"></script>
 </body>
