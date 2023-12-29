@@ -61,7 +61,6 @@ function toggleSidebar() {
   } else {
     // 사이드 바 보여주기
     sidebar.style.marginLeft = "0";
-    backbtn.style.display= "block";
     main.style.marginLeft = "300px";
     togglebtn.classList.add("toggle-btn-after");
     togglebtn.innerText = "✕"; // '☰' 에서 '✕'로 변경
