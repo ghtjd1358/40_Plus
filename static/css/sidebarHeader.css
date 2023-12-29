@@ -187,3 +187,7 @@ ol {
 #sidebar .navi-li a {
   color: var(--color-red-2);
 }
+
+.toggle-sidebar {
+  top: 0;
+}
