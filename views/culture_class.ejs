@@ -323,14 +323,24 @@
       }
 
       .back {
-        margin: auto;
         width: fit-content;
+        margin: auto;
       }
 
       .back > a,
       span {
         color: var(--color-black-2);
         font-size: 20px;
+      }
+
+      .backBtn {
+        display: flex;
+
+        width: auto;
+      }
+
+      .backBtn > p {
+        margin: 0;
       }
     </style>
   </head>
@@ -383,11 +393,7 @@
           </button>
           <div class="backBtn">
             <p class="back">
-              <a href="/culture"
-                >이전 메뉴로 돌아가기<span class="material-symbols-outlined">
-                  undo
-                </span></a
-              >
+              <a href="/culture">이전 메뉴로 돌아가기</a>
             </p>
           </div>
           <button class="swiper-button-next common-btn">
