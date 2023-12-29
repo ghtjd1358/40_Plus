@@ -129,8 +129,6 @@ async function logout(event) {
   ).then(function () {
     location.href = "/community";
   });
-
-  // location.href = "/";
 }
 
 // 글 조회 시 세부 페이지 이동
@@ -169,8 +167,6 @@ async function logout(event) {
   ).then(function () {
     location.href = "/community";
   });
-
-  // location.href = "/";
 }
 
 // 검색어로 찾기
@@ -186,8 +182,6 @@ function searchCommunity() {
       str: str,
     },
   }).then((result) => {
-    console.log("searchCommunity 전송 성공");
-    console.log(result);
     const table = document.querySelector(".table");
     const tableRow = document.querySelectorAll(".tableRow");
 
@@ -198,7 +192,6 @@ function searchCommunity() {
         tableRow[i].remove();
       }
       for (let i = 0; i < result.data.data.length; i++) {
-        console.log(result.data.data[i]);
         const { number, userid, title, content, view, date } =
           result.data.data[i];
         html += `<tr onclick="detailCommunityPage('${number}')" class="tableRow">
