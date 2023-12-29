@@ -3,6 +3,7 @@
 const express = require("express");
 const router = express.Router();
 const getUrlMiddleware = require('../middlewares/getUrl');
+const checkAccessTokenMiddleware = require('../middlewares/checkAccessToken');
 const controller = require("../controllers/community.controller");
 
 /**
@@ -40,7 +41,7 @@ router.post("/searchCommunity", controller.searchCommunity);
 
 // 글 작성하기
 router.post("/submitCommunity", controller.communityPost);
-router.get("/writeCommunity", controller.writeCommunity);
+router.get("/writeCommunity", checkAccessTokenMiddleware, controller.writeCommunity);
 router.post("/modifyCommunity", controller.sendModifyCommunity);
 router.get("/modifyCommunity", controller.reciveModifyCommunity);
 router.patch("/submitModifyCommunity", controller.submitModifyCommunity);
