@@ -5,17 +5,15 @@ const navUls = document.querySelectorAll('.nav-ul')
 window.addEventListener('scroll', fixNav)
 
 function fixNav() {
-    const scrolled = window.scrollY > nav.offsetHeight + 150
+    const scrolled = window.scrollY > nav.offsetHeight - 50
     // nav.classList.add('active') : nav.classList.remove('active')
     nav.classList.toggle('active', scrolled);
 }
 
 //--------------------------------------------------
 
-// animation scroll(section)
 
 const sections = document.querySelectorAll('section')
-// console.log(sections)
 
 window.addEventListener('scroll', () => {
     const windowInner = window.innerHeight;

@@ -16,6 +16,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fonts-archive/Pretendard/Pretendard.css" type="text/css"/>
     <link rel="stylesheet" href="/static/css/sub_kiosk.css">
     <link rel="stylesheet" href="/static/css/component.css">
+    <link rel="stylesheet" href="/static/css/footer.css">
+    <link rel="stylesheet" href="/static/css/header.css">
+
     <title>편의시설</title>
   </head>
   <body>
@@ -24,16 +27,6 @@
     <header>
        <!-- nav -->
      <%- include("./component/header")%>
-   
-      <!-- visual -->
-    <div class="visual">
-      <div class="container">
-        <h2>일상 속 디지털기기 사용법</h2>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores, consequuntur?</p>
-      </div>
-    </div>
-    </header>
-
     <!-- 키오스크 -->
     <!-- 키오스크 사용법 -->
     <section class="up">
@@ -116,12 +109,12 @@
         <p>키오스크를 실전에서 체험해보세요! 아래 게임과 활동을 통해 키오스크의 다양한 기능을 경험해보세요</p>
         <div class="game-container">
           <a href="/views/word.ejs" target="_blank">
-            <div class="gamebox word" style="background: url('/static/img/word.jpg') no-repeat center bottom;">
+            <div class="gamebox word" style="background: url('/static/css/img/word.jpg') no-repeat center bottom;">
                 단어정리 하러가기
               </div>
           </a>
              <a href="/views/kiosk.ejs" target="_blank" >
-               <div class="gamebox image" style="background: url('/static/img/game.jpg') no-repeat center top;">
+               <div class="gamebox image" style="background: url('/static/css/img/game.jpg') no-repeat center top;">
                 키오스크 체험하기
               </div>
              </a>
