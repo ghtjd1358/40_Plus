@@ -136,3 +136,39 @@ section {
   background-color: rgba(0, 0, 0, 0.5);
   z-index: -1;
 } */
+
+@media screen and (max-width: 1060px) {
+  .header {
+    font-size: 1rem;
+  }
+
+  .navMenu {
+    width: 48%;
+  }
+
+  .navUser {
+    width: 20%;
+    font-size: 0.8;
+  }
+
+  .nav a {
+    padding: var(--space-1);
+    margin: 0;
+  }
+  .indexli {
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    font-size: 1rem;
+  }
+  .navMenu {
+    width: 48%;
+  }
+
+  .navUser {
+    width: 20%;
+  }
+}
