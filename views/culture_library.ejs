@@ -32,7 +32,6 @@
         display: flex;
         width: 80%;
         /* height: 100%; */
-
         flex-wrap: wrap;
         align-items: center;
         /* justify-content: space-evenly; */
@@ -77,7 +76,7 @@
       #regionForm > select {
         width: 130px;
         height: 30px;
-        font-size: 18px;
+        font-size: 20px;
         border-radius: var(--border-radius-small);
 
         border: none;
@@ -87,14 +86,22 @@
         background-color: white;
       }
 
-      .btnS {
-        background-color: var(--color-orange-4);
-        color: var(--color-grey-0);
-        border: 1px solid var(--color-orange-3);
-        border-radius: var(--border-radius-small);
-        height: 30px;
-        width: 80px;
+      .common-btn {
         margin-left: var(--space-2);
+        width: 150px;
+        height: 50px;
+      }
+
+      .common-btn:hover::before {
+        position: absolute;
+        content: "";
+        background-color: var(--color-orange-4);
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        animation: fill 0.7s;
+        animation-timing-function: linear;
       }
 
       .name {
@@ -260,7 +267,7 @@
         font-size: 16px;
         position: relative;
         margin-left: 4px;
-        background-color: var(--color-orange-4);
+        /* background-color: var(--color-orange-4); */
         color: var(--color-grey-1);
         border: none;
         border-radius: var(--border-radius-small);
@@ -270,10 +277,10 @@
       .swiper-button-prev:active {
         background-color: var(--color-orange-3);
       }
-      .swiper-button-next:hover,
+      /* .swiper-button-next:hover,
       .swiper-button-prev:hover {
         background-color: var(--color-orange-3);
-      }
+      } */
 
       .sMainTitle {
         font-size: 26px;
@@ -295,7 +302,7 @@
       .sampleText1 {
         height: auto;
         font-size: 24px;
-        margin-top: 10%;
+        margin-top: 5%;
         display: block;
         color: var(--color-black-2);
         text-align: center;
@@ -320,8 +327,12 @@
         font-size: 20px;
       }
 
-      .footer {
-        margin-top: 80px;
+      .common-text {
+        color: var(--color-black-0);
+      }
+
+      body {
+        background-color: var(--color-grey-1);
       }
     </style>
   </head>
@@ -345,8 +356,12 @@
             </select>
             <select name="dtl_region" id="dtl_region"></select>
 
-            <button type="submit" onclick="submitForm(event)" class="btnS">
-              불러오기
+            <button
+              type="submit"
+              onclick="submitForm(event)"
+              class="common-btn"
+            >
+              <span class="common-text">정보 불러오기 </span>
             </button>
           </form>
         </div>
@@ -374,8 +389,12 @@
           <!--  -->
         </div>
         <div class="slider-buttons">
-          <button class="swiper-button-prev">이전으로</button>
-          <button class="swiper-button-next">다음으로</button>
+          <button class="swiper-button-prev common-btn">
+            <span class="common-text">이전으로 </span>
+          </button>
+          <button class="swiper-button-next common-btn">
+            <span class="common-text">다음으로 </span>
+          </button>
         </div>
       </div>
     </main>

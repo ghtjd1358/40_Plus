@@ -22,6 +22,7 @@ function toggleSidebar() {
   const backbtn = document.getElementById("back-btn");
   const activeSubmenu = document.querySelector(".main-line-active");
   const nav = document.querySelector(".headerNav");
+  const commonbtn = document.querySelectorAll(".common-btn");
 
   if (sidebar.style.marginLeft === "0px") {
     // 사이드 바 닫을 때
@@ -33,6 +34,7 @@ function toggleSidebar() {
     togglebtn.innerText = "☰"; // '✕' 에서 다시 '☰' 로 변경
     sidebar.classList.remove("toggle-sidebar"); // 클래스 제거
     main.style.margin = "0 0 0 10%";
+    commonbtn.style.display = "block";
     nav.style.opacity = "1";
 
     // 각 링크들 애니메이션 삭제하기
@@ -48,7 +50,9 @@ function toggleSidebar() {
     togglebtn.classList.add("toggle-btn-after");
     togglebtn.innerText = "✕"; // '☰' 에서 '✕'로 변경
     sidebar.classList.add("toggle-sidebar"); // 클래스 추가
+    commonbtn.style.display = "none";
     nav.style.opacity = "0";
+
 
     // 각 li(링크)들 애니메이션 추가하기
     homeLink.classList.add("fade-in");
@@ -132,14 +136,3 @@ document.getElementById("life").addEventListener("click", function () {
 document.getElementById("culture").addEventListener("click", function () {
   toggleSubmenu("culture");
 });
-
-// 로그인 부분
-async function logout(event) {
-  event.preventDefault();
-  const res = await axios({
-    method: "post",
-    url: "/logout",
-  });
-
-  location.href = "/";
-}
