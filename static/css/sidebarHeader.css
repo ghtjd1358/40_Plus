@@ -103,6 +103,7 @@ ol {
   color: var(--color-black-0);
   display: block;
   transition: 1s;
+  top: 0;
 }
 
 #toggle-btn.toggle-btn-before {
