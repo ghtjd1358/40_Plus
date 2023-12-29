@@ -22,11 +22,11 @@ router.get("/culture/class", getUrlMiddleware, controller.dayClass);
 router.get("/culture/festival", getUrlMiddleware, controller.festival);
 
 router.get("/computer", getUrlMiddleware, controller.computer);
-router.get("/kiosk", getUrlMiddleware, controller.kiosk);
-
-// router.get("/subkiosk/kiosk", getUrlMiddleware, controller.kiosk);
-router.get("/kiosk_word", getUrlMiddleware, controller.kiosk_word);
 router.get("/sub_kiosk", getUrlMiddleware, controller.sub_kiosk);
+
+router.get("/kiosk", getUrlMiddleware, controller.kiosk);
+router.get("/kiosk_word", getUrlMiddleware, controller.kiosk_word);
+
 
 
 router.post("/logout", controller.logout);

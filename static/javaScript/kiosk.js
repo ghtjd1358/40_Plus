@@ -324,7 +324,5 @@ function hoverTag(e) {
 
     if (currentElement.tagName === 'BUTTON') {
         currentElement.classList.toggle('shadow-drop-2-center', e.type === 'mouseover');
-    } else if (currentElement.tagName === 'IMG') {
-        currentElement.classList.toggle('shadow-drop-2-center', e.type === 'mouseover');
     }
 }
