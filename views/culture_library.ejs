@@ -253,12 +253,12 @@
 
       .slider-buttons {
         /* position: relative; */
-        /* display: flex; */
+        display: flex;
         display: none;
-        justify-content: center;
+        justify-content: space-between;
         /* background-color: pink; */
         width: 100%;
-        height: 5%;
+        /* height: 5%; */
         margin-top: var(--space-2);
       }
 
@@ -392,6 +392,15 @@
           <button class="swiper-button-prev common-btn">
             <span class="common-text">이전으로 </span>
           </button>
+          <div class="backBtn">
+            <p class="back">
+              <a href="/culture"
+                >이전 메뉴로 돌아가기<span class="material-symbols-outlined">
+                  undo
+                </span></a
+              >
+            </p>
+          </div>
           <button class="swiper-button-next common-btn">
             <span class="common-text">다음으로 </span>
           </button>
@@ -502,7 +511,7 @@
           .then((response) => response.json())
           .then((data) => {
             // 서버로부터 받은 데이터를 처리
-            console.log("data >", data);
+            // console.log("data >", data);
             apiData(data);
           })
           .catch((error) => {
@@ -525,11 +534,11 @@
         const libTime = xmlDoc.getElementsByTagName("operatingTime");
 
         // 각 데이터 길이 확인
-        console.log("libName length:", libName.length);
-        console.log("libAddress length:", libAddress.length);
-        console.log("libPage length:", libPage.length);
-        console.log("libClose length:", libClose.length);
-        console.log("libTime length:", libTime.length);
+        // console.log("libName length:", libName.length);
+        // console.log("libAddress length:", libAddress.length);
+        // console.log("libPage length:", libPage.length);
+        // console.log("libClose length:", libClose.length);
+        // console.log("libTime length:", libTime.length);
         try {
           const parser = new DOMParser();
           const xmlDoc = parser.parseFromString(data, "text/xml");

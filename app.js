@@ -58,8 +58,8 @@ const libraryKey = process.env.lIBRARYAPISERVICEKEY; // .env
 
 app.get("/libraryAPI", async (req, res) => {
   const { selectRegion, selectDtl } = req.query;
-  console.log("region>", selectRegion);
-  console.log("dtl>", selectDtl);
+  // console.log("region>", selectRegion);
+  // console.log("dtl>", selectDtl);
 
   const serviceUrl = "http://data4library.kr/api/extends/libSrch?";
 
@@ -71,7 +71,7 @@ app.get("/libraryAPI", async (req, res) => {
 
   const url = serviceUrl + URI;
 
-  console.log(URI);
+  // console.log(URI);
 
   try {
     const result = await axios.get(url);
@@ -100,7 +100,7 @@ app.get("/classAPI", async (req, res) => {
 
   const url = serviceUrl + URI;
 
-  console.log(url);
+  // console.log(url);
 
   try {
     const result = await axios.get(url);
@@ -127,7 +127,7 @@ app.get("/festivalAPI", async (req, res) => {
 
   const url = serviceUrl + URI;
 
-  console.log(url);
+  // console.log(url);
 
   try {
     const result = await axios.get(url);
