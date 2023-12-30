@@ -32,7 +32,6 @@ img {
 .wrap {
     width: 80%;
     margin: 0 auto;
-    /* border: 1px solid #000; */
 }
 
 /* nav */
@@ -53,7 +52,6 @@ img {
     display: inline-block;
     width: 15rem;
     height: 70px;
-    /* border: 2px solid rebeccapurple; */
 }
 
 #navigation-bar img {
@@ -89,7 +87,6 @@ img {
 
 .selectable {
     cursor: pointer;
-    /* border: 1px solid #ddd; */
     padding: 10px;
     margin: 10px;
 }
@@ -234,7 +231,6 @@ img {
 
 .menu-select>.selectable {
     margin-left: 10%;
-    /* border: 1px solid black; */
     width: 35%;
     display: flex;
     align-items: center;
@@ -275,7 +271,6 @@ img {
     height: 120px;
     margin: auto;
     background-color: #eee;
-    /* border: 1px solid #000; */
 }
 
 .menu-footer-inner {
@@ -290,7 +285,6 @@ img {
     align-items: center;
     justify-content: space-around;
     padding: 20px 40px;
-    /* border: 1px solid red; */
 }
 
 .menu-footer-box img {
@@ -338,7 +332,6 @@ img {
 .menu-header-modal {
     width: 100%;
     height: 60px;
-    /* background-color: #eee; */
     font-size: 1.3rem;
     font-weight: bold;
     line-height: 60px;
@@ -365,7 +358,6 @@ img {
 
 .menu-select-modal>.selectable {
     margin-left: 10%;
-    /* border: 1px solid black; */
     width: 35%;
     display: flex;
     align-items: center;
@@ -392,7 +384,6 @@ img {
     font-size: 1.4rem;
     left: 50%;
     position: absolute;
-    /* color: #CF0A0A; */
     align-self: flex-end;
 }
 
@@ -403,8 +394,6 @@ img {
     right: 0;
     width: 100%;
     height: 100px;
-    /* background-color: #eee; */
-    /* border: 1px solid #000; */
 }
 
 .menu-footer-inner-modal {
@@ -419,7 +408,6 @@ img {
     align-items: center;
     justify-content: space-around;
     padding: 20px 40px;
-    /* border: 1px solid red; */
 }
 
 .menu-footer-box-modal img {
@@ -441,7 +429,6 @@ img {
     align-items: center;
     justify-content: space-around;
     padding: 20px 30px;
-    /* border: 1px solid red; */
 }
 
 #menu-btn-modal button {
@@ -463,7 +450,6 @@ img {
 
 /* ------------------------------page 5~7-----------------------------------  */
 #menu-list {
-    /* display: none; */
     position: fixed;
     top: 0;
     left: 0;
@@ -476,7 +462,6 @@ img {
 }
 
 #menu-list-content {
-    /* display: flex; */
     width: 60%;
     height: 650px;
     margin-top: 5%;
@@ -568,7 +553,6 @@ img {
 
 .menu-select-text {
     width: 25vw;
-    /* border: 1px solid black; */
     padding: 0 50px;
     margin-left: 5rem;
     font-weight: bold;
@@ -617,7 +601,6 @@ img {
     height: 290px;
     margin: 0 auto;
     background-color: #eee;
-    /* border: 1px solid #000; */
 }
 
 .menu-footer2-inner {
@@ -720,7 +703,6 @@ img {
     width: 65%;
     justify-content: space-around;
     padding: 20px 40px;
-    /* border: 1px solid red; */
 }
 
 .menu-footer2-box img {
@@ -742,7 +724,6 @@ img {
     align-items: center;
     justify-content: space-around;
     padding: 20px 30px;
-    /* border: 1px solid red; */
 }
 
 #menu-footer2-button button {
@@ -801,7 +782,6 @@ img {
 
 .payments-left-box p {
     font-size: 1.3rem;
-    /* margin: 5px; */
 }
 
 .payments-left-box2 {
@@ -884,8 +864,6 @@ img {
 
 .payments-right-box img {
     width: 55%;
-
-    /* height: 100%; */
 }
 
 
@@ -958,8 +936,6 @@ img {
 .payments-modal2-left img {
     margin-top: 2rem;
     width: 90%;
-
-    /* border: 1px solid rebeccapurple; */
 }
 
 .payments-modal2-right {
@@ -1102,14 +1078,12 @@ footer {
     left: 0;
     right: 0;
     width: 80%;
-    /* min-height: 120px; */
     margin: 0 auto;
     background-color: #B1F9C6;
     z-index: 10;
 }
 
 #progressbar-text {
-    /* margin-left: 25%; */
     display: flex;
     text-align: center;
     height: 100px;
@@ -1119,11 +1093,9 @@ footer {
 #progressbar-inner {
     width: 99%;
     margin: 0 auto;
-    /* padding: 10px; */
 }
 
 #progressbar-text h3 {
-    /* width: 50rem; */
     font-size: 1.4rem;
     line-height: 25px;
 }
@@ -1131,17 +1103,6 @@ footer {
 #progressbar-text span {
     color: #CF0A0A;
 }
-
-/* #progressbar-text img {
-    position: fixed;
-    right: 10%;
-    bottom: -3%;
-    width: 10%;
-    height: 100px;
-    z-index: 1;
-    transform: scaleX(-1);
-
-} */
 
 #progressbar-container {
     width: 100%;
@@ -1185,7 +1146,6 @@ footer {
     width: 20%;
     margin-top: -100px;
     height: 500px;
-    /* background-color: #fff; */
     padding: 20px;
     text-align: center;
 }
@@ -1215,7 +1175,6 @@ footer {
 
 /* add 4page modal */
 #menu-modal {
-    /* display: none; */
     position: fixed;
     top: 0;
     left: 0;
@@ -1304,22 +1263,6 @@ footer {
     z-index: -1;
 }
 
-/* overlay */
-/* .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.7);
-    pointer-events: none;
-    z-index: 5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-} */
-
-/* circleFirst */
 #circleFirst {
     position: absolute;
     top: 28%;

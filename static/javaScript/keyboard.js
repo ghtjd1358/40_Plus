@@ -17,10 +17,8 @@ window.addEventListener("keyup", (e) => {
 
 // 키 이벤트를 처리하는 함수 (키 누를때마다 색 바뀌기)
 function handleKeyEvents(e, isKeyDown) {
-  // console.log(`Key event: key=${e.key}, code=${e.code}, isKeyDown=${isKeyDown}`);
 
   // 일반 키 + 특수 키 (통일)=> e.code 코드 값으로 받기.
-  // const code = document.getElementById(e.code);
 
   inputCode = e.code;
   const codes = document.querySelectorAll(`.${e.code}`);
@@ -85,7 +83,6 @@ function initializeText() {
 window.onload = initializeText;
 
 //  타자 검정
-// const originalText = "한글 타자 검정을 시작합니다. 아무내용이나 써보세요"; //정답
 const textToType = document.getElementById("text-to-type");
 const userInput = document.getElementById("user-input");
 const result = document.getElementById("result");
@@ -101,7 +98,6 @@ function checkTyping() {
   const userTypedChars = userTypedText.split(""); // 사용자 입력을 글자 단위로 분할
   const correctChars = correctText.split(""); // 정답을 글자 단위로 분할
   const minLength = Math.min(userTypedChars.length, correctChars.length); // 최소 길이 찾기
-  // console.log(minLength);
 
   // 각 글자를 비교하고 정확도 계산
   let correctCount = 0;
