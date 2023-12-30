@@ -58,8 +58,6 @@ const libraryKey = process.env.lIBRARYAPISERVICEKEY; // .env
 
 app.get("/libraryAPI", async (req, res) => {
   const { selectRegion, selectDtl } = req.query;
-  // console.log("region>", selectRegion);
-  // console.log("dtl>", selectDtl);
 
   const serviceUrl = "http://data4library.kr/api/extends/libSrch?";
 
@@ -71,7 +69,6 @@ app.get("/libraryAPI", async (req, res) => {
 
   const url = serviceUrl + URI;
 
-  // console.log(URI);
 
   try {
     const result = await axios.get(url);
@@ -85,9 +82,6 @@ app.get("/libraryAPI", async (req, res) => {
 const classKey = process.env.CULTUREAPISERVICEKEY; // .env
 
 app.get("/classAPI", async (req, res) => {
-  // const { selectRegion, selectDtl } = req.query;
-  // console.log("region>", selectRegion);
-  // console.log("dtl>", selectDtl);
 
   const serviceUrl = "http://api.kcisa.kr/openapi/API_CIA_081/request?";
 
@@ -95,12 +89,8 @@ app.get("/classAPI", async (req, res) => {
   URI += "&" + encodeURI("numOfRows") + "=" + encodeURI("10");
   URI += "&" + encodeURI("pageNo") + "=" + encodeURI("1");
   URI += "&" + encodeURI("returnType") + "=" + encodeURI("XML");
-  // URI += "&" + encodeURI("region") + "=" + encodeURI(selectRegion);
-  // URI += "&" + encodeURI("dtl_region") + "=" + encodeURI(selectDtl);
 
   const url = serviceUrl + URI;
-
-  // console.log(url);
 
   try {
     const result = await axios.get(url);
@@ -114,9 +104,6 @@ app.get("/classAPI", async (req, res) => {
 const festivalKey = process.env.FESTIVALAPISERVICEKEY; // .env
 
 app.get("/festivalAPI", async (req, res) => {
-  // const { selectRegion, selectDtl } = req.query;
-  // console.log("region>", selectRegion);
-  // console.log("dtl>", selectDtl);
 
   const serviceUrl =
     "http://api.kcisa.kr/openapi/service/rest/meta4/getKCPG0504?";
@@ -126,8 +113,6 @@ app.get("/festivalAPI", async (req, res) => {
   URI += "&" + encodeURI("pageNo") + "=" + encodeURI("1");
 
   const url = serviceUrl + URI;
-
-  // console.log(url);
 
   try {
     const result = await axios.get(url);

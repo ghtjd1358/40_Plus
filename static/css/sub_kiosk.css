@@ -23,7 +23,6 @@ button{
 
 /* section */
 section {
-  /* background-color: var(--color-grey-0); */
   transition: all 0.6s ease-in-out;
 }
 
@@ -153,9 +152,6 @@ section {
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.56), 0 3px 6px rgba(0, 0, 0, 0.63);
 }
 
-/* .arrow:focus {
-  outline: 0;
-} */
 
 .left-arrow {
   left: 5%;
@@ -215,11 +211,9 @@ section {
   align-items: center;
   justify-content: space-evenly;
   background-color: var(--color-white-0);
-  /* border: 1px solid red; */
 }
 
 .gamebox{
-  /* border:1px solid red; */
   width: 30vw;
   height: 60vh;
   display: flex;

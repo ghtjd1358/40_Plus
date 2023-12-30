@@ -93,7 +93,6 @@ function searchCommunity() {
 // 초기 페이지 로드 시 첫 번째 페이지 표시
 showPage(1);
 
-// /////
 function detailCommunityPage(postNumber) {
   axios({
     method: "post",

@@ -31,17 +31,14 @@
       .main-content {
         display: flex;
         width: 80%;
-        /* height: 100%; */
         flex-wrap: wrap;
         align-items: center;
-        /* justify-content: space-evenly; */
       }
 
       .culture {
         background-color: white;
         border: 1px solid var(--color-black-1);
         border-radius: var(--border-radius-medium);
-        /* box-shadow: 1px 1px var(--color-black-1); */
         width: 30%;
         height: auto;
 
@@ -53,7 +50,6 @@
         flex-direction: column;
         padding: 0.25rem;
         align-items: center;
-        /* align-items: center; */
         padding: 0;
       }
 
@@ -67,9 +63,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        /* background-color: var(--color-grey-0); */
         border-radius: var(--border-radius-medium);
-        /* box-shadow: var(--shadow); */
         margin: 0 0 var(--space-5);
       }
 
@@ -122,7 +116,6 @@
         transition: max-height 0.4s ease-out;
         width: 90%;
         text-align: center;
-        /* font-weight: 700; */
         margin-bottom: var(--space-1);
         font-size: 18px;
       }
@@ -223,10 +216,8 @@
 
       .swiper-pagination {
         position: absolute;
-        /* background-color: red; */
         left: 50%;
         top: 1%;
-        /* bottom: 8px; */
         transform: translatex(-50%);
         z-index: 10;
         width: auto !important;
@@ -252,13 +243,10 @@
       }
 
       .slider-buttons {
-        /* position: relative; */
         display: flex;
         display: none;
         justify-content: space-between;
-        /* background-color: pink; */
         width: 100%;
-        /* height: 5%; */
         margin-top: var(--space-2);
       }
 
@@ -267,7 +255,6 @@
         font-size: 16px;
         position: relative;
         margin-left: 4px;
-        /* background-color: var(--color-orange-4); */
         color: var(--color-grey-1);
         border: none;
         border-radius: var(--border-radius-small);
@@ -277,23 +264,17 @@
       .swiper-button-prev:active {
         background-color: var(--color-orange-3);
       }
-      /* .swiper-button-next:hover,
-      .swiper-button-prev:hover {
-        background-color: var(--color-orange-3);
-      } */
 
       .sMainTitle {
         font-size: 26px;
       }
       .sTitle {
         font-weight: 700;
-        /* background-color: pink; */
         color: var(--color-orange-4);
         margin-top: var(--space-2);
         display: block;
       }
       .sText {
-        /* background-color: red; */
         height: auto;
         margin-top: var(--space-0);
         display: block;
@@ -370,8 +351,7 @@
       <div class="swiper-container">
         <div class="swiper-pagination"></div>
         <div class="swiper-wrapper">
-          <!--  -->
-          <!-- <div class="slider-item swiper-slide sampleSlider"> -->
+
           <div class="sampleSlider">
             <p class="sampleText1">
               원하는 지역을 선택후 불러오기 버튼을 눌러주세요!
@@ -385,8 +365,7 @@
               >
             </p>
           </div>
-          <!-- </div> -->
-          <!--  -->
+
         </div>
         <div class="slider-buttons">
           <button class="swiper-button-prev common-btn">
@@ -511,7 +490,6 @@
           .then((response) => response.json())
           .then((data) => {
             // 서버로부터 받은 데이터를 처리
-            // console.log("data >", data);
             apiData(data);
           })
           .catch((error) => {
@@ -521,7 +499,6 @@
       }
 
       function apiData(data) {
-        // console.log("data2>", data);
 
         // xml 데이터 변환
         const parser = new DOMParser();
@@ -533,12 +510,6 @@
         const libClose = xmlDoc.getElementsByTagName("closed");
         const libTime = xmlDoc.getElementsByTagName("operatingTime");
 
-        // 각 데이터 길이 확인
-        // console.log("libName length:", libName.length);
-        // console.log("libAddress length:", libAddress.length);
-        // console.log("libPage length:", libPage.length);
-        // console.log("libClose length:", libClose.length);
-        // console.log("libTime length:", libTime.length);
         try {
           const parser = new DOMParser();
           const xmlDoc = parser.parseFromString(data, "text/xml");
@@ -582,12 +553,6 @@
 
             libraryDiv.appendChild(libraryDiv2);
 
-            // libraryButton.innerHTML =
-            //   `<button class="swiper-button-prev">이전으로</button>` +
-            //   `<button class="swiper-button-next">다음으로</button>`;
-            // mainDiv.appendChild(libraryButton);
-
-            // libraryDiv.classList.add("culture");
             dataElem.appendChild(libraryDiv);
             swiper.update();
             // addEvent();

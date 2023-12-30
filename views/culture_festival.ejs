@@ -449,34 +449,9 @@
       }
 
       function apiData(data) {
-        // console.log("data2>", data);
 
-        // xml 데이터 변환
-        // const parser = new DOMParser();
-        // const xmlDoc = parser.parseFromString(data, "text/xml");
-
-        // const title = xmlDoc.getElementsByTagName("title");
-        // const location = xmlDoc.getElementsByTagName("spatialCoverage");
-        // const date = xmlDoc.getElementsByTagName("regDate");
-        // const page = xmlDoc.getElementsByTagName("referenceIdentifier");
-        // const dsec = xmlDoc.getElementsByTagName("description");
-
-        // // 각 데이터 길이 확인
-        // console.log("titel length:", title.length);
-        // console.log("location length:", location.length);
-        // console.log("date length:", date.length);
-        // console.log("page length:", page.length);
-        // console.log("dsec length:", desc.length);
         try {
           const items = data.response.body.items.item;
-          // const parser = new DOMParser();
-          // const xmlDoc = parser.parseFromString(data, "text/xml");
-
-          // const title = xmlDoc.getElementsByTagName("title");
-          // const location = xmlDoc.getElementsByTagName("spatialCoverage");
-          // const date = xmlDoc.getElementsByTagName("regDate");
-          // const page = xmlDoc.getElementsByTagName("referenceIdentifier");
-          // const dsec = xmlDoc.getElementsByTagName("description");
 
           const dataElem = document.querySelector(".swiper-wrapper");
           dataElem.innerHTML = "";
@@ -490,7 +465,6 @@
             const page = item.url || "N/A";
             const dsec = item.description || "N/A";
 
-            // console.log(title);
 
             const buttondiv = document.querySelector(".slider-buttons");
             buttondiv.style.display = "flex";
@@ -517,7 +491,6 @@
 
             dataElem.appendChild(fetivalDiv);
             swiper.update();
-            // addEvent();
           }
         } catch (error) {
           console.error("Error parsing or displaying data:", error);

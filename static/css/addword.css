@@ -16,8 +16,6 @@ margin: auto;
 .h1-text {
     text-align: center;
     color: #fff;
-    /* font-size: 24px; */
-    /* margin-bottom: 20px; */
     border: 1px solid black;
     border-radius: 8px;
 }
@@ -42,7 +40,6 @@ h1 {
     display: flex;
 }
 .add-div {
-    /* border: 1px solid black; */
     display: inline-block;
     text-align: center;
     width: 50%;
@@ -127,9 +124,7 @@ th, td {
 }
 
 th {
-    /* background-color: #4CAF50; */
     background-color: var(--color-orange-3);
-    /* color: white; */
     color: #333;
 }
 
