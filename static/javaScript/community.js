@@ -73,25 +73,11 @@ function createPageButton(text, currentPage) {
   return pageButton;
 }
 
-// 커뮤니티 게시판 서치 (찾는 타입 + 문자열)
-function searchCommunity() {
-  const selectValue = document.getElementById("search-type").value;
-  const str = document.getElementById("search-input").value;
 
-  axios({
-    method: "post",
-    url: "/searchCommunity",
-    data: {
-      selectValue: selectValue,
-      str: str,
-    },
-  }).then((result) => {
-    console.log("searchCommunity 전송 성공");
-  });
-}
 
 // 초기 페이지 로드 시 첫 번째 페이지 표시
 showPage(1);
+
 
 function detailCommunityPage(postNumber) {
   axios({
@@ -106,7 +92,7 @@ function detailCommunityPage(postNumber) {
 
 // 글쓰기 페이지 이동
 function writeCommunity() {
-  if (!"<%= locals.userid%>") {
+  if (! pageUserid) {
     return swal("로그인이 필요합니다.", "", "error").then(function () {
       location.href = "/login";
     });
@@ -131,7 +117,7 @@ async function logout(event) {
 }
 
 // 글 조회 시 세부 페이지 이동
-function detailCommunityPage(postNumber) {
+function {
   axios({
     method: "post",
     url: "/detailCommunityPage",
@@ -139,32 +125,6 @@ function detailCommunityPage(postNumber) {
   }).then((result) => {
     location.href =
       "/readCommunity?number=" + JSON.stringify(result.data.number);
-  });
-}
-
-// 글쓰기 페이지 이동
-function writeCommunity() {
-  if (!"<%= locals.userid%>") {
-    return swal("로그인이 필요합니다.", "", "error").then(function () {
-      location.href = "/login";
-    });
-  }
-
-  window.location.href = "/writeCommunity";
-}
-
-async function logout(event) {
-  event.preventDefault();
-  const res = await axios({
-    method: "post",
-    url: "/logout",
-  });
-  swal(
-    "로그아웃이 완료되었습니다!",
-    "게시글 작성을 위해 로그인해주세요!",
-    "success"
-  ).then(function () {
-    location.href = "/community";
   });
 }
 

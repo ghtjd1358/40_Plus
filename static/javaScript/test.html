@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // (초기) 키 눌렀을 때 이벤트
+        window.addEventListener("keydown", (e) => {
+        handleKeyEvents(e, true);
+        });
+
+        // (초기) 키 뗐을 때 이벤트
+        window.addEventListener("keyup", (e) => {
+        handleKeyEvents(e, false);
+        });
+
+        nputCode = e.code;
+        const codes = document.querySelectorAll(`.${e.code}`);
+
+        for (const code of codes) {
+            if (code) {
+            if (isKeyDown) {
+                code.classList.add("changed");
+            } else {
+                code.classList.remove("changed");
+            }
+            }
+        }
+
+
+
+    userInput.addEventListener("keyup", function (event) {
+    const userTypedText = userInput.value; // 유저가 입력하는 값.
+    const correctText = word[wordIndex]; // 정답 ex) (문제)알잘딱깔센
+    const userTypedChars = userTypedText.split(""); // 사용자 입력을 글자 단위로 분할
+    const correctChars = correctText.split(""); // 정답을 글자 단위로 분할
+    const minLength = Math.min(userTypedChars.length, correctChars.length); // 최소 길이 찾기
+
+    if ((event.key === "Enter") & test) {
+        wordIndex = (wordIndex + 1) % word.length; // 정확하게 입력하면 다음 값으로 이동
+        meanIndex = (meanIndex + 1) % mean.length;
+        // 타자 속도 측정 및 출력
+        const endTime = Date.now();
+        const elapsedTime = (endTime - startTime) / (1000 * 60); // 분 단위로 변환
+        const typingSpeed = correctText.length / 5 / elapsedTime; // 5글자당 단어당 평균 길이로 나누어 타자 속도 계산
+        result2.innerText = `타자 속도 : ${typingSpeed.toFixed(2) * 100} 타`;
+
+        test = false;
+
+    }
+    </script>
+</body>
+</html>
