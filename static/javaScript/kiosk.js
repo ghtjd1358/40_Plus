@@ -1,14 +1,14 @@
-const totalPages = 14;
+
 const pages = document.querySelectorAll('.page')
-let currentPage = 1;
+
 
 const subScore = 5;
 let score = 105;
 
 let selectedDivs = [];
 
-
-
+const totalPages = 14;
+let currentPage = 1;
 // 페이지
 showPage(currentPage);
 console.log('Current Page:', currentPage);
@@ -24,6 +24,18 @@ function showPage() {
     }
     progressBar();
 }
+
+// 진행률        
+function progressBar() {
+    const progressBar = document.getElementById('progressbar');
+    const progress = (currentPage - 1) / (totalPages - 1) * 100 + '%';
+    progressBar.style.width = progress;
+    const mathProgress = Math.floor(parseFloat(progress))
+    progressBar.textContent = `진행 상황: ${mathProgress}%`;
+}
+
+
+
 
 // 다음 버튼
 function nextPage() {
@@ -53,18 +65,6 @@ function firstPage() {
     subsScore();
     resetSelection();
 }
-
-
-// 진행률        
-function progressBar() {
-    const progressBar = document.getElementById('progressbar');
-    const progress = (currentPage - 1) / (totalPages - 1) * 100 + '%';
-    progressBar.style.width = progress;
-    const mathProgress = Math.floor(parseFloat(progress))
-    progressBar.textContent = `진행 상황: ${mathProgress}%`;
-}
-
-
 
 
 //정답 체크 및 초기화

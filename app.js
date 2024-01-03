@@ -5,8 +5,6 @@ const cookieParser = require("cookie-parser");
 const axios = require("axios");
 const PORT = process.env.SERVERPORT;
 
-const swaggerRouter = require("./routes/swagger.router");
-
 const signupRouter = require("./routes/signup.router");
 const errorRouter = require("./routes/error.routes");
 const mypageRouter = require("./routes/mypage.routes");
@@ -34,12 +32,6 @@ app.set("views", "./views");
 app.use("/static", express.static(__dirname + "/static"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
-// swagger
-// http://localhost:8000/api-docs 로 접근 가능
-app.use("/api", swaggerRouter);
-const { swaggerUi, specs } = require("./swagger/swagger");
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 const sessionConfig = getSessionConfig();
 app.use(expressSession(sessionConfig));
@@ -69,7 +61,6 @@ app.get("/libraryAPI", async (req, res) => {
 
   const url = serviceUrl + URI;
 
-
   try {
     const result = await axios.get(url);
     const data = result.data;
@@ -82,7 +73,6 @@ app.get("/libraryAPI", async (req, res) => {
 const classKey = process.env.CULTUREAPISERVICEKEY; // .env
 
 app.get("/classAPI", async (req, res) => {
-
   const serviceUrl = "http://api.kcisa.kr/openapi/API_CIA_081/request?";
 
   let URI = encodeURI("serviceKey") + "=" + classKey;
@@ -104,7 +94,6 @@ app.get("/classAPI", async (req, res) => {
 const festivalKey = process.env.FESTIVALAPISERVICEKEY; // .env
 
 app.get("/festivalAPI", async (req, res) => {
-
   const serviceUrl =
     "http://api.kcisa.kr/openapi/service/rest/meta4/getKCPG0504?";
 
