@@ -79,7 +79,6 @@
         position: relative;
       }
       .collapsible {
-        /* background-color: pink; */
         cursor: pointer;
         padding: 18px;
         width: 100%;
@@ -112,13 +111,6 @@
         line-height: 10px;
         float: right;
       }
-      /* .active:after {
-        content: "\2303";
-        transform: rotate(360deg);
-        font-size: 25px;
-        line-height: 25px;
-        margin-top: 5px;
-      } */
 
       .line {
         width: 80%;
@@ -148,9 +140,7 @@
             rgb(255, 255, 255, 1) 100%
           ),
           url(https://images.pexels.com/photos/450035/pexels-photo-450035.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
-        /* url("https://cdn.pixabay.com/photo/2016/03/26/13/09/cup-of-coffee-1280537_1280.jpg"); */
         background-size: cover;
-        /* filter: grayscale(70%); */
         background-position: 0px;
         display: flex;
         justify-content: center;
@@ -178,12 +168,6 @@
       .material-symbols-outlined {
         font-size: 50px;
       }
-
-      /* a > .material-symbols-outlined {
-        font-size: 20px;
-        color: var(--color-black-0);
-        transition: none;
-      } */
 
       @keyframes down {
         0% {
@@ -261,7 +245,6 @@
           var(--color-orange-1) 0%,
           var(--color-orange-3) 100%
         );
-        /* background-color: var(--color-orange-1); */
       }
 
       .front:after {
@@ -279,16 +262,6 @@
         backface-visibility: hidden;
         border-radius: var(--border-radius-medium);
       }
-      /* .card:hover .front,
-      .card:hover .back {
-        -webkit-transition: -webkit-transform 0.7s
-          cubic-bezier(0.4, 0.2, 0.2, 1);
-        transition: -webkit-transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
-        -o-transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
-        transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
-        transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1),
-          -webkit-transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
-      } */
 
       .back {
         position: absolute;
@@ -410,7 +383,6 @@
           <ul class="navUser">
             <li class="navi-li indexli">
               <% if(locals.accessToken) {%>
-              <!-- <button id="logout" onclick="logout()">로그아웃</button> -->
               <a onclick="logout(window.event)" id="logout">로그아웃</a>
 
               <%} else { %>
@@ -599,16 +571,6 @@
         </div>
 
         <div class="line"></div>
-
-        <!-- <div class="footer-nav-box">
-          <ul class="foorter-nav">
-            <li><a href="">컴퓨터</a></li>
-            <li><a href="">모바일</a></li>
-            <li><a href="">생활</a></li>
-            <li><a href="">문화 여가</a></li>
-            <li><a href="/community">커뮤니티</a></li>
-          </ul>
-        </div> -->
       </section>
     </main>
 
@@ -666,11 +628,9 @@
       // animation scroll(section)
 
       const sections = document.querySelectorAll("section");
-      // console.log(sections)
 
       window.addEventListener("scroll", () => {
         const windowInner = window.innerHeight;
-        // console.log(windowInner)
 
         sections.forEach((section) => {
           const sectionHeight = section.getBoundingClientRect().top;

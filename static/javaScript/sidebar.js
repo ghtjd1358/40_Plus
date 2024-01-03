@@ -110,7 +110,6 @@ function toggleSubmenu(Id) {
   clickId.querySelector("a").style.display = "none";
 
   // back 버튼 생성
-  // backbtn.style.display = clickId.classList.contains('main-line-active') ? 'block' : 'none';
   backbtn.style.display = "block";
 
   // 토글될 때 다른 상위 메뉴들의 클래스 제거

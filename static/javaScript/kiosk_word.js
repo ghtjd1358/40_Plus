@@ -18,8 +18,6 @@ function showPage(pageIndex) {
     pages[pageIndex].style.display = 'block';
 }
 
-//     showPage(0);
-// }
 
 // prev
 function prevPage() {

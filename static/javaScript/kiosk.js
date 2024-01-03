@@ -63,7 +63,6 @@ function firstPage() {
     showPage();
     score = 105;
     subsScore();
-    // removeChecked();
     resetSelection();
 }
 
@@ -201,7 +200,6 @@ function createProduct(product, menuSelectId) {
 }
 
 setMenu.forEach(product => createProduct(product, 'set-menu'));
-// setMenu.forEach(product => createProduct(product, 'set-menu1'));
 
 recommend.forEach(product => createProduct(product, 'recommend'));
 side.forEach(product => createProduct(product, 'side'));
@@ -217,16 +215,7 @@ setDrink.forEach(product => createProduct(product, 'setDrink1'));
 
 // 10 page
 const paymentsBoxs = document.querySelectorAll('.payments1');
-// console.log(paymentsBoxs)
 
-// paymentsBoxs.forEach((paymentsBox,i) => {
-//     paymentsBox.addEventListener('click', () => {
-//         paymentsBoxs.forEach((paymentsBoxj) => {
-//             paymentsBoxj.classList.remove('checked');
-//         })
-//         paymentsBoxs[i].classList.add('checked')
-//     })
-// })
 
 paymentsBoxs.forEach(paymentsBox => {
     paymentsBox.addEventListener('click', () => {
@@ -270,7 +259,6 @@ function randomScore() {
     let randomNumber = Math.floor(Math.random() * 1000 + 1);
     const orderScore = document.querySelector('.account > h2');
     orderScore.textContent = randomNumber;
-    // console.log(randomNumber);
 }
 
 // 타이머
@@ -287,15 +275,12 @@ function startTimer() {
 function endTimer() {
     endTime = new Date();
     elapsedTime = Number(Math.floor((endTime - startTime) / 1000));
-    // console.log(`타입 : `,typeof elapsedTime)
-    // console.log(`시간: ${elapsedTime}`);
     updateScoreBoard();
 }
 
 // 점수판
 function subsScore() {
     score >= subScore ? score -= subScore : score = 0;
-    // console.log('현재 점수:', score);
     updateScoreBoard();
 }
 

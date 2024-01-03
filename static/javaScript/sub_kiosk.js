@@ -6,7 +6,6 @@ window.addEventListener('scroll', fixNav)
 
 function fixNav() {
     const scrolled = window.scrollY > nav.offsetHeight - 50
-    // nav.classList.add('active') : nav.classList.remove('active')
     nav.classList.toggle('active', scrolled);
 }
 
@@ -17,7 +16,6 @@ const sections = document.querySelectorAll('section')
 
 window.addEventListener('scroll', () => {
     const windowInner = window.innerHeight;
-    // console.log(windowInner)
 
     sections.forEach(section => {
         const sectionHeight = section.getBoundingClientRect().top
@@ -79,16 +77,6 @@ lis.forEach((li, i) => {
 
 rightBtn.addEventListener('click', nextSlide);
 leftBtn.addEventListener('click', prevSlide);
-
-
-
-// 티켓팅
-
-
-
-//   navUls.forEach(navUl => {
-//     navUl.classList.toggle('active', scrolled)
-// });
 
 
 document.addEventListener('mouseover', hoverTag);
