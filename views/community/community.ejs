@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="/static/css/component.css" />
+    <link rel="stylesheet" href="/static/css/borad.css" />
+    <link rel="stylesheet" href="/static/css/header.css" />
+    <link rel="stylesheet" href="/static/css/footer.css" />
+    <link rel="stylesheet" href="/static/css/sidebarHeader.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <!-- 테이블 클릭 할 시 링크이동을 위한 스타일 -->
+    <style>
+      .header {
+        background-color: white;
+      }
+
+      body {
+        background-color: #f5f5f5;
+        margin: 0;
+      }
+
+      #main {
+        width: 80%;
+        flex-direction: column;
+        margin: auto;
+      }
+    </style>
+
+    <title>커뮤니티 게시판</title>
+  </head>
+
+  <body>
+    <header id="mainheader"><%- include("../component/header")%></header>
+    <header id="sideheader"><%- include("../component/sidebarHeader")%></header>
+    <div id="main">
+      <form>
+        <div class="add-C">
+          <button type="button" class="common-btn" onclick="writeCommunity()">
+            <span class="common-text">글쓰기</span>
+          </button>
+        </div>
+      </form>
+      <table class="table">
+        <tr>
+          <th class="th-number">번호</th>
+          <th class="th-title">제목</th>
+          <th class="th-writer">글쓴이</th>
+          <th class="th-check">조회</th>
+          <th class="th-time">작성일</th>
+        </tr>
+        <% communityData.forEach((data) => { %>
+        <tr
+          onclick="detailCommunityPage('<%= data.number %>')"
+          class="tableRow"
+        >
+          <td><%= data.number %></td>
+          <td><%= data.title %></td>
+          <td><%= data.userid %></td>
+          <td><%= data.view %></td>
+          <td><%= data.date %></td>
+        </tr>
+        <% }); %>
+      </table>
+      <div class="add-C"></div>
+      <div class="paging" id="paging">
+        <!-- 페이징 추가 될 공간 -->
+      </div>
+
+      <!-- 검색 영역 추가 -->
+      <div id="search-area">
+        <select name="search-type" id="search-type">
+          <option value="title-content">제목+내용</option>
+          <option value="title">제목</option>
+          <option value="content">내용</option>
+          <option value="writer">글쓴이</option>
+        </select>
+        <input
+          type="text"
+          id="search-input"
+          placeholder="검색어를 입력하세요"
+        />
+        <button
+          id="search-button"
+          class="common-btn"
+          onclick="searchCommunity()"
+        >
+          <span class="common-text">검색</span>
+        </button>
+      </div>
+    </div>
+
+    <%- include("../component/footer")%>
+    <script>
+      let pageUserid = '<%= locals.userid %>'
+    </script>
+    <script src="/static/javaScript/community.js"></script>
+    <script src="/static/javaScript/sidebar.js"></script>
+  </body>
+</html>

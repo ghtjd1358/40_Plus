@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>게시판 글 읽기</title>
+
+    <link rel="stylesheet" href="/static/css/component.css" />
+    <link rel="stylesheet" href="/static/css/read.css" />
+    <link rel="stylesheet" href="/static/css/footer.css" />
+    <link rel="stylesheet" href="/static/css/header.css" />
+    <link rel="stylesheet" href="/static/css/sidebarHeader.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <style>
+      .footer {
+        margin: 0;
+      }
+      .header {
+        background-color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <header id="mainheader"><%- include("../component/header")%></header>
+    <header id="sideheader"><%- include("../component/sidebarHeader")%></header>
+    <!-- B 페이지의 EJS 파일 -->
+    
+    <div class="big-C">
+      <div class="small-C"  id="main">
+        <div class="title"><%= data.title %></div>
+        <% if (locals.userid == data.userid){ %>
+
+        <button
+          type="button"
+          class="common-btn edit"
+          onclick="sendModifyCommunity('<%= data.number %>')"
+        >
+          <span class="common-text">수정</span></button
+        ><button
+          type="button"
+          class="common-btn delete"
+          onclick="deleteCommunity('<%= data.number %>')"
+        >
+          <span class="common-text">삭제</span>
+        </button>
+        <% } %>
+        <hr />
+        <div class="meta-info">
+          <span class="user-name"><%= data.userid %></span>
+          <span class="space"> | </span>
+          <span class="date">작성일: <%= data.date %></span>
+          <span class="views">조회수: <%= data.view %></span>
+          <span class="comments">댓글: <%= data2.length %></span>
+        </div>
+        <hr />
+        <div class="content"><%= data.content %></div>
+        <hr />
+        <div class="comments-area">
+          <form name="comment-form">
+            <div class="comment-form">
+              <textarea placeholder="댓글을 입력하세요" name="write"></textarea>
+              <button
+                type="button"
+                class="common-btn add"
+                onclick="writeComment('<%= data.number %>', '<%= locals.userid %>')"
+              >
+                <span class="common-text">댓글 등록</span>
+              </button>
+            </div>
+          </form>
+          <hr class="comments-hr" />
+
+          <% if (data2.length) { %> <% for (let i = 0; i < data2.length; i++) {
+          %>
+          <div class="comment">
+            <div class="comment-user"><%= data2[i].userid %></div>
+            <div class="comment-date"><%= data2[i].date %></div>
+            <div
+              class="comment-like-button"
+              style="display: flex; align-items: center"
+            >
+              <span
+                style="cursor: pointer"
+                class="material-symbols-outlined"
+                onclick="likeComment('<%= data2[i].userid %>','<%= data2[i].content %>','<%= data2[i].like %>', '<%= i %>', '<%= locals.userid %>')"
+              >
+                thumb_up </span
+              ><span id="likeCount_<%= i %>" style="margin-left: 0.5rem">
+                <%= data2[i].like %></span
+              >
+            </div>
+            <div class="comment-content"><%= data2[i].content %></div>
+          </div>
+          <% } %> <% } else { %>
+          <div class="comment">
+            <div class="comment-content">댓글이 없어요</div>
+          </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
+
+    <%- include("../component/footer")%>
+
+    <script>
+    
+      //  댓글 텍스트 전송
+      function writeComment(number, islogin) {
+        const form = document.forms["comment-form"];
+        const content = form.write.value;
+        const date = getCurrentDate();
+        const like = 0;
+
+        if (!islogin) {
+          return swal("로그인이 필요합니다.", "", "error").then(function () {
+            location.href = "/login";
+          });
+        } else {
+          if (content != "") {
+            axios({
+              method: "post",
+              url: "/writeComment",
+              data: {
+                number: parseInt(number),
+                content: content,
+                date: date,
+                like: like,
+              },
+            })
+              .then((result) => {
+                location.href = `/readCommunity?number=${number}`;
+              })
+              .catch((error) => {
+                console.error("axios 에러:", error);
+              });
+          } else {
+            swal("댓글을 입력하세요.", "", "error").then(function () {
+              location.href = `/readCommunity?number=${parseInt(number)}`;
+            });
+          }
+        }
+      }
+
+      // 글 삭제 버튼
+      function deleteCommunity(number) {
+        axios({
+          method: "delete",
+          url: `/deleteCommunity/${number}`, // URL에 number를 포함
+        }).then((result) => {
+          location.href = "/community";
+        });
+      }
+
+      // 댓글 좋아요 버튼 (userid와 content를 db에서 검증), index는 댓글 순서
+      function likeComment(userid, content, like, index, islogin) {
+        if (!islogin) {
+          return swal("로그인이 필요합니다.", "", "error").then(function () {
+            location.href = "/login";
+          });
+        } else {
+          axios({
+            method: "post",
+            url: "/likeComment",
+            data: {
+              userid: userid,
+              content: content,
+              like: like,
+            },
+          }).then((result) => {
+            // like를 db에서 증가시키면 여기서도 index를 통해 바로 증가시킴
+            const likeCountSpan = document.getElementById(`likeCount_${index}`);
+            if (likeCountSpan) {
+              likeCountSpan.textContent = result.data.like;
+            }
+          });
+        }
+      }
+
+      function sendModifyCommunity(number) {
+        const title = document.querySelector(".title").textContent;
+        const content = document.querySelector(".content").textContent;
+
+        axios({
+          method: "post",
+          url: "/modifyCommunity",
+          data: {
+            title: title,
+            content: content,
+            number: number,
+          },
+        }).then((result) => {
+          location.href = "/modifyCommunity";
+        });
+      }
+
+      // 현재 시각 구하기
+      function getCurrentDate() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = now.getMonth() + 1; // 월은 0부터 시작하므로 1을 더함
+        const day = now.getDate();
+
+        // 날짜를 "YYYY-MM-DD" 형식의 문자열로 반환
+        const formattedDate = `${year}-${String(month).padStart(
+          2,
+          "0"
+        )}-${String(day).padStart(2, "0")}`;
+
+        return new Date(formattedDate);
+      }
+
+      async function logout(event) {
+        event.preventDefault();
+        const res = await axios({
+          method: "post",
+          url: "/logout",
+        });
+        swal("로그아웃 완료!", "", "success").then(function () {
+          location.href = "/community";
+        });
+      }
+    </script>
+    <script src="/static/javaScript/sidebar.js"></script>
+  </body>
+</html>

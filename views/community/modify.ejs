@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>게시판 글 작성</title>
+    <link rel="stylesheet" href="/static/css/component.css" />
+    <link rel="stylesheet" href="/static/css/header.css" />
+    <link rel="stylesheet" href="/static/css/footer.css" />
+    <link rel="stylesheet" href="/static/css/sidebarHeader.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <style>
+
+      .footer {
+          margin: 0;
+      }
+      .header {
+        background-color: white;
+      }
+      .big-C {
+        background-color: #f5f5f5;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .small-C {
+        background-color: #ffffff;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        padding: 20px;
+        width: 80%;
+        max-width: 900px;
+        text-align: center;
+        margin-top: 30px;
+        margin-bottom: 30px;
+      }
+
+      .input-group {
+        margin-bottom: 20px;
+      }
+
+      .input-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #333333;
+      }
+
+      .input-group input {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #dddddd;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        font-size: 24px;
+      }
+
+      .input-group textarea {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #dddddd;
+        border-radius: 5px;
+        height: 70vh;
+        resize: none;
+        margin-bottom: 10px;
+        font-size: 24px;
+      }
+      .input-group input::placeholder, .input-group textarea::placeholder {
+        font-size: 24px;
+      }
+      .common-btn:hover::before {
+        background-color: darkcyan;
+      }
+
+      .label-text {
+        font-size: larger;
+      }
+      /* 헤더 온 오프 */
+      @media screen and (min-width: 769px) {
+        #sideheader {
+          display: none;
+        }
+      }
+      @media screen and (max-width: 768px) {
+        .headerContainer {
+          display: none;
+        }
+        #sideheader {
+          display: block;
+        }
+        footer {
+          display: none;
+        }
+      }
+      @media screen and (min-width: 1921px) {
+        .small-C {
+          max-width: 1200px;
+        }
+        .input-group input::placeholder, .input-group textarea::placeholder {
+          font-size: larger;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header id="mainheader"><%- include("../component/header")%></header>
+    <header id="sideheader"><%- include("../component/sidebarHeader")%></header>
+    <form name="post-form">
+      <div class="big-C">
+        <div class="small-C" id="main">
+          <div class="input-group">
+            <label class="label-text" for="title">제목</label>
+            <input type="text" id="title" placeholder="제목을 입력하세요" />
+          </div>
+
+          <div class="input-group">
+            <label class="label-text" for="content">내용</label>
+            <textarea id="content" placeholder="내용을 입력하세요"></textarea>
+          </div>
+          <button
+            class="common-btn"
+            type="button"
+            onclick="submitModifyCommunity('<%= data.number %>')"
+          >
+            <span class="common-text">수정완료</span>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <%- include("../component/footer")%>
+    <script>
+      window.onload = function () {
+        var titleValue = `<%= data.title %>`;
+        document.getElementById("title").value = titleValue;
+
+        var contentValue = `<%= data.content.replace(/\n/g, "\\n").replace(/\r/g, "\\r") %>`;
+        document.getElementById("content").value = contentValue;
+      };
+
+      function submitModifyCommunity(number) {
+        const title = document.getElementById("title").value;
+        const content = document.getElementById("content").value;
+
+        console.log("sss", title, content);
+
+        axios({
+          method: "patch",
+          url: "/submitModifyCommunity",
+          data: {
+            title: title,
+            content: content,
+            number: number,
+          },
+        }).then((result) => {
+          console.log("수정 완료");
+          swal("수정이 완료되었습니다.", "", "success").then(function () {
+            location.href = "/community";
+          });
+        });
+      }
+    </script>
+    <script src="/static/javaScript/sidebar.js"></script>
+  </body>
+</html>

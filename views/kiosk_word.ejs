@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/css/component.css" />
+    <link rel="stylesheet" href="/static/css/kiosk_word.css" />
+    <link rel="stylesheet" href="/static/css/sidebarHeader.css" />
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <title>단어</title>
+  </head>
+  <body>
+    <%- include("./component/sidebarHeader")%>
+    <div id="main">
+      <!-- nav  -->
+      <header>
+        <div id="navigation-bar">
+          <button class="common-btn" onclick="prevPage()" class="common-btn">
+            <span class="common-text">돌아가기</span>
+          </button>
+        </div>
+      </header>
+      <!-- 키오스크 컨테이너 -->
+      <section>
+        <div id="kiosk-container">
+          <div class="page" id="page1">
+            <h2>단어 숙지</h2>
+            <p>궁금한 단어를 눌러주세요!</p>
+            <div class="word-box">
+              <button class="common-btn" id="button1">
+                <span class="common-text">키오스크</span>
+              </button>
+              <button class="common-btn" id="button2">
+                <span class="common-text">터치</span>
+              </button>
+              <button class="common-btn" id="button3">
+                <span class="common-text">ATM</span>
+              </button>
+              <button class="common-btn" id="button4">
+                <span class="common-text">미션</span>
+              </button>
+              <button class="common-btn" id="button5">
+                <span class="common-text">스페셜</span>
+              </button>
+              <button class="common-btn" id="button6">
+                <span class="common-text">프리미엄</span>
+              </button>
+              <button class="common-btn" id="button7">
+                <span class="common-text">와퍼</span>
+              </button>
+              <button class="common-btn" id="button8">
+                <span class="common-text">주니어</span>
+              </button>
+              <button class="common-btn" id="button9">
+                <span class="common-text">디저트</span>
+              </button>
+              <button class="common-btn" id="button10">
+                <span class="common-text">라지세트</span>
+              </button>
+              <button class="common-btn" id="button11">
+                <span class="common-text">포테이토</span>
+              </button>
+              <button class="common-btn" id="button12">
+                <span class="common-text">드링크</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="page" id="page2">
+            <div class="selectable">
+              <h2>키오스크</h2>
+              <div class="word-box">
+                <p>
+                  공공장소에 설치된 안내기기 또는 무인주문기. 건물안내, 시설,
+                  행사, 박람회, 식당 등에서 정보를 제공해주거나 주문을 받는
+                  용도로 사용되고 있습니다.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="page" id="page3">
+            <div class="selectable">
+              <h2>터치</h2>
+              <div class="word-box">
+                <p>
+                  손 또는 손가락으로 '만지다', '건드리다'라는 뜻의
+                  영어표현입니다.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="page" id="page4">
+            <div class="selectable">
+              <h2>ATM</h2>
+              <div class="word-box">
+                <p>
+                  현금자동입출금기.은행의 입금 및 출금 등을 할 수 있는
+                  기계입니다.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="page" id="page5">
+            <div class="selectable">
+              <h2>미션</h2>
+              <div class="word-box">
+                <p>목적달성 임무.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="page" id="page6">
+            <div class="selectable">
+              <h2>스페셜</h2>
+              <div class="word-box">
+                <p>
+                  보통의 것과는 특별히 다른 것을 의미하는 '특수한', '특별한'
+                  뜻의 영어표현입니다.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="page" id="page7">
+            <div class="selectable">
+              <h2>프리미엄</h2>
+              <div class="word-box">
+                <p>'아주 높은', '고급의' 라는 뜻의 영어표현입니다.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="page" id="page8">
+            <div class="selectable">
+              <h2>와퍼</h2>
+              <div class="word-box">
+                <p>
+                  1957년 출시된 버거킹의 대표 메뉴. 일반 햄버거의 평균 두께인
+                  3.81츠 5.08cm의 크기를 내세우고 있습니다.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="page" id="page9">
+            <div class="selectable">
+              <h2>주니어</h2>
+              <div class="word-box">
+                <p>'청소년', '나이어린'이란 뜻의 영어표현입니다.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="page" id="page10">
+            <div class="selectable">
+              <h2>디저트</h2>
+              <div class="word-box">
+                <p>'후식'이란 뜻의 영어표현입니다.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="page" id="page11">
+            <div class="selectable">
+              <h2>라지세트</h2>
+              <div class="word-box">
+                <p>
+                  크기가 크거나 또는 양이 많은 햄버거, 감자튀김, 콜라의
+                  구성입니다.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="page" id="page12">
+            <div class="selectable">
+              <h2>포테이토</h2>
+              <div class="word-box">
+                <p>'감자'라는 뜻의 영어표현입니다.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="page" id="page13">
+            <div class="selectable">
+              <h2>드링크</h2>
+              <div class="word-box">
+                <p>'음료'라는 뜻의 영어표현입니다.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      async function logout(event) {
+        event.preventDefault();
+        const res = await axios({
+          method: "post",
+          url: "/logout",
+        });
+        swal("로그아웃 완료!", "", "success").then(function () {
+          location.href = "/sub_kiosk";
+        });
+      }
+    </script>
+    
+    <script src="/static/javaScript/kiosk_word.js"></script>
+    <script src="/static/javaScript/sidebar.js"></script>
+  </body>
+</html>

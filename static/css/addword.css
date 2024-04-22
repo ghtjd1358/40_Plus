@@ -1,0 +1,211 @@
+#add_body {
+    background-color: #f5f5f5;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.header {
+    background-color: white;
+}
+#add-body {
+width: 80%;
+flex-direction: column;
+margin: auto;
+}
+.h1-text {
+    text-align: center;
+    color: #fff;
+    border: 1px solid black;
+    border-radius: 8px;
+}
+
+h1 {
+    font-size: 36px;
+    letter-spacing: 2px;
+    margin: 0;
+    padding: 20px;
+    background-color: var(--color-red-4);
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.h3-text {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 24px;
+}
+.sml_C {
+    display: flex;
+}
+.add-div {
+    display: inline-block;
+    text-align: center;
+    width: 50%;
+}
+.tooltip {
+    position: relative; 
+    margin: 20px; 
+    padding: 20px;
+    width: 50%;
+    color: var(--color-white-0); 
+    border-radius: 10px; 
+    background-color: var(--color-red-3);
+    font-size: 2em;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+.tooltip::after {
+    content: '';
+    position: absolute;
+    top: 45px;
+    left: -30px;
+    border-right: 30px solid var(--color-red-3); 
+    border-top: 10px solid transparent; 
+    border-bottom: 10px solid transparent;}
+
+/* 입력 칸 div */
+.add-C {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 20px 0;
+    border: 1px solid black;
+    box-shadow: 0 7px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.add-text {
+    padding: 10px;
+    width: 80%;
+    border: 1px solid darkblue;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-top: 20px;
+    font-size: larger;
+}
+
+.common-btn {
+    margin: 20px 0;
+}
+.common-btn:hover::before {
+    position: absolute;
+    content: "";
+    background-color: darkcyan;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    animation: fill 0.7s;
+    animation-timing-function: linear;
+  }
+
+/* DB 표 */
+table {
+    width: 80vw;
+    min-width: 500px;
+    border-collapse: collapse;  /* 표 테두리 단선으로 */
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 20px;
+    text-align: center;
+    font-size: larger;
+}
+
+th, td {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+}
+
+th {
+    background-color: var(--color-orange-3);
+    color: #333;
+}
+
+/* DB 표 */
+th.th-number {
+    width: 50px; 
+}
+
+th.th-word {
+    width: 150px; 
+}
+
+th.th-meaning {
+    width: 300px; 
+}
+
+th.th-username {
+    width: 100px; 
+}
+
+th.th-time {
+    width: 200px;
+}
+
+th:not(:first-child)::before,
+td:not(:first-child)::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 1px;
+    background-color: #ddd;
+}
+
+/* data 사이 간격 */
+th:not(:last-child)::after,
+td:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 1px;
+    background-color: #ddd;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+/* 페이징 스타일 */
+.paging {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.page-item {
+    margin: 0 5px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.page-item:hover {
+    background-color: #ddd;
+}
+
+/* 기존 스타일 유지하며 현재 보고 있는 페이지에 대한 스타일 추가 */
+.current-page {
+background-color: #4CAF50;
+color: white;
+}
+.next-page, .prev-page {
+    background-color: rgb(253, 240, 226);
+}
+.next-page:hover, .prev-page:hover {
+    background-color: bisque;
+}
+
+h1{
+    text-align: center;
+}

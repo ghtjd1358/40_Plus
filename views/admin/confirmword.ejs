@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="/static/css/component.css">
+    <link rel="stylesheet" href="/static/css/header.css" />
+     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <title>단어 승인</title>
+    <style>
+
+        .header {
+            background-color: white;
+        }
+
+        #add_body {
+            background-color: #f5f5f5;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            /* align-items: center; */
+        }
+        /* DB 표 */
+        table {
+            position: relative;
+            width: 80vw;
+            height: 60vh;
+            border-collapse: collapse; 
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            text-align: center;
+            margin-top: 5vh;
+        }
+        th, td {
+            border-bottom: 1px solid #ddd;
+            padding: 15px;
+            position: relative;
+        }
+
+        th {
+            background-color: #4409c6;
+            color: white;
+            top: 0;
+        }
+        /* data 사이 간격 */
+        th:not(:last-child)::after,
+        td:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background-color: #ddd;
+        }
+        
+        tr:hover {
+            background-color: #e6e6e6;
+        }
+
+        input {
+            border: none;
+            background-color: transparent;
+            font-family: inherit;
+            outline: none;
+            text-align: center;
+            font-size: larger;
+            width: 100%;
+            cursor: url(/static/css/img/basic.png) 10 10, auto;
+        }
+        .common-btn.approve:hover::before{
+            background-color: green;
+        }
+        .common-btn.delete:hover::before{
+            background-color: red;
+        }
+        
+    </style>
+</head>
+<header><%- include("../component/header")%></header>
+<body >
+    <main id="add_body">
+        <% if (words.length > 0) {%>
+            <table>
+                <tr>
+                    <th class="th-number">번호</th>
+                    <th class="th-word">단어 명</th>
+                    <th class="th-meaning">단어 뜻</th>
+                    <th class="th-username">유저명</th>
+                    <th></th>
+                </tr>
+            <% for (const word of words) {%>
+                <tr>
+                    <form method="post" action="/admin/confirmword" name="forms" data-number="<%= word.number %>">
+                    <td>
+                        <input type="text" id="number" name="number" value="<%= word.number %>" readonly> </input>
+                    </td>
+                    <td>
+                        <input type="text" name="userid" value="<%= word.userid %>" readonly></input>
+                    </td>
+                    <td>               
+                        <input type="text" name="word" value="<%= word.word %>" readonly></input>
+                    </td>
+                    <td>
+                        <input type="text" name="meaning" value="<%= word.meaning %>" readonly></input>
+                    </td>
+                        <input type="hidden" name="createdAt" value="<%= word.createdAt %>" readonly></input>
+                        <input type="hidden" name="updatedAt" value="<%= word.updatedAt %>" readonly>
+  
+                    <td>
+                        <button id="approve" class="common-btn approve"><span class="common-text">승인</span></button>
+                        <button class="common-btn delete" type="button"><span class="common-text">삭제</span></button>
+                    </td>
+                    </form>
+                </tr>
+                
+        <% } %>
+ 
+        <% } else {%>
+            <h1>등록된 단어가 없습니다.</h1>
+
+            <% } %>
+     </main>
+
+  <script>
+    const deleteButtonElements = document.querySelectorAll('.delete');
+
+    async function deleteWord(event) {
+        const form = event.target.parentElement;
+        try {
+            const res = await axios({
+                url: '/admin/confirmword',
+                method: 'delete',
+                data: {
+                    number: document.querySelector('#number').value
+                }
+            })
+            location.href = '/admin/confirmword'
+        } catch {
+            console.log('에러발생');
+        }
+
+    }
+    for (const deleteButtonElement of deleteButtonElements) {
+        deleteButtonElement.addEventListener('click', deleteWord);
+    }
+       async function logout(event) {
+        event.preventDefault();
+        const res = await axios({
+          method: "post",
+          url: "/logout",
+        });
+        swal("로그아웃 완료!", "", "success").then(function () {
+          location.href = "/";
+        });
+      }
+  </script>
+</body>
+</html>

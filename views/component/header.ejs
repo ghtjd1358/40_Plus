@@ -1,0 +1,53 @@
+<div class="headerContainer">
+  <nav class="nav header">
+    <!-- 로고 -->
+    <a href="/"
+      ><img
+        src="https://kdt10-bucket-jihun.s3.ap-northeast-2.amazonaws.com/logo.png"
+        alt=""
+        class="logo"
+    /></a>
+    <!-- 헤더 nav -->
+    <ul class="navMenu">
+      <% if(locals.userid === 'admin') {%>
+        <li class="navi-li indexli">
+          <a href="/admin/confirmword">단어승인</a>
+        </li>
+        <% } %>
+      <li class="navi-li indexli">
+        <a href="/computer">컴퓨터</a>
+      </li>
+
+      <li class="navi-li indexli">
+        <a href="/sub_kiosk">생활편의</a>
+      </li>
+
+      <li class="navi-li indexli">
+        <a href="/culture">문화생활</a>
+      </li>
+
+      <li class="navi-li indexli">
+        <a href="/community">게시판</a>
+      </li>
+    </ul>
+    <!-- 로그인 -->
+    <ul class="navUser">
+      <li class="navi-li indexli">
+        <% if(locals.accessToken) {%>
+        <a onclick="logout(window.event)" id="logout">로그아웃</a>
+
+        <%} else { %>
+        <a href="/login">로그인</a>
+        <%}%>
+      </li>
+      <li class="navi-li indexli">
+        <% if(locals.accessToken) {%>
+        <a href="/Mypage"> 마이페이지 </a>
+        <%} else { %>
+
+        <a href="/signup"> 회원가입</a>
+        <%}%>
+      </li>
+    </ul>
+  </nav>
+</div>

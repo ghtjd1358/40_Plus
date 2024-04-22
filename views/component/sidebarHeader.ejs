@@ -1,0 +1,70 @@
+<div id="toggle-btn" onclick="toggleSidebar()">☰</div>
+<div id="back-btn" onclick="goBack()">↩︎</div>
+
+
+  <!-- 사이드 바 -->
+  <div id="sidebar">
+    <img src="/static/css/img/logo2.png" alt="" class="logo-sidebar" />
+    <ul class="full-line">
+      <li class="navi-li headerli main-line">
+        <% if(locals.accessToken) {%>
+        <a onclick="logout(window.event)" id="logout"> 로그아웃</a>
+
+        <%} else { %>
+        <a href="/login">로그인</a>
+        <%}%>
+      </li>
+      <li class="navi-li headerli main-line">
+        <% if(locals.accessToken) {%>
+        <a href="/Mypage"> 마이페이지 </a>
+        <%} else { %>
+
+        <a href="/signup"> 회원가입</a>
+        <%}%>
+      </li>
+      <li class="main-line" id="home"><a href="/">Home</a></li>
+      <% if(locals.userid === 'admin') {%>
+        <li class="main-line">
+          <a href="/admin/confirmword">단어승인</a>
+        </li>
+        <% } %>
+      <li class="main-line" id="computer">
+        <a href="#">컴퓨터</a>
+        <ol>
+          <li class="sub-line">
+            <a href="/word/keyboard">MZ어 타자 연습</a>
+          </li>
+          <li class="sub-line">
+            <a href="/word/">MZ어 단어장</a>
+          </li>
+        </ol>
+      </li>
+      <li class="main-line" id="life">
+        <a href="#">생활/편의</a>
+        <ol>
+          <li class="sub-line">
+            <a href="/sub_kiosk">키오스크</a>
+          </li>
+        </ol>
+      </li>
+      <li class="main-line" id="culture">
+        <a href="#">문화/여가</a>
+        <ol>
+          <li class="sub-line">
+            <a href="">무료 구청 교육</a>
+          </li>
+          <li class="sub-line">
+            <a href="/culture/class">동네 문화 생활</a>
+          </li>
+          <li class="sub-line">
+            <a href="/culture/library">도서관 영업 시간</a>
+          </li>
+        </ol>
+      </li>
+      <li class="main-line" id="community"><a href="/community">게시판</a></li>
+    </ul>
+    <!-- 추가적인 메뉴 항목을 원하는 만큼 추가할 수 있습니다. -->
+  </div>
+
+  
+</header>

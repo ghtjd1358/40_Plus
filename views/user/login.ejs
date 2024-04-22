@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>로그인</title>
+    <link rel="stylesheet" href="/static/css/header.css" />
+    <link rel="stylesheet" href="/static/css/component.css" />
+    <link rel="stylesheet" href="/static/css/footer.css" />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
+
+    <style>
+      .header {
+        background-color: white;
+      }
+      .footer {
+        margin-top: 0px;
+      }
+      body {
+        background-color: var(--color-white-0);
+      }
+
+      .container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        width: 100%;
+        height: 80vh;
+
+        /* border-top: 1px solid var(--color-grey-0); */
+
+        background-color: var(--color-grey-0);
+      }
+
+      .loginContent {
+        width: 700px;
+        background-color: var(--color-white-0);
+        height: auto;
+
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        border-radius: var(--border-radius-large);
+        border: 2px solid var(--color-grey-0);
+        /* box-shadow: var(--shadow); */
+        margin-top: 50px;
+      }
+
+      .loginBox {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* background-color: pink; */
+        margin-top: var(--space-3);
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        /* justify-content: center; */
+        align-items: center;
+      }
+
+      input {
+        width: 500px;
+        height: 50px;
+        border: 1px solid var(--color-black-1);
+        border-radius: var(--border-radius-small);
+        font-size: 18px;
+        padding-left: var(--space-1);
+      }
+
+      #userid {
+        margin-bottom: var(--space-1);
+      }
+
+      input::placeholder {
+        font-size: 18px;
+        color: var(--color-black-2);
+      }
+
+      #result {
+        color: var(--color-red-4);
+        font-weight: 700;
+      }
+
+      .link {
+        display: flex;
+        width: 300px;
+        height: 50px;
+        justify-content: space-around;
+        align-items: center;
+        margin: auto;
+        margin-top: var(--space-3);
+        margin-bottom: var(--space-5);
+        font-size: 18px;
+      }
+
+      .title {
+        margin-top: var(--space-5);
+      }
+
+      .resultContent {
+        margin: var(--space-2) 0;
+      }
+
+      .signup {
+        color: var(--color-orange-4) !important;
+        font-weight: 600 !important;
+      }
+
+      .swal-modal {
+        margin-top: -20%;
+      }
+      .swal-button {
+        padding: 7px 19px;
+        background-color: var(--color-orange-5);
+        font-size: 12px;
+      }
+
+      .common-btn {
+        box-shadow: none;
+        font-size: 20px;
+        position: relative;
+        width: 500px;
+        height: 50px;
+        border-radius: var(--border-radius-small);
+        cursor: url(/static/css/img/pointer.png) 10 10, auto;
+        overflow: hidden;
+        background-color: var(--color-grey-0);
+        /* box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.8); */
+      }
+      .common-btn:hover::before {
+        position: absolute;
+        content: "";
+        background-color: var(--color-orange-5);
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        animation: fill 0.7s;
+        animation-timing-function: linear;
+      }
+      @keyframes fill {
+        0% {
+          left: -100%;
+          width: 0px;
+          height: 0px;
+          border-bottom: 250px solid var(--color-grey-0);
+          border-left: 100px solid transparent;
+          border-right: 100px solid var(--color-grey-0);
+        }
+
+        25% {
+          left: -750%;
+          width: 0px;
+          height: 0px;
+          border-bottom: 270px solid var(--color-grey-0);
+          border-left: 120px solid transparent;
+          border-right: 120px solid var(--color-grey-0);
+        }
+        50% {
+          left: -50%;
+          width: 0px;
+          height: 0px;
+        }
+
+        75% {
+          left: -25%;
+          width: 0px;
+          height: 0px;
+          border-bottom: 330px solid var(--color-grey-0);
+          border-left: 150px solid transparent;
+          border-right: 150px solid var(--color-grey-0);
+        }
+
+        100% {
+          left: 0%;
+          width: 0px;
+          height: 0px;
+          border-bottom: 360px solid var(--color-grey-0);
+          border-left: 180px solid transparent;
+          border-right: 180px solid var(--color-grey-0);
+        }
+      }
+      /* 공용 버튼 안에 글자 */
+      .common-text {
+        color: black;
+        position: relative;
+        cursor: url(/static/css/img/pointer.png) 10 10, auto;
+        z-index: 2;
+      }
+      .common-btn:hover .common-text {
+        animation: colorchange 0.7s linear forwards;
+      }
+      @keyframes colorchange {
+        50% {
+          color: white;
+        }
+        100% {
+          color: white;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header><%- include("../component/header")%></header>
+    <main class="container">
+      <!-- 로그인 콘텐츠 영역 -->
+      <div class="loginContent">
+        <h1 class="title">로그인</h1>
+        <p>다양한 사람들과 소통! 로그인하세요.</p>
+        <div class="loginBox">
+          <form name="login">
+            <input type="text" id="userid" name="userid" placeholder="아이디" />
+            <input
+              type="password"
+              name="password"
+              placeholder="비밀번호"
+              class="password"
+            />
+            <div class="resultContent">
+              <p id="result"></p>
+            </div>
+            <button type="button" id="login" class="common-btn">
+              <span class="common-text">로그인</span>
+            </button>
+          </form>
+          <div class="link">
+            <p>
+              아직 회원이 아니신가요?
+              <a href="/signup" class="signup"> 회원가입</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+    <%- include("../component/footer")%>
+  </body>
+  <script>
+    const loginButtonElement = document.querySelector("#login");
+    const resultElement = document.querySelector("#result");
+    const userid = document.querySelector("#userid").value;
+
+    async function login() {
+      const form = document.forms["login"];
+      const res = await axios({
+        method: "post",
+        url: "/login",
+        data: {
+          userid: form.userid.value,
+          password: form.password.value,
+        },
+      });
+      if (res.data.isError) {
+        return (resultElement.textContent = res.data.msg);
+      }
+      swal("로그인 완료되었습니다.", "", "success").then(function () {
+        location.href = "<%= url%>";
+      });
+    }
+
+    loginButtonElement.addEventListener("click", login);
+
+    function enterKey() {
+      const pw = document.querySelector(".password");
+      pw.addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+          event.preventDefault();
+          login();
+        }
+      });
+
+      const id = document.getElementById("userid");
+      id.addEventListener("keyup", function (event) {
+        if (event.keyCode === 13) {
+          event.preventDefault();
+          login();
+        }
+      });
+    }
+
+    enterKey();
+  </script>
+</html>

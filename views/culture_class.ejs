@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="/static/css/header.css" />
+    <link rel="stylesheet" href="/static/css/component.css" />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="/static/css/footer.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
+    <title>culture</title>
+
+    <style>
+      .header {
+        background-color: white;
+      }
+      .main-content {
+        display: flex;
+        width: 80%;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      .culture {
+        background-color: white;
+        border: 1px solid var(--color-black-1);
+        border-radius: var(--border-radius-medium);
+        width: 30%;
+        height: auto;
+
+        min-height: 300px;
+        max-height: 900px;
+        margin-left: 2rem;
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: column;
+        padding: 0.25rem;
+        align-items: center;
+        padding: 0;
+      }
+
+      .title {
+        margin: 0 0 var(--space-5);
+      }
+
+      .terms {
+        width: 500px;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--border-radius-medium);
+        margin: 0 0 var(--space-5);
+      }
+
+      #regionForm > select {
+        width: 130px;
+        height: 30px;
+        font-size: 18px;
+        border-radius: var(--border-radius-small);
+
+        border: none;
+      }
+
+      option {
+        background-color: white;
+      }
+
+      .common-btn {
+        margin-left: var(--space-2);
+        width: 150px;
+        height: 50px;
+      }
+
+      .common-btn:hover::before {
+        position: absolute;
+        content: "";
+        background-color: var(--color-orange-4);
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        animation: fill 0.7s;
+        animation-timing-function: linear;
+      }
+
+      .name {
+        margin-top: 0;
+        line-height: 3;
+        border-radius: var(--border-radius-medium) var(--border-radius-medium) 0
+          0;
+      }
+      .page {
+        color: var(--color-orange-3);
+      }
+
+      .content {
+        padding: 0 18px;
+        height: auto;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-out;
+        width: 90%;
+        text-align: center;
+        margin-bottom: var(--space-1);
+        font-size: 18px;
+      }
+
+      .mainContent {
+        margin-top: 50px;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        align-items: center;
+        justify-content: center;
+      }
+
+      h1 {
+        transform: translateY(20px);
+        transition: all 0.4s ease;
+        transition-delay: 0.2s;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      p {
+        font-size: 18px;
+        line-height: 24px;
+        color: black;
+        transform: translateY(20px);
+        transition: all 0.4s ease;
+        transition-delay: 0.3s;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .swiper-wrapper {
+        height: 100%;
+        max-height: none;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        z-index: 1;
+        position: relative;
+
+        margin: auto;
+      }
+
+      .swiper-container {
+        width: 600px;
+        height: 600px;
+        position: relative;
+        margin: auto;
+        border-radius: var(--border-radius-medium);
+      }
+
+      .slider-item {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+        opacity: 0;
+        background: var(--color-white-0);
+
+        border-radius: var(--border-radius-medium);
+        border: 2px solid var(--color-grey-0);
+      }
+
+      .sampleSlider {
+        background: var(--color-white-0);
+        display: flex;
+        flex-direction: column;
+        margin: var(--space-2) auto auto;
+        height: 50%;
+        width: 100%;
+
+        border-radius: var(--border-radius-medium);
+        border: 2px solid var(--color-grey-0);
+      }
+
+      .slider-item-content {
+        padding: 32px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        transition: 0.4s;
+      }
+      .slider-item-content > * {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      .swiper-slide-active .slider-item-content > * {
+        transform: translateY(0px);
+        opacity: 1;
+      }
+
+      .swiper-pagination {
+        position: absolute;
+        left: 50%;
+        top: 1%;
+        transform: translatex(-50%);
+        z-index: 10;
+        width: auto !important;
+      }
+
+      .swiper-pagination-bullet {
+        width: 20px;
+        height: 10px;
+        border-radius: 10px;
+        opacity: 1;
+        background: var(--color-orange-2);
+        display: inline-block;
+        margin-right: 3px;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .swiper-pagination-bullet-active {
+        background: var(--color-orange-4);
+        width: 50px;
+        height: 10px;
+        border-radius: 10px;
+      }
+
+      .slider-buttons {
+        display: flex;
+        display: none;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: var(--space-2);
+      }
+
+      .swiper-button-next,
+      .swiper-button-prev {
+        font-size: 16px;
+        position: relative;
+        margin-left: 4px;
+        color: var(--color-grey-1);
+        border: none;
+        border-radius: var(--border-radius-small);
+        width: 80px;
+      }
+      .swiper-button-next:active,
+      .swiper-button-prev:active {
+        background-color: var(--color-orange-3);
+      }
+
+      .sTitle {
+        font-weight: 700;
+        color: var(--color-orange-4);
+        margin-top: var(--space-2);
+        display: block;
+      }
+      .sText {
+        height: auto;
+        margin-top: var(--space-0);
+        display: block;
+      }
+
+      .sampleText1 {
+        height: auto;
+        font-size: 24px;
+        margin-top: 5%;
+        display: block;
+        color: var(--color-black-2);
+        text-align: center;
+      }
+      .sampleText2 {
+        height: auto;
+        font-size: 18px;
+        margin-top: var(--space-3);
+        display: block;
+        color: var(--color-black-2);
+        text-align: center;
+      }
+      .back > a,
+      span {
+        color: var(--color-black-2);
+        font-size: 20px;
+      }
+
+      .sMainTitle {
+        font-size: 26px;
+      }
+
+      .common-text {
+        color: var(--color-black-0);
+      }
+      body {
+        background-color: var(--color-grey-1);
+      }
+
+      .back {
+        width: fit-content;
+        margin: auto;
+      }
+
+      .back > a,
+      span {
+        color: var(--color-black-2);
+        font-size: 20px;
+      }
+
+      .backBtn {
+        display: flex;
+
+        width: auto;
+      }
+
+      .backBtn > p {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include("./component/header")%>
+
+    <main id="main">
+      <div class="mainContent">
+        <h1 class="title">지역별 일일 클래스 안내</h1>
+        <div class="terms">
+          <form
+            action="/classAPI"
+            name="regionForm"
+            id="regionForm"
+            onsubmit="submitForm(event)"
+          >
+            <button
+              type="submit"
+              onclick="submitForm(event)"
+              class="common-btn"
+            >
+              <span class="common-text">정보 불러오기 </span>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="swiper-container">
+        <div class="swiper-pagination"></div>
+        <div class="swiper-wrapper">
+          <div class="sampleSlider">
+            <p class="sampleText1">정보 불러오기 버튼을 눌러주세요!</p>
+            <p class="sampleText2">아래 일일 클래스 정보가 표시됩니다!</p>
+            <p class="back">
+              <a href="/culture"
+                >이전 메뉴로 돌아가기<span class="material-symbols-outlined">
+                  undo
+                </span></a
+              >
+            </p>
+          </div>
+        </div>
+        <div class="slider-buttons">
+          <button class="swiper-button-prev common-btn">
+            <span class="common-text">이전으로 </span>
+          </button>
+          <div class="backBtn">
+            <p class="back">
+              <a href="/culture">이전 메뉴로 돌아가기</a>
+            </p>
+          </div>
+          <button class="swiper-button-next common-btn">
+            <span class="common-text">다음으로 </span>
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <%- include("./component/footer")%>
+    <!-- partial -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.5/swiper-bundle.min.js"></script>
+    <script>
+      var swiper = new Swiper(".swiper-container", {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        effect: "fade",
+        loop: true,
+        speed: 300,
+        mousewheel: {
+          invert: false,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+          dynamicBullets: true,
+        },
+        // Navigation arrows
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+    </script>
+
+    <script>
+      function submitForm(event) {
+        event.preventDefault();
+
+
+        fetch(`/classAPI?`, {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // 서버로부터 받은 데이터를 처리
+            apiData(data);
+          })
+          .catch((error) => {
+            console.error("Error fetching data:", error);
+          });
+        return false;
+      }
+
+      function apiData(data) {
+        try {
+          const items = data.response.body.items.item;
+
+          const dataElem = document.querySelector(".swiper-wrapper");
+          dataElem.innerHTML = "";
+
+          for (let i = 0; i < items.length; i++) {
+            const item = items[i];
+
+            const name = item.title || "N/A";
+            const issuedDate = item.issuedDate || "N/A";
+            const category3 = item.category3 || "N/A";
+            const addr = item.address || "N/A";
+            const charge = item.charge || "N/A";
+            const desc = item.description || "N/A";
+            const headcount = item.headcount || "N/A";
+            const time = item.time || "N/A";
+
+
+            const buttondiv = document.querySelector(".slider-buttons");
+            buttondiv.style.display = "flex";
+            const libraryDiv = document.createElement("div");
+            libraryDiv.classList.add("slider-item", "swiper-slide");
+
+            const libraryDiv2 = document.createElement("div");
+            libraryDiv2.classList.add("slider-item-content");
+
+            const libraryButton = document.createElement("div");
+            libraryButton.classList.add("slider-buttons");
+
+            libraryDiv2.innerHTML =
+              `<h1 class="sMainTitle"> ${name}</h1>` +
+              `<p class="sTitle">주소</p>` +
+              `<p class="sText">${addr}</p>` +
+              `<p class="sTitle">클래스 설명 </p>` +
+              `<p class="sText"> ${desc} </p>` +
+              `<p class="sTitle">시간 </p>` +
+              `<p class="sText"> ${time} </p>` +
+              `<p class="sTitle">최대 인원 </p>` +
+              `<p class="sText"> ${headcount} </p>` +
+              `<p class="sTitle">비용 </p>` +
+              `<p class="sText"> ${charge} </p>`;
+
+            libraryDiv.appendChild(libraryDiv2);
+
+            dataElem.appendChild(libraryDiv);
+            swiper.update();
+          }
+        } catch (error) {
+          console.error("Error parsing or displaying data:", error);
+        }
+      }
+
+      async function logout(event) {
+        event.preventDefault();
+        const res = await axios({
+          method: "post",
+          url: "/logout",
+        });
+        swal("로그아웃이 완료되었습니다!", "", "success").then(function () {
+          location.href = "/culture/class";
+        });
+      }
+    </script>
+  </body>
+</html>

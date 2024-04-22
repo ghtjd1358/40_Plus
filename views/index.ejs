@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+      integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/static/css/header.css" />
+    <link rel="stylesheet" href="/static/css/footer.css" />
+    <link rel="stylesheet" href="/static/css/component.css" />
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
+
+    <link rel="icon" href="./static/css/img/favicon.png" />
+
+    <style>
+      /* 사진 아래 부분 */
+
+      body {
+        width: 100vw;
+      }
+      .container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        top: 150px;
+        width: 100%;
+        height: 100%;
+      }
+
+      .description {
+        margin-top: var(--space-4);
+        width: 80%;
+      }
+
+      .dtitle {
+        font-size: 32px;
+        color: var(--color-black-0);
+      }
+
+      .dtext {
+        color: var(--color-black-0);
+      }
+
+      .mainContent {
+        width: 80%;
+        margin-top: var(--space-4);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      .mainContent > a {
+        width: 100%;
+        height: 100%;
+      }
+
+      /* 자주 묻는 질문 */
+      .question {
+        width: 80%;
+        position: relative;
+      }
+      .collapsible {
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 18px;
+        border-radius: 5px;
+        margin-top: 1rem;
+      }
+
+      .content {
+        padding: 0px 18px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+        background-color: var(--color-white-0);
+      }
+
+      .active,
+      .collapsible:hover {
+        background-color: #ccc;
+      }
+
+      .collapsible:after {
+        content: "\2303";
+        transform: rotate(180deg);
+        border-radius: 0px;
+        font-size: 25px;
+        line-height: 10px;
+        float: right;
+      }
+
+      .line {
+        width: 80%;
+        height: 1px;
+        background-color: var(--color-black-1);
+        margin: 5% 0;
+        z-index: 1;
+      }
+
+      footer {
+        position: relative;
+      }
+
+      .visual {
+        position: relative;
+        display: flex;
+        top: 110px;
+        width: 100%;
+        height: 900px;
+        border: none;
+        background: linear-gradient(
+            to top,
+            rgba(255, 255, 255, 0) 10%,
+            rgba(255, 255, 255, 0.25) 25%,
+            rgba(255, 255, 255, 0.5) 50%,
+            rgba(255, 255, 255, 0.75) 75%,
+            rgb(255, 255, 255, 1) 100%
+          ),
+          url(https://images.pexels.com/photos/450035/pexels-photo-450035.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+        background-size: cover;
+        background-position: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+      }
+
+      .downButton {
+        width: auto;
+        height: 50px;
+        text-align: center;
+        margin-bottom: 10%;
+      }
+
+      .downButton > p,
+      span {
+        color: var(--color-white-0);
+        font-size: 28px;
+        animation-name: down;
+        animation-duration: 1s;
+        animation-direction: normal;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+      }
+
+      .material-symbols-outlined {
+        font-size: 50px;
+      }
+
+      @keyframes down {
+        0% {
+          margin-top: 4%;
+        }
+
+        25% {
+          margin-top: 2%;
+        }
+
+        50% {
+          margin-top: 0%;
+        }
+
+        75% {
+          margin-top: 2%;
+        }
+
+        100% {
+          margin-top: 4%;
+        }
+      }
+
+      /* 회전 박스 관련 CSS */
+
+      .col {
+        width: 300px;
+
+        min-width: 20%;
+        height: auto;
+        cursor: pointer;
+      }
+
+      .card {
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+        -webkit-perspective: 1000px;
+        perspective: 1000px;
+      }
+
+      .front,
+      .back {
+        box-shadow: var(--shadow);
+        border-radius: var(--border-radius-medium);
+        background-position: center;
+        -webkit-transition: -webkit-transform 0.7s
+          cubic-bezier(0.4, 0.2, 0.2, 1);
+        transition: -webkit-transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+        -o-transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+        transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+        transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1),
+          -webkit-transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        text-align: center;
+        min-height: 280px;
+        height: auto;
+        border-radius: var(--border-radius-medium);
+        font-size: 1rem;
+      }
+
+      .back {
+        background: -webkit-linear-gradient(
+          45deg,
+          var(--color-orange-1) 0%,
+          var(--color-orange-3) 100%
+        );
+        background: -o-linear-gradient(
+          45deg,
+          var(--color-orange-1) 0%,
+          var(--color-orange-3) 100%
+        );
+        background: linear-gradient(
+          45deg,
+          var(--color-orange-1) 0%,
+          var(--color-orange-3) 100%
+        );
+      }
+
+      .front:after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        content: "";
+        display: block;
+        opacity: 1;
+        background-color: var(--color-grey-0);
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        border-radius: var(--border-radius-medium);
+      }
+
+      .back {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+      }
+
+      .inner {
+        -webkit-transform: translateY(-50%) translateZ(60px) scale(0.94);
+        transform: translateY(-50%) translateZ(60px) scale(0.94);
+        top: 50%;
+        position: absolute;
+        left: 0;
+        width: 100%;
+        padding: 2rem;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        outline: 1px solid transparent;
+        -webkit-perspective: inherit;
+        perspective: inherit;
+        z-index: 2;
+      }
+
+      .card .back {
+        -webkit-transform: rotateY(180deg);
+        transform: rotateY(180deg);
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+      }
+
+      .card .front {
+        -webkit-transform: rotateY(0deg);
+        transform: rotateY(0deg);
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+      }
+
+      .card:hover .back {
+        -webkit-transform: rotateY(0deg);
+        transform: rotateY(0deg);
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+      }
+
+      .card:hover .front {
+        -webkit-transform: rotateY(-180deg);
+        transform: rotateY(-180deg);
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+      }
+
+      .front .inner p {
+        font-size: 16px;
+        margin-bottom: 2rem;
+        position: relative;
+      }
+
+      .front .inner p:after {
+        content: "";
+        width: 4rem;
+        height: 2px;
+        position: absolute;
+        background: var(--color-black-4);
+        display: block;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        bottom: -0.75rem;
+      }
+
+      .front .inner span {
+        color: var(--color-black-4);
+        font-weight: 300;
+      }
+
+      .textdeco {
+        color: var(--color-orange-5);
+      }
+    </style>
+    <title>main page</title>
+  </head>
+  <body>
+    <!-- header -->
+    <header>
+      <div class="headerContainer">
+        <nav class="nav header">
+          <!-- 로고 -->
+          <a href="/"
+            ><img
+              src="https://kdt10-bucket-jihun.s3.ap-northeast-2.amazonaws.com/logo.png"
+              alt=""
+              class="logo"
+          /></a>
+          <!-- 헤더 nav -->
+          <ul class="navMenu">
+            <% if(locals.userid === 'admin') {%>
+              <li class="navi-li indexli">
+                <a href="/admin/confirmword">단어승인</a>
+              </li>
+              <% } %>
+            <li class="navi-li indexli">
+              <a href="/computer">컴퓨터</a>
+            </li>
+
+            <li class="navi-li indexli">
+              <a href="/sub_kiosk">생활편의</a>
+            </li>
+
+            <li class="navi-li indexli">
+              <a href="/culture">문화생활</a>
+            </li>
+
+            <li class="navi-li indexli">
+              <a href="/community">게시판</a>
+            </li>
+          </ul>
+          <!-- 로그인 -->
+          <ul class="navUser">
+            <li class="navi-li indexli">
+              <% if(locals.accessToken) {%>
+              <a onclick="logout(window.event)" id="logout">로그아웃</a>
+
+              <%} else { %>
+              <a href="/login">로그인</a>
+              <%}%>
+            </li>
+            <li class="navi-li indexli">
+              <% if(locals.accessToken) {%>
+              <a href="/Mypage"> 마이페이지 </a>
+              <%} else { %>
+
+              <a href="/signup"> 회원가입</a>
+              <%}%>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div class="visual">
+      <div class="downButton">
+        <p>아래로 내려보세요!</p>
+        <span class="material-symbols-outlined arrow">
+          keyboard_arrow_down
+        </span>
+      </div>
+    </div>
+
+    <main class="mainContainer">
+      <section class="container up">
+        <section class="description">
+          <h1 class="dtitle">
+            <span class="textdeco">40 PLUS (사십 플러스)</span> 는,
+          </h1>
+          <p class="dtext">
+            타자 연습을 통해 MZ세대가 사용하는 단어를 쉽게 배우고, 복잡한
+            키오스크를 웹에서 직접 연습해 보는 서비스를 제공하는 플랫폼 입니다.
+          </p>
+          <p class="dtext">
+            전국 문화 체험 정보, 도시별 도서관 운영 시간과 같은 여가 생활에
+            필요한 정보들을 제공하며, 게시판에서 다른 사용자와 다양한 정보를
+            공유할 수 있습니다.
+          </p>
+          <br />
+          <br />
+        </section>
+
+        <!--  -->
+        <section class="mainContent">
+          <div
+            class="col content-box"
+            ontouchstart="this.classList.toggle('hover');"
+          >
+            <div class="card">
+              <div class="front">
+                <div class="inner">
+                  <p>
+                    <span class="material-symbols-outlined"> keyboard </span>
+                  </p>
+                  <span>컴퓨터</span>
+                </div>
+              </div>
+              <div class="back">
+                <div class="inner">
+                  <p>
+                    컴퓨터 메뉴에서는 MZ 언어를 통한 키보드 자판 연습이
+                    가능하며, 원하는 단어를 사전으로 등록하여 활용이 가능합니다.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="col content-box"
+            ontouchstart="this.classList.toggle('hover');"
+          >
+            <div class="card">
+              <div class="front">
+                <div class="inner">
+                  <p>
+                    <span class="material-symbols-outlined">
+                      jamboard_kiosk
+                    </span>
+                  </p>
+                  <span>생활편의</span>
+                </div>
+              </div>
+              <div class="back">
+                <div class="inner">
+                  <p>
+                    평소 키오스크 사용이 어렵게 느껴지셨나요? 생활편의 메뉴에서
+                    자주 접하는 식당의 키오스크 메뉴 연습을 통해 원활한 사용을
+                    도와드립니다.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="col content-box"
+            ontouchstart="this.classList.toggle('hover');"
+          >
+            <div class="card">
+              <div class="front">
+                <div class="inner">
+                  <p><span class="material-symbols-outlined"> public </span></p>
+                  <span>문화여가</span>
+                </div>
+              </div>
+              <div class="back">
+                <div class="inner">
+                  <p>
+                    여가 시간에 가볼만한 지역별 일일 클래스, 축제 정보부터 집
+                    주변 도서관 정보를 알려드립니다.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="col content-box"
+            ontouchstart="this.classList.toggle('hover');"
+          >
+            <div class="card">
+              <div class="front">
+                <div class="inner">
+                  <p>
+                    <span class="material-symbols-outlined"> person_add </span>
+                  </p>
+                  <span> 게시판</span>
+                </div>
+              </div>
+              <div class="back">
+                <div class="inner">
+                  <p>게시판에서 나와 비슷한 유저들과 소통이 가능합니다!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div class="line"></div>
+
+        <div class="question">
+          <h2 class="textdeco">자주 묻는 질문</h2>
+          <button type="button" class="collapsible btn">
+            컴퓨터 메뉴에선 어떤걸 할 수 있나요?
+          </button>
+          <div class="content">
+            <p>
+              <br />
+              컴퓨터 메뉴에서는 MZ어 타자 검정을 통해 타자 연습이 가능합니다.
+              자신만의 단어를 등록해서 등록한 단어로 타자 검정 또한 가능합니다.
+            </p>
+          </div>
+
+          <button type="button" class="collapsible btn">
+            생활 편의에서는 어떤걸 할 수 있나요?
+          </button>
+          <div class="content">
+            <p>
+              <br />
+              생활 편의 메뉴에서는 오프라인에서 자주 접하는 키오스크를 웹 상에서
+              체험해 볼 수 있습니다.
+              <br />키오스크 과정을 차근차근 따라가며 평소 다루기 어러웠던
+              기계에 더 쉽게 접근이 가능합니다.
+            </p>
+          </div>
+
+          <button type="button" class="collapsible btn">
+            회원 가입은 필수로 해야하는 건가요?
+          </button>
+          <div class="content">
+            <p>
+              <br />
+              회원가입을 하지 않아도, 컴퓨터, 생활 편의, 문화생활 등 여러 메뉴
+              이용이 가능합니다.
+              <br />
+              단, 비회원으로 이용 시 나만의 단어 등록, 게시판 이용에 제한이 있을
+              수 있습니다.
+            </p>
+          </div>
+        </div>
+
+        <div class="line"></div>
+      </section>
+    </main>
+
+    <%- include("./component/footer")%>
+
+    <script>
+      const coll = document.getElementsByClassName("collapsible");
+      let i;
+
+      for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function () {
+          this.classList.toggle("active");
+          var content = this.nextElementSibling;
+          if (content.style.maxHeight) {
+            content.style.maxHeight = null;
+          } else {
+            content.style.height = "70px";
+
+            content.style.maxHeight = "200px";
+            // content.scrollHeight +
+          }
+        });
+      }
+
+      async function logout(event) {
+        event.preventDefault();
+        const res = await axios({
+          method: "post",
+          url: "/logout",
+        });
+
+        swal(
+          "로그아웃이 완료되었습니다!.",
+          "원활한 서비스 이용을 위해 다시 로그인 해주세요!",
+          "success"
+        ).then(function () {
+          location.href = "/";
+        });
+      }
+
+      // nav bar
+      const nav = document.querySelector(".nav");
+      const navUls = document.querySelectorAll(".nav-ul");
+
+      window.addEventListener("scroll", fixNav);
+
+      function fixNav() {
+        const scrolled = window.scrollY > nav.offsetHeight + 150;
+        // nav.classList.add('active') : nav.classList.remove('active')
+        nav.classList.toggle("active", scrolled);
+      }
+
+      //--------------------------------------------------
+
+      // animation scroll(section)
+
+      const sections = document.querySelectorAll("section");
+
+      window.addEventListener("scroll", () => {
+        const windowInner = window.innerHeight;
+
+        sections.forEach((section) => {
+          const sectionHeight = section.getBoundingClientRect().top;
+          if (windowInner > sectionHeight) {
+            section.classList.remove("up");
+          } else {
+            section.classList.add("up");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

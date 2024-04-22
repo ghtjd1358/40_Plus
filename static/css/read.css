@@ -1,0 +1,196 @@
+body {
+    margin: 0;
+}
+.common-btn {
+    margin-bottom: 10px;
+    width: 80px;
+    height: 40px; 
+    margin-left: 80%;
+}
+.common-btn.edit {
+    margin-right: 10px;
+}
+.common-btn.delete {
+    margin-left: 0px;
+}
+.common-btn.edit:hover::before {
+    background-color: green;
+}
+.common-btn.delete:hover::before {
+    background-color: var(--color-red-5);
+}
+.common-btn.add {
+    width: 100px;
+    height: 50px;
+    margin-left: auto;
+}
+.big-C {
+    min-height: 100vh;
+    background-color: #f5f5f5;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.small-C {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    width: 80%;
+    max-width: 900px;
+    text-align: left;
+    margin: 50px 0;
+}
+/* 제목 */
+.title {
+    font-size: 36px;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 20px;
+}
+/* 내용 */
+.content {
+    font-size: 24px;
+    color: #555555;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    white-space: pre-wrap;
+}
+
+/* 기타 정보 */
+.meta-info {
+    font-size: 18px;
+    color: #888888;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+hr {
+    margin-bottom: 20px;    
+}
+.space {
+    margin-left: 10px;
+    margin-right: 5px;
+}
+.date {
+    margin-left: 5px;
+}
+.views {
+    margin-left: auto;
+    margin-right: 5px;
+}
+.comments {
+    margin-right: 5px;
+}
+.comments-hr {
+    border: 0; /* 기본 테두리 제거 */
+    height: 2px; /* 선의 높이(두께) 조절 */
+    background-color: #3498db; /* 파란색으로 변경 */
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* 댓글 창 스타일 */
+.comments-area {
+    margin-top: 30px;
+}
+/* 댓글 입력 폼 */
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.comment-form textarea {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    height: 80px;
+    resize: none;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+
+.common-btn.add:hover::before {
+    background-color: darkcyan;
+}
+
+/* 각 댓글 보기 스타일 */
+.comment {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    display: flex;
+
+    flex-direction: column;
+}
+
+.comment-user {
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+.comment-date {
+    color: #888888;
+    font-size: 12px;
+    margin-left: auto;
+    margin-bottom: 10px;
+}
+.comment-like-button {
+    color: #888888;
+    font-size: 16px;
+    margin-left: auto;
+    margin-bottom: 10px;
+}
+
+.comment-content {
+    border-top: 1px solid #ddd; /* 구분선 스타일 추가 */
+    padding-top: 10px; /* 구분선과의 간격 조절 */
+    white-space: pre-wrap;
+}
+/* 헤더 온 오프 */
+@media screen and (min-width: 769px) {
+    #sideheader {
+      display: none;
+    }
+    
+  }
+  @media screen and (max-width: 768px) {
+    .headerContainer {
+      display: none;
+    }
+    #sideheader {
+      display: block;
+    }
+    footer {
+      display: none;
+    }
+  }
+  @media screen and (max-width:1140px) {
+    .small-C {
+        min-width: 700px;
+    }
+    .common-btn {
+        margin-left: 73%
+    }
+  }
+  @media screen and (min-width: 1921px) {
+    .small-C {
+      max-width: 1200px;
+    }
+    .input-group input::placeholder, .input-group textarea::placeholder {
+      font-size: larger;
+    }
+    .common-btn {
+        margin-left: 85%;
+    }
+  }

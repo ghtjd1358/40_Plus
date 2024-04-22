@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <link rel="stylesheet" href="/static/css/header.css" />
+    <link rel="stylesheet" href="/static/css/component.css" />
+    <link rel="stylesheet" href="/static/css/footer.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"
+    />
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <title>festival</title>
+
+    <style>
+      .header {
+        background-color: white;
+      }
+      .main-content {
+        display: flex;
+        width: 80%;
+        /* height: 100%; */
+        /* background-color: pink; */
+        flex-wrap: wrap;
+        align-items: center;
+        /* justify-content: space-evenly; */
+      }
+
+      .culture {
+        background-color: white;
+        border: 1px solid var(--color-black-1);
+        border-radius: var(--border-radius-medium);
+        /* box-shadow: 1px 1px var(--color-black-1); */
+        width: 30%;
+        height: auto;
+
+        min-height: 300px;
+        max-height: 900px;
+        margin-left: 2rem;
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: column;
+        padding: 0.25rem;
+        align-items: center;
+        /* align-items: center; */
+        padding: 0;
+      }
+
+      .title {
+        margin: 0 0 var(--space-5);
+      }
+
+      .terms {
+        width: 500px;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* background-color: var(--color-grey-0); */
+        border-radius: var(--border-radius-medium);
+        /* box-shadow: var(--shadow); */
+        margin: 0 0 var(--space-5);
+      }
+
+      #regionForm > select {
+        width: 130px;
+        height: 30px;
+        font-size: 18px;
+        border-radius: var(--border-radius-small);
+
+        border: none;
+      }
+
+      option {
+        background-color: white;
+      }
+
+      .common-btn {
+        margin-left: var(--space-2);
+        width: 150px;
+        height: 50px;
+      }
+
+      .common-btn:hover::before {
+        position: absolute;
+        content: "";
+        background-color: var(--color-orange-4);
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        animation: fill 0.7s;
+        animation-timing-function: linear;
+      }
+
+      .name {
+        margin-top: 0;
+        line-height: 3;
+        border-radius: var(--border-radius-medium) var(--border-radius-medium) 0
+          0;
+      }
+      .page {
+        color: var(--color-orange-3);
+      }
+
+      .content {
+        padding: 0 18px;
+        height: auto;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-out;
+        width: 90%;
+        text-align: center;
+        /* font-weight: 700; */
+        margin-bottom: var(--space-1);
+        font-size: 18px;
+      }
+
+      .mainContent {
+        margin-top: 50px;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        align-items: center;
+        justify-content: center;
+      }
+
+      h1 {
+        transform: translateY(20px);
+        transition: all 0.4s ease;
+        transition-delay: 0.2s;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      p {
+        font-size: 18px;
+        line-height: 24px;
+        color: black;
+        transform: translateY(20px);
+        transition: all 0.4s ease;
+        transition-delay: 0.3s;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .swiper-wrapper {
+        height: 100%;
+        max-height: none;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        z-index: 1;
+        position: relative;
+
+        margin: auto;
+      }
+
+      .swiper-container {
+        width: 600px;
+        height: 600px;
+        position: relative;
+        margin: auto;
+        border-radius: var(--border-radius-medium);
+      }
+
+      .slider-item {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+        opacity: 0;
+        background: var(--color-white-0);
+
+        border-radius: var(--border-radius-medium);
+        border: 2px solid var(--color-grey-0);
+      }
+
+      .sampleSlider {
+        background: var(--color-white-0);
+        display: flex;
+        flex-direction: column;
+        margin: var(--space-2) auto auto;
+        height: 50%;
+        width: 100%;
+
+        border-radius: var(--border-radius-medium);
+        border: 2px solid var(--color-grey-0);
+      }
+
+      .slider-item-content {
+        padding: 32px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        transition: 0.4s;
+      }
+      .slider-item-content > * {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      .swiper-slide-active .slider-item-content > * {
+        transform: translateY(0px);
+        opacity: 1;
+      }
+
+      .swiper-pagination {
+        position: absolute;
+        /* background-color: red; */
+        left: 50%;
+        top: 1%;
+        /* bottom: 8px; */
+        transform: translatex(-50%);
+        z-index: 10;
+        width: auto !important;
+      }
+
+      .swiper-pagination-bullet {
+        width: 20px;
+        height: 10px;
+        border-radius: 10px;
+        opacity: 1;
+        background: var(--color-orange-2);
+        display: inline-block;
+        margin-right: 3px;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .swiper-pagination-bullet-active {
+        background: var(--color-orange-4);
+        width: 50px;
+        height: 10px;
+        border-radius: 10px;
+      }
+
+      .slider-buttons {
+        /* position: relative; */
+        display: flex;
+        display: none;
+        justify-content: space-between;
+        /* background-color: pink; */
+        width: 100%;
+        /* height: 5%; */
+        margin-top: var(--space-2);
+      }
+
+      .swiper-button-next,
+      .swiper-button-prev {
+        font-size: 16px;
+        position: relative;
+        margin-left: 4px;
+        /* background-color: var(--color-orange-4); */
+        color: var(--color-grey-1);
+        border: none;
+        border-radius: var(--border-radius-small);
+        width: 80px;
+      }
+      .swiper-button-next:active,
+      .swiper-button-prev:active {
+        background-color: var(--color-orange-3);
+      }
+      /* .swiper-button-next:hover,
+      .swiper-button-prev:hover {
+        background-color: var(--color-orange-3);
+      } */
+
+      .sTitle {
+        font-weight: 700;
+        /* background-color: pink; */
+        color: var(--color-orange-4);
+        margin-top: var(--space-2);
+        display: block;
+      }
+      .sText {
+        /* background-color: red; */
+        height: auto;
+        margin-top: var(--space-0);
+        display: block;
+      }
+
+      .sampleText1 {
+        height: auto;
+        font-size: 24px;
+        margin-top: 5%;
+        display: block;
+        color: var(--color-black-2);
+        text-align: center;
+      }
+      .sampleText2 {
+        height: auto;
+        font-size: 18px;
+        margin-top: var(--space-3);
+        display: block;
+        color: var(--color-black-2);
+        text-align: center;
+      }
+      .back > a,
+      span {
+        color: var(--color-black-2);
+        font-size: 20px;
+      }
+
+      .sMainTitle {
+        font-size: 26px;
+      }
+
+      .common-text {
+        color: var(--color-black-0);
+      }
+      body {
+        background-color: var(--color-grey-1);
+      }
+
+      .back {
+        width: fit-content;
+        margin: auto;
+      }
+
+      .back > a,
+      span {
+        color: var(--color-black-2);
+        font-size: 20px;
+      }
+
+      .backBtn {
+        width: auto;
+      }
+
+      .backBtn > p {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header><%- include("./component/header")%></header>
+
+    <main id="main">
+      <div class="mainContent">
+        <h1 class="title">지역별 축제 정보 안내</h1>
+        <div class="terms">
+          <form
+            action="/festivalAPI"
+            name="regionForm"
+            id="regionForm"
+            onsubmit="submitForm(event)"
+          >
+            <button
+              type="submit"
+              onclick="submitForm(event)"
+              class="common-btn"
+            >
+              <span class="common-text">정보 불러오기 </span>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="swiper-container">
+        <div class="swiper-pagination"></div>
+        <div class="swiper-wrapper">
+          <!--  -->
+          <!-- <div class="slider-item swiper-slide sampleSlider"> -->
+          <div class="sampleSlider">
+            <p class="sampleText1">정보 불러오기 버튼을 눌러주세요!</p>
+            <p class="sampleText2">아래 다양한 축제 정보가 표시됩니다!</p>
+            <p class="back">
+              <a href="/culture"
+                >이전 메뉴로 돌아가기<span class="material-symbols-outlined">
+                  undo
+                </span></a
+              >
+            </p>
+          </div>
+          <!-- </div> -->
+          <!--  -->
+        </div>
+        <div class="slider-buttons">
+          <button class="swiper-button-prev common-btn">
+            <span class="common-text">이전으로 </span>
+          </button>
+          <div class="backBtn">
+            <p class="back">
+              <a href="/culture">이전 메뉴로 돌아가기</a>
+            </p>
+          </div>
+          <button class="swiper-button-next common-btn">
+            <span class="common-text">다음으로 </span>
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <%- include("./component/footer")%>
+    <!-- partial -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.4.5/swiper-bundle.min.js"></script>
+    <script>
+      var swiper = new Swiper(".swiper-container", {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        effect: "fade",
+        loop: true,
+        speed: 300,
+        mousewheel: {
+          invert: false,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+          dynamicBullets: true,
+        },
+        // Navigation arrows
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+    </script>
+
+    <script>
+      function submitForm(event) {
+        event.preventDefault();
+
+        // const selectRegion = region.value;
+        // const selectDtl = dtl_region.value;
+
+        fetch(`/festivalAPI?`, {
+          method: "get",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // 서버로부터 받은 데이터를 처리
+            // console.log("data >", data);
+            apiData(data);
+          })
+          .catch((error) => {
+            console.error("Error fetching data");
+          });
+        return false;
+      }
+
+      function apiData(data) {
+
+        try {
+          const items = data.response.body.items.item;
+
+          const dataElem = document.querySelector(".swiper-wrapper");
+          dataElem.innerHTML = "";
+
+          for (let i = 0; i < items.length; i++) {
+            const item = items[i];
+
+            const title = item.title || "N/A";
+            const spatialCoverage = item.spatialCoverage || "N/A";
+            const date = item.regDate || "N/A";
+            const page = item.url || "N/A";
+            const dsec = item.description || "N/A";
+
+
+            const buttondiv = document.querySelector(".slider-buttons");
+            buttondiv.style.display = "flex";
+            const fetivalDiv = document.createElement("div");
+            fetivalDiv.classList.add("slider-item", "swiper-slide");
+
+            const festivalDiv2 = document.createElement("div");
+            festivalDiv2.classList.add("slider-item-content");
+
+            const festivalBtn = document.createElement("div");
+            festivalBtn.classList.add("slider-buttons");
+
+            festivalDiv2.innerHTML =
+              `<h1 class="sMainTitle"> ${title}</h1>` +
+              `<p class="sTitle">주소</p>` +
+              `<p class="sText">${spatialCoverage}</p>` +
+              `<p class="sTitle">축제일 </p>` +
+              `<p class="sText">${date}</p>` +
+              `<p class="sTitle">축제 설명 </p>` +
+              `<p class="sText"> ${dsec} </p>` +
+              `<p class="sTitle"> <a href=${page}>홈페이지 바로가기 </a></p>`;
+
+            fetivalDiv.appendChild(festivalDiv2);
+
+            dataElem.appendChild(fetivalDiv);
+            swiper.update();
+          }
+        } catch (error) {
+          console.error("Error parsing or displaying data:", error);
+        }
+      }
+
+      async function logout(event) {
+        event.preventDefault();
+        const res = await axios({
+          method: "post",
+          url: "/logout",
+        });
+        swal("로그아웃이 완료되었습니다!", "", "success").then(function () {
+          location.href = "/culture/festival";
+        });
+      }
+    </script>
+  </body>
+</html>

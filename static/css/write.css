@@ -1,0 +1,87 @@
+.big-C {
+    background-color: #f5f5f5;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .small-C {
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    width: 80%;
+    max-width: 900px;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  .input-group {
+    margin-bottom: 20px;
+  }
+
+  .input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333333;
+  }
+
+  .input-group input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    font-size: 24px;
+  }
+
+
+  .input-group textarea {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #dddddd;
+    border-radius: 5px;
+    height: 70vh;
+    resize: none;
+    margin-bottom: 10px;
+    font-size: 24px;
+  }
+  .input-group input::placeholder, .input-group textarea::placeholder {
+    font-size: 24px;
+  }
+  .common-btn:hover::before {
+    background-color: darkcyan;
+  }
+
+  .label-text {
+    font-size: 32px;
+  }
+  /* 헤더 온 오프 */
+  @media screen and (min-width: 769px) {
+    #sideheader {
+      display: none;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .headerContainer {
+      display: none;
+    }
+    #sideheader {
+      display: block;
+    }
+    footer {
+      display: none;
+    }
+  }
+  @media screen and (min-width: 1921px) {
+    .small-C {
+      max-width: 1200px;
+    }
+    .input-group input::placeholder, .input-group textarea::placeholder {
+      font-size: larger;
+    }
+  }

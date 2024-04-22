@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <title>main page</title>
+
+    <link rel="stylesheet" href="/static/css/header.css" />
+    <link rel="stylesheet" href="/static/css/component.css" />
+    <link rel="stylesheet" href="/static/css/footer.css" />
+    <style>
+      .header {
+        background-color: white;
+      }
+      .footer {
+        margin-top: 0px;
+      }
+      .container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        width: 100%;
+        height: 80vh;
+
+        /* border-top: 1px solid var(--color-grey-0); */
+
+        background-color: var(--color-grey-0);
+      }
+
+      .userContent {
+        margin-top: 50px;
+        width: 700px;
+        /* height: 600px; */
+
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        /* justify-content: center;
+        align-items: center; */
+        background-color: var(--color-white-0);
+        border-radius: var(--border-radius-medium);
+        /* box-shadow: var(--shadow); */
+      }
+
+      .registerBox {
+        /* position: relative; */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* background-color: pink; */
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      #name {
+        width: 400px;
+        margin-bottom: var(--space-5);
+      }
+      .btnS {
+        background-color: var(--color-orange-4);
+        color: var(--color-grey-0);
+        border: 1px solid var(--color-orange-3);
+        border-radius: var(--border-radius-small);
+        height: 30px;
+        width: 80px;
+        margin-left: var(--space-2);
+      }
+
+      .btnM {
+        background-color: var(--color-orange-4);
+        color: var(--color-grey-0);
+        border: 1px solid var(--color-orange-3);
+        border-radius: var(--border-radius-small);
+        font-size: 18px;
+        height: 40px;
+        width: 200px;
+        margin: 0 var(--space-2);
+      }
+
+      .modalPw {
+        position: absolute;
+        background-color: white;
+        display: none;
+        width: 100%;
+        height: 100%;
+        top: 0;
+      }
+
+      .modalDel {
+        position: absolute;
+        background-color: white;
+        display: none;
+        width: 100%;
+        height: 100%;
+        top: 0;
+      }
+
+      .modalBox {
+        display: flex;
+        width: 100%;
+        height: 118%;
+        align-items: center;
+
+        flex-direction: column;
+        background-color: var(--color-white-0);
+        border-radius: var(--border-radius-medium);
+        box-shadow: var(--shadow);
+      }
+
+      .delbox {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+      }
+
+      .infos {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: var(--space-5);
+      }
+
+      .userId {
+        /* display: flex; */
+        /* flex-direction: column; */
+        align-items: center;
+
+        background-color: pink;
+      }
+
+      label {
+        font-size: 18px;
+      }
+
+      input {
+        width: 500px;
+        height: 40px;
+        border: none;
+        border-bottom: 2px solid var(--color-black-1);
+        font-size: 18px;
+        margin-bottom: var(--space-3);
+      }
+
+      input::placeholder {
+        font-size: 18px;
+        text-align: right;
+        color: var(--color-black-2);
+      }
+
+      input:focus {
+        background-color: none;
+        border-bottom: 3px solid var(--color-orange-4);
+      }
+
+      .title {
+        margin: var(--space-5) 0 var(--space-3);
+      }
+
+      .star {
+        color: var(--color-red-4);
+        font-size: 16px;
+      }
+
+      .idSpan {
+        color: var(--color-black-1);
+      }
+
+      #result-of-change-name {
+        color: var(--color-red-4);
+      }
+
+      #result-of-change-password {
+        color: var(--color-red-4);
+        font-weight: 700;
+      }
+
+      .delP {
+        margin-bottom: var(--space-5);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- header -->
+    <header><%- include("../component/header")%></header>
+    <main class="container">
+      <div class="userContent">
+        <h1 class="title">회원 정보</h1>
+        <div class="registerBox">
+          <label for="userid"
+            >아이디
+            <span class="idSpan">(아이디는 변경 불가능합니다)</span>
+          </label>
+
+          <input
+            type="text"
+            id="userid"
+            value="<%= userInfo.userid %>"
+            readonly
+          />
+
+          <label for="name"
+            >이름<span class="star">*</span>
+            <span id="result-of-change-name"></span>
+          </label>
+          <div>
+            <input type="text" id="name" value="<%= userInfo.name %>" />
+
+            <button id="change-name-button" class="btnS">이름 변경</button>
+          </div>
+
+          <div class="infos">
+            <!-- 비빌번호 변경 -->
+            <button class="btnM openPwModal">비밀번호 변경</button>
+
+            <div class="modal modalPw">
+              <div class="modalBox">
+                <h1 class="title">비밀번호 변경</h1>
+
+                <div id="result-of-change-password"></div>
+                <form name="change-password">
+                  <label for="current-password">현재 비밀번호</label>
+                  <input
+                    type="password"
+                    id="current-password"
+                    name="current-password"
+                  />
+
+                  <label for="new-password">새 비밀번호</label>
+                  <input
+                    type="password"
+                    id="new-password"
+                    name="new-password"
+                  />
+                  <label for="confirm-password">비밀번호 확인</label>
+                  <input
+                    type="password"
+                    id="confirm-password"
+                    name="confirm-password"
+                  />
+                  <div class="infos">
+                    <button
+                      id="change-password-button"
+                      type="button"
+                      class="btnM"
+                    >
+                      비밀번호 변경
+                    </button>
+
+                    <button class="btnM">닫기</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <!-- 회원 탈퇴 -->
+            <button id="delete-user-button" class="btnM openDelModal">
+              회원 탈퇴
+            </button>
+
+            <div class="modal modalDel">
+              <div class="delbox">
+                <h1 class="title">회원을 탈퇴하시겠습니까?</h1>
+
+                <p class="delP">예 버튼 클릭시 즉시 탈퇴됩니다.</p>
+                <div class="infos">
+                  <button id="delete-user-button-yes" class="btnM">예</button>
+                  <button id="delete-user-button-no" class="btnM">
+                    아니오
+                  </button>
+                </div>
+              </div>
+              <div id="result-of-delete-user"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <%- include("../component/footer")%>
+
+    <script>
+      const modal1 = document.querySelector(".modalPw");
+      const modal2 = document.querySelector(".modalDel");
+
+      const openModal1 = document.querySelector(".openPwModal");
+      const openModal2 = document.querySelector(".openDelModal");
+
+      openModal1.addEventListener("click", () => {
+        modal1.style.display = "flex";
+      });
+
+      openModal2.addEventListener("click", () => {
+        modal2.style.display = "flex";
+      });
+      modal1.addEventListener("click", () => {
+        modal2.style.display = "none";
+      });
+      modal2.addEventListener("click", () => {
+        modal2.style.display = "none";
+      });
+
+      const changeNameBtnElement = document.querySelector(
+        "#change-name-button"
+      );
+      const changePasswordBtnElement = document.querySelector(
+        "#change-password-button"
+      );
+      const deleteUserBtnElement = document.querySelector(
+        "#delete-user-button-yes"
+      );
+
+      async function changeName() {
+        const nameElement = document.querySelector("#name");
+        const result = document.querySelector("#result-of-change-name");
+        const res = await axios({
+          url: "/mypage/changename",
+          method: "patch",
+          data: {
+            name: nameElement.value,
+          },
+        });
+        console.log(res.data);
+        result.textContent = res.data.msg;
+      }
+
+      async function changePassword() {
+        const passwordForm = document.forms["change-password"];
+        const resultOfchangePassword = document.querySelector(
+          "#result-of-change-password"
+        );
+
+        const res = await axios({
+          url: "/mypage/changepassword",
+          method: "patch",
+          data: {
+            currentPassword: passwordForm["current-password"].value,
+            newPassword: passwordForm["new-password"].value,
+            confirmPassword: passwordForm["confirm-password"].value,
+          },
+        });
+        console.log(res.data);
+        resultOfchangePassword.textContent = res.data.msg;
+      }
+      async function deleteUser() {
+        const resultOfDeleteUser = document.querySelector(
+          "#result-of-delete-user"
+        );
+        const res = await axios({
+          url: "/mypage",
+          method: "delete",
+        });
+
+        if (!res.data.isError) {
+          swal(
+            "회원탈퇴가 완료되었습니다!",
+            "이용해주셔서 감사드립니다.",
+            "success"
+          ).then(function () {
+            location.href = "/";
+          });
+          // location.href = "/";
+        } else {
+          resultOfDeleteUser.textContent = res.data.msg;
+        }
+      }
+
+      changeNameBtnElement.addEventListener("click", changeName);
+      changePasswordBtnElement.addEventListener("click", changePassword);
+      deleteUserBtnElement.addEventListener("click", deleteUser);
+
+      async function logout(event) {
+        event.preventDefault();
+        const res = await axios({
+          method: "post",
+          url: "/logout",
+        });
+        swal("로그아웃 완료!", "", "success").then(function () {
+          location.href = "/";
+        });
+      }
+    </script>
+  </body>
+</html>

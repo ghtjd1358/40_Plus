@@ -1,0 +1,257 @@
+html {
+  /* 검정 계열  */
+  --color-black-1: rgb(204, 204, 204);
+  --color-black-2: rgb(153, 153, 153);
+  --color-black-3: rgb(102, 102, 102);
+  --color-black-4: rgb(51, 51, 51);
+  --color-black-5: rgb(0, 0, 0);
+
+  /* 빨강 계열 */
+  --color-red-1: rgb(255, 194, 194);
+  --color-red-2: rgb(250, 153, 153);
+  --color-red-3: rgb(239, 112, 112);
+  --color-red-4: rgb(228, 71, 71);
+  --color-red-5: rgb(207, 10, 10);
+
+  /* 주황 계열 */
+  --color-orange-1: rgb(255, 214, 191);
+  --color-orange-2: rgb(255, 184, 143);
+  --color-orange-3: rgb(243, 154, 95);
+  --color-orange-4: rgb(232, 125, 48);
+  --color-orange-5: rgb(220, 95, 0);
+
+  /* 검정 */
+  --color-black-0: #333;
+
+  /* 흰색 */
+  --color-white-0: #ffffff;
+
+  /* 회색 */
+  --color-grey-0: #eeeeee;
+  --color-grey-1: #f2f2f2;
+
+  /* 둥글기 */
+  --border-radius-small: 5px;
+  --border-radius-medium: 10px;
+  --border-radius-large: 15px;
+
+  /* 그림자 */
+  --shadow: 0 3px 3px rgb(51, 51, 51, 0.2);
+
+  /* 여백 */
+  /* font-size에 비례 */
+  --space-0: 0.25rem;
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-5: 2.5rem;
+
+  /* height: 100%; */
+}
+
+@font-face {
+  font-family: "GmarketSansMedium";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  font-family: "GmarketSansMedium";
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: var(--color-black-0);
+  /* 마우스 포인트 */
+  cursor: url(./img/basic.png) 10 10, auto;
+}
+
+/* 로고 */
+.logo {
+  width: 200px;
+  height: 100px;
+  cursor: url(./img/pointer.png) 10 10, auto;
+}
+
+li {
+  list-style: none;
+}
+
+body {
+  overflow-x: scroll;
+}
+
+a {
+  text-decoration: none;
+  cursor: url(./img/pointer.png) 10 10, auto;
+}
+
+.btn {
+  cursor: url(./img/pointer.png) 10 10, auto;
+}
+
+/* 공용 버튼 */
+.common-btn {
+  font-size: 20px;
+  position: relative;
+  width: 100px;
+  height: 50px;
+  border-radius: 5px;
+  cursor: url(./img/pointer.png) 10 10, auto;
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.8);
+}
+.common-btn:hover::before {
+  position: absolute;
+  content: "";
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  animation: fill 0.7s;
+  animation-timing-function: linear;
+}
+@keyframes fill {
+  0% {
+    left: -100%;
+    width: 0px;
+    height: 0px;
+    border-bottom: 250px solid white;
+    border-left: 100px solid transparent;
+    border-right: 100px solid white;
+  }
+  50% {
+    left: -50%;
+    width: 0px;
+    height: 0px;
+  }
+  100% {
+    left: 0%;
+    width: 0px;
+    height: 0px;
+    border-bottom: 360px solid white;
+    border-left: 180px solid transparent;
+    border-right: 180px solid white;
+  }
+}
+/* 공용 버튼 안에 글자 */
+.common-text {
+  position: relative;
+  cursor: url(./img/pointer.png) 10 10, auto;
+  z-index: 2;
+}
+.common-btn:hover .common-text {
+  animation: colorchange 0.7s linear forwards;
+}
+@keyframes colorchange {
+  50% {
+    color: white;
+  }
+  100% {
+    color: white;
+  }
+}
+/* <button class="common-btn"><span class="common-text">버튼</span></button> 이런식으로 */
+header {
+  font-size: 18px;
+}
+
+/* 메인 콘텐츠 영역 */
+
+/* 인풋창 */
+input {
+  cursor: url(./img/pointer.png) 10 10, auto;
+}
+
+input:focus {
+  outline: none;
+}
+
+input:focus::placeholder {
+  font-size: 0px;
+}
+
+/* alert창 */
+.swal-modal {
+  margin-top: -20%;
+}
+.swal-button {
+  padding: 7px 19px;
+  background-color: var(--color-orange-5);
+  font-size: 12px;
+}
+
+/* alert창 */
+
+.swal2-popup {
+  margin-top: -30%;
+}
+
+.swal2-confirm {
+  margin-left: 400px;
+  font-size: 20px;
+  position: relative;
+  width: 80px;
+  height: 40px;
+  border-radius: 5px;
+  cursor: url(./img/pointer.png) 10 10, auto;
+  overflow: hidden;
+  background-color: white;
+}
+
+.swal2-confirm:hover::before {
+  position: absolute;
+  content: "";
+  background-color: var(--color-orange-3);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  animation: fill 0.7s;
+  animation-timing-function: linear;
+}
+@keyframes fill {
+  0% {
+    left: -100%;
+    width: 0px;
+    height: 0px;
+    border-bottom: 250px solid white;
+    border-left: 100px solid transparent;
+    border-right: 100px solid white;
+  }
+  50% {
+    left: -50%;
+    width: 0px;
+    height: 0px;
+  }
+  100% {
+    left: 0%;
+    width: 0px;
+    height: 0px;
+    border-bottom: 360px solid white;
+    border-left: 180px solid transparent;
+    border-right: 180px solid white;
+  }
+}
+
+.common-text {
+  position: relative;
+  cursor: url(./img/pointer.png) 10 10, auto;
+  z-index: 2;
+}
+.common-btn:hover .common-text {
+  animation: colorchange 0.7s linear forwards;
+  color: white;
+}
+@keyframes colorchange {
+  50% {
+    color: white;
+  }
+  100% {
+    color: white;
+  }
+}

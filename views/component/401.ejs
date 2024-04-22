@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/component.css">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>401 Error</title>
+    <style>
+    html, body {
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      font-size: larger;
+      overflow: hidden;
+    }
+    body {
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .man {
+      width: 200px;
+      margin-top: 40px;
+      height: 360px;
+    }
+
+    .head {
+      width: 70px;
+      height: 70px;
+      background-color: purple;
+      border-radius: 50%;
+      animation-name: body;
+      animation-duration: 4s;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+    }
+
+    .body {
+      height: 144px;
+      width: 62px;
+      background-color: purple;
+      border-radius: 100% 20% 0 0;
+      transform: skewX(-2deg);
+      position: relative;
+      left: -50px;  
+      animation-name: body;
+      animation-duration: 4s;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+    }
+    @keyframes body {
+      25% {
+        transform: translateY(5px);
+      }
+      50% {
+        transform: translateY(0);
+      }
+      75% {
+        transform: translateY(5px);
+      }
+    }
+
+    .foot {
+      width: 40px;
+      height: 14px;
+      border-radius: 10px 80% 4px 4px;
+      transform: skewX(5deg);
+      background-color: purple;
+      display: inline-block;
+      animation-name: foot;
+      animation-duration: 1.8s;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+      &:last-child {
+        margin-left: -40px;
+        animation-delay: 0.9s;
+      }
+    }
+    @keyframes foot {
+      20% {
+          transform: translate3d(34px, -16px, 0);
+      } 
+      26% {
+          transform: translate3d(34px, -10px, 4);
+      }
+      40% {
+          transform: translate3d(56px, -6px, 0);
+      }
+      44% {
+          transform: translate3d(56px, 0, 0);
+      }
+    }
+    /* // #f1513b */
+    .feet {
+      text-align: left;
+      position: relative;
+      top: 100px;
+      left: -66px;
+    }
+
+    .textarea {
+      width: 50vw;
+      height: 59vh;
+      color: black;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .textarea h1 {
+      font-size: 2.5em;
+      color: purple;
+      padding-top: 30px;
+    }
+
+    .textarea h5 {
+      font-size: 1.2em;
+      margin: 20px 20px;
+      margin-top: 40px;
+    }
+    .common-btn {
+      margin: 2vw;
+      width: 200px;
+      height: 100px;
+
+    }
+    @keyframes fill {
+      0% {
+        left: -100%;
+        width: 0px;
+        height: 0px;
+        border-bottom: 250px solid white;
+        border-left: 100px solid transparent;
+        border-right: 100px solid white;
+      }
+      50% {
+        left: -50%;
+        width: 0px;
+        height: 0px;
+      }
+      70% {
+        left: -30%;
+        width: 0px;
+        height: 0px;
+        border-bottom: 360px solid white;
+        border-left: 180px solid transparent;
+        border-right: 180px solid white;
+      }
+      100% {
+        left: 0%;
+        width: 0px;
+        height: 0px;
+        border-bottom: 500px solid white;
+        border-left: 250px solid transparent;
+        border-right: 180px solid white;
+      }
+    }
+    .common-text {
+      font-size: 30px;
+    }
+    </style>
+</head>
+<body>
+    <div class="man">
+      <div class="head"></div>
+      <div class="body"></div>
+      <div class="feet">
+        <div class="foot"></div>
+        <div class="foot"></div>
+      </div>
+    </div>
+    <div class="textarea">
+      <h1>401 Error</h1>
+      <h5>인증 오류가 발생했습니다.</h5>
+      <h5>잠시 후 다시 시도 해 주세요</h5>
+      <h5>이용에 불편을 드려 죄송합니다.</h5>
+      <a href="/"><button class="common-btn"><span class="common-text">메인으로</span></button></a>
+    </div>
+</body>
+</html>

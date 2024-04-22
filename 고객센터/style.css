@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+/* set up */
+*{
+    margin: 0;padding: 0;
+    box-sizing: border-box;
+}
+
+
+body{
+    font-family: 'Muli', sans-serif;
+    text-align: center;
+    background-color: #fff;
+    font-size: 1.4rem;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+h1{
+    font-size: 3rem;
+    margin: 50px 0 30px;
+    text-align: center;
+}
+
+h3{
+    display: block;
+    font-size: 2rem;
+    margin-bottom: 30px;
+}
+
+.faq-container {
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+.faq{
+    background-color: transparent;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 20px 0;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+    transition: 0.5s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.3)
+}
+
+.faq.active{
+    background-color: #fff;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4), 0 3px 6px rgba(0, 0, 0, 0.5)
+    
+}
+
+.faq.active::before,
+.faq.active::after
+{
+    content: '\f075';
+    font-family: 'Font Awesome 5 Free';
+    color: #2ecc71;
+    font-size: 7rem;
+    position: absolute;
+    opacity: 0.2;
+    top: 20px;
+    left: 20px;
+    z-index: 0;
+}
+
+.faq.active::before{
+    color: #3498db;
+    top: -10px;
+    left: -30px;
+    transform: rotateY(180deg);
+}
+
+.fa-title {
+    margin: 0 35px 0 0;;
+}
+
+.toggle_page{
+    display:none;
+    margin: 30px 0 0;
+}
+
+.faq.active .toggle_page{
+    display: block;
+}
+
+/* active */
+.faq-toggle{
+    background-color: transparent;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    padding: 0;
+    position: absolute;
+    top: 30px;right: 30px;
+    width: 30px;
+    height: 30px;
+}
+
+.faq-toggle:focus{
+    outline: 0;
+}
+
+.faq-toggle .fa-times{
+    display: none;
+}
+
+.faq.active .faq-toggle .fa-times {
+    color: #fff;
+    display: block;
+}
+
+.faq.active .faq-toggle .fa-chevron-down {
+    display: none;
+}
+
+.faq.active .faq-toggle {
+    background-color: #9fa4a8;
+}
+
+/* 공지사항 목록 */
+#boardNoticeList{
+    width: 100%;
+}
+
+.faq-board-list{
+    width: 100%;
+}
+
+.board-list{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.item{
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    padding: 50px 20px 50px 20px;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(206, 197, 197);
+    position: relative;
+}
+.list-title{
+    position: absolute;
+    left: 10%;
+    transform: translateX(-10%);
+}
+
+.board-bottom{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    padding: 50px 0 30px 0;
+}
+
+.board-page{
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-content: space-around;
+}
+
+/* 자주 묻는 질문 */
+#faqNoticeList {
+    width: 100%;
+}
+
+.faq-faq-list {
+    width: 100%;
+}
+
+.faq-list {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.item {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    padding: 50px 20px 50px 20px;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(206, 197, 197);
+    position: relative;
+}
+
+.list-title {
+    position: absolute;
+    left: 10%;
+    transform: translateX(-10%);
+}
+
+.faq-bottom {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    padding: 50px 0 30px 0;
+}
+
+.faq-page {
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-content: space-around;
+}
+
+
+

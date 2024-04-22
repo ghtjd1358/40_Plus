@@ -1,0 +1,221 @@
+body {
+    height: fit-content;
+    text-align: center;
+    /* overflow: hidden; */
+    overflow-x: auto;
+}
+/* 모니터 화면 */
+#moniter {
+    margin-top: 5vh;
+    margin-left: auto;
+    margin-right: auto;
+    /* border: 1px solid black; */
+    width: 60vw;
+    height: 50vh;
+    box-shadow: 2px 2px 2px 2px grey;
+}
+/* 문제 */
+#text-to-type {
+    position: relative;
+    font-size: 3.5em;
+    padding: 20px;
+    margin-bottom: 30px;
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-weight: bolder;
+    color: var(--color-orange-5)
+}
+/* 유저 입력 칸 */
+#user-input {
+    font-size: 3em;
+    padding: 15px;
+    width: 25vw;
+    height: 7vh;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease;
+    color: darkblue;
+    margin-top: 5vh;
+}
+
+#user-input:focus {
+    border-color: dodgerblue; /* 입력창에 포커스 시 테두리 색상을 파란색으로 변경 */
+    background-color: rgb(255, 251, 214);
+}
+
+#user-input.error {
+    color: red;
+    border-color: red;
+}
+#user-input::placeholder{
+    font-size: 20px;
+}
+/* 해설 */
+#mean-by {
+    font-size: 1.5em;
+    padding: 20px;
+    font-weight: bold;
+    text-align: center;
+    background-color: #2ecc71; /* 배경색 변경 */
+    margin-top: 4.5vh;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 2px grey;
+}
+/* 해설 내용 */
+#mean-by-text {
+    font-size: 1.6em;
+    display: inline-block;
+    color: #000000; /* 글자색 변경 */
+    font-weight: bold;
+    text-transform: uppercase; /* 대문자로 변환 */
+    letter-spacing: 1px; /* 글자 간격 조절 */
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5); /* 그림자 효과 추가 */
+}
+/* 결과 창 */
+#result-box {
+    width: 18vw;
+    margin: 1vh auto; 
+    height: fit-content;
+    font-weight: bold;
+    font-size: larger;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    background-color: #3498db;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 2px grey;
+}
+#result, #result2 {
+    color: white
+}
+
+#result-box .accuracy {
+    font-size: 1.5em;
+}
+
+/* 키보드 전체  */
+.big_C {
+    /* border: 1px solid black; */
+    flex-wrap: wrap;
+    /* max-width: fit-content; */
+    text-align: center;
+    margin: 0 auto;
+    width: 60vw;
+    height: 41vh;
+
+}
+/* 한줄 마다 */
+.sml_C {
+    /* border: 1px solid black; */
+    display: flex;
+}
+.key {
+    width: 4.1vw;
+    height: 4vw;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 2px;
+    box-shadow: 2px 2px 2px 1px grey;
+}
+.key .top {
+    display: none;
+}
+
+.shift-pressed .key .top {
+    display: block;
+}
+.shift-pressed .key .bottom {
+    display: none;
+}
+.tab-key {
+    width: 5vw; /* Tab 키의 가로 길이 조절 */
+}
+.caps-lock-key {
+    width: 6.8vw; /* Caps Lock 키의 가로 길이 조절 */
+}
+.delete-key {
+    width: 5vw;
+}
+.enter-key {
+    width: 6.8vw;
+}
+.shift-key {
+    width: 9vw;
+}
+.space-key {
+    width: 30vw;
+}
+.ctrl-key {
+    width: 4.5vw;
+}
+/* 키보드 key,down 이벤트 */
+.changed {
+    background-color: rgb(255, 73, 73);
+}
+/* 정답 일 때 */
+.correct {
+    animation: pulse 1s infinite; /* 깜빡거림 효과 */
+}
+@keyframes pulse {
+    0%, 100% {
+        background-color: #3498db;
+        color: white;
+    }
+    50% {
+        background-color: rgb(255, 255, 255); /* 깜빡거림 중간 색상 설정 */
+        color: black;
+    }
+}
+/* 토클 버튼 */
+#toggleKeyboard {
+    position: absolute;
+    color: black;
+    width: 80px;
+    height: 80px;
+    transform: translate(800px,130px);
+    /* left: 82vw;
+    top: 55vh;
+    width: 5vw;
+    height: 5vw; */
+    background-color: rgb(162, 246, 137);
+    border-radius: 50%;
+    font-size: 25px;
+    font-weight: bold;
+    border: none;
+    cursor: url(./img/pointer.png) 10 10, auto;
+    outline: none;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    align-items: center;
+    box-shadow: 2px 2px 2px 2px grey;
+}
+
+#toggleKeyboard:hover {
+    background-color: #2ecc71; /* hover 시 배경색 변경 */
+}
+
+
+.navi-li.headerli a {
+    color: var(--color-black-0);
+}
+
+.navi-li.headerli a:hover {
+    color: var(--color-red-5);
+    font-weight: bold;
+}
+
+@media screen and (min-width: 2400px) {
+    .key {
+        font-size: 36px;
+    }
+}

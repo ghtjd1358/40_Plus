@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="/static/css/component.css" />
+    <link rel="stylesheet" href="/static/css/addword.css" />
+    <link rel="stylesheet" href="/static/css/header.css" />
+    <link rel="stylesheet" href="/static/css/footer.css" />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <title>단어 추가</title>
+
+    <style></style>
+  </head>
+  <body>
+    <header><%- include("./component/header")%></header>
+    <main id="add-body">
+      <div>
+        <form name="addword">
+          <div class="add-C">
+            <div class="h1-text">
+              <h1>현재 <%= words.length %>개의 단어가 등록되어 있습니다.</h1>
+            </div>
+            <div class="sml_C">
+              <div class="add-div">
+                <input
+                  type="text"
+                  class="add-text"
+                  name="name"
+                  id="name"
+                  placeholder="단어 명"
+                />
+                <br />
+                <input
+                  type="text"
+                  class="add-text"
+                  name="mean"
+                  id="mean"
+                  placeholder="단어 뜻"
+                />
+                <br />
+                <button id="addWord" class="common-btn" type="button">
+                  <span class="common-text">등록 신청</span>
+                </button>
+              </div>
+              <div class="tooltip">
+                나만의 MZ어를 등록하여 다른 사람들과 공유해보세요! <br />
+                관리자의 승인이 허가 되면 문제로 출제됩니다!!
+              </div>
+            </div>
+          </div>
+        </form>
+        <table>
+          <tr>
+            <th class="th-number">번호</th>
+            <th class="th-word">단어 명</th>
+            <th class="th-meaning">단어 뜻</th>
+            <th class="th-username">유저명</th>
+            <th class="th-time">등록일</th>
+          </tr>
+          <% if (words) {%> <% for (let i = 0; i < 5; i++) {%> <% if (!words[i])
+          break; %>
+          <tr>
+            <td><%= words[i].number %></td>
+            <td><%= words[i].word%></td>
+            <td><%= words[i].meaning %></td>
+            <td><%= words[i].name %></td>
+            <td class="createdAt"><%= words[i].createdAt %></td>
+          </tr>
+          <% } %> <% } else{%>
+          <tr>
+            <td>아직 등록된 단어가 없습니다.</td>
+          </tr>
+          <% } %>
+        </table>
+        <div class="paging" id="paging">
+          <!-- 페이징 추가 될 공간 -->
+        </div>
+        <p id="result"></p>
+      </div>
+    </main>
+    <%- include("./component/footer")%>
+
+    <script>
+      // 밑에거를 토대로 개수 만들기
+      let words = `<%- JSON.stringify(words) %>`;
+      words = JSON.parse(words);
+      const createAtElements = document.querySelectorAll(".createdAt");
+
+      for (let i = 0; i < 5; i++) {
+        const date = new Date(words[i].createdAt);
+        const realDay = `${date.getFullYear()}년 ${
+          date.getMonth() + 1
+        }월 ${date.getDate()}일 ${date.getHours()}시 ${date.getMinutes()}분`;
+        createAtElements[i].textContent = realDay;
+      }
+    </script>
+
+    <script>
+      async function logout(event) {
+        event.preventDefault();
+        const res = await axios({
+          method: "post",
+          url: "/logout",
+        });
+        swal("로그아웃 완료!", "", "success").then(function () {
+          location.href = "/word";
+        });
+      }
+    </script>
+
+    <script src="/static/javaScript/addword.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="/static/css/header.css" />
+    <link rel="stylesheet" href="/static/css/component.css" />
+    <link rel="stylesheet" href="/static/css/footer.css" />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <title>culture</title>
+
+    <style>
+      .header {
+        background-color: white;
+      }
+      .mainContent {
+        display: flex;
+        width: 100%;
+        height: 70vh;
+        align-items: center;
+        justify-content: center;
+        margin-top: 50px;
+      }
+
+      .content-box {
+        width: 400px;
+        height: 500px;
+
+        margin: 0 var(--space-1);
+        background-color: var(--color-white-0);
+        border: 1px solid var(--color-black-1);
+        border-radius: var(--border-radius-medium);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .content-box img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        object-position: center top;
+        filter: grayscale(200%);
+      }
+
+      .content img {
+        font-weight: 700;
+        transition: all 0.4s linear;
+      }
+
+      .content:hover img {
+        filter: grayscale(30%);
+      }
+
+      .content a {
+        transition: all 0.5s linear;
+        font-weight: 700;
+        font-size: 2.5rem;
+        color: var(--color-white-0) !important;
+        text-shadow: var(--shadow);
+      }
+
+      .content:hover a {
+        color: var(--color-white-0);
+        opacity: 0;
+      }
+
+      .textButton {
+        position: absolute;
+        width: 100%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: var(--color-black-0);
+        font-size: 0;
+        font-weight: bold;
+        text-align: center;
+      }
+      body {
+        background-color: var(--color-grey-1);
+      }
+    </style>
+  </head>
+  <body>
+    <header><%- include("./component/header")%></header>
+
+    <main id="main">
+      <section class="mainContent">
+        <div class="content-box content">
+          <img src="" alt="" class="classContent" />
+          <a href="/culture/class" class="textButton"> 지역별 일일 클래스 </a>
+        </div>
+        <div class="content-box content">
+          <img src="" alt="" class="libraryContent" />
+          <a href="/culture/library" class="textButton"> 지역별 도서관 정보</a>
+        </div>
+        <div class="content-box content">
+          <img src="" alt="" class="festivalContent" />
+          <a href="/culture/festival" class="textButton">지역별 축제 정보</a>
+          >
+        </div>
+      </section>
+    </main>
+
+    <%- include("./component/footer")%>
+    <script>
+      async function logout(event) {
+        event.preventDefault();
+        const res = await axios({
+          method: "post",
+          url: "/logout",
+        });
+        swal("로그아웃 완료!", "", "success").then(function () {
+          location.href = "/culture";
+        });
+      }
+
+      const clsPng = "/static/css/img/cooking.png";
+      const clsGif = "/static/css/img/cooking.gif";
+
+      const classBox = document.querySelector(".classContent");
+      classBox.src = clsPng;
+
+      classBox.addEventListener("mouseenter", function () {
+        classBox.src = clsGif;
+      });
+
+      classBox.addEventListener("mouseleave", function () {
+        classBox.src = clsPng;
+      });
+
+      const libPng = "/static/css/img/library.png";
+      const libGif = "/static/css/img/library.gif";
+
+      const libBox = document.querySelector(".libraryContent");
+      libBox.src = libPng;
+
+      libBox.addEventListener("mouseenter", function () {
+        libBox.src = libGif;
+      });
+
+      libBox.addEventListener("mouseleave", function () {
+        libBox.src = libPng;
+      });
+
+      const fesPng = "/static/css/img/festival.png";
+      const fesGif = "/static/css/img/festival.gif";
+
+      const fesBox = document.querySelector(".festivalContent");
+      fesBox.src = fesPng;
+
+      fesBox.addEventListener("mouseenter", function () {
+        fesBox.src = fesGif;
+      });
+
+      fesBox.addEventListener("mouseleave", function () {
+        fesBox.src = fesPng;
+      });
+    </script>
+  </body>
+</html>

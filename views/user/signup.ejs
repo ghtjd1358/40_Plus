@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>회원가입</title>
+    <link rel="stylesheet" href="/static/css/header.css" />
+    <link rel="stylesheet" href="/static/css/component.css" />
+    <link rel="stylesheet" href="/static/css/footer.css" />
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <style>
+      .header {
+        background-color: white;
+      }
+
+      .footer {
+        margin-top: 0px;
+      }
+      .container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        width: 100%;
+        height: 80vh;
+
+        /* border-top: 1px solid var(--color-grey-0); */
+
+        background-color: var(--color-grey-0);
+      }
+
+      .signupContent {
+        width: 700px;
+        /* height: 700px; */
+        background-color: var(--color-white-0);
+        height: 600px;
+
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        border-radius: var(--border-radius-large);
+        /* box-shadow: var(--shadow); */
+        border: 2px solid var(--color-grey-0);
+        /* margin-top: var(--space-1); */
+        margin-top: 50px;
+      }
+
+      #userid {
+        width: 400px;
+      }
+
+      input {
+        width: 500px;
+        height: 40px;
+        border: none;
+        border-bottom: 2px solid var(--color-black-1);
+        /* border-radius: var(--border-radius-small); */
+        font-size: 18px;
+        margin-bottom: var(--space-3);
+      }
+
+      input:focus {
+        background-color: none;
+        border-bottom: 3px solid var(--color-orange-4);
+      }
+
+      label {
+        font-size: 18px;
+      }
+
+      input::placeholder {
+        font-size: 18px;
+        color: var(--color-black-2);
+      }
+
+      .btnS {
+        border: black;
+        /* background-color: var(--color-orange-4);
+        color: var(--color-grey-0); */
+        border: 1px solid var(--color-black-5);
+        /* border-radius: var(--border-radius-small); */
+        height: 30px;
+        width: 80px;
+        margin-left: var(--space-2);
+      }
+      .common-btn {
+        box-shadow: none;
+        font-size: 20px;
+        position: relative;
+        width: 500px;
+        height: 50px;
+        border-radius: var(--border-radius-small);
+        cursor: url(/static/css/img/pointer.png) 10 10, auto;
+        overflow: hidden;
+        background-color: var(--color-grey-0);
+        /* box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.8); */
+      }
+      .common-btn:hover::before {
+        position: absolute;
+        content: "";
+        background-color: var(--color-orange-5);
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        animation: fill 0.7s;
+        animation-timing-function: linear;
+      }
+      @keyframes fill {
+        0% {
+          left: -100%;
+          width: 0px;
+          height: 0px;
+          border-bottom: 250px solid var(--color-grey-0);
+          border-left: 100px solid transparent;
+          border-right: 100px solid var(--color-grey-0);
+        }
+
+        25% {
+          left: -75%;
+          width: 0px;
+          height: 0px;
+          border-bottom: 270px solid var(--color-grey-0);
+          border-left: 120px solid transparent;
+          border-right: 120px solid var(--color-grey-0);
+        }
+        50% {
+          left: -50%;
+          width: 0px;
+          height: 0px;
+        }
+
+        75% {
+          left: -25%;
+          width: 0px;
+          height: 0px;
+          border-bottom: 330px solid var(--color-grey-0);
+          border-left: 150px solid transparent;
+          border-right: 150px solid var(--color-grey-0);
+        }
+
+        100% {
+          left: 0%;
+          width: 0px;
+          height: 0px;
+          border-bottom: 360px solid var(--color-grey-0);
+          border-left: 180px solid transparent;
+          border-right: 180px solid var(--color-grey-0);
+        }
+      }
+      /* 공용 버튼 안에 글자 */
+      .common-text {
+        font-size: 20px;
+        color: black;
+        position: relative;
+        cursor: url(/static/css/img/pointer.png) 10 10, auto;
+        z-index: 2;
+      }
+      .common-btn:hover .common-text {
+        animation: colorchange 0.7s linear forwards;
+      }
+      @keyframes colorchange {
+        50% {
+          color: white;
+        }
+        100% {
+          color: white;
+        }
+      }
+
+      .btnS {
+        border: black;
+        /* background-color: var(--color-orange-4);
+        color: var(--color-grey-0); */
+        border: 1px solid var(--color-black-5);
+        /* border-radius: var(--border-radius-small); */
+        height: 30px;
+        width: 80px;
+        margin-left: var(--space-2);
+      }
+      .btnS > span {
+        font-size: 14px !important;
+      }
+
+      .signupBox {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        /* background-color: pink; */
+        margin-top: var(--space-5);
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        /* justify-content: center; */
+      }
+
+      .title {
+        margin-top: var(--space-5);
+      }
+
+      span {
+        color: var(--color-red-4);
+        font-size: 16px;
+      }
+
+      /* .password {
+             margin-bottom: var(--space-2);
+           } */
+
+      .resultContent {
+        margin: var(--space-2) 0;
+      }
+
+      #result {
+        color: var(--color-red-4);
+        font-weight: 700;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <header><%- include("../component/header")%></header>
+
+    <main class="container">
+      <div class="signupContent">
+        <h1 class="title">회원가입</h1>
+        <div class="signupBox">
+          <form name="signup">
+            <label for="userid">
+              아이디<span>*</span> <span id="valid-check-result"></span
+            ></label>
+
+            <div>
+              <input
+                type="text"
+                id="userid"
+                name="userid"
+                placeholder="아이디"
+              />
+
+              <button type="button" id="valid-check" class="common-btn btnS">
+                <span class="common-text">중복검사</span>
+              </button>
+            </div>
+
+            <label for="password"> 비밀번호<span>*</span> </label>
+            <input
+              type="password"
+              name="password"
+              class="password"
+              placeholder="비밀번호"
+            />
+
+            <label for="confirm-password">비밀번호 확인<span>*</span></label>
+            <input
+              type="password"
+              name="confirm-password"
+              placeholder="비밀번호 확인"
+            />
+
+            <label for="name">이름<span>*</span> </label>
+            <input type="text" placeholder="이름" name="name" />
+
+            <div class="resultContent">
+              <p id="result"></p>
+            </div>
+            <button type="button" id="signup" class="common-btn">
+              <span class="common-text">회원가입</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </main>
+    <%- include("../component/footer")%>
+  </body>
+  <script>
+    let isUnique;
+    const validCheckButtonElement = document.querySelector("#valid-check");
+    const signUpButtonElement = document.querySelector("#signup");
+    const resultElement = document.querySelector("#result");
+    const validCheckResultElement = document.querySelector(
+      "#valid-check-result"
+    );
+    async function getIsValid() {
+      const userid = document.querySelector("#userid").value;
+      const res = await axios({
+        method: "post",
+        url: "/isValid",
+        data: {
+          userid: userid,
+        },
+      });
+      isUnique = res.data.isUnique;
+      validCheckResultElement.textContent = res.data.msg;
+      // to do: res.data.msg를 아이디 input과 중복 검사 자리에 색깔이랑 해서 넣기
+    }
+
+    async function signup() {
+      const form = document.forms["signup"];
+      console.log(form.name);
+      const res = await axios({
+        method: "post",
+        url: "/signup",
+        data: {
+          userid: form.userid.value,
+          password: form.password.value,
+          confirmPassword: form["confirm-password"].value,
+          name: form.name.value,
+          isUnique: isUnique,
+        },
+      });
+      resultElement.textContent = res.data.msg;
+      if (!res.data.isError) {
+        swal(
+          "회원가입이 완료되었습니다!",
+          "가입하신 아이디, 비밀번호로 로그인해주세요!",
+          "success"
+        ).then(function () {
+          location.href = "/";
+        });
+      }
+    }
+
+    validCheckButtonElement.addEventListener("click", getIsValid);
+    signUpButtonElement.addEventListener("click", signup);
+
+    function enterKey() {
+      const inputs = document.querySelectorAll("input");
+      inputs.forEach(function (input) {
+        input.addEventListener("keyup", function (event) {
+          if (event.keyCode === 13) {
+            event.preventDefault();
+            signup();
+          }
+        });
+      });
+    }
+
+    enterKey();
+  </script>
+</html>

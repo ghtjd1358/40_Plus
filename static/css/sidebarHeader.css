@@ -1,0 +1,190 @@
+#sidebar {
+  height: 100%;
+  width: 300px;
+  position: fixed;
+  background-color: #111;
+  padding-top: 20px;
+  transition: 1s;
+  margin-left: -300px; /* 초기에는 사이드바를 숨겨둠 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--color-black-4);
+  z-index: 30;
+}
+/* 배경 뿌옇게 보이기 */
+#sidebar::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 100; /* 가상 요소를 화면의 뒷 배경에 위치시키기 위해 음수 z-index 사용 */
+  display: none; /* 초기에는 가상 요소를 숨김 */
+}
+
+#sidebar.toggle-sidebar::before {
+  display: block; /* 토글되었을 때 가상 요소를 보이도록 설정 */
+}
+
+/* 사이드 바 카테고리 내용 */
+#sidebar a,
+#sidebar li {
+  padding: 0px;
+  font-size: 18px;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s;
+  text-align: center;
+  height: 80px;
+  width: 100%;
+}
+#sidebar a:hover {
+  background-color: var(--color-orange-4);
+}
+
+.fade-in {
+  animation: fadein 1s;
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+/* 항목들 전체 */
+.full-line {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 200;
+}
+.full-line a {
+  color: var(--color-white-0);
+}
+/* 하위 항목들 */
+ol {
+  display: none;
+  height: 80px;
+  width: 100%;
+}
+
+/* 문화/여가 하위 항목만 조절 */
+#sidebar #culture .sub-line a {
+  bottom: 80px;
+}
+
+/* 토글 버튼 */
+#toggle-btn {
+  font-size: 40px;
+  cursor: url(./img/pointer.png) 10 10, auto;
+  position: fixed;
+  margin-left: 25px;
+  margin-top: 10px;
+  z-index: 300;
+  color: var(--color-black-0);
+  display: block;
+  transition: 1s;
+  top: 0;
+}
+
+#toggle-btn.toggle-btn-before {
+  color: rgb(0, 0, 0);
+  animation: backmove 0.5s linear;
+}
+@keyframes backmove {
+  50% {
+    transform: rotate(-180deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
+
+#toggle-btn.toggle-btn-after {
+  color: var(--color-white-0);
+  animation: move 0.5s linear;
+  margin-top: 20px;
+  margin-left: 250px;
+}
+@keyframes move {
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#toggle-btn:hover {
+  color: #9b9b9b;
+  transform: scale(1.2);
+}
+#toggle-btn.toggle-btn-after:hover {
+  color: rgb(101, 101, 101);
+  transform: scale(1.2);
+}
+
+/* back 버튼 */
+#back-btn {
+  font-size: 30px;
+  height: 50px;
+  cursor: url(./img/pointer.png) 10 10, auto;
+  position: fixed;
+  margin-left: 15px;
+  margin-top: 15px;
+  z-index: 200;
+  color: white;
+  background-color: var(--color-black-0); /* 배경 색상 추가 */
+  border: none;
+  padding: 10px 10px;
+  border-radius: 5px; /* 둥근 테두리 적용 */
+  display: none;
+  transition: 1s;
+  animation: backbtn 0.5s linear;
+}
+@keyframes backbtn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#back-btn:hover {
+  background-color: #555; /* 호버 시 배경 색상 변경 */
+  transform: scale(1.2); /* 활성화 시 크기 확대 */
+}
+
+#main {
+  transition: margin-left 1s;
+}
+
+.logo-sidebar {
+  width: 300px;
+  position: absolute;
+  top: 3vh;
+  cursor: url(./img/basic.png) 10 10, auto;
+  z-index: 200;
+}
+
+#sidebar .navi-li a {
+  color: var(--color-red-2);
+}
+
+.toggle-sidebar {
+  top: 0;
+}
