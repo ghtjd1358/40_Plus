@@ -1,6 +1,6 @@
 <div align="center">
-    <img src="https://github.com/ghtjd1358/DoRun-DoRun/assets/129839683/4a94a2ee-1d3f-4702-b079-552bee1c7c99" />
-    <h1>DoRun-DoRun!</h1>
+    <img src="https://github.com/ghtjd1358/40_Plus/assets/129839683/20b497dc-0976-4fcf-9a76-cceefd1888d1" width="800" height="350">\
+    <h1>40+</h1>
     <br/>
 </div>
 <h2>📊목차</h2>
@@ -51,7 +51,7 @@
 <table>
   <tr>
     <th>프로젝트 명</th>
-    <th>DoRun-DoRun</th>
+    <th>40+</th>
   </tr>
   <tr>
     <td>진행기간</td>
@@ -59,15 +59,15 @@
   </tr>
   <tr>
     <td>팀명 / 팀원</td>
-    <td>final / 6명(프론트 3명, 백 3명)</td>
+    <td>final / 5명(프론트 2명, 백 2명, 풀스택 1명)</td>
   </tr>
   <tr>
     <td>github 주소</td>
-    <td><a href="https://github.com/ghtjd1358/DoRun-DoRun">https://github.com/ghtjd1358/DoRun-DoRun</a></td>
+    <td><a href="https://github.com/ghtjd1358/40_Plus">https://github.com/ghtjd1358/40_Plus</a></td>
   </tr>
   <tr>
     <td>배포 주소</td>
-    <td></td>
+    <td>???????????</td>
   </tr>
 </table><br>
 
@@ -88,8 +88,10 @@
 
 <h3>#Front-end</h3>
 <div>
-    <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=white">
-<img src="https://img.shields.io/badge/TYPESCRIPT-3178C6?style=for-the-badge&logo=TYPESCRIPT&logoColor=white">
+<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
+<img src="https://img.shields.io/badge/css3-B4CA65?style=for-the-badge&logo=css3&logoColor=white">
+<img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=white">
+<img src="https://img.shields.io/badge/ejs-F7DF1E?style=for-the-badge&logo=ejs&logoColor=white">
 </div>
 
 
@@ -133,7 +135,15 @@
     <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
     <img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white">
     <img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white">
-</div><br>
+</div>
+
+<h3>#open API</h3>
+    <div>
+    <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+    <img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white">
+    <img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white">
+    </div><br>
+
 
 <h2>💡주요 기능</h2>
 <table>
