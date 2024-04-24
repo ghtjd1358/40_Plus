@@ -154,10 +154,10 @@
 <h2>📂프로젝트 구성도</h2>
 <table>
     <tr>
-        <th>아키텍처(Architecture)</th>
+        <th>프로젝트 구조</th>
     </tr>
     <tr>
-        <td><img src="https://github.com/ghtjd1358/DoRun-DoRun/assets/129839683/df2d6017-4b70-4e0f-b2cb-2ac134221fc1" alt="아키텍처"></td>
+        <td><img src="https://github.com/ghtjd1358/40_Plus/assets/129839683/796998a7-3d77-4dc7-b07f-34f87e839ffb"></td>
     </tr>
 </table><br>
 
@@ -230,23 +230,3 @@
 
 <h2>📱프로젝트 소개 및 영상</h2>
     
-
-<h2>💻실행 방법</h2>
-
-### Server 실행
-**1. 원격 저장소 복제**
-```bash
-$ git clone https://github.com/ghtjd1358/DoRun-DoRun.git
-```
-**2. 프로젝트 폴더로 이동**
-```bash
-$ cd frontend
-```
-**3. 필요한 node_modules 설치**
-```bash
-$ npm install
-```
-**4. 개발 서버 실행**
-```bash
-$ npm run dev
-```
