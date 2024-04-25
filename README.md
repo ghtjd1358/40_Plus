@@ -229,4 +229,6 @@
 </table><br>
 
 <h2>📱프로젝트 소개 및 영상</h2>
-    
+https://github.com/ghtjd1358/40_Plus/assets/129839683/71cc5ed4-bb94-4433-986b-89bcd071ad95
+
+
