@@ -63,11 +63,11 @@
   </tr>
   <tr>
     <td>github 주소</td>
-    <td><a href="https://github.com/ghtjd1358/40_Plus">https://github.com/ghtjd1358/40_Plus</a></td>
+    <td><a href="https://github.com/ghtjd1358/40_Plus">https://github.com/ghtjd1358/40_Plus/tree/main</a></td>
   </tr>
   <tr>
     <td>배포 주소</td>
-    <td>https://github.com/ghtjd1358/40_Plus</td>
+    <td>http://43.201.109.188:8000/</td>
   </tr>
 </table><br>
 
