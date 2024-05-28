@@ -67,7 +67,7 @@
   </tr>
   <tr>
     <td>배포 주소</td>
-    <td>???????????</td>
+    <td>https://github.com/ghtjd1358/40_Plus</td>
   </tr>
 </table><br>
 
