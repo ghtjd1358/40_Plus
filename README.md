@@ -229,6 +229,11 @@
 </table><br>
 
 <h2>📱프로젝트 소개 및 영상</h2>
+전체 포트폴리오 소개영상
 https://github.com/ghtjd1358/40_Plus/assets/129839683/71cc5ed4-bb94-4433-986b-89bcd071ad95
+키오스크 소개영상
+<img src="https://github.com/user-attachments/assets/823065f6-0919-4d74-a7f9-a4c1b86f002f">
+
+
 
 
